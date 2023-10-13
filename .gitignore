@@ -1,0 +1,156 @@
+*.swp
+*.*~
+project.lock.json
+.DS_Store
+*.pyc
+nupkg/
+
+# Visual Studio Code
+.vscode
+
+# Rider
+.idea
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.cach
+*.old
+*.log
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
+[Oo]ut/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Visual Studio 2015
+.vs/
+/Integration.API/obj/Debug/net7.0/Integration.API.csproj.AssemblyReference.cache
+/.vs/Retail.Pro.To.SAP.Business.One.Integration/v17/.suo
+/Integration.API/obj/Debug/net7.0/Integration.API.csproj.FileListAbsolute.txt
+/Integration.API/obj/project.nuget.cache
+/Prism.API.Helper/obj/project.nuget.cache
+/Prism.API.Helper/obj/Debug/net7.0/Prism.API.Helper.csproj.FileListAbsolute.txt
+/Prism.API.Helper/obj/Debug/net7.0/Prism.API.Helper.csproj.AssemblyReference.cache
+/Integration.UI/obj/project.nuget.cache
+/Integration.UI/obj/Debug/net7.0-windows/Integration.UI.csproj.FileListAbsolute.txt
+/Integration.UI/obj/Debug/net7.0-windows/Integration.UI.csproj.AssemblyReference.cache
+/Integration.EF/obj/project.nuget.cache
+/Integration.EF/obj/Debug/net7.0/Integration.EF.csproj.AssemblyReference.cache
+/Integration.Core/obj/project.nuget.cache
+/ServiceLayer.Helper/obj/project.nuget.cache
+/ServiceLayer.Helper/obj/Debug/net7.0/ServiceLayer.Helper.csproj.FileListAbsolute.txt
+/ServiceLayer.Helper/obj/Debug/net7.0/ServiceLayer.Helper.csproj.AssemblyReference.cache
+/.vs/ProjectEvaluation/retail.pro.to.sap.business.one.integration.metadata.v6.1
+/.vs/ProjectEvaluation/retail.pro.to.sap.business.one.integration.projects.v6.1
+/.vs/Retail.Pro.To.SAP.Business.One.Integration/FileContentIndex/2ca5d025-e671-4b25-aab0-c56a4fb67b39.vsidx
+/.vs/Retail.Pro.To.SAP.Business.One.Integration/FileContentIndex/7d0b91af-3f42-43f2-820b-471148645e84.vsidx
+/.vs/Retail.Pro.To.SAP.Business.One.Integration/FileContentIndex/7ecbb747-fae2-4417-bb1d-66bc4b57da84.vsidx
+/.vs/Retail.Pro.To.SAP.Business.One.Integration/v17/.futdcache.v2
+/.vs/Retail.Pro.To.SAP.Business.One.Integration/FileContentIndex/f7197d5c-a72a-4bd3-aafc-1f38ddf1e2ec.vsidx
+/.vs/Retail.Pro.To.SAP.Business.One.Integration/DesignTimeBuild/.dtbcache.v2
+/Integration.API/obj/Debug/net7.0/Integration.API.pdb
+/Integration.API/obj/Debug/net7.0/Integration.API.dll
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Crashpad/settings.dat
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Cache/Cache_Data/data_0
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Cache/Cache_Data/data_2
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Cache/Cache_Data/data_3
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Cache/Cache_Data/data_1
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Cache/Cache_Data/f_00003e
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Code Cache/js/index-dir/the-real-index
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/GPUCache/data_0
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/GPUCache/data_1
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Code Cache/js/2e70215b37afb07e_0
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Code Cache/js/7315078d4ec5a7fa_0
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/DawnCache/data_1
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Extension State/LOG
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Extension State/LOG.old
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/GPUCache/data_2
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/GPUCache/data_3
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Local Storage/leveldb/LOG
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Local Storage/leveldb/000003.log
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Local Storage/leveldb/LOG.old
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Session Storage/000003.log
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Session Storage/LOG
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Session Storage/LOG.old
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/shared_proto_db/metadata/000003.log
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/shared_proto_db/metadata/LOG
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/shared_proto_db/metadata/LOG.old
+*.v2
+.vs/Retail.Pro.To.SAP.Business.One.Integration/DesignTimeBuild/.dtbcache.v2
+*.pma
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Crashpad/settings.dat
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Cache/Cache_Data/data_0
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Cache/Cache_Data/data_1
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Cache/Cache_Data/data_2
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Cache/Cache_Data/data_3
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Cache/Cache_Data/f_00003e
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Code Cache/js/2e70215b37afb07e_0
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Code Cache/js/7315078d4ec5a7fa_0
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Code Cache/js/index-dir/the-real-index
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/DawnCache/data_1
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Extension State/LOG
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Extension State/LOG.old
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/GPUCache/data_0
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/GPUCache/data_1
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/GPUCache/data_2
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/GPUCache/data_3
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/History
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Local Storage/leveldb/000003.log
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Local Storage/leveldb/LOG
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Local Storage/leveldb/LOG.old
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Network Action Predictor
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Preferences
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Session Storage/000003.log
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Session Storage/LOG
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Session Storage/LOG.old
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/shared_proto_db/000003.log
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/shared_proto_db/LOG
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/shared_proto_db/LOG.old
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/shared_proto_db/metadata/000003.log
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/shared_proto_db/metadata/LOG
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/shared_proto_db/metadata/LOG.old
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Site Characteristics Database/000003.log
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Site Characteristics Database/LOG
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Site Characteristics Database/LOG.old
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Sync Data/LevelDB/LOG
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Sync Data/LevelDB/LOG.old
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/GrShaderCache/data_0
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/GrShaderCache/data_1
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/GrShaderCache/data_3
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Local State
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/ShaderCache/data_1
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/SmartScreen/local/uriCache_
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/SmartScreen/RemoteData/synchronousLookupUris
+Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/SmartScreen/RemoteData/synchronousLookupUris_638208726144326652
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/shared_proto_db/000003.log
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/shared_proto_db/LOG
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/shared_proto_db/LOG.old
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Sync Data/LevelDB/LOG.old
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Sync Data/LevelDB/LOG
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Site Characteristics Database/LOG.old
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Site Characteristics Database/LOG
+/Integration.UI/bin/Debug/net7.0-windows/Integration.UI.exe.WebView2/EBWebView/Default/Site Characteristics Database/000003.log
+/Integration.API/obj/Debug/net7.0/Integration.API.pdb
+/Integration.API/obj/Debug/net7.0/Integration.API.dll
+/Integration.Core/obj/Debug/net7.0/refint/Integration.Core.dll
+/Integration.Core/obj/Debug/net7.0/ref/Integration.Core.dll
+/Integration.Core/obj/Debug/net7.0/Integration.Core.pdb
+/Integration.Core/obj/Debug/net7.0/Integration.Core.dll
+/Integration.EF/obj/Debug/net7.0/Integration.EF.pdb
+/Integration.EF/obj/Debug/net7.0/Integration.EF.dll
+/Integration.API/obj/Debug/net7.0/Integration.API.assets.cache
+/Integration.API/obj/Debug/net7.0/Integration.API.assets.cache

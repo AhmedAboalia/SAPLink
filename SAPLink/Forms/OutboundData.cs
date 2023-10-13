@@ -1,0 +1,936 @@
+﻿using SAPLink.Core.Models.Prism.StockManagement;
+using SAPLink.Handler.Prism.Handlers.OutboundData.StockManagement.InventoryPosting;
+using VerifiedVouchersService = SAPLink.Handler.Prism.Handlers.OutboundData.StockManagement.VerifiedVouchers.Service;
+using VerifiedVouchersHandler = SAPLink.Handler.Prism.Handlers.OutboundData.StockManagement.InventoryTransfer.Handler;
+using SAPLink.Utilities.Forms;
+using InventoryPosting = SAPLink.Core.Models.Prism.StockManagement.InventoryPosting;
+using SAPLink.Handler.SAP.Application;
+using SAPLink.Handler.Prism.Connection.Auth;
+
+namespace SAPLink.Forms;
+
+public partial class OutboundData : Form
+{
+    private readonly UnitOfWork _unitOfWork;
+    private readonly ServiceLayerHandler _serviceLayer;
+    private readonly Clients _client;
+    private readonly Credentials _credentials;
+    private readonly ItemsService _itemsService;
+    private readonly InvoiceHandler _invoiceHandler;
+    private readonly Handler.Prism.Handlers.OutboundData.PointOfSale.Handler _handler;
+    private readonly OrdersHandler _ordersHandler;
+    private readonly DownPaymentHandler _downPaymentHandler;
+    private readonly CreditMemoHandler _creditMemoHandler;
+    private readonly ReturnsHandler _returnsHandler;
+    private readonly InvoiceService _invoiceService;
+    private readonly DepartmentService _departmentService;
+
+    private readonly VerifiedVouchersService _verifiedVoucherService;
+    private readonly VerifiedVouchersHandler _verifiedVoucherHandler;
+
+    private readonly InventoryPostingService _inventoryPostingService;
+    private readonly InventoryPostingHandler _inventoryPostingHandler;
+
+    public OutboundData(UnitOfWork unitOfWork, ServiceLayerHandler serviceLayer, DepartmentService departmentService,
+        ItemsService itemsService, Clients client)
+    {
+        InitializeComponent();
+        _unitOfWork = unitOfWork;
+        _serviceLayer = serviceLayer;
+        _client = client;
+        _credentials = _client.Credentials.FirstOrDefault();
+
+        _invoiceService = new InvoiceService(_client);
+        _handler = new Handler.Prism.Handlers.OutboundData.PointOfSale.Handler(_client);
+        _invoiceHandler = new InvoiceHandler(_client, _invoiceService, _serviceLayer);
+        _returnsHandler = new ReturnsHandler(_client, _invoiceService, _serviceLayer);
+        _ordersHandler = new OrdersHandler(_client, _invoiceService, _serviceLayer);
+        _downPaymentHandler = new DownPaymentHandler(_client, _invoiceService, _serviceLayer);
+        _creditMemoHandler = new CreditMemoHandler(_client, _invoiceService, _serviceLayer);
+
+        _verifiedVoucherService = new VerifiedVouchersService(_client);
+        _verifiedVoucherHandler = new VerifiedVouchersHandler(_client);
+
+        _inventoryPostingService = new InventoryPostingService(_client);
+        _inventoryPostingHandler = new InventoryPostingHandler();
+
+        _itemsService = itemsService;
+        _departmentService = departmentService;
+    }
+
+    private async void buttonSyncNow_Click(object sender, EventArgs e)
+    {
+        var documentType = (OutboundDocuments)comboBoxDocTypeSync.SelectedIndex;
+
+        var branch = -1;
+        if (comboBoxBranch.SelectedIndex != 0)
+            branch = (int)comboBoxBranch.SelectedValue;
+
+
+        var filterByDateRang = GetSyncQuery();
+
+        var docCode = "";
+        if (checkBoxDocCode.Checked)
+            docCode = textBoxDocCode.Text;
+
+        textBoxLogsSync.Clear();
+        dataGridViewSync.DataSource = null;
+
+        switch (documentType)
+        {
+            case OutboundDocuments.SalesInvoice:
+                {
+                    var salesInvoices = new RequestResult<PrismInvoice>();
+
+                    if (docCode.IsHasValue())
+                        salesInvoices = await _invoiceService.GetInvoicesAsync(OutboundDocuments.SalesInvoice, filterByDateRang, branch, docCode);
+                    else
+                        salesInvoices = await _invoiceService.GetInvoicesAsync(OutboundDocuments.SalesInvoice, filterByDateRang, branch);
+
+                    if (salesInvoices.EntityList.Any())
+                    {
+                        foreach (var sInvoice in salesInvoices.EntityList)
+                        {
+                            var invoiceResult = await _invoiceService.GetInvoiceDetailsBySidAsync(sInvoice.Sid);
+                            var invoice = invoiceResult.EntityList.FirstOrDefault();
+
+                            LogMessages($"Invoice/s." +
+                                        $"\r\nFirst Request Message {salesInvoices.Message}" +
+                                        $"\r\n\r\nSecond Request Message: {invoiceResult.Message}",
+                                "");
+
+                            if (invoice == null) continue;
+
+                            var isARDownPayment = invoice.Items.Any(p => p.Alu == "SP0012");
+
+
+                            if (isARDownPayment && CheckInvoiceExist(sInvoice.Sid, "ODPI"))
+                            {
+                                var docNum = GetInvoiceDocNum(sInvoice.Sid, "ODPI");
+
+                                LogMessages(
+                                     $"Prism Invoice No. ({sInvoice.DocumentNumber}) is Already Exist with SAP A/r Down Payment No. ({docNum}).",
+                                     "");
+                            }
+
+                            else if (!isARDownPayment && CheckInvoiceExist(sInvoice.Sid, "OINV"))
+                            {
+                                var docNum = GetInvoiceDocNum(sInvoice.Sid, "OINV");
+
+                                LogMessages(
+                                     $"Prism Invoice No. ({sInvoice.DocumentNumber}) is Already Exist with SAP Invoice No. ({docNum}).",
+                                     "");
+                            }
+
+
+                            if (isARDownPayment && !CheckInvoiceExist(sInvoice.Sid, "ODPI"))
+                                await HandleDownPayment(dataGridViewSync, invoiceResult.EntityList, UpdateType.SyncInvoice, treeView1);                         
+                            
+                            else if (!isARDownPayment && !CheckInvoiceExist(sInvoice.Sid, "OINV"))
+                                await HandleInvoices(dataGridViewSync, invoiceResult.EntityList, UpdateType.SyncInvoice, treeView1);
+                        }
+
+                    }
+                    else
+                    {
+                        dataGridViewSync.DataSource = null;
+                        LogMessages($"No Available invoice/s." +
+                                    $"\r\nResponse: {salesInvoices.Response.Content} " +
+                                    $"\r\nResult Message: {salesInvoices.Message}" +
+                                    $"\r\nStatus: {salesInvoices.Status}",
+                            $"No Available invoice/s.");
+                    }
+
+                    break;
+                }
+            case OutboundDocuments.ReturnInvoice:
+                {
+                    var returnInvoices = new RequestResult<PrismInvoice>();
+
+
+                    if (docCode.IsHasValue())
+                        returnInvoices = await _invoiceService.GetInvoicesAsync(OutboundDocuments.ReturnInvoice, filterByDateRang, branch, docCode);
+                    else
+                        returnInvoices = await _invoiceService.GetInvoicesAsync(OutboundDocuments.ReturnInvoice, filterByDateRang, branch);
+
+                    if (returnInvoices.EntityList.Any())
+                    {
+                        foreach (var rInvoice in returnInvoices.EntityList)
+                        {
+                            var invoiceResult = await _invoiceService.GetInvoiceDetailsBySidAsync(rInvoice.Sid);
+                            var returnInvoice = invoiceResult.EntityList.FirstOrDefault();
+                            LogMessages($"Return invoice/s." +
+                                        $"\r\nFirst Request Message: {returnInvoices.Message}" +
+                                        $"\r\n\r\nSecond Request Message: {invoiceResult.Message}",
+                                "");
+
+                            if (returnInvoice == null) continue;
+
+                            if (CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
+                            {
+                                var docNum = GetReturnInvoiceDocNum(returnInvoice.Sid);
+
+                                LogMessages($"Prism Invoice No. ({returnInvoice.DocumentNumber}) is Already Exist with SAP A/R Credit Payment No. ({docNum}).",
+                                     "");
+                            }
+                            var isCreditMemo = returnInvoice.Items.Any(p => p.Alu == "SP0012");
+
+                            if (isCreditMemo && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
+                                await HandleCreditMemo(dataGridViewSync, invoiceResult.EntityList, UpdateType.SyncInvoice, treeView1);
+
+
+                            else if (!isCreditMemo && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
+                                await HandleInvoiceReturn(dataGridViewSync, invoiceResult.EntityList, UpdateType.SyncCreditMemo, treeView1);
+
+                        }
+                    }
+                    else
+                    {
+                        dataGridViewSync.DataSource = null;
+                        LogMessages($"No Available Return invoice/s." +
+                                    $"\r\nResponse: {returnInvoices.Response.Content} " +
+                                    $"\r\nResult Message: {returnInvoices.Message}" +
+                                    $"\r\nStatus: {returnInvoices.Status}",
+                            $"No Available Return invoice/s.");
+                    }
+                }
+                break;
+            case OutboundDocuments.CustomerOrder:
+                {
+                    var customerOrders = new RequestResult<PrismInvoice>();
+
+
+                    if (docCode.IsHasValue())
+                        customerOrders = await _invoiceService.GetInvoicesAsync(OutboundDocuments.CustomerOrder, filterByDateRang, branch, docCode);
+                    else
+                        customerOrders = await _invoiceService.GetInvoicesAsync(OutboundDocuments.CustomerOrder, filterByDateRang, branch);
+
+
+                    if (customerOrders.EntityList.Any())
+                    {
+                        foreach (var sInvoice in customerOrders.EntityList)
+                        {
+                            var order = await _invoiceService.GetInvoiceDetailsBySidAsync(sInvoice.Sid);
+
+                            LogMessages($"Order/s." +
+                                        $"\r\nFirst Request Message: {customerOrders.Message}" +
+                                        $"\r\n\r\nSecond Request Message: {order.Message}",
+                                "");
+
+                            await HandleOrders(dataGridViewSync, order.EntityList, UpdateType.SyncInvoice, treeView1);
+                        }
+
+                    }
+                    else
+                    {
+                        dataGridViewSync.DataSource = null;
+                        LogMessages($"No Available Order/s." +
+                                    $"\r\nResponse: {customerOrders.Response.Content} " +
+                                    $"\r\nResult Message: {customerOrders.Message}" +
+                                    $"\r\nStatus: {customerOrders.Status}",
+                            $"No Available invoice/s.");
+                    }
+                }
+                break;
+
+            case OutboundDocuments.StockTransfer:
+                {
+                    var verifiedVouchers = new RequestResult<VerifiedVoucher>();
+
+
+                    if (docCode.IsHasValue())
+                        verifiedVouchers = await _verifiedVoucherService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value, docCode);
+                    else
+                        verifiedVouchers = await _verifiedVoucherService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value);
+
+
+                    if (verifiedVouchers.EntityList.Any())
+                    {
+
+                        foreach (var verifiedVoucher in verifiedVouchers.EntityList)
+                        {
+                            LogMessages($"Stock Transfer/s." + $"\r\nRequest Message: {verifiedVouchers.Message}", "");
+
+                            if (verifiedVoucher == null) continue;
+
+                            if (!CheckStockTransferExist(verifiedVoucher.Sid))// To-Do Add Check Exist in SAP by Sid in field U_PrismSid and U_SyncToPrism
+                                await HandleVerifiedVoucher(dataGridViewSync, verifiedVouchers.EntityList, UpdateType.SyncInvoice, treeView1);
+                            else
+                            {
+                                var docNum = GetStockTransferDocNum(verifiedVoucher.Sid);
+
+                                LogMessages($"Prism Verified Voucher No. ({verifiedVoucher.Slipno}) is Already Exist with SAP Stock Transfer No. ({docNum}).", "");
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        dataGridViewSync.DataSource = null;
+                        LogMessages($"No Available Verified Voucher/s." +
+                                    $"\r\nResponse:\r\n{verifiedVouchers.Response.Content.PrettyJson()} " +
+                                    $"\r\n\r\nResult Message: {verifiedVouchers.Message}" +
+                                    $"\r\nStatus: {verifiedVouchers.Status}",
+                            $"No Available Verified Voucher/s.");
+                    }
+                }
+                break;
+
+            case OutboundDocuments.InventoryPosting:
+                {
+                    var result = await _inventoryPostingService.GetInventoryPosting(branch, docCode);
+
+                    if (result.EntityList.Any())
+                    {
+                        LogMessages($"Inventory Posting/s." +
+                                    $"\r\n\r\nRequest Message: {result.Message}", "");
+
+
+
+                        foreach (var inventoryPosting in result.EntityList)
+                        {
+                            if (inventoryPosting == null) continue;
+
+                            if (!CheckInventoryPostingExist(inventoryPosting.Sid))// To-Do Add Check Exist in SAP by Sid in field U_PrismSid and U_SyncToPrism
+                                await HandleInventoryPosting(dataGridViewSync, result.EntityList, UpdateType.SyncInvoice, treeView1);
+                            else
+                            {
+                                var docNum = GetInventoryPostingDocNum(inventoryPosting.Sid);
+
+                                var message = $"Prism Adjustment No. ({inventoryPosting.Adjno}) is Already Exist with SAP Inventory Posting No. ({docNum}).";
+                                LogMessages(message, message);
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        dataGridViewSync.DataSource = null;
+                        LogMessages($"No Available Inventory Posting/s." +
+                                    $"\r\nResponse: {result.Response.Content} " +
+                                    $"\r\n\r\nResult Message: {result.Message}" +
+                                    $"\r\nStatus: {result.Status}",
+                            $"No Available Inventory Posting/s.");
+                    }
+                }
+                break;
+        }
+    }
+
+    private async Task HandleInvoices(Guna2DataGridView dt, List<PrismInvoice> invoicesList, UpdateType UpdateType, TreeView treeView)
+    {
+        PlaySound.Click();
+        //var BpList = new List<BusinessPartner>();
+        var bindingList = dt.DataSource as BindingList<SAPInvoice>;
+
+        await foreach (var syncResult in _invoiceHandler.AddSalesInvoiceAsync(invoicesList))
+        {
+            if (syncResult.EntityList != null && syncResult.EntityList.Count > 0)
+            {
+                foreach (var invoice in syncResult.EntityList)
+                {
+                    dt.BindInvoices(ref bindingList, invoice);
+                    treeView.BindInvoices(ref bindingList, invoice);
+
+                    //Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+                }
+            }
+            else
+            {
+                dt.DataSource = null;
+                treeView.Nodes.Clear();
+            }
+
+
+            if (textBoxLogsSync.Text.Contains(syncResult.Message))
+                return;
+
+            Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+
+            //syncResult.UpdateResponse;
+        }
+    }
+
+    private static bool CheckInvoiceExist(string invoiceSid, string table)
+    {
+        var query = $"SELECT CASE WHEN EXISTS (SELECT 1 FROM {table} WHERE U_PrismSid = '{invoiceSid}') THEN 1 ELSE 0 END";
+
+        var oRecordSet = (Recordset)ClientHandler.Company.GetBusinessObject(BoObjectTypes.BoRecordset);
+        oRecordSet.DoQuery(query);
+
+        if (oRecordSet.RecordCount > 0)
+            return oRecordSet.Fields.Item(0).Value.ToString() == "1";
+
+        return false;
+    }
+    private static string GetInvoiceDocNum(string invoiceSid, string table)
+    {
+        var query = $"SELECT DocNum FROM {table} WHERE U_PrismSid = '{invoiceSid}'";
+
+        var oRecordSet = (Recordset)ClientHandler.Company.GetBusinessObject(BoObjectTypes.BoRecordset);
+        oRecordSet.DoQuery(query);
+
+        return oRecordSet.RecordCount > 0
+            ? oRecordSet.Fields.Item(0).Value.ToString()
+            : "";
+    }
+
+    private static bool CheckReturnInvoiceExist(string invoiceSid)
+    {
+        var query = $"SELECT CASE WHEN EXISTS (SELECT 1 FROM ORIN WHERE U_PrismSid = '{invoiceSid}') THEN 1 ELSE 0 END";
+
+        var oRecordSet = (Recordset)ClientHandler.Company.GetBusinessObject(BoObjectTypes.BoRecordset);
+        oRecordSet.DoQuery(query);
+
+        if (oRecordSet.RecordCount > 0)
+            return oRecordSet.Fields.Item(0).Value.ToString() == "1";
+
+        return false;
+    }
+    private static string GetReturnInvoiceDocNum(string invoiceSid)
+    {
+        var query = $"SELECT DocNum FROM ORIN WHERE U_PrismSid = '{invoiceSid}'";
+
+        var oRecordSet = (Recordset)ClientHandler.Company.GetBusinessObject(BoObjectTypes.BoRecordset);
+        oRecordSet.DoQuery(query);
+
+        return oRecordSet.RecordCount > 0
+            ? oRecordSet.Fields.Item(0).Value.ToString()
+            : "";
+    }
+    private static bool CheckInventoryPostingExist(string invoiceSid)
+    {
+        var query = $"SELECT CASE WHEN EXISTS (SELECT 1 FROM OIQR WHERE U_PrismSid = '{invoiceSid}') THEN 1 ELSE 0 END";
+
+        var oRecordSet = (Recordset)ClientHandler.Company.GetBusinessObject(BoObjectTypes.BoRecordset);
+        oRecordSet.DoQuery(query);
+
+        if (oRecordSet.RecordCount > 0)
+            return oRecordSet.Fields.Item(0).Value.ToString() == "1";
+
+        return false;
+    }
+    private static string GetInventoryPostingDocNum(string invoiceSid)
+    {
+        var query = $"SELECT DocNum FROM OIQR WHERE U_PrismSid = '{invoiceSid}'";
+
+        var oRecordSet = (Recordset)ClientHandler.Company.GetBusinessObject(BoObjectTypes.BoRecordset);
+        oRecordSet.DoQuery(query);
+
+        return oRecordSet.RecordCount > 0
+            ? oRecordSet.Fields.Item(0).Value.ToString()
+            : "";
+    }
+    private async Task HandleInvoiceReturn(Guna2DataGridView dt, List<PrismInvoice> invoicesList, UpdateType UpdateType, TreeView treeView)
+    {
+        PlaySound.Click();
+        //var BpList = new List<BusinessPartner>();
+        var bindingList = dt.DataSource as BindingList<SAPInvoice>;
+
+        await foreach (var syncResult in _returnsHandler.AddReturnInvoiceAsync(invoicesList))
+        {
+            if (syncResult.EntityList != null && syncResult.EntityList.Count > 0)
+            {
+                foreach (var invoice in syncResult.EntityList)
+                {
+                    dt.BindInvoices(ref bindingList, invoice);
+                    treeView.BindInvoices(ref bindingList, invoice);
+
+                    //Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+                }
+            }
+            else
+            {
+                dt.DataSource = null;
+                treeView.Nodes.Clear();
+            }
+
+            if (textBoxLogsSync.Text.Contains(syncResult.Message))
+                return;
+            Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+
+            //syncResult.UpdateResponse;
+        }
+    }
+    private async Task HandleOrders(Guna2DataGridView dt, List<PrismInvoice> invoicesList, UpdateType UpdateType, TreeView treeView)
+    {
+        PlaySound.Click();
+        //var BpList = new List<BusinessPartner>();
+        var bindingList = dt.DataSource as BindingList<SAPInvoice>;
+
+        await foreach (var syncResult in _ordersHandler.AddOrdersAsync(invoicesList))
+        {
+            if (syncResult.EntityList != null && syncResult.EntityList.Count > 0)
+            {
+                foreach (var invoice in syncResult.EntityList)
+                {
+                    dt.BindInvoices(ref bindingList, invoice);
+                    treeView.BindInvoices(ref bindingList, invoice);
+
+                    //Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+                }
+            }
+            else
+            {
+                dt.DataSource = null;
+                treeView.Nodes.Clear();
+            }
+
+            if (textBoxLogsSync.Text.Contains(syncResult.Message))
+                return;
+            Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+
+            //syncResult.UpdateResponse;
+        }
+    }
+
+    private async Task HandleVerifiedVoucher(Guna2DataGridView dt, List<VerifiedVoucher> verifiedVouchers, UpdateType UpdateType, TreeView treeView)
+    {
+        PlaySound.Click();
+        var bindingList = dt.DataSource as BindingList<VerifiedVoucher>;
+
+        await foreach (var syncResult in _verifiedVoucherHandler.SyncVerifiedVoucher(verifiedVouchers))
+        {
+            if (syncResult.EntityList != null && syncResult.EntityList.Count > 0)
+            {
+                foreach (var verifiedVoucher in syncResult.EntityList)
+                {
+                    //dt.BindVerifiedVouchers(ref bindingList, verifiedVoucher);
+                    treeView.BindStockTransfer(ref bindingList, verifiedVoucher);
+
+                    //var nextRowVersion = verifiedVoucher.Rowversion;
+                    //var result = await _verifiedVoucherService.UpdateIsSynced(verifiedVoucher.Sid, nextRowVersion.ToString(), "Yes", "", verifiedVoucher.Storecode);
+
+                    //syncResult.Message += $"\r\n{result.Message}\r\n";
+
+                    if (textBoxLogsSync.Text.Contains(syncResult.Message))
+                        return;
+                    Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+                }
+            }
+            else
+            {
+                dt.DataSource = null;
+                treeView.Nodes.Clear();
+            }
+
+            //if (textBoxLogsSync.Text.Contains(syncResult.Message))
+            //    return;
+            //Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+
+            //syncResult.UpdateResponse;
+        }
+    }
+
+    private static bool CheckStockTransferExist(string voucherSid)
+    {
+        var query = $"SELECT CASE WHEN EXISTS (SELECT 1 FROM OWTR WHERE U_PrismSid = '{voucherSid}') THEN 1 ELSE 0 END";
+
+        var oRecordSet = (Recordset)ClientHandler.Company.GetBusinessObject(BoObjectTypes.BoRecordset);
+        oRecordSet.DoQuery(query);
+
+        if (oRecordSet.RecordCount > 0)
+            return oRecordSet.Fields.Item(0).Value.ToString() == "1";
+
+        return false;
+    }
+    private static string GetStockTransferDocNum(string voucherSid)
+    {
+        var query = $"SELECT DocNum FROM OWTR WHERE U_PrismSid = '{voucherSid}'";
+
+        var oRecordSet = (Recordset)ClientHandler.Company.GetBusinessObject(BoObjectTypes.BoRecordset);
+        oRecordSet.DoQuery(query);
+
+        return oRecordSet.RecordCount > 0
+            ? oRecordSet.Fields.Item(0).Value.ToString()
+            : "";
+    }
+    private async Task HandleInventoryPosting(Guna2DataGridView dt, List<InventoryPosting> inventoryPostings, UpdateType UpdateType, TreeView treeView)
+    {
+        PlaySound.Click();
+        var bindingList = dt.DataSource as BindingList<InventoryPosting>;
+
+        await foreach (var syncResult in _inventoryPostingHandler.SyncInventoryPosting(inventoryPostings))
+        {
+            if (syncResult.EntityList != null && syncResult.EntityList.Count > 0)
+            {
+                foreach (var count in syncResult.EntityList)
+                {
+                    //dataGridViewSync.BringToFront();
+                    //dataGridViewSync.Visible = true;
+                    //dt.BindInventoryPosting(ref bindingList, count);
+                    treeView.BindInventoryCounting(ref bindingList, count);
+
+                    //Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+                }
+            }
+            else
+            {
+                dt.DataSource = null;
+                treeView.Nodes.Clear();
+            }
+
+            if (textBoxLogsSync.Text.Contains(syncResult.Message))
+                return;
+            Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+
+            //syncResult.UpdateResponse;
+        }
+    }
+
+    private async Task HandleDownPayment(Guna2DataGridView dt, List<PrismInvoice> invoicesList, UpdateType UpdateType, TreeView treeView)
+    {
+        PlaySound.Click();
+        //var BpList = new List<BusinessPartner>();
+        var bindingList = dt.DataSource as BindingList<SAPInvoice>;
+
+        await foreach (var syncResult in _downPaymentHandler.AddDownPaymentAsync(invoicesList))
+        {
+            if (syncResult.EntityList != null && syncResult.EntityList.Count > 0)
+            {
+                foreach (var invoice in syncResult.EntityList)
+                {
+                    dt.BindInvoices(ref bindingList, invoice);
+                    //treeView.BindInvoices(ref bindingList, invoice);
+
+                    //Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+                }
+            }
+            else
+            {
+                dt.DataSource = null;
+                treeView.Nodes.Clear();
+            }
+
+            if (textBoxLogsSync.Text.Contains(syncResult.Message))
+                return;
+            Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+
+            //syncResult.UpdateResponse;
+        }
+    }
+    private async Task HandleCreditMemo(Guna2DataGridView dt, List<PrismInvoice> invoicesList, UpdateType UpdateType, TreeView treeView)
+    {
+        PlaySound.Click();
+        //var BpList = new List<BusinessPartner>();
+        var bindingList = dt.DataSource as BindingList<SAPInvoice>;
+
+        await foreach (var syncResult in _creditMemoHandler.AddCreditMemoAsync(invoicesList))
+        {
+            if (syncResult.EntityList != null && syncResult.EntityList.Count > 0)
+            {
+                foreach (var invoice in syncResult.EntityList)
+                {
+                    dt.BindInvoices(ref bindingList, invoice);
+                    //treeView.BindInvoices(ref bindingList, invoice);
+
+                    //Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+                }
+            }
+            else
+            {
+                dt.DataSource = null;
+                treeView.Nodes.Clear();
+            }
+
+            if (textBoxLogsSync.Text.Contains(syncResult.Message))
+                return;
+            Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+
+            //syncResult.UpdateResponse;
+        }
+    }
+
+    public void OpenFormWithSettings(int tabControlInventoryIndex, int comboBoxDocTypeSyncIndex)
+    {
+        tabControlInventory.SelectedIndex = tabControlInventoryIndex;
+        comboBoxDocTypeSync.SelectedIndex = comboBoxDocTypeSyncIndex;
+        comboBoxDocTypeSchedule.SelectedIndex = comboBoxDocTypeSyncIndex;
+
+        //if (comboBoxDocTypeSyncIndex == (int)Documents.Invoice)
+        //    toggleARInvoice.Checked = true;
+
+        //else if (comboBoxDocTypeSyncIndex == (int)Documents.CreditMemo)
+        //    toggleCreditMemo.Checked = true;
+
+        //else if (comboBoxDocTypeSyncIndex == (int)Documents.StockTransfer)
+        //    toggleStockTransfer.Checked = true;
+
+        //else if (comboBoxDocTypeSyncIndex == (int)Documents.StockTaking)
+        //    toggleStockTaking.Checked = true;
+
+        //else if (comboBoxDocTypeSyncIndex == (int)Documents.GoodsReceipt)
+        //    toggleGoodsReceipt.Checked = true;
+
+        //else if (comboBoxDocTypeSyncIndex == (int)Documents.GoodsIssue)
+        //    toggleGoodsIssue.Checked = true;
+    }
+
+    private async void OutboundData_Load(object sender, EventArgs e)
+    {
+        comboBoxDocTypeSync.SelectedIndex = (int)OutboundDocuments.SalesInvoice;
+        comboBoxBranch.SelectedIndex = 0;
+        dateTimePickerFrom.Value = DateTime.Now.AddMonths(-1);
+
+        dateTimePickerTo.Value = DateTime.Now;
+
+        _invoiceService.Stores = await _invoiceService.StoresService.GetAll();
+        _invoiceService.TaxCodes = await _invoiceService.TaxCodesService.GetAll();
+
+        //var branches = _invoiceService.Stores
+        //    .Select(i => new { i.StoreNumber, i.StoreName })
+        //    .OrderBy(branch => branch.StoreNumber); // To sort by StoreNumber in ascending order
+
+        ////comboBoxBranch.DataSource = branches.ToList();
+        ////comboBoxBranch.DisplayMember = "StoreNumber - StoreName"; // The property to display
+        ////comboBoxBranch.ValueMember = "Sid"; // The property to use as the value
+
+        //foreach (var branch in branches)
+        //    comboBoxBranch.AddItem(branch.StoreNumber, $"{branch.StoreNumber} - {branch.StoreName}");
+
+
+        // Create a list of Store objects from _invoiceService.Stores
+        var branches = _invoiceService.Stores
+            .Select(i => new Store { StoreNumber = i.StoreNumber, StoreCode = i.StoreCode, StoreName = i.StoreName })
+            .ToList()
+            .OrderBy(branch => branch.StoreCode);
+
+        // Create a new list
+        List<Store> allBranches = new List<Store>();
+
+        // Add the "All" item
+        allBranches.Add(new Store { StoreNumber = -1, DisplayMember = "All" });
+
+        // Add the rest of the items
+        allBranches.AddRange(branches);
+
+        comboBoxBranch.DataSource = allBranches; // You need to set DataSource to allBranches instead of branches
+
+        comboBoxBranch.ValueMember = "StoreNumber"; // The property to use as the value
+        comboBoxBranch.DisplayMember = "DisplayMember"; // The property to display
+
+
+        var isReachable = await Helper.IsDashboardAvailable();
+        if (isReachable)
+            webViewSchedule.Visible = true;
+        else
+            webViewSchedule.Visible = false;
+
+        textBoxDocCode.Focus();
+    }
+
+
+
+    private string GetSyncQuery()
+    {
+        var dateFrom = dateTimePickerFrom.Value.ToPrismFromDateFormat();
+
+        var dateTo = dateTimePickerTo.Value.ToPrismToDateFormat();
+
+
+        //dateFrom    2023-06-26T21:00:00.736Z   -  dateTo     2023-07-27T20:59:59.736Z
+        return $"AND(invoice_posted_date,ge,{dateFrom})AND(invoice_posted_date,le,{dateTo})";
+
+        //AND(invoice_posted_date,ge,2023-07-24T21:00:00.877Z)AND(invoice_posted_date,le,2023-07-25T20:59:59.877Z)
+    }
+
+    private bool ShouldSync(string documentName, OutboundDocuments document, out string filter)
+    {
+        var updateType = SyncType.GetSyncType(document);
+        var initialDate = SyncEntityService.CompareSyncDateWithDateNow(_unitOfWork, updateType.Initial,
+            out var needToSyncBasedOnInitialDate);
+        var syncDate =
+            SyncEntityService.CompareSyncDateWithDateNow(_unitOfWork, updateType.Sync,
+                out var needToSyncBasedOnSyncDate);
+
+        if (needToSyncBasedOnInitialDate || needToSyncBasedOnSyncDate)
+        {
+            var lastInitialDate = initialDate.ToSAPDateFormat();
+            var lastSyncDate = syncDate.ToSAPDateFormat();
+
+            filter =
+                $" WHERE (T0.[CreateDate] >= '{lastInitialDate}' OR T0.[UpdateDate] >= '{lastSyncDate}') AND (T0.[U_SyncToPrism] IS NULL OR  T0.[U_SyncToPrism] = '' OR  T0.[U_SyncToPrism] = 'N')";
+
+            return true;
+        }
+
+        var message =
+            $"There is no {documentName} available to be synced, or may it flagged as synced to prism or not active to be synced.";
+        var status =
+            $"Status: there is no {documentName} available to be synced, or may it flagged as synced to prism or not active to be synced.";
+        LogMessages(message, status);
+
+        filter = "";
+        return false;
+    }
+
+    private void LogMessages(string message, string status)
+    {
+        textBoxLogsSync.Log(new[] { message + "\r\n" }, Logger.MessageTime.Long);
+        labelStatus.Log(status, Logger.MessageTypes.Warning,
+            Logger.MessageTime.Long);
+    }
+
+    private void Log(UpdateType updateType, string message, string status)
+    {
+        if (updateType == UpdateType.SyncInvoice ||
+            updateType == UpdateType.SyncCreditMemo ||
+            updateType == UpdateType.SyncStockTransfer ||
+            updateType == UpdateType.SyncStockTaking ||
+            updateType == UpdateType.SyncOutGoodsReceipt ||
+            updateType == UpdateType.SyncOutGoodsIssue
+           )
+        {
+            //textBoxLogsSync.Clear();
+            textBoxLogsSync.Text += message;
+            // UpdateTextBox(textBoxLogsInitialize, message);
+        }
+
+        //else
+        //{
+        //    textBoxLogsInitialize.Clear();
+        //    textBoxLogsInitialize.AppendText(message);
+        //}
+        labelStatus.Log(status, Logger.MessageTypes.Warning,
+            Logger.MessageTime.Long);
+    }
+
+
+    private void guna2ControlBox1_Click(object sender, EventArgs e)
+    {
+        Helper.TryKillProcess();
+    }
+
+
+    private void guna2ControlBox2_Click(object sender, EventArgs e) => WindowState = FormWindowState.Minimized;
+
+    private void guna2PictureBox1_DoubleClick(object sender, EventArgs e) => ResizeForm();
+
+    void ResizeForm()
+    {
+        if (WindowState == FormWindowState.Normal)
+        {
+            WindowState = FormWindowState.Maximized;
+            guna2Elipse1.BorderRadius = 0;
+        }
+        else
+        {
+            WindowState = FormWindowState.Normal;
+            guna2Elipse1.BorderRadius = 30;
+        }
+    }
+
+    private void guna2Panel1_DoubleClick(object sender, EventArgs e) => ResizeForm();
+
+    private void guna2ControlBox3_Click(object sender, EventArgs e)
+    {
+        guna2Elipse1.BorderRadius = WindowState == FormWindowState.Normal ? 30 : 0;
+    }
+
+    private void guna2Button1_Click(object sender, EventArgs e)
+    {
+        Close();
+        Dashboard mainScreen = new Dashboard(_unitOfWork, _serviceLayer, _departmentService, _itemsService, _client);
+        mainScreen.Show();
+
+        if (Program.IsPrismConnected)
+        {
+            mainScreen.CheckConnectivity(true);
+        }
+        else
+            mainScreen.CheckConnectivity(false);
+    }
+
+    private void guna2Button2_Click(object sender, EventArgs e)
+    {
+        Close();
+        InboundData inboundData =
+            new InboundData(_unitOfWork, _serviceLayer, _departmentService, _itemsService, _client);
+        inboundData.Show();
+    }
+
+    private void guna2Button6_Click(object sender, EventArgs e)
+    {
+        Close();
+        var administration = new Settings(_unitOfWork, _serviceLayer, _departmentService, _itemsService, _client);
+        administration.Show();
+    }
+
+    private void comboBoxDocTypeSync_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        var documentType = (OutboundDocuments)comboBoxDocTypeSync.SelectedIndex;
+
+        if (documentType
+            is OutboundDocuments.SalesInvoice
+            or OutboundDocuments.ReturnInvoice
+            or OutboundDocuments.CustomerOrder
+            or OutboundDocuments.StockTransfer
+            or OutboundDocuments.InventoryPosting
+            or OutboundDocuments.GoodsReceipt
+            or OutboundDocuments.GoodsIssue
+            )
+        {
+            labelBranchs.Visible = true;
+            comboBoxBranch.Visible = true;
+
+            checkBoxDate.Visible = true;
+            checkBoxDocCode.Visible = true;
+        }
+        else
+        {
+            labelBranchs.Visible = false;
+            comboBoxBranch.Visible = false;
+
+            checkBoxDate.Visible = false;
+            checkBoxDocCode.Visible = false;
+        }
+    }
+
+    private void textBoxDocCode_Enter(object sender, EventArgs e)
+        => checkBoxDocCode.Checked = true;
+
+    private void textBoxDocCode_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Enter)
+            buttonSyncNow.PerformClick();
+    }
+
+    private void ClearSyncDataGridView()
+    {
+        dataGridViewSync.DataSource = null;
+        dataGridViewSync.Rows.Clear();
+    }
+
+    private void SyncClearLogs_Click(object sender, EventArgs e)
+        => textBoxLogsSync.Clear();
+
+
+    private void MenuISyncCopy_Click(object sender, EventArgs e)
+        => CopyText(textBoxLogsSync);
+
+
+    private void MenuISyncClearMonitoringLogs_Click(object sender, EventArgs e)
+        => ClearSyncDataGridView();
+
+    private void CopyText(RichTextBox textBoxLogs)
+    {
+        if (!string.IsNullOrEmpty(textBoxLogs.SelectedText))
+        {
+            Clipboard.SetText(textBoxLogs.SelectedText);
+            labelStatus.Log("Status: Selected Text Copied", Logger.MessageTypes.Warning, Logger.MessageTime.Short);
+        }
+    }
+
+    private void MenuRefreshAuth_Click(object sender, EventArgs e)
+        => RefreshAuthSession();
+
+    private async void RefreshAuthSession()
+    {
+        var newAuth = await LoginManager.GetAuthSessionAsync(_credentials.BaseUri, _credentials.PrismUserName, _credentials.PrismPassword);
+        if (newAuth.IsHasValue())
+            labelStatus.Log("Status: Auth Session refreshed.", Logger.MessageTypes.Warning, Logger.MessageTime.Long);
+        else
+            labelStatus.Log("Status: Cant refresh Auth-Session, Wait a few seconds before you try again.", Logger.MessageTypes.Error, Logger.MessageTime.Long);
+    }
+}
+

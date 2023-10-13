@@ -1,0 +1,89 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>Images\link.ico</ApplicationIcon>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+    <AssemblyName>$(MSBuildProjectName)</AssemblyName>
+    <AssemblyVersion>1.2</AssemblyVersion>
+    <FileVersion>1.2</FileVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Icon\**" />
+    <EmbeddedResource Remove="Icon\**" />
+    <None Remove="Icon\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Forms\Dashboard.resx~RF25ed3a8.TMP" />
+    <None Remove="Images\Price-Checker.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Images\link.ico" />
+    <Content Include="Images\Price-Checker.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Guna.UI2.WinForms" Version="2.0.4.4" />
+    <PackageReference Include="Humanizer.Core" Version="2.14.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.1901.177" />
+    <PackageReference Include="RestSharp" Version="106.15.0" />
+    <PackageReference Include="Serilog" Version="3.0.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SAPLink.Handler\SAPLink.Handler.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SAPBusinessOneSDK">
+      <HintPath>bin\Debug\net7.0-windows\SAPBusinessOneSDK.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Forms\Settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\InboundData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\OutboundData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\Dashboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="RD /S /Q &quot;$(TargetDir)ca\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)cs\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)da\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)fa\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)fi\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)ko\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)mk\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)nl\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)pl\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)pt\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)pt-BR\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)pt-PT\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)sv\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)tr\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)tr-TR\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)zh\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)zh-TW\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)zh-CN\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)de\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)es\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)fr\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)it\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)ja\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)ko\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)ru\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)zh-Hans\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)zh-Hant\&quot;&#xD;&#xA;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)de\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)es\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)fr\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)it\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)ja\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)ko\&quot;&#xD;&#xA;RD /S /Q &quot;$(TargetDir)ru\&quot;" />
+  </Target>
+
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
+
+</Project>

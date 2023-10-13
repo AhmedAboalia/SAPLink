@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32126.317
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SAPLink.API", "SAPLink.API", "{1701ED11-D251-416E-A0CE-95170DBD3516}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAPLink.Core", "SAPLink.API\SAPLink.Core\SAPLink.Core.csproj", "{3A6F16B1-D3C6-4490-A97A-8CBCD1EB9066}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAPLink.EF", "SAPLink.API\SAPLink.EF\SAPLink.EF.csproj", "{84DFA583-CEAE-457C-974C-F7C2F9B4CA09}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAPLink", "SAPLink\SAPLink.csproj", "{D63A613B-93AC-4C18-90F3-1526DE49E6CC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAPLink.Handler", "SAPLink.Handler\SAPLink.Handler.csproj", "{E1CEC206-0365-4E56-90F3-9B9539C04B08}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3A6F16B1-D3C6-4490-A97A-8CBCD1EB9066}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A6F16B1-D3C6-4490-A97A-8CBCD1EB9066}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A6F16B1-D3C6-4490-A97A-8CBCD1EB9066}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A6F16B1-D3C6-4490-A97A-8CBCD1EB9066}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84DFA583-CEAE-457C-974C-F7C2F9B4CA09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84DFA583-CEAE-457C-974C-F7C2F9B4CA09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84DFA583-CEAE-457C-974C-F7C2F9B4CA09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84DFA583-CEAE-457C-974C-F7C2F9B4CA09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D63A613B-93AC-4C18-90F3-1526DE49E6CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D63A613B-93AC-4C18-90F3-1526DE49E6CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D63A613B-93AC-4C18-90F3-1526DE49E6CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D63A613B-93AC-4C18-90F3-1526DE49E6CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1CEC206-0365-4E56-90F3-9B9539C04B08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1CEC206-0365-4E56-90F3-9B9539C04B08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1CEC206-0365-4E56-90F3-9B9539C04B08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1CEC206-0365-4E56-90F3-9B9539C04B08}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3A6F16B1-D3C6-4490-A97A-8CBCD1EB9066} = {1701ED11-D251-416E-A0CE-95170DBD3516}
+		{84DFA583-CEAE-457C-974C-F7C2F9B4CA09} = {1701ED11-D251-416E-A0CE-95170DBD3516}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EC6B154B-1812-4279-BD23-FE592010838E}
+	EndGlobalSection
+EndGlobal

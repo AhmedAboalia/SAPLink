@@ -1,0 +1,14 @@
+global using System.Collections.Generic;
+global using SAPLink.Core;
+global using SAPLink.Core.Models.System;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using SAPLink.Core.Models;
+global using SAPLink.Core.Models.Prism.Settings;
+global using SAPLink.Core.Models.SAP.MasterData.Items;
+global using SAPLink.EF.Data;
+global using SAPLink.EF.Interfaces;
+global using SAPLink.EF.Repositories;
+global using static SAPLink.Core.Enums;
+global using static SAPLink.Core.InboundEnums;
+global using Credentials = SAPLink.Core.Models.System.Credentials;
