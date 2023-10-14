@@ -23,7 +23,7 @@
 
   <ItemGroup>
     <Reference Include="SAPBusinessOneSDK">
-      <HintPath>bin\Debug\net7.0\SAPBusinessOneSDK.dll</HintPath>
+      <HintPath>..\SAPLink\bin\Debug\net7.0-windows\SAPBusinessOneSDK.dll</HintPath>
     </Reference>
   </ItemGroup>
 
