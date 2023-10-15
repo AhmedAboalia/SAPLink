@@ -56,7 +56,7 @@ public partial class Service
 
             var resource = $"/receiving" +
                            $"?filter=(sbssid,eq,{_subsidiary.SID}){dateRange}AND(status,eq,4)AND(vouclass,ne,2)AND(slipflag,eq,1)AND(verified,eq,true){vouchersFilter}" + ///AND(Trackingno,ne,)
-                           $"&cols=slipsbsno,vouno,storesid,origstoresid,slipstorecode,rowversion,storeno,storename,storecode,origstorecode,origstoreno,origstorename,recvitem.qty,recvitem.itemsid,recvitem.itemsid,recvitem.description1,recvitem.description2,recvitem.alu,recvitem.price,recvitem.upc,pkgno,slipno";
+                           $"&cols=slipsbsno,vouno,storesid,origstoresid,slipstorecode,rowversion,storeno,storename,storecode,origstorecode,origstoreno,origstorename,recvitem.qty,recvitem.itemsid,recvitem.udf10string,recvitem.itemsid,recvitem.description1,recvitem.description2,recvitem.alu,recvitem.price,recvitem.upc,pkgno,slipno";
 
             result.Message = $"Resource: \r\n" +
                              $"{query}{resource}\r\n" +

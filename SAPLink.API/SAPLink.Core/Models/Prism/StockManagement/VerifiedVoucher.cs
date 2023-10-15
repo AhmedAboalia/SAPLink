@@ -52,6 +52,7 @@ public partial class VerifiedVoucher
 
     [JsonProperty("slipstorecode")]
     public string SlipStoreCode { get; set; }
+
 }
 public partial class Recvitem
 {
@@ -76,6 +77,9 @@ public partial class Recvitem
 
     [JsonProperty("alu")]
     public string Alu { get; set; }
+
+    [JsonProperty("udfvalue5")]
+    public string SalesPerUnitFactor { get; set; }
 }
 
 public partial class VerifiedVoucher

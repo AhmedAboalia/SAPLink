@@ -34,40 +34,40 @@ internal static class CredentialsList
     {
         return new Credentials[]
         {
-            //new()
-            //{
-            //    Id = (int)Environments.Production,
-            //    ClientId = (int)Environments.Production,
-            //    EnvironmentCode = (int)Environments.Production,
-            //    EnvironmentName = "Production Environment",
-            //    Active = false,
+            new()
+            {
+                Id = (int)Environments.Production,
+                ClientId = (int)Environments.Production,
+                EnvironmentCode = (int)Environments.Production,
+                EnvironmentName = "Production Environment",
+                Active = false,
 
-            //    PrismUserName = "SAPLINK",
-            //    PrismPassword = "RetailTec@123",
-            //    BaseUri = ProductionBaseUrl,
-            //    BackOfficeUri = $"{ProductionBaseUrl}/api/backoffice",
-            //    CommonUri = $"{ProductionBaseUrl}/v1/rest",
-            //    RestUri = $"{ProductionBaseUrl}/api/common",
-            //    Origin = ProductionBaseUrl,
-            //    Referer = $"{ProductionBaseUrl}/prism.shtml",
-            //    AuthSession = "",
+                PrismUserName = "SAPLINK",
+                PrismPassword = "RetailTec@123",
+                BaseUri = ProductionBaseUrl,
+                BackOfficeUri = $"{ProductionBaseUrl}/api/backoffice",
+                CommonUri = $"{ProductionBaseUrl}/v1/rest",
+                RestUri = $"{ProductionBaseUrl}/api/common",
+                Origin = ProductionBaseUrl,
+                Referer = $"{ProductionBaseUrl}/prism.shtml",
+                AuthSession = "",
 
-            //    ServiceLayerUri = "https://sap-test:50000/b1s/v1/",
-            //    Server = "SAP-TEST",
-            //    ServerTypes = BoDataServerTypes.dst_MSSQL2016,
-            //    CompanyDb = "",
-            //    UserName = "manager",
-            //    Password = "",
-            //    DbUserName = "sa",
-            //    DbPassword = "sap123456*",
+                ServiceLayerUri = "https://sap-test:50000/b1s/v1/",
+                Server = "SAP-TEST",
+                ServerTypes = BoDataServerTypes.dst_MSSQL2016,
+                CompanyDb = "",
+                UserName = "manager",
+                Password = "",
+                DbUserName = "sa",
+                DbPassword = "sap123456*",
 
-            //    AuthUserName = @"{{""UserName"" : ""manager"",""CompanyDB"" : """"}}",
-            //    AuthPassword = "",
-            //    Authorization = "",
-            //    Cookie = "",
+                AuthUserName = @"{{""UserName"" : ""manager"",""CompanyDB"" : """"}}",
+                AuthPassword = "",
+                Authorization = "",
+                Cookie = "",
 
-            //    IntegrationUrl = integrationUrl,
-            //},
+                IntegrationUrl = integrationUrl,
+            },
             new()
             {
                 Id = (int)Environments.Test,

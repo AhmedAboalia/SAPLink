@@ -22,20 +22,20 @@ internal static class SubsidiariesList
     {
         return new List<Subsidiaries>
         {
-            //new()
-            //{
-            //    Id = (int)Environments.Production,
-            //    CredentialId = (int)Environments.Production, // Foreign key referencing the credential
-            //    Name = "AlKaffary - (Production)",
+            new()
+            {
+                Id = (int)Environments.Production,
+                CredentialId = (int)Environments.Production, // Foreign key referencing the credential
+                Name = "AlKaffary - (Production)",
 
-            //    Number = 1,
-            //    SID = 664651285000113257,
-            //    Clerksid = "674955099100039866",
-            //    ActivePriceLevelid = "664651377000135721",
-            //    ActiveSeasonSid = "664651377000169734",
-            //    ActiveStoreSid = "664651285000116261",
-            //    ActiveTaxCode = "664651377000183746",
-            //},
+                Number = 1,
+                SID = 664651285000113257,
+                Clerksid = "674955099100039866",
+                ActivePriceLevelid = "664651377000135721",
+                ActiveSeasonSid = "664651377000169734",
+                ActiveStoreSid = "664651285000116261",
+                ActiveTaxCode = "664651377000183746",
+            },
             new()
             {
                 Id = (int)Environments.Test,

@@ -214,8 +214,8 @@ public static class Enums
     {
         None = 0,
 
-        //[Description("Production Environment")]
-        //Production ,
+        [Description("Production Environment")]
+        Production,
 
         [Description("Test Environment")]
         Test,

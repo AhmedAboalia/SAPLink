@@ -42,7 +42,7 @@ public partial class Handler
                 foreach (var item in verifiedVoucher.Recvitem)
                 {
                     oStockTransfer.Lines.ItemCode = item.Alu;
-                    oStockTransfer.Lines.UserFields.Fields.Item("U_QTY").Value = item.Qty.ToString();
+                    oStockTransfer.Lines.UserFields.Fields.Item("Quantity").Value = (item.Qty * Convert.ToDecimal(item.SalesPerUnitFactor)).ToString();
                     oStockTransfer.Lines.Price = item.Price;
                     oStockTransfer.Lines.WarehouseCode = verifiedVoucher.Storecode;
                     oStockTransfer.Lines.Add();

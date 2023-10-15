@@ -23,12 +23,12 @@ internal static class ClientsList
     {
         return new List<Clients>
         {
-            //new()
-            //{
-            //    Id = (int)Environments.Production,
-            //    Name = "Al-Kaffary Subsidiary - SAP Live DB (KaffaryDB)",//Live Env. - 
-            //    Active = false,
-            //},
+            new()
+            {
+                Id = (int)Environments.Production,
+                Name = "Al-Kaffary Subsidiary - SAP Live DB (KaffaryDB)",//Live Env. - 
+                Active = false,
+            },
             new()
             {
                 Id = (int)Environments.Test,
