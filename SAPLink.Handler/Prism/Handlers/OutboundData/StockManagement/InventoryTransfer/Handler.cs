@@ -42,7 +42,11 @@ public partial class Handler
                 foreach (var item in verifiedVoucher.Recvitem)
                 {
                     oStockTransfer.Lines.ItemCode = item.Alu;
-                    oStockTransfer.Lines.UserFields.Fields.Item("Quantity").Value = (item.Qty * Convert.ToDecimal(item.SalesPerUnitFactor)).ToString();
+                    Decimal.TryParse(item.SalesPerUnitFactor, out var factor);
+                    if (factor > 0)
+                    oStockTransfer.Lines.UserFields.Fields.Item("Quantity").Value = (item.Qty * factor).ToString();
+                    else
+                        oStockTransfer.Lines.UserFields.Fields.Item("Quantity").Value = item.Qty.ToString();
                     oStockTransfer.Lines.Price = item.Price;
                     oStockTransfer.Lines.WarehouseCode = verifiedVoucher.Storecode;
                     oStockTransfer.Lines.Add();
@@ -81,6 +85,7 @@ public partial class Handler
                     _loger.Error(result.Message);
                     result.Message += $"Failed to create stock transfer. Error {result}: {errorMessage}";
                     result.Status = Enums.StatusType.Failed;
+                    yield return result;    
                 }
             }
         }

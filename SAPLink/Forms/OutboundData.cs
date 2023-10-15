@@ -239,9 +239,9 @@ public partial class OutboundData : Form
 
 
                     if (docCode.IsHasValue())
-                        verifiedVouchers = await _verifiedVoucherService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value, docCode);
+                        verifiedVouchers = await _verifiedVoucherService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value, branch, docCode);
                     else
-                        verifiedVouchers = await _verifiedVoucherService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value);
+                        verifiedVouchers = await _verifiedVoucherService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value, branch);
 
 
                     if (verifiedVouchers.EntityList.Any())

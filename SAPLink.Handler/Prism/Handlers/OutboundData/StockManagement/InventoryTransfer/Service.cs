@@ -37,13 +37,21 @@ public partial class Service
         StoresService = new StoresService(client);
     }
    
-    public async Task<RequestResult<VerifiedVoucher>> GetVerifiedVoucher(DateTime dateFrom, DateTime dateTo, string vouchersNo = "")
+    public async Task<RequestResult<VerifiedVoucher>> GetVerifiedVoucher(DateTime dateFrom, DateTime dateTo, int storeNumber, string vouchersNo = "")
     {
         RequestResult<VerifiedVoucher> result = new();
         try
         {
+            string storeFilter = "";
+
             string query = _credentials.BackOfficeUri;
 
+            if (storeNumber >= 0)
+            {
+                Stores = await StoresService.GetAll();
+                var storeCode = Stores.FirstOrDefault(s => s.StoreNumber == storeNumber).Sid;
+                storeFilter = $"AND(storesid,eq,{storeCode})";
+            }
 
             var from = dateFrom.ToPrismFromDateFormat();
             var to = dateTo.ToPrismToDateFormat();
@@ -55,8 +63,8 @@ public partial class Service
                 vouchersFilter = $"AND(vouno,eq,{vouchersNo})";
 
             var resource = $"/receiving" +
-                           $"?filter=(sbssid,eq,{_subsidiary.SID}){dateRange}AND(status,eq,4)AND(vouclass,ne,2)AND(slipflag,eq,1)AND(verified,eq,true){vouchersFilter}" + ///AND(Trackingno,ne,)
-                           $"&cols=slipsbsno,vouno,storesid,origstoresid,slipstorecode,rowversion,storeno,storename,storecode,origstorecode,origstoreno,origstorename,recvitem.qty,recvitem.itemsid,recvitem.udf10string,recvitem.itemsid,recvitem.description1,recvitem.description2,recvitem.alu,recvitem.price,recvitem.upc,pkgno,slipno";
+                           $"?filter=(sbssid,eq,{_subsidiary.SID}){storeFilter}{dateRange}AND(status,eq,4)AND(vouclass,ne,2)AND(slipflag,eq,1)AND(verified,eq,true){vouchersFilter}" + ///AND(Trackingno,ne,)
+                           $"&cols=slipsbsno,vouno,storesid,origstoresid,slipstorecode,rowversion,storeno,storename,storecode,origstorecode,origstoreno,origstorename,recvitem.qty,recvitem.itemsid,recvitem.udfvalue5,recvitem.itemsid,recvitem.description1,recvitem.description2,recvitem.alu,recvitem.price,recvitem.upc,pkgno,slipno";
 
             result.Message = $"Resource: \r\n" +
                              $"{query}{resource}\r\n" +
