@@ -158,10 +158,19 @@ namespace SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Inventory
 
                                 itemsOut.Add(itemc);
 
-                                yield return new RequestResult<ItemMasterData>(Enums.StatusType.Success,
-                                    $"Remaining ({items.Count - 1 - index} of {items.Count}).\r\n" +
-                                    $"{message}  \r\n {requestBody.PrettyJson()} ",
-                                    status, itemsOut, resultItemSync.Response);
+
+                                var requestResult = new RequestResult<ItemMasterData>(
+                             Enums.StatusType.Failed, $"{remaining}.\r\n" +
+                                                      $"{message}", status, itemsOut, resultItemSync.Response);
+
+                              
+
+                                yield return requestResult;
+
+                                //yield return new RequestResult<ItemMasterData>(Enums.StatusType.Success,
+                                //    $"{remaining}.\r\n" +
+                                //    $"{message}  \r\n {requestBody.PrettyJson()} ",
+                                //    status, itemsOut, resultItemSync.Response);
 
                             }
                         }

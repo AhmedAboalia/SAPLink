@@ -514,9 +514,9 @@ public partial class OutboundData : Form
                 treeView.Nodes.Clear();
             }
 
-            //if (textBoxLogsSync.Text.Contains(syncResult.Message))
-            //    return;
-            //Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+            if (textBoxLogsSync.Text.Contains(syncResult.Message))
+                return;
+            Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
         }

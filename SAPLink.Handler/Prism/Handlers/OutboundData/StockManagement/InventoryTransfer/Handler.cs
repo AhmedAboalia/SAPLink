@@ -83,7 +83,7 @@ public partial class Handler
                     ClientHandler.Company.GetLastError(out results, out var errorMessage);
 
                     _loger.Error(result.Message);
-                    result.Message += $"Failed to create stock transfer. Error {result}: {errorMessage}";
+                    result.Message += $"\r\nFailed to create stock transfer. \r\nError {result.Message}: {errorMessage}";
                     result.Status = Enums.StatusType.Failed;
                     yield return result;    
                 }

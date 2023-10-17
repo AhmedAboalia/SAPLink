@@ -9,8 +9,8 @@
     <ApplicationIcon>Images\link.ico</ApplicationIcon>
     <RunPostBuildEvent>Always</RunPostBuildEvent>
     <AssemblyName>$(MSBuildProjectName)</AssemblyName>
-    <AssemblyVersion>1.2</AssemblyVersion>
-    <FileVersion>1.2</FileVersion>
+    <AssemblyVersion>1.0.1</AssemblyVersion>
+    <FileVersion>1.0.1</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
