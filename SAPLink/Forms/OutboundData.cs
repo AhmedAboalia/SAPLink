@@ -94,7 +94,7 @@ public partial class OutboundData : Form
                             var invoiceResult = await _invoiceService.GetInvoiceDetailsBySidAsync(sInvoice.Sid);
                             var invoice = invoiceResult.EntityList.FirstOrDefault();
 
-                            LogMessages($"Invoice/s." +
+                            Log(UpdateType.SyncInvoice,$"Invoice/s." +
                                         $"\r\nFirst Request Message {salesInvoices.Message}" +
                                         $"\r\n\r\nSecond Request Message: {invoiceResult.Message}",
                                 "");
@@ -108,8 +108,8 @@ public partial class OutboundData : Form
                             {
                                 var docNum = GetInvoiceDocNum(sInvoice.Sid, "ODPI");
 
-                                LogMessages(
-                                     $"Prism Invoice No. ({sInvoice.DocumentNumber}) is Already Exist with SAP A/r Down Payment No. ({docNum}).",
+                                Log(UpdateType.SyncInvoice,
+                                    $"Prism Invoice No. ({sInvoice.DocumentNumber}) is Already Exist with SAP A/r Down Payment No. ({docNum}).",
                                      "");
                             }
 
@@ -117,8 +117,8 @@ public partial class OutboundData : Form
                             {
                                 var docNum = GetInvoiceDocNum(sInvoice.Sid, "OINV");
 
-                                LogMessages(
-                                     $"Prism Invoice No. ({sInvoice.DocumentNumber}) is Already Exist with SAP Invoice No. ({docNum}).",
+                                Log(UpdateType.SyncInvoice,
+                                    $"Prism Invoice No. ({sInvoice.DocumentNumber}) is Already Exist with SAP Invoice No. ({docNum}).",
                                      "");
                             }
 
@@ -159,7 +159,7 @@ public partial class OutboundData : Form
                         {
                             var invoiceResult = await _invoiceService.GetInvoiceDetailsBySidAsync(rInvoice.Sid);
                             var returnInvoice = invoiceResult.EntityList.FirstOrDefault();
-                            LogMessages($"Return invoice/s." +
+                            Log(UpdateType.SyncCreditMemo, $"Return invoice/s." +
                                         $"\r\nFirst Request Message: {returnInvoices.Message}" +
                                         $"\r\n\r\nSecond Request Message: {invoiceResult.Message}",
                                 "");
@@ -170,7 +170,7 @@ public partial class OutboundData : Form
                             {
                                 var docNum = GetReturnInvoiceDocNum(returnInvoice.Sid);
 
-                                LogMessages($"Prism Invoice No. ({returnInvoice.DocumentNumber}) is Already Exist with SAP A/R Credit Payment No. ({docNum}).",
+                                Log(UpdateType.SyncCreditMemo,$"Prism Invoice No. ({returnInvoice.DocumentNumber}) is Already Exist with SAP A/R Credit Payment No. ({docNum}).",
                                      "");
                             }
                             var isCreditMemo = returnInvoice.Items.Any(p => p.Alu == "SP0012");
@@ -282,7 +282,7 @@ public partial class OutboundData : Form
 
                     if (result.EntityList.Any())
                     {
-                        LogMessages($"Inventory Posting/s." +
+                        Log(UpdateType.SyncStockTaking, $"Inventory Posting/s." +
                                     $"\r\n\r\nRequest Message: {result.Message}", "");
 
 
@@ -298,7 +298,7 @@ public partial class OutboundData : Form
                                 var docNum = GetInventoryPostingDocNum(inventoryPosting.Sid);
 
                                 var message = $"Prism Adjustment No. ({inventoryPosting.Adjno}) is Already Exist with SAP Inventory Posting No. ({docNum}).";
-                                LogMessages(message, message);
+                                Log(UpdateType.SyncStockTaking, message, message);
                             }
                         }
 

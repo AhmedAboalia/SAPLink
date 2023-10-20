@@ -47,12 +47,18 @@ partial class ServiceLayerHandler
                 }
                 if (result.Response.StatusCode == HttpStatusCode.BadRequest || result.Response.StatusCode == HttpStatusCode.NotFound)
                 {
+                    var message = "";
                     result.Status = Enums.StatusType.NotFound;
-                    result.Message = $"\r\nCan`t Add Invoice" +
-                                     $"\r\n\r\nResponse Content:" +
-                                     $"\r\n{result.Response.Content}" + 
-                                     $"\r\nRequest Body:" + 
-                                     $"\r\n{body.PrettyJson()}";
+                    if (result.Response.Content.Contains("To generate this document, first define the numbering series in the Administration module"))
+                        message = "Can`t find document series, Please make sure you define Whs series in Street/PO Box that Linked to document numbring (Series Name)";
+                    else
+                        message = result.Response.Content;
+
+                    result.Message = $"\r\nCan`t Add Invoice - Prism Invoice ({PrismInvoice.DocumentNumber})" +
+                              $"\r\n\r\nErrors in Response Content:" +
+                              $"\r\n{message}" +
+                              $"\r\n\r\nRequest Body:" +
+                              $"\r\n{body}";
                 }
 
             }
@@ -100,12 +106,18 @@ partial class ServiceLayerHandler
                 }
                 if (result.Response.StatusCode == HttpStatusCode.BadRequest || result.Response.StatusCode == HttpStatusCode.NotFound)
                 {
+                    var message = "";
                     result.Status = Enums.StatusType.NotFound;
-                    result.Message = $"\r\nCan`t Add Return Invoice" +
-                                     $"\r\n\r\nResponse Content:" +
-                                     $"\r\n{result.Response.Content}" +
-                                     $"\r\nRequest Body:" +
-                                     $"\r\n{body.PrettyJson()}";
+                    if (result.Response.Content.Contains("To generate this document, first define the numbering series in the Administration module"))
+                        message = "Can`t find document series, Please make sure you define Whs series in Street/PO Box that Linked to document numbring (Series Name)";
+                    else
+                        message = result.Response.Content;
+
+                    result.Message = $"\r\nCan`t Add Return Invoice - Prism Invoice ({PrismInvoice.DocumentNumber})" +
+                              $"\r\n\r\nErrors in Response Content:" +
+                              $"\r\n{message}" +
+                              $"\r\n\r\nRequest Body:" +
+                              $"\r\n{body}";
                 }
             }
         }
@@ -113,7 +125,11 @@ partial class ServiceLayerHandler
         {
             {
                 result.Status = Enums.StatusType.Failed;
-                result.Message = $"Return Invoice ID: {PrismInvoice.DocumentNumber} is not added. - Exception: {e.Message}";
+                if (code.IsNullOrEmpty() || e.Message.Contains("Index and length must refer to a location within the string. (Parameter 'length')"))
+                    result.Message = "Business Partner Code is null or empty. Check Whs Code in Business Partner Master data 'U_PrismStoreCode'.";
+                else
+                    result.Message += $"Return Invoice ID: {PrismInvoice.DocumentNumber} is not added. - Exception: {e.Message}";
+
             }
         }
         //result.Status = Enums.StatusType.NotFound;
@@ -151,12 +167,18 @@ partial class ServiceLayerHandler
                 }
                 if (result.Response.StatusCode == HttpStatusCode.BadRequest || result.Response.StatusCode == HttpStatusCode.NotFound)
                 {
+                    var message = "";
                     result.Status = Enums.StatusType.NotFound;
-                    result.Message = $"\r\nCan`t Add A/R Down Payment" +
-                                     $"\r\n\r\nResponse Content:" +
-                                     $"\r\n{result.Response.Content}" +
-                                     $"\r\nRequest Body:" +
-                                     $"\r\n{body.PrettyJson()}";
+                    if (result.Response.Content.Contains("To generate this document, first define the numbering series in the Administration module"))
+                        message = "Can`t find document series, Please make sure you define Whs series in Street/PO Box that Linked to document numbring (Series Name)";
+                    else
+                        message = result.Response.Content;
+
+                    result.Message = $"\r\nCan`t Add A/R Down Payment - Prism Invoice ({PrismInvoice.DocumentNumber})" +
+                              $"\r\n\r\nErrors in Response Content:" +
+                              $"\r\n{message}" +
+                              $"\r\n\r\nRequest Body:" +
+                              $"\r\n{body}";
                 }
 
             }
@@ -465,12 +487,18 @@ partial class ServiceLayerHandler
                 }
                 if (result.Response.StatusCode == HttpStatusCode.BadRequest)
                 {
+                    var message2 = "";
                     result.Status = Enums.StatusType.NotFound;
-                    result.Message = $"\r\nCan`t Add Order" +
-                                     $"\r\n\r\nResponse Content:" +
-                                     $"\r\n{result.Response.Content}" +
-                                     $"\r\nRequest Body:" +
-                                     $"\r\n{body.PrettyJson()}";
+                    if (result.Response.Content.Contains("To generate this document, first define the numbering series in the Administration module"))
+                        message2 = "Can`t find document series, Please make sure you define Whs series in Street/PO Box that Linked to document numbring (Series Name)";
+                    else
+                        message2 = result.Response.Content;
+
+                    result.Message = $"\r\nCan`t Add Order - Prism Invoice ({PrismInvoice.DocumentNumber})" +
+                              $"\r\n\r\nErrors in Response Content:" +
+                              $"\r\n{message2}" +
+                              $"\r\n\r\nRequest Body:" +
+                              $"\r\n{body}";
                 }
             }
         }
