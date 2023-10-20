@@ -249,17 +249,17 @@ public partial class OutboundData : Form
 
                         foreach (var verifiedVoucher in verifiedVouchers.EntityList)
                         {
-                            LogMessages($"Stock Transfer/s." + $"\r\nRequest Message: {verifiedVouchers.Message}", "");
+                            Log(UpdateType.SyncStockTransfer, $"Stock Transfer/s." + $"\r\nRequest Message: {verifiedVouchers.Message}", "");
 
                             if (verifiedVoucher == null) continue;
 
                             if (!CheckStockTransferExist(verifiedVoucher.Sid))// To-Do Add Check Exist in SAP by Sid in field U_PrismSid and U_SyncToPrism
-                                await HandleVerifiedVoucher(dataGridViewSync, verifiedVouchers.EntityList, UpdateType.SyncInvoice, treeView1);
+                                await HandleVerifiedVoucher(dataGridViewSync, verifiedVoucher, UpdateType.SyncInvoice, treeView1);
                             else
                             {
                                 var docNum = GetStockTransferDocNum(verifiedVoucher.Sid);
 
-                                LogMessages($"Prism Verified Voucher No. ({verifiedVoucher.Slipno}) is Already Exist with SAP Stock Transfer No. ({docNum}).", "");
+                                Log(UpdateType.SyncStockTransfer,$"Prism Verified Voucher No. ({verifiedVoucher.Slipno}) is Already Exist with SAP Stock Transfer No. ({docNum}).", "");
                             }
                         }
 
@@ -484,29 +484,26 @@ public partial class OutboundData : Form
         }
     }
 
-    private async Task HandleVerifiedVoucher(Guna2DataGridView dt, List<VerifiedVoucher> verifiedVouchers, UpdateType UpdateType, TreeView treeView)
+    private async Task HandleVerifiedVoucher(Guna2DataGridView dt, VerifiedVoucher verifiedVoucher, UpdateType UpdateType, TreeView treeView)
     {
         PlaySound.Click();
         var bindingList = dt.DataSource as BindingList<VerifiedVoucher>;
 
-        await foreach (var syncResult in _verifiedVoucherHandler.SyncVerifiedVoucher(verifiedVouchers))
+        await foreach (var syncResult in _verifiedVoucherHandler.SyncVerifiedVoucher(verifiedVoucher))
         {
             if (syncResult.EntityList != null && syncResult.EntityList.Count > 0)
             {
-                foreach (var verifiedVoucher in syncResult.EntityList)
-                {
-                    //dt.BindVerifiedVouchers(ref bindingList, verifiedVoucher);
-                    treeView.BindStockTransfer(ref bindingList, verifiedVoucher);
+                dt.BindVerifiedVouchers(ref bindingList, verifiedVoucher);
+                //treeView.BindStockTransfer(ref bindingList, verifiedVoucher);
 
-                    //var nextRowVersion = verifiedVoucher.Rowversion;
-                    //var result = await _verifiedVoucherService.UpdateIsSynced(verifiedVoucher.Sid, nextRowVersion.ToString(), "Yes", "", verifiedVoucher.Storecode);
+                //var nextRowVersion = verifiedVoucher.Rowversion;
+                //var result = await _verifiedVoucherService.UpdateIsSynced(verifiedVoucher.Sid, nextRowVersion.ToString(), "Yes", "", verifiedVoucher.Storecode);
 
-                    //syncResult.Message += $"\r\n{result.Message}\r\n";
+                //syncResult.Message += $"\r\n{result.Message}\r\n";
 
-                    if (textBoxLogsSync.Text.Contains(syncResult.Message))
-                        return;
-                    Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
-                }
+                if (textBoxLogsSync.Text.Contains(syncResult.Message))
+                    return;
+                Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
             }
             else
             {
@@ -778,11 +775,10 @@ public partial class OutboundData : Form
             updateType == UpdateType.SyncStockTransfer ||
             updateType == UpdateType.SyncStockTaking ||
             updateType == UpdateType.SyncOutGoodsReceipt ||
-            updateType == UpdateType.SyncOutGoodsIssue
-           )
+            updateType == UpdateType.SyncOutGoodsIssue )
         {
             //textBoxLogsSync.Clear();
-            textBoxLogsSync.Text += message;
+            textBoxLogsSync.Text += $"\r\n\r\n{message}";
             // UpdateTextBox(textBoxLogsInitialize, message);
         }
 

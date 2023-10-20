@@ -55,7 +55,7 @@ public partial class Service
 
             var from = dateFrom.ToPrismFromDateFormat();
             var to = dateTo.ToPrismToDateFormat();
-            string dateRange = $"AND(createddatetime,ge,{from})AND(postdate,le,{to})"; //AND(postdate,le,{to})";  //(createddatetime,ge,2023-07-31T21:00:00.000Z)
+            string dateRange = $"AND(createddatetime,ge,{from})AND(createddatetime,le,{to})"; //AND(postdate,le,{to})";  //(createddatetime,ge,2023-07-31T21:00:00.000Z)
 
 
             string vouchersFilter = "";
@@ -64,7 +64,7 @@ public partial class Service
 
             var resource = $"/receiving" +
                            $"?filter=(sbssid,eq,{_subsidiary.SID}){storeFilter}{dateRange}AND(status,eq,4)AND(vouclass,ne,2)AND(slipflag,eq,1)AND(verified,eq,true){vouchersFilter}" + ///AND(Trackingno,ne,)
-                           $"&cols=slipsbsno,vouno,storesid,origstoresid,slipstorecode,rowversion,storeno,storename,storecode,origstorecode,origstoreno,origstorename,recvitem.qty,recvitem.itemsid,recvitem.udfvalue5,recvitem.itemsid,recvitem.description1,recvitem.description2,recvitem.alu,recvitem.price,recvitem.upc,pkgno,slipno";
+                           $"&cols=slipsbsno,createddatetime,vouno,storesid,origstoresid,slipstorecode,rowversion,storeno,storename,storecode,origstorecode,origstoreno,origstorename,recvitem.qty,recvitem.itemsid,recvitem.udfvalue5,recvitem.itemsid,recvitem.description1,recvitem.description2,recvitem.alu,recvitem.price,recvitem.upc,pkgno,slipno";
 
             result.Message = $"Resource: \r\n" +
                              $"{query}{resource}\r\n" +

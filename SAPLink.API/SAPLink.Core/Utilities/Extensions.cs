@@ -43,7 +43,7 @@ public static class Extensions
     /// <returns>The formatted date-time as a string.</returns>
     public static string ToPrismToDateFormat(this DateTime dateTime)
     {
-        DateTime dateTime2 = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 20, 59, 59, 00, DateTimeKind.Utc);
+        DateTime dateTime2 = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 23, 59, 59, 00, DateTimeKind.Utc);
 
         if (dateTime.Kind != DateTimeKind.Utc)
         {
@@ -77,7 +77,7 @@ public static class Extensions
     /// <returns>The formatted date-time as a string.</returns>
     public static string ToPrismFromDateFormat(this DateTime dateTime)
     {
-        DateTime dateTime2 = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 21, 00, 00, 00, DateTimeKind.Utc);
+        DateTime dateTime2 = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 00, 00, 00, 00, DateTimeKind.Utc);
 
         if (dateTime.Kind != DateTimeKind.Utc)
         {

@@ -53,6 +53,9 @@ public partial class VerifiedVoucher
     [JsonProperty("slipstorecode")]
     public string SlipStoreCode { get; set; }
 
+    [JsonProperty("createddatetime")]
+    public string CreatedDate { get; set; }
+
 }
 public partial class Recvitem
 {
