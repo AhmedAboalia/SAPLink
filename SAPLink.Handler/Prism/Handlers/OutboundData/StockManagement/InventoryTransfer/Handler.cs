@@ -83,7 +83,12 @@ public partial class Handler
             ClientHandler.Company.GetLastError(out results, out var errorMessage);
 
             _loger.Error(result.Message);
-            result.Message += $"\r\nFailed to create stock transfer. \r\nError {result.Message}: {errorMessage}";
+            //result.Message += $"\r\nFailed to create stock transfer. \r\nError {result.Message}: {errorMessage}";
+
+            result.Message += $"Faild to Create SAP IT." +
+                            $"- Voucher No. : {verifiedVoucher.Vouno} - Sid: {verifiedVoucher.Sid} - Slip No. : {verifiedVoucher.Slipno} - " +
+                            $"From ({verifiedVoucher.SlipStoreCode}) To ({verifiedVoucher.Storecode}). \r\nError {result.Message}: {errorMessage}";
+
             result.Status = Enums.StatusType.Failed;
             yield return result;
         }
