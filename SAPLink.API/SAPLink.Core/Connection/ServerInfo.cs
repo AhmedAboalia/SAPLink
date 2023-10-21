@@ -15,15 +15,15 @@ public class ServerInfo
 
         var serverlist = new ServerInfo[]
         {
-            //new()
-            //{
-            //    Id = (int)Environments.Production,
-            //    ConnectionName = "Prism Production Server Connection",
-            //    Server = "KAFFARYRETAIL",
-            //    Database = database,
-            //    Password = "RetailTec@123",
-            //    Active = pcName == "KAFFARYRETAIL",
-            //},
+            new()
+            {
+                Id = (int)Environments.Production,
+                ConnectionName = "Prism Production Server Connection",
+                Server = "KAFFARYRETAIL",
+                Database = database,
+                Password = "RetailTec@123",
+                Active = pcName == "KAFFARYRETAIL",
+            },
             new()
             {
                 Id = (int)Environments.Test,

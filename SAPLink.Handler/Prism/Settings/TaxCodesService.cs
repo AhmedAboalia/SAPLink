@@ -6,8 +6,8 @@ namespace SAPLink.Handler.Prism.Settings
 {
     public class TaxCodesService
     {
-        private readonly Credentials _credentials;
-        private readonly Subsidiaries _subsidiary;
+        private static Credentials _credentials;
+        private static Subsidiaries _subsidiary;
         public TaxCodesService(Clients client)
         {
             _credentials = client.Credentials.FirstOrDefault();
@@ -38,7 +38,7 @@ namespace SAPLink.Handler.Prism.Settings
             return TaxCodes.FromJson(file).Data.ToList();
         }
 
-        public async Task<TaxCodes?> GetByName(string name)
+        public static async Task<TaxCodes?> GetByName(string name)
         {
             var query = _credentials.BaseUri;
             var resource = "/api/common/taxcode" +

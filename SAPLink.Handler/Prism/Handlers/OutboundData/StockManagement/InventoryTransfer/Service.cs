@@ -69,7 +69,7 @@ public partial class Service
             result.Message = $"Resource: \r\n" +
                              $"{query}{resource}\r\n" +
                              $"Auth Session: {_credentials.AuthSession}";
-
+            _loger.Information(result.Message);
             result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET);
 
 
@@ -80,7 +80,7 @@ public partial class Service
                 _loger.Information("Successfully fetched the Verified Voucher/s.");
             }
             else
-                _loger.Warning($"Failed to fetch Verified Voucher/s. Status Code: {result.Response.StatusCode}. Content: {result.Response.Content}");
+                _loger.Fatal($"Failed to fetch Verified Voucher/s. Status Code: {result.Response.StatusCode}. Content: {result.Response.Content}");
 
             return result;
 

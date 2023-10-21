@@ -9,6 +9,7 @@ using SAPLink.Handler.Connection;
 using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Departments;
 using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Vendors;
 using SAPLink.Handler.Prism.Interfaces;
+using SAPLink.Handler.Prism.Settings;
 using SAPLink.Handler.SAP.Interfaces;
 using HttpClientFactory = SAPLink.Handler.Connection.HttpClientFactory;
 
@@ -22,11 +23,12 @@ public class ItemsService : IEntityService<RequestResult<ProductResponseModel>, 
     private readonly Clients _client;
     private readonly Credentials _credentials;
     private readonly Subsidiaries _subsidiary;
-
+    TaxCodesService _taxCodesService;
     public ItemsService(Clients client, DepartmentService departmentService, VendorsService vendorsHandler)
     {
         _departmentService = departmentService;
         _vendorsHandler = vendorsHandler;
+        _taxCodesService = new TaxCodesService(client);
 
         _client = client;
         _credentials = _client.Credentials.FirstOrDefault();
@@ -101,72 +103,8 @@ public class ItemsService : IEntityService<RequestResult<ProductResponseModel>, 
         return result;
     }
 
-    public IRestResponse AddProducts(List<ItemMasterData> items)
-    {
-        try
-        {
-            var query = _credentials.BackOfficeUri;
-            var resource = "/dcs";
-            var body = CreateProductsPayload(items);
-
-            var response = HttpClientFactory.InitializeAsync(query, resource, Method.POST, body).Result;
-
-            // message = "Error Message" + response.ErrorMessage + "\r\r \r\n " + body;
-            return response;
-        }
-        catch (Exception ex)
-        {
-            //message = $"Response Error Message: {response.ErrorMessage} \r\n \r\n ex {ex.Message}";
-        }
-
-        return null;
-    }
-
-    private string CreateProductsPayload(List<ItemMasterData> itemGroupsList)
-    {
-        var dcsList = new List<Product>();
-
-        foreach (var item in itemGroupsList)
-        {
-            dcsList.Add(new Product
-            {
-                //Originapplication = "RProPrismWeb",
-                //Sbssid = _subsidiary.SID,
-                //Active = 1,
-                //Dname = item.ItemGroupName,
-                //Regional = false,
-                //Dcscode = item.ItemGroupCode,
-                //Publishstatus = 2,
-                //D = item.ItemGroupCode,
-                //C = "",
-                //S = "",
-                //Dlongname = "",
-                //Cname = "",
-                //Clongname = "",
-                //Sname = "",
-                //Slongname = "",
-                //Unknown Property : patternsid 
-                //Useqtydecimals = 1,
-                //Taxcodesid = "",
-                //Marginpctg = 1,
-                //Markuppctg = 1,
-                //Coefficient = 1,
-                //Margintype = 1,
-                //Marginvalue = 1,
-            });
-        }
-
-        OdataPrism<Product> root = new OdataPrism<Product>
-        {
-            Data = dcsList,
-        };
-
-        return JsonConvert.SerializeObject(root);
-    }
-
     public async Task<string> CreateEntityPayload(ItemMasterData item)
     {
-        // PrimaryItemDefinition variables
         var departmentResult = await _departmentService.GetByCodeAsync(item.ItemGroupCode);
         var department = departmentResult.EntityList.FirstOrDefault();
 
@@ -176,34 +114,18 @@ public class ItemsService : IEntityService<RequestResult<ProductResponseModel>, 
         var subsidiarySid = _subsidiary.SID.ToString();
         var activePriceLevelSid = _subsidiary.ActivePriceLevelid;
         var activeSeasonSid = _subsidiary.ActiveSeasonSid;
-        //var activestoreSid = _subsidiary.ActiveStoreSid;
-
-        //var name = item.IsTaxable.Equals("Y") ? "TAXABLE" : "EXEMPT";
-        //var taxCodeSid = _subsidiary.TaxCodes.Find(x => x.Taxname.ToUpper() == name.ToUpper()).Sid;
-        //var taxCodeSid = prismHandler.GetTaxCodeSidByName(name).Sid;
 
         var name = item.IsTaxable.Equals("Y") ? "TAXABLE" : "EXEMPT";
-        var taxCodeSid = await GetTaxCodeSid(name);
+        var taxCode = await TaxCodesService.GetByName(name);
+        var taxCodeSid = taxCode.Sid;
 
+        if (taxCodeSid.IsNullOrEmpty())
+            taxCodeSid = _subsidiary.ActiveTaxCode;
 
-        string itemName50Char;
-        if (item.ItemName.Length > 50)
-        {
-            var itemNameOrg = item.ItemName;
-            itemName50Char = itemNameOrg.Substring(0, Math.Min(itemNameOrg.Length, 50));
-        }
-        else
-            itemName50Char = item.ItemName;
+        //var activestoreSid = _subsidiary.ActiveStoreSid;
 
-
-        string itemForeignName50Char;
-        if (item.ItemName.Length > 50)
-        {
-            var itemForeignNameOrg = item.ForeignName;
-            itemForeignName50Char = itemForeignNameOrg.Substring(0, Math.Min(itemForeignNameOrg.Length, 50));
-        }
-        else
-            itemForeignName50Char = item.ForeignName;
+        var itemName50Char = TrimNameTo50Characters(item.ItemName);
+        var itemForeignName50Char = TrimNameTo50Characters(item.ForeignName);
 
 
         var productsList = new OdataPrism<Product>()
@@ -332,7 +254,6 @@ public class ItemsService : IEntityService<RequestResult<ProductResponseModel>, 
 
     public async Task<string> CreateUpdatePayload(ItemMasterData item, long productSid)
     {
-        // PrimaryItemDefinition variables
         var departmentResult = await _departmentService.GetByCodeAsync(item.ItemGroupCode);
         var department = departmentResult.EntityList.FirstOrDefault();
 
@@ -343,35 +264,18 @@ public class ItemsService : IEntityService<RequestResult<ProductResponseModel>, 
         var activePriceLevelSid = _subsidiary.ActivePriceLevelid;
         var activeSeasonSid = _subsidiary.ActiveSeasonSid;
 
-
-
         var name = item.IsTaxable.Equals("Y") ? "TAXABLE" : "EXEMPT";
-        var taxCodeSid = await GetTaxCodeSid(name);
+
+        var taxCode = await TaxCodesService.GetByName(name);
+        var taxCodeSid = taxCode.Sid;
 
         if (taxCodeSid.IsNullOrEmpty())
             taxCodeSid = _subsidiary.ActiveTaxCode;
 
         //var activestoreSid = _subsidiary.ActiveStoreSid;
 
-
-        string itemName50Char;
-        if (item.ItemName.Length > 50)
-        {
-            var itemNameOrg = item.ItemName;
-            itemName50Char = itemNameOrg.Substring(0, Math.Min(itemNameOrg.Length, 50));
-        }
-        else
-            itemName50Char = item.ItemName;
-
-
-        string itemForeignName50Char;
-        if (item.ItemName.Length > 50)
-        {
-            var itemForeignNameOrg = item.ForeignName;
-            itemForeignName50Char = itemForeignNameOrg.Substring(0, Math.Min(itemForeignNameOrg.Length, 50));
-        }
-        else
-            itemForeignName50Char = item.ForeignName;
+        var itemName50Char = TrimNameTo50Characters(item.ItemName);
+        var itemForeignName50Char = TrimNameTo50Characters(item.ForeignName);
 
         var productsList = new OdataPrism<Product>()
         {
@@ -380,7 +284,6 @@ public class ItemsService : IEntityService<RequestResult<ProductResponseModel>, 
                 new()
                 {
                     OriginApplication = "RProPrismWeb",
-                    //Sid = productSid,
                     PrimaryItemDefinition = new PrimaryItemDefinition
                     {
                         Dcssid = department.Sid,
@@ -498,45 +401,116 @@ public class ItemsService : IEntityService<RequestResult<ProductResponseModel>, 
         return body;
     }
 
-    private async Task<string> GetTaxCodeSid(string name)
+    private string TrimNameTo50Characters(string name)
     {
-        var taxCodesProduction = new List<TaxCodes>()
+        if (name.Length > 50)
         {
-            new("664651377000183746", 664651285000113257, 0, "Taxable", true),
-            new("664651377000185747", 664651285000113257, 2, "Exempt", false),
-            new("664651377000185748", 664651285000113257, 3, "Luxury", false),
-        };
-
-        var taxCodesTest = new List<TaxCodes>()
-        {
-            new("663852140000157746", 674650600000126277, 1, "TAXABLE", true),
-            new("663852140000157747", 674650600000126277, 2, "EXEMPT", false),
-            new("663852140000158748", 674650600000126277, 3, "LUXURY", false),
-        };
-
-        var taxCodesLocal = new List<TaxCodes>()
-        {
-            new("665151925000173747", 665151872000149257, 0, "Taxable", true),
-            new("665151925000174748", 665151872000149257, 1, "Exempt", false),
-            new("665151925000176749", 665151872000149257, 2, "Luxury", false),
-        };
-
-        var taxCodeSid = "";
-        if (_subsidiary.Name.Contains("Production"))
-        {
-            taxCodeSid = taxCodesProduction.Find(x => x.TaxName.ToUpper() == name.ToUpper()).Sid;
+            return name.Substring(0, 50);
         }
-
-        if (_subsidiary.Name.Contains("Test"))
-        {
-            taxCodeSid = taxCodesTest.Find(x => x.TaxName.ToUpper() == name.ToUpper()).Sid;
-        }
-
-        if (_subsidiary.Name.Contains("Local"))
-        {
-            taxCodeSid = taxCodesLocal.Find(x => x.TaxName.ToUpper() == name.ToUpper()).Sid;
-        }
-
-        return taxCodeSid;
+        return name;
     }
+    //private async Task<string> GetTaxCodeSid(string name)
+    //{
+    //    var taxCodesProduction = new List<TaxCodes>()
+    //    {
+    //        new("664651377000183746", 664651285000113257, 0, "Taxable", true),
+    //        new("664651377000185747", 664651285000113257, 2, "Exempt", false),
+    //        new("664651377000185748", 664651285000113257, 3, "Luxury", false),
+    //    };
+
+    //    var taxCodesTest = new List<TaxCodes>()
+    //    {
+    //        new("663852140000157746", 674650600000126277, 1, "TAXABLE", true),
+    //        new("663852140000157747", 674650600000126277, 2, "EXEMPT", false),
+    //        new("663852140000158748", 674650600000126277, 3, "LUXURY", false),
+    //    };
+
+    //    var taxCodesLocal = new List<TaxCodes>()
+    //    {
+    //        new("665151925000173747", 665151872000149257, 0, "Taxable", true),
+    //        new("665151925000174748", 665151872000149257, 1, "Exempt", false),
+    //        new("665151925000176749", 665151872000149257, 2, "Luxury", false),
+    //    };
+
+    //    var taxCodeSid = "";
+    //    if (_subsidiary.Name.Contains("Production"))
+    //    {
+    //        taxCodeSid = taxCodesProduction.Find(x => x.TaxName.ToUpper() == name.ToUpper()).Sid;
+    //    }
+
+    //    if (_subsidiary.Name.Contains("Test"))
+    //    {
+    //        taxCodeSid = taxCodesTest.Find(x => x.TaxName.ToUpper() == name.ToUpper()).Sid;
+    //    }
+
+    //    if (_subsidiary.Name.Contains("Local"))
+    //    {
+    //        taxCodeSid = taxCodesLocal.Find(x => x.TaxName.ToUpper() == name.ToUpper()).Sid;
+    //    }
+
+    //    return taxCodeSid;
+    //}
+
+    //public IRestResponse AddProducts(List<ItemMasterData> items)
+    //{
+    //    try
+    //    {
+    //        var query = _credentials.BackOfficeUri;
+    //        var resource = "/dcs";
+    //        var body = CreateProductsPayload(items);
+
+    //        var response = HttpClientFactory.InitializeAsync(query, resource, Method.POST, body).Result;
+
+    //        // message = "Error Message" + response.ErrorMessage + "\r\r \r\n " + body;
+    //        return response;
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        //message = $"Response Error Message: {response.ErrorMessage} \r\n \r\n ex {ex.Message}";
+    //    }
+
+    //    return null;
+    //}
+
+    //private string CreateProductsPayload(List<ItemMasterData> itemGroupsList)
+    //{
+    //    var dcsList = new List<Product>();
+
+    //    foreach (var item in itemGroupsList)
+    //    {
+    //        dcsList.Add(new Product
+    //        {
+    //            //Originapplication = "RProPrismWeb",
+    //            //Sbssid = _subsidiary.SID,
+    //            //Active = 1,
+    //            //Dname = item.ItemGroupName,
+    //            //Regional = false,
+    //            //Dcscode = item.ItemGroupCode,
+    //            //Publishstatus = 2,
+    //            //D = item.ItemGroupCode,
+    //            //C = "",
+    //            //S = "",
+    //            //Dlongname = "",
+    //            //Cname = "",
+    //            //Clongname = "",
+    //            //Sname = "",
+    //            //Slongname = "",
+    //            //Unknown Property : patternsid 
+    //            //Useqtydecimals = 1,
+    //            //Taxcodesid = "",
+    //            //Marginpctg = 1,
+    //            //Markuppctg = 1,
+    //            //Coefficient = 1,
+    //            //Margintype = 1,
+    //            //Marginvalue = 1,
+    //        });
+    //    }
+
+    //    OdataPrism<Product> root = new OdataPrism<Product>
+    //    {
+    //        Data = dcsList,
+    //    };
+
+    //    return JsonConvert.SerializeObject(root);
+    //}
 }

@@ -2,34 +2,34 @@
 
 public class Product
 {
-    [JsonProperty("OriginApplication")]
+    [JsonProperty("OriginApplication", NullValueHandling = NullValueHandling.Ignore)]
     public string OriginApplication { get; set; } = "RProPrismWeb";
 
     //[JsonProperty("sid")]
     //public string Sid { get; set; }
 
-    [JsonProperty("PrimaryItemDefinition")]
+    [JsonProperty("PrimaryItemDefinition", NullValueHandling = NullValueHandling.Ignore)]
     public PrimaryItemDefinition PrimaryItemDefinition { get; set; }
 
-    [JsonProperty("InventoryItems")]
+    [JsonProperty("InventoryItems", NullValueHandling = NullValueHandling.Ignore)]
     public InventoryItem[] InventoryItems { get; set; }
 
-    [JsonProperty("UpdateStyleDefinition")]
+    [JsonProperty("UpdateStyleDefinition", NullValueHandling = NullValueHandling.Ignore)]
     public bool UpdateStyleDefinition { get; set; }
 
-    [JsonProperty("UpdateStyleCost")]
+    [JsonProperty("UpdateStyleCost", NullValueHandling = NullValueHandling.Ignore)]
     public bool UpdateStyleCost { get; set; }
 
-    [JsonProperty("UpdateStylePrice")]
+    [JsonProperty("UpdateStylePrice", NullValueHandling = NullValueHandling.Ignore)]
     public bool UpdateStylePrice { get; set; }
 
-    [JsonProperty("DefaultReasonSidForQtyMemo")]
+    [JsonProperty("DefaultReasonSidForQtyMemo", NullValueHandling = NullValueHandling.Ignore)]
     public string DefaultReasonSidForQtyMemo { get; set; }
 
-    [JsonProperty("DefaultReasonSidForCostMemo")]
+    [JsonProperty("DefaultReasonSidForCostMemo", NullValueHandling = NullValueHandling.Ignore)]
     public string DefaultReasonSidForCostMemo { get; set; }
 
-    [JsonProperty("DefaultReasonSidForPriceMemo")]
+    [JsonProperty("DefaultReasonSidForPriceMemo", NullValueHandling = NullValueHandling.Ignore)]
     public string DefaultReasonSidForPriceMemo { get; set; }
 
     // public static Odata CreateInstance() => new();
@@ -62,43 +62,43 @@ public class PrimaryItemDefinition
     [JsonProperty("description2")]
     public string Description2 { get; set; }
 
-    [JsonProperty("attribute")]
+    [JsonProperty("attribute", NullValueHandling = NullValueHandling.Ignore)]
     public string Attribute { get; set; }
 
-    [JsonProperty("itemsize")]
+    [JsonProperty("itemsize", NullValueHandling = NullValueHandling.Ignore)]
     public string Itemsize { get; set; }
 
-    [JsonProperty("sid")]
+    [JsonProperty("sid", NullValueHandling = NullValueHandling.Ignore)]
     public string Sid { get; set; }
 
-    [JsonProperty("udf3string")]
+    [JsonProperty("udf3string", NullValueHandling = NullValueHandling.Ignore)]
     public string UDF3 { get; set; }
 
-    [JsonProperty("udf4string")]
+    [JsonProperty("udf4string", NullValueHandling = NullValueHandling.Ignore)]
     public string UDF4 { get; set; }
 
-    [JsonProperty("udf5string")]
+    [JsonProperty("udf5string", NullValueHandling = NullValueHandling.Ignore)]
     public string UDF5 { get; set; }
 
-    [JsonProperty("udf6string")]
+    [JsonProperty("udf6string", NullValueHandling = NullValueHandling.Ignore)]
     public string UDF6 { get; set; }
 
-    [JsonProperty("udf7string")]
+    [JsonProperty("udf7string", NullValueHandling = NullValueHandling.Ignore)]
     public string UDF7 { get; set; }
 
-    [JsonProperty("udf8string")]
+    [JsonProperty("udf8string", NullValueHandling = NullValueHandling.Ignore)]
     public string UDF8 { get; set; }
 
-    [JsonProperty("udf9string")]
+    [JsonProperty("udf9string", NullValueHandling = NullValueHandling.Ignore)]
     public string UDF9 { get; set; }
 
-    [JsonProperty("udf10string")]
+    [JsonProperty("udf10string", NullValueHandling = NullValueHandling.Ignore)]
     public string UDF10 { get; set; }
 
-    [JsonProperty("udf11string")]
+    [JsonProperty("udf11string", NullValueHandling = NullValueHandling.Ignore)]
     public string UDF11 { get; set; }
 
-    [JsonProperty("udf12string")]
+    [JsonProperty("udf12string", NullValueHandling = NullValueHandling.Ignore)]
     public string UDF12 { get; set; }
 
 }
