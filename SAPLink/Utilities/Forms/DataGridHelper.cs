@@ -101,7 +101,7 @@ namespace SAPLink.Utilities.Forms
                 gridView.Rows[gridView.Rows.Count - 1].Cells["#"].Value = gridView.Rows.Count.ToString();
             }
         }
-        public static void BindStockTransfer(this TreeView treeView, ref BindingList<VerifiedVoucher>? bindingList, VerifiedVoucher verifiedVoucher)
+        public static void BindVerifiedVouchers(this TreeView treeView, ref BindingList<VerifiedVoucher>? bindingList, VerifiedVoucher verifiedVoucher)
         {
             treeView.Nodes.Clear();
 

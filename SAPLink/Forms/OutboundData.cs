@@ -109,7 +109,7 @@ public partial class OutboundData : Form
                                 var docNum = GetInvoiceDocNum(sInvoice.Sid, "ODPI");
 
                                 Log(UpdateType.SyncInvoice,
-                                    $"Prism Invoice No. ({sInvoice.DocumentNumber}) is Already Exist with SAP A/r Down Payment No. ({docNum}).",
+                                    $"\r\nPrism Invoice No. ({sInvoice.DocumentNumber}) is Already Exist with SAP A/r Down Payment No. ({docNum}).",
                                      "");
                             }
 
@@ -118,7 +118,7 @@ public partial class OutboundData : Form
                                 var docNum = GetInvoiceDocNum(sInvoice.Sid, "OINV");
 
                                 Log(UpdateType.SyncInvoice,
-                                    $"Prism Invoice No. ({sInvoice.DocumentNumber}) is Already Exist with SAP Invoice No. ({docNum}).",
+                                    $"\r\nPrism Invoice No. ({sInvoice.DocumentNumber}) is Already Exist with SAP Invoice No. ({docNum}).",
                                      "");
                             }
 
@@ -170,7 +170,7 @@ public partial class OutboundData : Form
                             {
                                 var docNum = GetReturnInvoiceDocNum(returnInvoice.Sid);
 
-                                Log(UpdateType.SyncCreditMemo,$"Prism Invoice No. ({returnInvoice.DocumentNumber}) is Already Exist with SAP A/R Credit Payment No. ({docNum}).",
+                                Log(UpdateType.SyncCreditMemo,$"\r\nPrism Invoice No. ({returnInvoice.DocumentNumber}) is Already Exist with SAP A/R Credit Payment No. ({docNum}).",
                                      "");
                             }
                             var isCreditMemo = returnInvoice.Items.Any(p => p.Alu == "SP0012");
@@ -249,7 +249,7 @@ public partial class OutboundData : Form
 
                         foreach (var verifiedVoucher in verifiedVouchers.EntityList)
                         {
-                            Log(UpdateType.SyncStockTransfer, $"Stock Transfer/s." + $"\r\nRequest Message: {verifiedVouchers.Message}", "");
+                            Log(UpdateType.SyncInventoryTransfer, $"\r\nStock Transfer/s." + $"\r\nRequest Message: {verifiedVouchers.Message}", "");
 
                             if (verifiedVoucher == null) continue;
 
@@ -259,7 +259,7 @@ public partial class OutboundData : Form
                             {
                                 var docNum = GetStockTransferDocNum(verifiedVoucher.Sid);
 
-                                Log(UpdateType.SyncStockTransfer,$"Prism Verified Voucher No. ({verifiedVoucher.Slipno}) is Already Exist with SAP Stock Transfer No. ({docNum}).", "");
+                                Log(UpdateType.SyncInventoryTransfer, $"Prism Verified Voucher No. ({verifiedVoucher.Slipno}) is Already Exist with SAP Stock Transfer No. ({docNum}).", "");
                             }
                         }
 
@@ -282,8 +282,8 @@ public partial class OutboundData : Form
 
                     if (result.EntityList.Any())
                     {
-                        Log(UpdateType.SyncStockTaking, $"Inventory Posting/s." +
-                                    $"\r\n\r\nRequest Message: {result.Message}", "");
+                        Log(UpdateType.SyncInventoryPosting, $"Inventory Posting/s." +
+                                                             $"\r\n\r\nRequest Message: {result.Message}", "");
 
 
 
@@ -297,8 +297,8 @@ public partial class OutboundData : Form
                             {
                                 var docNum = GetInventoryPostingDocNum(inventoryPosting.Sid);
 
-                                var message = $"Prism Adjustment No. ({inventoryPosting.Adjno}) is Already Exist with SAP Inventory Posting No. ({docNum}).";
-                                Log(UpdateType.SyncStockTaking, message, message);
+                                var message = $"\r\nPrism Adjustment No. ({inventoryPosting.Adjno}) is Already Exist with SAP Inventory Posting No. ({docNum}).";
+                                Log(UpdateType.SyncInventoryPosting, message, message);
                             }
                         }
 
@@ -493,13 +493,12 @@ public partial class OutboundData : Form
         {
             if (syncResult.EntityList != null && syncResult.EntityList.Count > 0)
             {
+                dt.BringToFront();
+                dt.Visible = true;
                 dt.BindVerifiedVouchers(ref bindingList, verifiedVoucher);
-                //treeView.BindStockTransfer(ref bindingList, verifiedVoucher);
+                dt.SelectLastRow();
 
-                //var nextRowVersion = verifiedVoucher.Rowversion;
-                //var result = await _verifiedVoucherService.UpdateIsSynced(verifiedVoucher.Sid, nextRowVersion.ToString(), "Yes", "", verifiedVoucher.Storecode);
-
-                //syncResult.Message += $"\r\n{result.Message}\r\n";
+                //treeView.BindVerifiedVouchers(ref bindingList, verifiedVoucher);
 
                 if (textBoxLogsSync.Text.Contains(syncResult.Message))
                     return;
@@ -556,6 +555,11 @@ public partial class OutboundData : Form
                     //dataGridViewSync.BringToFront();
                     //dataGridViewSync.Visible = true;
                     //dt.BindInventoryPosting(ref bindingList, count);
+                    //dt.SelectLastRow();
+
+
+                    treeView.BringToFront();
+                    treeView.Visible = true;
                     treeView.BindInventoryCounting(ref bindingList, count);
 
                     //Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
@@ -587,7 +591,11 @@ public partial class OutboundData : Form
             {
                 foreach (var invoice in syncResult.EntityList)
                 {
+                    dt.BringToFront();
+                    dt.Visible = true;
                     dt.BindInvoices(ref bindingList, invoice);
+                    dt.SelectLastRow();
+
                     //treeView.BindInvoices(ref bindingList, invoice);
 
                     //Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
@@ -618,7 +626,11 @@ public partial class OutboundData : Form
             {
                 foreach (var invoice in syncResult.EntityList)
                 {
+                    dt.BringToFront();
+                    dt.Visible = true;
                     dt.BindInvoices(ref bindingList, invoice);
+                    dt.SelectLastRow();
+
                     //treeView.BindInvoices(ref bindingList, invoice);
 
                     //Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
@@ -770,15 +782,18 @@ public partial class OutboundData : Form
 
     private void Log(UpdateType updateType, string message, string status)
     {
-        if (updateType == UpdateType.SyncInvoice ||
-            updateType == UpdateType.SyncCreditMemo ||
-            updateType == UpdateType.SyncStockTransfer ||
-            updateType == UpdateType.SyncStockTaking ||
-            updateType == UpdateType.SyncOutGoodsReceipt ||
-            updateType == UpdateType.SyncOutGoodsIssue )
+        if (updateType 
+            is UpdateType.SyncInvoice 
+            or UpdateType.SyncCreditMemo 
+            or UpdateType.SyncOrders 
+            or UpdateType.SyncInventoryTransfer 
+            or UpdateType.SyncInventoryPosting 
+            or UpdateType.SyncOutGoodsReceipt 
+            or UpdateType.SyncOutGoodsIssue 
+            )
         {
             //textBoxLogsSync.Clear();
-            textBoxLogsSync.Text += $"\r\n\r\n{message}";
+            textBoxLogsSync.Text += message;
             // UpdateTextBox(textBoxLogsInitialize, message);
         }
 
@@ -895,6 +910,8 @@ public partial class OutboundData : Form
     {
         dataGridViewSync.DataSource = null;
         dataGridViewSync.Rows.Clear();
+
+        treeView1.Nodes.Clear();
     }
 
     private void SyncClearLogs_Click(object sender, EventArgs e)

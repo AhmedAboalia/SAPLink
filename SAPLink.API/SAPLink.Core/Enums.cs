@@ -133,13 +133,13 @@ public static class Enums
                 },
                 OutboundDocuments.StockTransfer => new SyncType
                 {
-                    Initial = UpdateType.InitialStockTransfer,
-                    Sync = UpdateType.SyncStockTransfer
+                    Initial = UpdateType.InitialInventoryTransfer,
+                    Sync = UpdateType.SyncInventoryTransfer
                 },
                 OutboundDocuments.InventoryPosting => new SyncType
                 {
-                    Initial = UpdateType.InitialStockTaking,
-                    Sync = UpdateType.SyncStockTaking
+                    Initial = UpdateType.InitialInventoryPosting,
+                    Sync = UpdateType.SyncInventoryPosting
                 },
                 OutboundDocuments.GoodsReceipt => new SyncType
                 {
@@ -183,17 +183,20 @@ public static class Enums
         InitialCreditMemo,
         SyncCreditMemo,
 
-        InitialStockTransfer,
-        SyncStockTransfer,
+        InitialInventoryTransfer,
+        SyncInventoryTransfer,
 
-        InitialStockTaking,
-        SyncStockTaking,
+        InitialInventoryPosting,
+        SyncInventoryPosting,
 
         InitialOutGoodsReceipt,
         SyncOutGoodsReceipt,
 
         InitialOutGoodsIssue,
         SyncOutGoodsIssue,
+
+        InitialOrders,
+        SyncOrders
     }
     public enum BoDataServerTypes
     {
