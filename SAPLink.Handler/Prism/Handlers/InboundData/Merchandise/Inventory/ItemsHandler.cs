@@ -63,7 +63,7 @@ namespace SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Inventory
                         var product = checkResult.EntityList.FirstOrDefault();
 
 
-                        var requestBody = await _itemsService.CreateUpdatePayload(item, Convert.ToInt64(product.Sid));
+                        var requestBody = await _itemsService.CreateEntityPayload(item, product.Sid);
                         var resultSync = await _itemsService.Sync(requestBody);
 
                         if (resultSync.Response.StatusCode == HttpStatusCode.OK)

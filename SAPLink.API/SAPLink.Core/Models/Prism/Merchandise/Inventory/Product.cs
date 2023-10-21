@@ -47,6 +47,12 @@ public class Product
     {
     }
 
+    public Product(string originApplication, PrimaryItemDefinition primaryItemDefinition, InventoryItem[] inventoryItems) : this()
+    {
+        OriginApplication = originApplication;
+        PrimaryItemDefinition = primaryItemDefinition;
+        InventoryItems = inventoryItems;
+    }
 }
 public class PrimaryItemDefinition
 {

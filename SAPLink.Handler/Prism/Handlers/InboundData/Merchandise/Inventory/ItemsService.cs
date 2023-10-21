@@ -15,7 +15,7 @@ using HttpClientFactory = SAPLink.Handler.Connection.HttpClientFactory;
 
 namespace SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Inventory;
 
-public class ItemsService : IEntityService<RequestResult<ProductResponseModel>, ItemMasterData>
+public class ItemsService : IProductService<RequestResult<ProductResponseModel>, ItemMasterData>
 {
     private static DepartmentService _departmentService;
     private readonly VendorsService _vendorsHandler;
@@ -103,156 +103,7 @@ public class ItemsService : IEntityService<RequestResult<ProductResponseModel>, 
         return result;
     }
 
-    public async Task<string> CreateEntityPayload(ItemMasterData item)
-    {
-        var departmentResult = await _departmentService.GetByCodeAsync(item.ItemGroupCode);
-        var department = departmentResult.EntityList.FirstOrDefault();
-
-        var vendorResult = await _vendorsHandler.GetByCodeAsync(item.CardCode);
-        var vendor = vendorResult.EntityList.FirstOrDefault();
-
-        var subsidiarySid = _subsidiary.SID.ToString();
-        var activePriceLevelSid = _subsidiary.ActivePriceLevelid;
-        var activeSeasonSid = _subsidiary.ActiveSeasonSid;
-
-        var name = item.IsTaxable.Equals("Y") ? "TAXABLE" : "EXEMPT";
-        var taxCode = await TaxCodesService.GetByName(name);
-        var taxCodeSid = taxCode.Sid;
-
-        if (taxCodeSid.IsNullOrEmpty())
-            taxCodeSid = _subsidiary.ActiveTaxCode;
-
-        //var activestoreSid = _subsidiary.ActiveStoreSid;
-
-        var itemName50Char = TrimNameTo50Characters(item.ItemName);
-        var itemForeignName50Char = TrimNameTo50Characters(item.ForeignName);
-
-
-        var productsList = new OdataPrism<Product>()
-        {
-            Data = new List<Product>()
-            {
-                new()
-                {
-                    OriginApplication = "RProPrismWeb",
-                    PrimaryItemDefinition = new PrimaryItemDefinition
-                    {
-                        Dcssid = department.Sid,
-                        Vendsid = vendor.Sid,
-                        Description1 = item.DesigGroupName,
-                        Description2 = item.Size,
-                        Attribute = item.ColorCode,
-                        Itemsize = item.SalesUoM,
-                        //Sid = null
-
-
-                        UDF3 = itemName50Char,
-                        UDF4 = itemForeignName50Char,
-                        UDF5 = item.ItemsPerSaleUoM,
-                        UDF6 = item.Sticker,
-                        UDF7 = item.StickerForeign,
-                        UDF8 = item.TypeGroupName,
-                        UDF9 = item.BarCode,
-                        UDF10 = item.OrignGroupName,
-                        UDF11 = item.AveragePrice.ToString(),
-                        UDF12 = item.SalesPrice,
-
-                    },
-                    InventoryItems = new[]
-                    {
-                        new InventoryItem
-                        {
-                            Sbssid = subsidiarySid,
-                            Alu = item.ItemCode,
-                            Active = item.Active,
-                            Attribute = item.ColorCode,
-                            ItemSize = item.SalesUoM,
-
-                            Dcssid = department.Sid,
-                            Vendsid = vendor.Sid, //
-                            Description1 = item.DesigGroupName,
-                            Description2 = item.Size, //
-                            Description3 = item.ColorGroup, //
-                            Description4 = item.ProductGroupName, //
-                            Longdescription = item.ItemName + " - " + item.ForeignName, //
-                            Lastrcvdcost = (decimal)item.AveragePrice,
-                            //Price = item.PriceListCode,
-
-                            Taxcodesid = taxCodeSid, //
-
-                            Noninventory = item.InvntoryItem,
-                            Dcscode = department.DcsCode, //
-
-                            TEXT1 = item.ItemName,
-                            TEXT2 = item.ForeignName,
-                            TEXT3 = item.InventoryUoM,
-
-                            //Spif = 0,
-
-                            //Itemsize = 1,
-                            Useqtydecimals = 2,
-                            //QtyPerCase = item.ItemsPerSaleUoM,
-
-                            Regional = false,
-                            Activepricelevelsid = activePriceLevelSid,
-                            Activeseasonsid = activeSeasonSid,
-                            //Activestoresid = activestoreSid,
-
-
-                            #region Not Mandatory
-
-                            //Upc = null,
-                            //Maxdiscperc1 = 100,
-                            //Maxdiscperc2 = 100,
-                            //Serialtype = 0,
-                            //Lottype = 0,
-
-
-                            //Actstrprice = 10,
-                            //Actstrpricewt = 12,
-                            //Actstrohqty = 2,
-
-                            //Invnquantity = new Invnquantity[]
-                            //{
-                            //   new Invnquantity()
-                            //   {
-                            //       Qty = 2,
-                            //       Invnsbsitemsid = 0,
-                            //       Sbssid = subsidiaryId,
-                            //       Storesid = storeSid,
-                            //       Minqty = 0,
-                            //       Maxqty = 0,
-                            //   }
-                            //},
-                            //Invnprice = new Invnprice[] {
-                            //    new Invnprice()
-                            //    {
-                            //        Price = 12,
-                            //        Invnsbsitemsid = 0,
-                            //        Sbssid = subsidiaryId,
-                            //        Pricelvlsid = priceLevelSid,
-                            //        Seasonsid = seasonSid,
-                            //    }
-                            //},
-
-                            #endregion
-                        },
-                    },
-                    //UpdateStyleDefinition = false,
-                    //UpdateStyleCost = false,
-                    //UpdateStylePrice = false,
-                    //DefaultReasonSidForQtyMemo = "663852140000104707",
-                    //DefaultReasonSidForCostMemo = "663852140000104707",
-                    //DefaultReasonSidForPriceMemo = "663852140000104707",
-                }
-            }
-        };
-        var body = JsonConvert.SerializeObject(productsList);
-
-        return body;
-    }
-
-    public async Task<string> CreateUpdatePayload(ItemMasterData item, long productSid)
+    public async Task<string> CreateEntityPayload(ItemMasterData item, string productSid = null)
     {
         var departmentResult = await _departmentService.GetByCodeAsync(item.ItemGroupCode);
         var department = departmentResult.EntityList.FirstOrDefault();
@@ -292,7 +143,7 @@ public class ItemsService : IEntityService<RequestResult<ProductResponseModel>, 
                         Description2 = item.Size,
                         Attribute = item.ColorCode,
                         Itemsize = item.SalesUoM,
-                        Sid = productSid.ToString(),
+                        Sid = productSid,
 
 
                         UDF3 = itemName50Char,
@@ -326,7 +177,7 @@ public class ItemsService : IEntityService<RequestResult<ProductResponseModel>, 
                             Longdescription = item.ItemName + " - " + item.ForeignName, //
                             Lastrcvdcost = (decimal)item.AveragePrice,
                             //Price = item.PriceListCode,
-                            Sid = productSid.ToString(),
+                            Sid = productSid,
 
                             Taxcodesid = taxCodeSid, //
 
@@ -400,6 +251,7 @@ public class ItemsService : IEntityService<RequestResult<ProductResponseModel>, 
 
         return body;
     }
+
 
     private string TrimNameTo50Characters(string name)
     {
