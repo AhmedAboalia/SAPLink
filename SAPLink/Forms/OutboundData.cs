@@ -259,7 +259,7 @@ public partial class OutboundData : Form
                             {
                                 var docNum = GetStockTransferDocNum(verifiedVoucher.Sid);
 
-                                Log(UpdateType.SyncInventoryTransfer, $"Prism Verified Voucher No. ({verifiedVoucher.Slipno}) is Already Exist with SAP Stock Transfer No. ({docNum}).", "");
+                                Log(UpdateType.SyncInventoryTransfer, $"Prism Voucher No. ({verifiedVoucher.Vouno}) Slip No ({verifiedVoucher.Slipno}) is Already Exist with SAP Stock Transfer No. ({docNum}).", "");
                             }
                         }
 
