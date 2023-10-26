@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             components = new Container();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges49 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges50 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            ComponentResourceManager resources = new ComponentResourceManager(typeof(OutboundData));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
@@ -50,8 +51,6 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -64,30 +63,26 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges37 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges38 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges39 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges40 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges41 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges42 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges43 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges44 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges45 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges46 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges47 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges48 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            ComponentResourceManager resources = new ComponentResourceManager(typeof(OutboundData));
             guna2Panel1 = new Guna2Panel();
+            contextMenuRefreshAuth = new ContextMenuStrip(components);
+            MenuRefreshAuth = new ToolStripMenuItem();
             labelStatus = new Label();
             tabControlInventory = new Guna2TabControl();
             tabPageSync = new TabPage();
             tabControlManualSync = new Guna2TabControl();
+            contextMenuSync = new ContextMenuStrip(components);
+            MenuISyncCopy = new ToolStripMenuItem();
+            toolStripSeparator4 = new ToolStripSeparator();
+            MenuISyncClearLogs = new ToolStripMenuItem();
+            MenuISyncClearMoniteringLogs = new ToolStripMenuItem();
+            toolStripSeparator3 = new ToolStripSeparator();
+            MenuISyncRefreshAuth = new ToolStripMenuItem();
             tabPage7 = new TabPage();
             treeView1 = new TreeView();
             dataGridViewSync = new Guna2DataGridView();
@@ -110,23 +105,6 @@
             label7 = new Label();
             buttonSyncNow = new Guna2Button();
             label14 = new Label();
-            tabPageSchedule = new TabPage();
-            guna2TabControl4 = new Guna2TabControl();
-            tabPage6 = new TabPage();
-            webViewSchedule = new Microsoft.Web.WebView2.WinForms.WebView2();
-            tabPage5 = new TabPage();
-            textBoxLogsSchedule = new RichTextBox();
-            guna2Panel4 = new Guna2Panel();
-            buttonSchedule = new Guna2Button();
-            TextBoxIntervalSchedule = new Guna2TextBox();
-            ComboBoxDaysOfWeek = new Guna2ComboBox();
-            comboBoxDocTypeSchedule = new Guna2ComboBox();
-            label2 = new Label();
-            comboBoxRecurrenceSchedule = new Guna2ComboBox();
-            labelRepeatEvery = new Label();
-            label3 = new Label();
-            buttonScheduleIt = new Guna2Button();
-            label8 = new Label();
             guna2Button6 = new Guna2Button();
             label4 = new Label();
             label6 = new Label();
@@ -144,33 +122,18 @@
             guna2DragControl1 = new Guna2DragControl(components);
             guna2ShadowForm1 = new Guna2ShadowForm(components);
             guna2Elipse1 = new Guna2Elipse(components);
-            contextMenuRefreshAuth = new ContextMenuStrip(components);
-            MenuRefreshAuth = new ToolStripMenuItem();
-            contextMenuSync = new ContextMenuStrip(components);
-            MenuISyncCopy = new ToolStripMenuItem();
-            toolStripSeparator4 = new ToolStripSeparator();
-            MenuISyncClearLogs = new ToolStripMenuItem();
-            MenuISyncClearMoniteringLogs = new ToolStripMenuItem();
-            toolStripSeparator3 = new ToolStripSeparator();
-            MenuISyncRefreshAuth = new ToolStripMenuItem();
             guna2Panel1.SuspendLayout();
+            contextMenuRefreshAuth.SuspendLayout();
             tabControlInventory.SuspendLayout();
             tabPageSync.SuspendLayout();
             tabControlManualSync.SuspendLayout();
+            contextMenuSync.SuspendLayout();
             tabPage7.SuspendLayout();
             ((ISupportInitialize)dataGridViewSync).BeginInit();
             tabPage8.SuspendLayout();
             guna2Panel2.SuspendLayout();
-            tabPageSchedule.SuspendLayout();
-            guna2TabControl4.SuspendLayout();
-            tabPage6.SuspendLayout();
-            ((ISupportInitialize)webViewSchedule).BeginInit();
-            tabPage5.SuspendLayout();
-            guna2Panel4.SuspendLayout();
             ((ISupportInitialize)guna2PictureBox2).BeginInit();
             ((ISupportInitialize)MainPanel).BeginInit();
-            contextMenuRefreshAuth.SuspendLayout();
-            contextMenuSync.SuspendLayout();
             SuspendLayout();
             // 
             // guna2Panel1
@@ -195,15 +158,30 @@
             guna2Panel1.Controls.Add(guna2ControlBox1);
             guna2Panel1.Controls.Add(MainPanel);
             guna2Panel1.CustomBorderColor = Color.Transparent;
-            guna2Panel1.CustomizableEdges = customizableEdges49;
+            guna2Panel1.CustomizableEdges = customizableEdges35;
             guna2Panel1.Dock = DockStyle.Fill;
             guna2Panel1.Location = new Point(0, 0);
             guna2Panel1.Margin = new Padding(4);
             guna2Panel1.Name = "guna2Panel1";
-            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges50;
+            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges36;
             guna2Panel1.Size = new Size(1113, 721);
             guna2Panel1.TabIndex = 0;
             guna2Panel1.DoubleClick += guna2Panel1_DoubleClick;
+            // 
+            // contextMenuRefreshAuth
+            // 
+            contextMenuRefreshAuth.ImageScalingSize = new Size(20, 20);
+            contextMenuRefreshAuth.Items.AddRange(new ToolStripItem[] { MenuRefreshAuth });
+            contextMenuRefreshAuth.Name = "contextMenuStrip1";
+            contextMenuRefreshAuth.Size = new Size(189, 30);
+            // 
+            // MenuRefreshAuth
+            // 
+            MenuRefreshAuth.Image = (Image)resources.GetObject("MenuRefreshAuth.Image");
+            MenuRefreshAuth.Name = "MenuRefreshAuth";
+            MenuRefreshAuth.Size = new Size(188, 26);
+            MenuRefreshAuth.Text = "Refresh Auth Session";
+            MenuRefreshAuth.Click += MenuRefreshAuth_Click;
             // 
             // labelStatus
             // 
@@ -221,7 +199,6 @@
             tabControlInventory.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             tabControlInventory.ContextMenuStrip = contextMenuRefreshAuth;
             tabControlInventory.Controls.Add(tabPageSync);
-            tabControlInventory.Controls.Add(tabPageSchedule);
             tabControlInventory.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             tabControlInventory.ItemSize = new Size(180, 40);
             tabControlInventory.Location = new Point(182, 106);
@@ -294,6 +271,55 @@
             tabControlManualSync.TabIndex = 58;
             tabControlManualSync.TabMenuBackColor = Color.WhiteSmoke;
             tabControlManualSync.TabMenuOrientation = TabMenuOrientation.HorizontalTop;
+            // 
+            // contextMenuSync
+            // 
+            contextMenuSync.ImageScalingSize = new Size(20, 20);
+            contextMenuSync.Items.AddRange(new ToolStripItem[] { MenuISyncCopy, toolStripSeparator4, MenuISyncClearLogs, MenuISyncClearMoniteringLogs, toolStripSeparator3, MenuISyncRefreshAuth });
+            contextMenuSync.Name = "contextMenuStrip1";
+            contextMenuSync.Size = new Size(196, 120);
+            // 
+            // MenuISyncCopy
+            // 
+            MenuISyncCopy.Image = (Image)resources.GetObject("MenuISyncCopy.Image");
+            MenuISyncCopy.Name = "MenuISyncCopy";
+            MenuISyncCopy.Size = new Size(195, 26);
+            MenuISyncCopy.Text = "Copy";
+            MenuISyncCopy.Click += MenuISyncCopy_Click;
+            // 
+            // toolStripSeparator4
+            // 
+            toolStripSeparator4.Name = "toolStripSeparator4";
+            toolStripSeparator4.Size = new Size(192, 6);
+            // 
+            // MenuISyncClearLogs
+            // 
+            MenuISyncClearLogs.Image = (Image)resources.GetObject("MenuISyncClearLogs.Image");
+            MenuISyncClearLogs.Name = "MenuISyncClearLogs";
+            MenuISyncClearLogs.Size = new Size(195, 26);
+            MenuISyncClearLogs.Text = "Clear Logs";
+            MenuISyncClearLogs.Click += SyncClearLogs_Click;
+            // 
+            // MenuISyncClearMoniteringLogs
+            // 
+            MenuISyncClearMoniteringLogs.Image = (Image)resources.GetObject("MenuISyncClearMoniteringLogs.Image");
+            MenuISyncClearMoniteringLogs.Name = "MenuISyncClearMoniteringLogs";
+            MenuISyncClearMoniteringLogs.Size = new Size(195, 26);
+            MenuISyncClearMoniteringLogs.Text = "Clear Monitering Logs";
+            MenuISyncClearMoniteringLogs.Click += MenuISyncClearMonitoringLogs_Click;
+            // 
+            // toolStripSeparator3
+            // 
+            toolStripSeparator3.Name = "toolStripSeparator3";
+            toolStripSeparator3.Size = new Size(192, 6);
+            // 
+            // MenuISyncRefreshAuth
+            // 
+            MenuISyncRefreshAuth.Image = (Image)resources.GetObject("MenuISyncRefreshAuth.Image");
+            MenuISyncRefreshAuth.Name = "MenuISyncRefreshAuth";
+            MenuISyncRefreshAuth.Size = new Size(195, 26);
+            MenuISyncRefreshAuth.Text = "Refresh Auth Session";
+            MenuISyncRefreshAuth.Click += MenuRefreshAuth_Click;
             // 
             // tabPage7
             // 
@@ -731,330 +757,12 @@
             label14.TabIndex = 57;
             label14.Text = "Sync Prism with SAP";
             // 
-            // tabPageSchedule
-            // 
-            tabPageSchedule.Controls.Add(guna2TabControl4);
-            tabPageSchedule.Controls.Add(guna2Panel4);
-            tabPageSchedule.Controls.Add(label8);
-            tabPageSchedule.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            tabPageSchedule.Location = new Point(4, 44);
-            tabPageSchedule.Margin = new Padding(3, 2, 3, 2);
-            tabPageSchedule.Name = "tabPageSchedule";
-            tabPageSchedule.Padding = new Padding(3, 2, 3, 2);
-            tabPageSchedule.Size = new Size(908, 535);
-            tabPageSchedule.TabIndex = 0;
-            tabPageSchedule.Text = "Schedule Syncs";
-            tabPageSchedule.UseVisualStyleBackColor = true;
-            // 
-            // guna2TabControl4
-            // 
-            guna2TabControl4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            guna2TabControl4.Controls.Add(tabPage6);
-            guna2TabControl4.Controls.Add(tabPage5);
-            guna2TabControl4.ItemSize = new Size(180, 30);
-            guna2TabControl4.Location = new Point(19, 190);
-            guna2TabControl4.Margin = new Padding(3, 2, 3, 2);
-            guna2TabControl4.Name = "guna2TabControl4";
-            guna2TabControl4.SelectedIndex = 0;
-            guna2TabControl4.Size = new Size(871, 318);
-            guna2TabControl4.TabButtonHoverState.BorderColor = Color.Empty;
-            guna2TabControl4.TabButtonHoverState.FillColor = Color.FromArgb(40, 52, 70);
-            guna2TabControl4.TabButtonHoverState.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Regular, GraphicsUnit.Point);
-            guna2TabControl4.TabButtonHoverState.ForeColor = Color.White;
-            guna2TabControl4.TabButtonHoverState.InnerColor = Color.FromArgb(40, 52, 70);
-            guna2TabControl4.TabButtonIdleState.BorderColor = Color.Empty;
-            guna2TabControl4.TabButtonIdleState.FillColor = Color.FromArgb(224, 224, 224);
-            guna2TabControl4.TabButtonIdleState.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Regular, GraphicsUnit.Point);
-            guna2TabControl4.TabButtonIdleState.ForeColor = Color.FromArgb(156, 160, 167);
-            guna2TabControl4.TabButtonIdleState.InnerColor = Color.FromArgb(33, 42, 57);
-            guna2TabControl4.TabButtonSelectedState.BorderColor = Color.Empty;
-            guna2TabControl4.TabButtonSelectedState.FillColor = Color.Gray;
-            guna2TabControl4.TabButtonSelectedState.Font = new Font("Segoe UI Semibold", 8F, FontStyle.Regular, GraphicsUnit.Point);
-            guna2TabControl4.TabButtonSelectedState.ForeColor = Color.White;
-            guna2TabControl4.TabButtonSelectedState.InnerColor = Color.SteelBlue;
-            guna2TabControl4.TabButtonSize = new Size(180, 30);
-            guna2TabControl4.TabIndex = 56;
-            guna2TabControl4.TabMenuBackColor = Color.WhiteSmoke;
-            guna2TabControl4.TabMenuOrientation = TabMenuOrientation.HorizontalTop;
-            // 
-            // tabPage6
-            // 
-            tabPage6.Controls.Add(webViewSchedule);
-            tabPage6.Location = new Point(4, 34);
-            tabPage6.Margin = new Padding(3, 2, 3, 2);
-            tabPage6.Name = "tabPage6";
-            tabPage6.Padding = new Padding(3, 2, 3, 2);
-            tabPage6.Size = new Size(863, 280);
-            tabPage6.TabIndex = 1;
-            tabPage6.Text = "Monitoring";
-            tabPage6.UseVisualStyleBackColor = true;
-            // 
-            // webViewSchedule
-            // 
-            webViewSchedule.AllowExternalDrop = true;
-            webViewSchedule.BackgroundImageLayout = ImageLayout.Zoom;
-            webViewSchedule.CreationProperties = null;
-            webViewSchedule.DefaultBackgroundColor = Color.White;
-            webViewSchedule.Dock = DockStyle.Fill;
-            webViewSchedule.Location = new Point(3, 2);
-            webViewSchedule.Name = "webViewSchedule";
-            webViewSchedule.Size = new Size(857, 276);
-            webViewSchedule.Source = new Uri("https://localhost:44326/dashboard/recurring", UriKind.Absolute);
-            webViewSchedule.TabIndex = 42;
-            webViewSchedule.ZoomFactor = 1D;
-            // 
-            // tabPage5
-            // 
-            tabPage5.Controls.Add(textBoxLogsSchedule);
-            tabPage5.Location = new Point(4, 34);
-            tabPage5.Margin = new Padding(3, 2, 3, 2);
-            tabPage5.Name = "tabPage5";
-            tabPage5.Padding = new Padding(3, 2, 3, 2);
-            tabPage5.Size = new Size(863, 280);
-            tabPage5.TabIndex = 0;
-            tabPage5.Text = "Logs";
-            tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // textBoxLogsSchedule
-            // 
-            textBoxLogsSchedule.BackColor = Color.WhiteSmoke;
-            textBoxLogsSchedule.BorderStyle = BorderStyle.None;
-            textBoxLogsSchedule.Dock = DockStyle.Fill;
-            textBoxLogsSchedule.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxLogsSchedule.Location = new Point(3, 2);
-            textBoxLogsSchedule.Name = "textBoxLogsSchedule";
-            textBoxLogsSchedule.Size = new Size(857, 276);
-            textBoxLogsSchedule.TabIndex = 46;
-            textBoxLogsSchedule.Text = "";
-            // 
-            // guna2Panel4
-            // 
-            guna2Panel4.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            guna2Panel4.BackColor = Color.Transparent;
-            guna2Panel4.BorderColor = Color.WhiteSmoke;
-            guna2Panel4.BorderRadius = 20;
-            guna2Panel4.BorderThickness = 1;
-            guna2Panel4.Controls.Add(buttonSchedule);
-            guna2Panel4.Controls.Add(TextBoxIntervalSchedule);
-            guna2Panel4.Controls.Add(ComboBoxDaysOfWeek);
-            guna2Panel4.Controls.Add(comboBoxDocTypeSchedule);
-            guna2Panel4.Controls.Add(label2);
-            guna2Panel4.Controls.Add(comboBoxRecurrenceSchedule);
-            guna2Panel4.Controls.Add(labelRepeatEvery);
-            guna2Panel4.Controls.Add(label3);
-            guna2Panel4.Controls.Add(buttonScheduleIt);
-            guna2Panel4.CustomBorderColor = Color.Gainsboro;
-            guna2Panel4.CustomBorderThickness = new Padding(1);
-            guna2Panel4.CustomizableEdges = customizableEdges29;
-            guna2Panel4.FillColor = Color.White;
-            guna2Panel4.Location = new Point(19, 29);
-            guna2Panel4.Name = "guna2Panel4";
-            guna2Panel4.ShadowDecoration.CustomizableEdges = customizableEdges30;
-            guna2Panel4.Size = new Size(871, 156);
-            guna2Panel4.TabIndex = 50;
-            // 
-            // buttonSchedule
-            // 
-            buttonSchedule.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonSchedule.BackColor = Color.White;
-            buttonSchedule.BorderColor = Color.Gainsboro;
-            buttonSchedule.BorderRadius = 10;
-            buttonSchedule.BorderThickness = 1;
-            buttonSchedule.CustomBorderColor = Color.WhiteSmoke;
-            buttonSchedule.CustomBorderThickness = new Padding(1);
-            buttonSchedule.CustomizableEdges = customizableEdges17;
-            buttonSchedule.DisabledState.BorderColor = Color.DarkGray;
-            buttonSchedule.DisabledState.CustomBorderColor = Color.DarkGray;
-            buttonSchedule.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            buttonSchedule.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            buttonSchedule.FillColor = Color.WhiteSmoke;
-            buttonSchedule.Font = new Font("Bahnschrift", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonSchedule.ForeColor = Color.DarkSlateGray;
-            buttonSchedule.HoverState.FillColor = Color.Gold;
-            buttonSchedule.Image = (Image)resources.GetObject("buttonSchedule.Image");
-            buttonSchedule.ImageAlign = HorizontalAlignment.Left;
-            buttonSchedule.ImageOffset = new Point(7, 10);
-            buttonSchedule.ImageSize = new Size(25, 25);
-            buttonSchedule.Location = new Point(668, 32);
-            buttonSchedule.Name = "buttonSchedule";
-            buttonSchedule.PressedColor = Color.PaleTurquoise;
-            buttonSchedule.ShadowDecoration.CustomizableEdges = customizableEdges18;
-            buttonSchedule.Size = new Size(146, 60);
-            buttonSchedule.TabIndex = 46;
-            buttonSchedule.Tag = "";
-            buttonSchedule.Text = "Schedule It";
-            buttonSchedule.TextAlign = HorizontalAlignment.Left;
-            buttonSchedule.TextOffset = new Point(40, -15);
-            buttonSchedule.Tile = true;
-            // 
-            // TextBoxIntervalSchedule
-            // 
-            TextBoxIntervalSchedule.CustomizableEdges = customizableEdges19;
-            TextBoxIntervalSchedule.DefaultText = "1";
-            TextBoxIntervalSchedule.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            TextBoxIntervalSchedule.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            TextBoxIntervalSchedule.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            TextBoxIntervalSchedule.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            TextBoxIntervalSchedule.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            TextBoxIntervalSchedule.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-            TextBoxIntervalSchedule.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            TextBoxIntervalSchedule.Location = new Point(173, 81);
-            TextBoxIntervalSchedule.Margin = new Padding(3, 5, 3, 5);
-            TextBoxIntervalSchedule.Name = "TextBoxIntervalSchedule";
-            TextBoxIntervalSchedule.PasswordChar = '\0';
-            TextBoxIntervalSchedule.PlaceholderForeColor = Color.Black;
-            TextBoxIntervalSchedule.PlaceholderText = "";
-            TextBoxIntervalSchedule.SelectedText = "";
-            TextBoxIntervalSchedule.ShadowDecoration.CustomizableEdges = customizableEdges20;
-            TextBoxIntervalSchedule.Size = new Size(239, 24);
-            TextBoxIntervalSchedule.TabIndex = 45;
-            // 
-            // ComboBoxDaysOfWeek
-            // 
-            ComboBoxDaysOfWeek.AutoCompleteCustomSource.AddRange(new string[] { "Hourly", "Daily", "None" });
-            ComboBoxDaysOfWeek.BackColor = Color.Transparent;
-            ComboBoxDaysOfWeek.CustomizableEdges = customizableEdges21;
-            ComboBoxDaysOfWeek.DrawMode = DrawMode.OwnerDrawFixed;
-            ComboBoxDaysOfWeek.DropDownStyle = ComboBoxStyle.DropDownList;
-            ComboBoxDaysOfWeek.FocusedColor = Color.FromArgb(94, 148, 255);
-            ComboBoxDaysOfWeek.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            ComboBoxDaysOfWeek.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-            ComboBoxDaysOfWeek.ForeColor = Color.FromArgb(68, 88, 112);
-            ComboBoxDaysOfWeek.ItemHeight = 15;
-            ComboBoxDaysOfWeek.Items.AddRange(new object[] { "Sunday", "Monday", "Thursday", "Wednesday", "Friday", "Saturday" });
-            ComboBoxDaysOfWeek.Location = new Point(173, 83);
-            ComboBoxDaysOfWeek.Name = "ComboBoxDaysOfWeek";
-            ComboBoxDaysOfWeek.ShadowDecoration.CustomizableEdges = customizableEdges22;
-            ComboBoxDaysOfWeek.Size = new Size(239, 21);
-            ComboBoxDaysOfWeek.TabIndex = 40;
-            ComboBoxDaysOfWeek.Visible = false;
-            // 
-            // comboBoxDocTypeSchedule
-            // 
-            comboBoxDocTypeSchedule.AutoCompleteCustomSource.AddRange(new string[] { "Departments", "Vendors", "Items", "Goods Receipt Po (GRPO)", "Goods Receipt (GR)", "Goods Issue (GI)" });
-            comboBoxDocTypeSchedule.BackColor = Color.Transparent;
-            comboBoxDocTypeSchedule.CustomizableEdges = customizableEdges23;
-            comboBoxDocTypeSchedule.DrawMode = DrawMode.OwnerDrawFixed;
-            comboBoxDocTypeSchedule.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxDocTypeSchedule.FocusedColor = Color.FromArgb(94, 148, 255);
-            comboBoxDocTypeSchedule.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            comboBoxDocTypeSchedule.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBoxDocTypeSchedule.ForeColor = Color.FromArgb(68, 88, 112);
-            comboBoxDocTypeSchedule.ItemHeight = 15;
-            comboBoxDocTypeSchedule.Items.AddRange(new object[] { "A/R Invoice (+ Incoming Payment)", "A/R Invoice (+Outgoing Payment)", "Stock Transfer", "Stock-Taking", "Goods Receipt (GR)", "Goods Issue (GI)" });
-            comboBoxDocTypeSchedule.Location = new Point(163, 29);
-            comboBoxDocTypeSchedule.Name = "comboBoxDocTypeSchedule";
-            comboBoxDocTypeSchedule.ShadowDecoration.CustomizableEdges = customizableEdges24;
-            comboBoxDocTypeSchedule.Size = new Size(230, 21);
-            comboBoxDocTypeSchedule.TabIndex = 39;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.BackColor = Color.White;
-            label2.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.ForeColor = Color.DimGray;
-            label2.Location = new Point(24, 33);
-            label2.Name = "label2";
-            label2.Size = new Size(97, 16);
-            label2.TabIndex = 38;
-            label2.Text = "Document Type:";
-            // 
-            // comboBoxRecurrenceSchedule
-            // 
-            comboBoxRecurrenceSchedule.AutoCompleteCustomSource.AddRange(new string[] { "Hourly", "Daily", "None" });
-            comboBoxRecurrenceSchedule.BackColor = Color.Transparent;
-            comboBoxRecurrenceSchedule.CustomizableEdges = customizableEdges25;
-            comboBoxRecurrenceSchedule.DrawMode = DrawMode.OwnerDrawFixed;
-            comboBoxRecurrenceSchedule.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxRecurrenceSchedule.FocusedColor = Color.FromArgb(94, 148, 255);
-            comboBoxRecurrenceSchedule.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            comboBoxRecurrenceSchedule.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBoxRecurrenceSchedule.ForeColor = Color.FromArgb(68, 88, 112);
-            comboBoxRecurrenceSchedule.ItemHeight = 15;
-            comboBoxRecurrenceSchedule.Items.AddRange(new object[] { "--None--", "Hourly", "Daily" });
-            comboBoxRecurrenceSchedule.Location = new Point(163, 56);
-            comboBoxRecurrenceSchedule.Name = "comboBoxRecurrenceSchedule";
-            comboBoxRecurrenceSchedule.ShadowDecoration.CustomizableEdges = customizableEdges26;
-            comboBoxRecurrenceSchedule.Size = new Size(230, 21);
-            comboBoxRecurrenceSchedule.TabIndex = 37;
-            // 
-            // labelRepeatEvery
-            // 
-            labelRepeatEvery.AutoSize = true;
-            labelRepeatEvery.BackColor = Color.White;
-            labelRepeatEvery.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-            labelRepeatEvery.ForeColor = Color.DimGray;
-            labelRepeatEvery.Location = new Point(78, 85);
-            labelRepeatEvery.Name = "labelRepeatEvery";
-            labelRepeatEvery.Size = new Size(62, 16);
-            labelRepeatEvery.TabIndex = 29;
-            labelRepeatEvery.Text = "In Minute:";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.White;
-            label3.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.ForeColor = Color.DimGray;
-            label3.Location = new Point(24, 57);
-            label3.Name = "label3";
-            label3.Size = new Size(57, 16);
-            label3.TabIndex = 27;
-            label3.Text = "Repeats:";
-            // 
-            // buttonScheduleIt
-            // 
-            buttonScheduleIt.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonScheduleIt.BackColor = Color.White;
-            buttonScheduleIt.BorderColor = Color.Gainsboro;
-            buttonScheduleIt.BorderRadius = 10;
-            buttonScheduleIt.BorderThickness = 1;
-            buttonScheduleIt.CustomBorderColor = Color.WhiteSmoke;
-            buttonScheduleIt.CustomBorderThickness = new Padding(1);
-            buttonScheduleIt.CustomizableEdges = customizableEdges27;
-            buttonScheduleIt.DisabledState.BorderColor = Color.DarkGray;
-            buttonScheduleIt.DisabledState.CustomBorderColor = Color.DarkGray;
-            buttonScheduleIt.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            buttonScheduleIt.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            buttonScheduleIt.FillColor = Color.WhiteSmoke;
-            buttonScheduleIt.Font = new Font("Bahnschrift", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonScheduleIt.ForeColor = Color.DarkSlateGray;
-            buttonScheduleIt.HoverState.FillColor = Color.Gold;
-            buttonScheduleIt.Image = (Image)resources.GetObject("buttonScheduleIt.Image");
-            buttonScheduleIt.ImageAlign = HorizontalAlignment.Left;
-            buttonScheduleIt.ImageOffset = new Point(7, 10);
-            buttonScheduleIt.ImageSize = new Size(25, 25);
-            buttonScheduleIt.Location = new Point(1339, 32);
-            buttonScheduleIt.Name = "buttonScheduleIt";
-            buttonScheduleIt.PressedColor = Color.PaleTurquoise;
-            buttonScheduleIt.ShadowDecoration.CustomizableEdges = customizableEdges28;
-            buttonScheduleIt.Size = new Size(146, 60);
-            buttonScheduleIt.TabIndex = 23;
-            buttonScheduleIt.Tag = "";
-            buttonScheduleIt.Text = "Schedule It";
-            buttonScheduleIt.TextAlign = HorizontalAlignment.Left;
-            buttonScheduleIt.TextOffset = new Point(40, -15);
-            buttonScheduleIt.Tile = true;
-            // 
-            // label8
-            // 
-            label8.AutoSize = true;
-            label8.BackColor = Color.Transparent;
-            label8.Font = new Font("Bahnschrift", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label8.ForeColor = Color.DarkGray;
-            label8.Location = new Point(19, 11);
-            label8.Name = "label8";
-            label8.Size = new Size(149, 14);
-            label8.TabIndex = 51;
-            label8.Text = "Recurring Schedule Syncs ";
-            // 
             // guna2Button6
             // 
             guna2Button6.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             guna2Button6.BackColor = SystemColors.Control;
             guna2Button6.BorderRadius = 10;
-            guna2Button6.CustomizableEdges = customizableEdges31;
+            guna2Button6.CustomizableEdges = customizableEdges17;
             guna2Button6.DisabledState.BorderColor = Color.DarkGray;
             guna2Button6.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button6.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -1068,7 +776,7 @@
             guna2Button6.ImageSize = new Size(30, 30);
             guna2Button6.Location = new Point(10, 653);
             guna2Button6.Name = "guna2Button6";
-            guna2Button6.ShadowDecoration.CustomizableEdges = customizableEdges32;
+            guna2Button6.ShadowDecoration.CustomizableEdges = customizableEdges18;
             guna2Button6.Size = new Size(128, 40);
             guna2Button6.TabIndex = 29;
             guna2Button6.Text = "Settings";
@@ -1122,13 +830,13 @@
             // guna2PictureBox2
             // 
             guna2PictureBox2.BackColor = SystemColors.Control;
-            guna2PictureBox2.CustomizableEdges = customizableEdges33;
+            guna2PictureBox2.CustomizableEdges = customizableEdges19;
             guna2PictureBox2.Image = (Image)resources.GetObject("guna2PictureBox2.Image");
             guna2PictureBox2.ImageRotate = 0F;
             guna2PictureBox2.InitialImage = null;
             guna2PictureBox2.Location = new Point(14, 41);
             guna2PictureBox2.Name = "guna2PictureBox2";
-            guna2PictureBox2.ShadowDecoration.CustomizableEdges = customizableEdges34;
+            guna2PictureBox2.ShadowDecoration.CustomizableEdges = customizableEdges20;
             guna2PictureBox2.Size = new Size(33, 32);
             guna2PictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             guna2PictureBox2.TabIndex = 15;
@@ -1138,7 +846,7 @@
             // 
             guna2Button3.BackColor = SystemColors.Control;
             guna2Button3.BorderRadius = 10;
-            guna2Button3.CustomizableEdges = customizableEdges35;
+            guna2Button3.CustomizableEdges = customizableEdges21;
             guna2Button3.DisabledState.BorderColor = Color.DarkGray;
             guna2Button3.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button3.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -1151,7 +859,7 @@
             guna2Button3.ImageSize = new Size(30, 30);
             guna2Button3.Location = new Point(10, 218);
             guna2Button3.Name = "guna2Button3";
-            guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges36;
+            guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges22;
             guna2Button3.Size = new Size(128, 40);
             guna2Button3.TabIndex = 18;
             guna2Button3.Text = "Outbound Data";
@@ -1161,7 +869,7 @@
             // 
             guna2Button2.BackColor = SystemColors.Control;
             guna2Button2.BorderRadius = 10;
-            guna2Button2.CustomizableEdges = customizableEdges37;
+            guna2Button2.CustomizableEdges = customizableEdges23;
             guna2Button2.DisabledState.BorderColor = Color.DarkGray;
             guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -1175,7 +883,7 @@
             guna2Button2.ImageSize = new Size(30, 30);
             guna2Button2.Location = new Point(10, 162);
             guna2Button2.Name = "guna2Button2";
-            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges38;
+            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges24;
             guna2Button2.Size = new Size(128, 40);
             guna2Button2.TabIndex = 19;
             guna2Button2.Text = "Inbound Data";
@@ -1195,7 +903,7 @@
             // 
             guna2Button1.BackColor = SystemColors.Control;
             guna2Button1.BorderRadius = 10;
-            guna2Button1.CustomizableEdges = customizableEdges39;
+            guna2Button1.CustomizableEdges = customizableEdges25;
             guna2Button1.DisabledState.BorderColor = Color.DarkGray;
             guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -1209,7 +917,7 @@
             guna2Button1.ImageSize = new Size(30, 30);
             guna2Button1.Location = new Point(10, 106);
             guna2Button1.Name = "guna2Button1";
-            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges40;
+            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges26;
             guna2Button1.Size = new Size(128, 40);
             guna2Button1.TabIndex = 17;
             guna2Button1.Text = "Dashboard";
@@ -1222,13 +930,13 @@
             guna2ControlBox3.BackColor = Color.White;
             guna2ControlBox3.BorderRadius = 8;
             guna2ControlBox3.ControlBoxType = Guna.UI2.WinForms.Enums.ControlBoxType.MaximizeBox;
-            guna2ControlBox3.CustomizableEdges = customizableEdges41;
+            guna2ControlBox3.CustomizableEdges = customizableEdges27;
             guna2ControlBox3.FillColor = Color.Transparent;
             guna2ControlBox3.IconColor = Color.Black;
             guna2ControlBox3.Location = new Point(1026, 9);
             guna2ControlBox3.Margin = new Padding(4);
             guna2ControlBox3.Name = "guna2ControlBox3";
-            guna2ControlBox3.ShadowDecoration.CustomizableEdges = customizableEdges42;
+            guna2ControlBox3.ShadowDecoration.CustomizableEdges = customizableEdges28;
             guna2ControlBox3.Size = new Size(32, 28);
             guna2ControlBox3.TabIndex = 2;
             guna2ControlBox3.Click += guna2ControlBox3_Click;
@@ -1239,13 +947,13 @@
             guna2ControlBox2.BackColor = Color.White;
             guna2ControlBox2.BorderRadius = 8;
             guna2ControlBox2.ControlBoxType = Guna.UI2.WinForms.Enums.ControlBoxType.MinimizeBox;
-            guna2ControlBox2.CustomizableEdges = customizableEdges43;
+            guna2ControlBox2.CustomizableEdges = customizableEdges29;
             guna2ControlBox2.FillColor = Color.Transparent;
             guna2ControlBox2.IconColor = Color.Black;
             guna2ControlBox2.Location = new Point(986, 9);
             guna2ControlBox2.Margin = new Padding(4);
             guna2ControlBox2.Name = "guna2ControlBox2";
-            guna2ControlBox2.ShadowDecoration.CustomizableEdges = customizableEdges44;
+            guna2ControlBox2.ShadowDecoration.CustomizableEdges = customizableEdges30;
             guna2ControlBox2.Size = new Size(32, 28);
             guna2ControlBox2.TabIndex = 0;
             guna2ControlBox2.Click += guna2ControlBox2_Click;
@@ -1255,13 +963,13 @@
             guna2ControlBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             guna2ControlBox1.BackColor = Color.White;
             guna2ControlBox1.BorderRadius = 8;
-            guna2ControlBox1.CustomizableEdges = customizableEdges45;
+            guna2ControlBox1.CustomizableEdges = customizableEdges31;
             guna2ControlBox1.FillColor = Color.Transparent;
             guna2ControlBox1.IconColor = Color.Black;
             guna2ControlBox1.Location = new Point(1066, 9);
             guna2ControlBox1.Margin = new Padding(4);
             guna2ControlBox1.Name = "guna2ControlBox1";
-            guna2ControlBox1.ShadowDecoration.CustomizableEdges = customizableEdges46;
+            guna2ControlBox1.ShadowDecoration.CustomizableEdges = customizableEdges32;
             guna2ControlBox1.Size = new Size(32, 28);
             guna2ControlBox1.TabIndex = 1;
             guna2ControlBox1.Click += guna2ControlBox1_Click;
@@ -1271,14 +979,14 @@
             MainPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             MainPanel.BorderRadius = 30;
             MainPanel.ContextMenuStrip = contextMenuRefreshAuth;
-            customizableEdges47.BottomRight = false;
-            customizableEdges47.TopRight = false;
-            MainPanel.CustomizableEdges = customizableEdges47;
+            customizableEdges33.BottomRight = false;
+            customizableEdges33.TopRight = false;
+            MainPanel.CustomizableEdges = customizableEdges33;
             MainPanel.ImageRotate = 0F;
             MainPanel.Location = new Point(145, 0);
             MainPanel.Margin = new Padding(4);
             MainPanel.Name = "MainPanel";
-            MainPanel.ShadowDecoration.CustomizableEdges = customizableEdges48;
+            MainPanel.ShadowDecoration.CustomizableEdges = customizableEdges34;
             MainPanel.Size = new Size(968, 721);
             MainPanel.SizeMode = PictureBoxSizeMode.StretchImage;
             MainPanel.TabIndex = 0;
@@ -1297,70 +1005,6 @@
             guna2Elipse1.BorderRadius = 0;
             guna2Elipse1.TargetControl = this;
             // 
-            // contextMenuRefreshAuth
-            // 
-            contextMenuRefreshAuth.ImageScalingSize = new Size(20, 20);
-            contextMenuRefreshAuth.Items.AddRange(new ToolStripItem[] { MenuRefreshAuth });
-            contextMenuRefreshAuth.Name = "contextMenuStrip1";
-            contextMenuRefreshAuth.Size = new Size(189, 30);
-            // 
-            // MenuRefreshAuth
-            // 
-            MenuRefreshAuth.Image = (Image)resources.GetObject("MenuRefreshAuth.Image");
-            MenuRefreshAuth.Name = "MenuRefreshAuth";
-            MenuRefreshAuth.Size = new Size(188, 26);
-            MenuRefreshAuth.Text = "Refresh Auth Session";
-            MenuRefreshAuth.Click += MenuRefreshAuth_Click;
-            // 
-            // contextMenuSync
-            // 
-            contextMenuSync.ImageScalingSize = new Size(20, 20);
-            contextMenuSync.Items.AddRange(new ToolStripItem[] { MenuISyncCopy, toolStripSeparator4, MenuISyncClearLogs, MenuISyncClearMoniteringLogs, toolStripSeparator3, MenuISyncRefreshAuth });
-            contextMenuSync.Name = "contextMenuStrip1";
-            contextMenuSync.Size = new Size(196, 120);
-            // 
-            // MenuISyncCopy
-            // 
-            MenuISyncCopy.Image = (Image)resources.GetObject("MenuISyncCopy.Image");
-            MenuISyncCopy.Name = "MenuISyncCopy";
-            MenuISyncCopy.Size = new Size(195, 26);
-            MenuISyncCopy.Text = "Copy";
-            MenuISyncCopy.Click += MenuISyncCopy_Click;
-            // 
-            // toolStripSeparator4
-            // 
-            toolStripSeparator4.Name = "toolStripSeparator4";
-            toolStripSeparator4.Size = new Size(192, 6);
-            // 
-            // MenuISyncClearLogs
-            // 
-            MenuISyncClearLogs.Image = (Image)resources.GetObject("MenuISyncClearLogs.Image");
-            MenuISyncClearLogs.Name = "MenuISyncClearLogs";
-            MenuISyncClearLogs.Size = new Size(195, 26);
-            MenuISyncClearLogs.Text = "Clear Logs";
-            MenuISyncClearLogs.Click += SyncClearLogs_Click;
-            // 
-            // MenuISyncClearMoniteringLogs
-            // 
-            MenuISyncClearMoniteringLogs.Image = (Image)resources.GetObject("MenuISyncClearMoniteringLogs.Image");
-            MenuISyncClearMoniteringLogs.Name = "MenuISyncClearMoniteringLogs";
-            MenuISyncClearMoniteringLogs.Size = new Size(195, 26);
-            MenuISyncClearMoniteringLogs.Text = "Clear Monitering Logs";
-            MenuISyncClearMoniteringLogs.Click += MenuISyncClearMonitoringLogs_Click;
-            // 
-            // toolStripSeparator3
-            // 
-            toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new Size(192, 6);
-            // 
-            // MenuISyncRefreshAuth
-            // 
-            MenuISyncRefreshAuth.Image = (Image)resources.GetObject("MenuISyncRefreshAuth.Image");
-            MenuISyncRefreshAuth.Name = "MenuISyncRefreshAuth";
-            MenuISyncRefreshAuth.Size = new Size(195, 26);
-            MenuISyncRefreshAuth.Text = "Refresh Auth Session";
-            MenuISyncRefreshAuth.Click += MenuRefreshAuth_Click;
-            // 
             // OutboundData
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1377,27 +1021,19 @@
             Load += OutboundData_Load;
             guna2Panel1.ResumeLayout(false);
             guna2Panel1.PerformLayout();
+            contextMenuRefreshAuth.ResumeLayout(false);
             tabControlInventory.ResumeLayout(false);
             tabPageSync.ResumeLayout(false);
             tabPageSync.PerformLayout();
             tabControlManualSync.ResumeLayout(false);
+            contextMenuSync.ResumeLayout(false);
             tabPage7.ResumeLayout(false);
             ((ISupportInitialize)dataGridViewSync).EndInit();
             tabPage8.ResumeLayout(false);
             guna2Panel2.ResumeLayout(false);
             guna2Panel2.PerformLayout();
-            tabPageSchedule.ResumeLayout(false);
-            tabPageSchedule.PerformLayout();
-            guna2TabControl4.ResumeLayout(false);
-            tabPage6.ResumeLayout(false);
-            ((ISupportInitialize)webViewSchedule).EndInit();
-            tabPage5.ResumeLayout(false);
-            guna2Panel4.ResumeLayout(false);
-            guna2Panel4.PerformLayout();
             ((ISupportInitialize)guna2PictureBox2).EndInit();
             ((ISupportInitialize)MainPanel).EndInit();
-            contextMenuRefreshAuth.ResumeLayout(false);
-            contextMenuSync.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -1440,23 +1076,6 @@
         private Label label7;
         private Guna2Button buttonSyncNow;
         private Label label14;
-        private TabPage tabPageSchedule;
-        private Guna2TabControl guna2TabControl4;
-        private TabPage tabPage6;
-        private Microsoft.Web.WebView2.WinForms.WebView2 webViewSchedule;
-        private TabPage tabPage5;
-        private RichTextBox textBoxLogsSchedule;
-        private Guna2Panel guna2Panel4;
-        private Guna2TextBox TextBoxIntervalSchedule;
-        private Guna2ComboBox ComboBoxDaysOfWeek;
-        private Guna2ComboBox comboBoxDocTypeSchedule;
-        private Label label2;
-        private Guna2ComboBox comboBoxRecurrenceSchedule;
-        private Label labelRepeatEvery;
-        private Label label3;
-        private Guna2Button buttonScheduleIt;
-        private Label label8;
-        private Guna2Button buttonSchedule;
         private Guna2Button buttonSync;
         private Label labelStatus;
         private TreeView treeView1;
