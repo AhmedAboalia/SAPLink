@@ -6,6 +6,7 @@ using SAPLink.Utilities.Forms;
 using InventoryPosting = SAPLink.Core.Models.Prism.StockManagement.InventoryPosting;
 using SAPLink.Handler.SAP.Application;
 using SAPLink.Handler.Prism.Connection.Auth;
+using System.Security.Cryptography.X509Certificates;
 
 namespace SAPLink.Forms;
 
@@ -62,9 +63,9 @@ public partial class OutboundData : Form
     {
         var documentType = (OutboundDocuments)comboBoxDocTypeSync.SelectedIndex;
 
-        var branch = -1;
+        var storeNum = -1;
         if (comboBoxBranch.SelectedIndex != 0)
-            branch = (int)comboBoxBranch.SelectedValue;
+            storeNum = (int)comboBoxBranch.SelectedValue;
 
 
         var filterByDateRang = GetSyncQuery();
@@ -83,9 +84,9 @@ public partial class OutboundData : Form
                     var salesInvoices = new RequestResult<PrismInvoice>();
 
                     if (docCode.IsHasValue())
-                        salesInvoices = await _invoiceService.GetInvoicesAsync(OutboundDocuments.SalesInvoice, filterByDateRang, branch, docCode);
+                        salesInvoices = await _invoiceService.GetInvoicesAsync(OutboundDocuments.SalesInvoice, filterByDateRang, storeNum, docCode);
                     else
-                        salesInvoices = await _invoiceService.GetInvoicesAsync(OutboundDocuments.SalesInvoice, filterByDateRang, branch);
+                        salesInvoices = await _invoiceService.GetInvoicesAsync(OutboundDocuments.SalesInvoice, filterByDateRang, storeNum);
 
                     if (salesInvoices.EntityList.Any())
                     {
@@ -149,9 +150,9 @@ public partial class OutboundData : Form
 
 
                     if (docCode.IsHasValue())
-                        returnInvoices = await _invoiceService.GetInvoicesAsync(OutboundDocuments.ReturnInvoice, filterByDateRang, branch, docCode);
+                        returnInvoices = await _invoiceService.GetInvoicesAsync(OutboundDocuments.ReturnInvoice, filterByDateRang, storeNum, docCode);
                     else
-                        returnInvoices = await _invoiceService.GetInvoicesAsync(OutboundDocuments.ReturnInvoice, filterByDateRang, branch);
+                        returnInvoices = await _invoiceService.GetInvoicesAsync(OutboundDocuments.ReturnInvoice, filterByDateRang, storeNum);
 
                     if (returnInvoices.EntityList.Any())
                     {
@@ -201,9 +202,9 @@ public partial class OutboundData : Form
 
 
                     if (docCode.IsHasValue())
-                        customerOrders = await _invoiceService.GetInvoicesAsync(OutboundDocuments.CustomerOrder, filterByDateRang, branch, docCode);
+                        customerOrders = await _invoiceService.GetInvoicesAsync(OutboundDocuments.CustomerOrder, filterByDateRang, storeNum, docCode);
                     else
-                        customerOrders = await _invoiceService.GetInvoicesAsync(OutboundDocuments.CustomerOrder, filterByDateRang, branch);
+                        customerOrders = await _invoiceService.GetInvoicesAsync(OutboundDocuments.CustomerOrder, filterByDateRang, storeNum);
 
 
                     if (customerOrders.EntityList.Any())
@@ -239,9 +240,9 @@ public partial class OutboundData : Form
 
 
                     if (docCode.IsHasValue())
-                        verifiedVouchers = await _verifiedVoucherService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value, branch, docCode);
+                        verifiedVouchers = await _verifiedVoucherService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value, storeNum, docCode);
                     else
-                        verifiedVouchers = await _verifiedVoucherService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value, branch);
+                        verifiedVouchers = await _verifiedVoucherService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value, storeNum);
 
 
                     if (verifiedVouchers.EntityList.Any())
@@ -277,42 +278,15 @@ public partial class OutboundData : Form
                 break;
 
             case OutboundDocuments.InventoryPosting:
-                {
-                    var result = await _inventoryPostingService.GetInventoryPosting(branch, docCode);
+                await ProcessOutboundDocument(OutboundDocuments.InventoryPosting, storeNum, "AND(status,eq,4)AND(adjtype,eq,0)", docCode);
+                break;
 
-                    if (result.EntityList.Any())
-                    {
-                        Log(UpdateType.SyncInventoryPosting, $"Inventory Posting/s." +
-                                                             $"\r\n\r\nRequest Message: {result.Message}", "");
+            case OutboundDocuments.GoodsReceipt:
+                await ProcessOutboundDocument(OutboundDocuments.GoodsReceipt, storeNum, "AND(reasonname,eq,GR)", docCode);
+                break;
 
-
-
-                        foreach (var inventoryPosting in result.EntityList)
-                        {
-                            if (inventoryPosting == null) continue;
-
-                            if (!CheckInventoryPostingExist(inventoryPosting.Sid))// To-Do Add Check Exist in SAP by Sid in field U_PrismSid and U_SyncToPrism
-                                await HandleInventoryPosting(dataGridViewSync, result.EntityList, UpdateType.SyncInvoice, treeView1);
-                            else
-                            {
-                                var docNum = GetInventoryPostingDocNum(inventoryPosting.Sid);
-
-                                var message = $"\r\nPrism Adjustment No. ({inventoryPosting.Adjno}) is Already Exist with SAP Inventory Posting No. ({docNum}).";
-                                Log(UpdateType.SyncInventoryPosting, message, message);
-                            }
-                        }
-
-                    }
-                    else
-                    {
-                        dataGridViewSync.DataSource = null;
-                        LogMessages($"No Available Inventory Posting/s." +
-                                    $"\r\nResponse: {result.Response.Content} " +
-                                    $"\r\n\r\nResult Message: {result.Message}" +
-                                    $"\r\nStatus: {result.Status}",
-                            $"No Available Inventory Posting/s.");
-                    }
-                }
+            case OutboundDocuments.GoodsIssue:
+                await ProcessOutboundDocument(OutboundDocuments.GoodsIssue, storeNum, "AND(reasonname,eq,GI)", docCode);
                 break;
         }
     }
@@ -578,7 +552,37 @@ public partial class OutboundData : Form
             //syncResult.UpdateResponse;
         }
     }
+    private async Task ProcessOutboundDocument(OutboundDocuments documentType, int storeNum, string filter, string docCode)
+    {
+        var result = await _inventoryPostingService.GetInventoryPosting(storeNum, filter, docCode);
 
+        if (result.EntityList.Any())
+        {
+            LogMessages($"Inventory Posting/s.\r\n\r\nRequest Message: {result.Message}", "");
+
+            foreach (var inventoryPosting in result.EntityList)
+            {
+                if (inventoryPosting == null) continue;
+
+                if (!CheckInventoryPostingExist(inventoryPosting.Sid)) // To-Do Add Check Exist in SAP by Sid in field U_PrismSid and U_SyncToPrism
+                {
+                    await HandleInventoryPosting(dataGridViewSync, result.EntityList, UpdateType.SyncInvoice, treeView1);
+                }
+                else
+                {
+                    var docNum = GetInventoryPostingDocNum(inventoryPosting.Sid);
+                    var message = $"Prism Adjustment No. ({inventoryPosting.Adjno}) is Already Exist with SAP Inventory Posting No. ({docNum}).";
+                    LogMessages(message, message);
+                }
+            }
+        }
+        else
+        {
+            dataGridViewSync.DataSource = null;
+            LogMessages($"No Available Inventory Posting/s.\r\nResponse: {result.Response.Content} \r\n\r\nResult Message: {result.Message}\r\nStatus: {result.Status}",
+                $"No Available Inventory Posting/s.");
+        }
+    }
     private async Task HandleDownPayment(Guna2DataGridView dt, List<PrismInvoice> invoicesList, UpdateType UpdateType, TreeView treeView)
     {
         PlaySound.Click();

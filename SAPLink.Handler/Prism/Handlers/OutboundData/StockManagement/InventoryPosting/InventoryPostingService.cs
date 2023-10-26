@@ -37,8 +37,8 @@ public partial class InventoryPostingService
         TaxCodesService = new TaxCodesService(client);
         StoresService = new StoresService(client);
     }
-   
-    public async Task<RequestResult<InventoryPostings>> GetInventoryPosting(int storeNumber, string DocCode = "")
+
+    public async Task<RequestResult<InventoryPostings>> GetInventoryPosting(int storeNumber, string filter, string DocCode = "")
     {
         var result = new RequestResult<InventoryPostings>();
         try
@@ -62,8 +62,8 @@ public partial class InventoryPostingService
 
             //
             var resource = $"/adjustment" +
-                           $"?filter=(sbssid,eq,{_subsidiary.SID})AND(status,eq,4){storeCodeFilter}AND(adjtype,eq,0){DocCodeFilter}AND(creatingdoctype,eq,1)" +
-                           $"&cols=sid,rowversion,adjno,adjtype,status,verified,storecode,creatingdoctype,adjitem.sid,adjitem.rowversion,adjitem.itemsid,adjitem.alu,adjitem.origvalue,adjitem.adjvalue,adjitem.description1,adjitem.description2,adjitem.price,adjitem.cost";
+                           $"?filter=(sbssid,eq,{_subsidiary.SID}){storeCodeFilter}{DocCodeFilter}AND(creatingdoctype,eq,1)" +
+                           $"&cols=sid,rowversion,adjno,adjtype,status,verified,reasonname,storecode,creatingdoctype,adjitem.sid,adjitem.rowversion,adjitem.itemsid,adjitem.alu,adjitem.origvalue,adjitem.adjvalue,adjitem.description1,adjitem.description2,adjitem.price,adjitem.cost";
 
             //api/backoffice/adjustment
             //?filter=(creatingdoctype,eq,1)AND(status,eq,4)
