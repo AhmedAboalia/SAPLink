@@ -15,18 +15,11 @@
 
   <ItemGroup>
     <Compile Remove="Icon\**" />
+    <Compile Remove="Images\**" />
     <EmbeddedResource Remove="Icon\**" />
+    <EmbeddedResource Remove="Images\**" />
     <None Remove="Icon\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Forms\Dashboard.resx~RF25ed3a8.TMP" />
-    <None Remove="Images\Price-Checker.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Images\link.ico" />
-    <Content Include="Images\Price-Checker.ico" />
+    <None Remove="Images\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,16 +38,18 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SAPLink.Handler\SAPLink.Handler.csproj" />
-    <ProjectReference Include="..\SAPLink.Schedule\SAPLink.Schedule.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="SAPBusinessOneSDK">
-      <HintPath>bin\Debug\net7.0-windows\SAPBusinessOneSDK.dll</HintPath>
+      <HintPath>..\SAPLink\bin\Debug\net7.0-windows\SAPBusinessOneSDK.dll</HintPath>
     </Reference>
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Forms\Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Forms\Settings.cs">
       <SubType>Form</SubType>
     </Compile>
