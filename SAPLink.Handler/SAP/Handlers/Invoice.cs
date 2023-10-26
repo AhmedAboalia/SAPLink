@@ -59,6 +59,8 @@ partial class ServiceLayerHandler
                               $"\r\n{message}" +
                               $"\r\n\r\nRequest Body:" +
                               $"\r\n{body}";
+
+                    return result;
                 }
 
             }
