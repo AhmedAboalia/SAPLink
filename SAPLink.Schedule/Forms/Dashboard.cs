@@ -111,5 +111,12 @@ namespace SAPLink.Schedule.Forms
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
             => Helper.TryKillProcess();
+
+        private void buttonDepartments_Click(object sender, EventArgs e)
+        {
+            InboundData inboundData = new InboundData(_unitOfWork,_serviceLayer,_departmentService,_itemsService,_client);
+            inboundData.Show();
+
+        }
     }
 }
