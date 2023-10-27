@@ -95,7 +95,7 @@ public partial class OutboundData : Form
                             var invoiceResult = await _invoiceService.GetInvoiceDetailsBySidAsync(sInvoice.Sid);
                             var invoice = invoiceResult.EntityList.FirstOrDefault();
 
-                            Log(UpdateType.SyncInvoice,$"Invoice/s." +
+                            Log(UpdateType.SyncInvoice, $"Invoice/s." +
                                         $"\r\nFirst Request Message {salesInvoices.Message}" +
                                         $"\r\n\r\nSecond Request Message: {invoiceResult.Message}",
                                 "");
@@ -125,8 +125,8 @@ public partial class OutboundData : Form
 
 
                             if (isARDownPayment && !CheckInvoiceExist(sInvoice.Sid, "ODPI"))
-                                await HandleDownPayment(dataGridViewSync, invoiceResult.EntityList, UpdateType.SyncInvoice, treeView1);                         
-                            
+                                await HandleDownPayment(dataGridViewSync, invoiceResult.EntityList, UpdateType.SyncInvoice, treeView1);
+
                             else if (!isARDownPayment && !CheckInvoiceExist(sInvoice.Sid, "OINV"))
                                 await HandleInvoices(dataGridViewSync, invoiceResult.EntityList, UpdateType.SyncInvoice, treeView1);
                         }
@@ -171,7 +171,7 @@ public partial class OutboundData : Form
                             {
                                 var docNum = GetReturnInvoiceDocNum(returnInvoice.Sid);
 
-                                Log(UpdateType.SyncCreditMemo,$"\r\nPrism Invoice No. ({returnInvoice.DocumentNumber}) is Already Exist with SAP A/R Credit Payment No. ({docNum}).",
+                                Log(UpdateType.SyncCreditMemo, $"\r\nPrism Invoice No. ({returnInvoice.DocumentNumber}) is Already Exist with SAP A/R Credit Payment No. ({docNum}).",
                                      "");
                             }
                             var isCreditMemo = returnInvoice.Items.Any(p => p.Alu == "SP0012");
@@ -278,15 +278,15 @@ public partial class OutboundData : Form
                 break;
 
             case OutboundDocuments.InventoryPosting:
-                await ProcessOutboundDocument(OutboundDocuments.InventoryPosting, storeNum, "AND(status,eq,4)AND(adjtype,eq,0)", docCode);
+                await ProcessOutboundDocument(OutboundDocuments.InventoryPosting, storeNum, "AND(creatingdoctype,eq,1)AND(status,eq,4)AND(adjtype,eq,0)", docCode);
                 break;
 
             case OutboundDocuments.GoodsReceipt:
-                await ProcessOutboundDocument(OutboundDocuments.GoodsReceipt, storeNum, "AND(reasonname,eq,GR)", docCode);
+                await ProcessOutboundDocument(OutboundDocuments.GoodsReceipt, storeNum, "AND(creatingdoctype,eq,8)AND(reasonname,eq,GR)", docCode);
                 break;
 
             case OutboundDocuments.GoodsIssue:
-                await ProcessOutboundDocument(OutboundDocuments.GoodsIssue, storeNum, "AND(reasonname,eq,GI)", docCode);
+                await ProcessOutboundDocument(OutboundDocuments.GoodsIssue, storeNum, "AND(creatingdoctype,eq,8)AND(reasonname,eq,GI)", docCode);
                 break;
         }
     }
@@ -786,14 +786,14 @@ public partial class OutboundData : Form
 
     private void Log(UpdateType updateType, string message, string status)
     {
-        if (updateType 
-            is UpdateType.SyncInvoice 
-            or UpdateType.SyncCreditMemo 
-            or UpdateType.SyncOrders 
-            or UpdateType.SyncInventoryTransfer 
-            or UpdateType.SyncInventoryPosting 
-            or UpdateType.SyncOutGoodsReceipt 
-            or UpdateType.SyncOutGoodsIssue 
+        if (updateType
+            is UpdateType.SyncInvoice
+            or UpdateType.SyncCreditMemo
+            or UpdateType.SyncOrders
+            or UpdateType.SyncInventoryTransfer
+            or UpdateType.SyncInventoryPosting
+            or UpdateType.SyncOutGoodsReceipt
+            or UpdateType.SyncOutGoodsIssue
             )
         {
             //textBoxLogsSync.Clear();

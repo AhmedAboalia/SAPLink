@@ -28,7 +28,7 @@ public class InventoryPostingHandler
                 InventoryPostingsService oInventoryPostingsService = (InventoryPostingsService)oCS.GetBusinessService(ServiceTypes.InventoryPostingsService);
                 SAPbobsCOM.InventoryPosting oInventoryPosting = (SAPbobsCOM.InventoryPosting)oInventoryPostingsService.GetDataInterface(InventoryPostingsServiceDataInterfaces.ipsInventoryPosting);
 
-                oInventoryPosting.CountDate = DateTime.Now;
+                oInventoryPosting.CountDate = Convert.ToDateTime(count.CreateDate);
                 oInventoryPosting.UserFields.Item("U_SyncToPrism").Value = "Y";
                 oInventoryPosting.UserFields.Item("U_PrismSid").Value = $"{count.Sid}";
                 foreach (var item in count.Adjitem)
