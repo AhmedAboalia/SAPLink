@@ -278,15 +278,15 @@ public partial class OutboundData : Form
                 break;
 
             case OutboundDocuments.InventoryPosting:
-                await ProcessOutboundDocument(OutboundDocuments.InventoryPosting, storeNum, "AND(status,eq,4)AND(adjtype,eq,0)", docCode);
+                await ProcessOutboundDocument(OutboundDocuments.InventoryPosting, storeNum, "AND(creatingdoctype,eq,1)AND(status,eq,4)AND(adjtype,eq,0)", docCode);
                 break;
 
             case OutboundDocuments.GoodsReceipt:
-                await ProcessOutboundDocument(OutboundDocuments.GoodsReceipt, storeNum, "AND(reasonname,eq,GR)", docCode);
+                await ProcessOutboundDocument(OutboundDocuments.GoodsReceipt, storeNum, "AND(creatingdoctype,eq,8)AND(reasonname,eq,GR)", docCode);
                 break;
 
             case OutboundDocuments.GoodsIssue:
-                await ProcessOutboundDocument(OutboundDocuments.GoodsIssue, storeNum, "AND(reasonname,eq,GI)", docCode);
+                await ProcessOutboundDocument(OutboundDocuments.GoodsIssue, storeNum, "AND(creatingdoctype,eq,8)AND(reasonname,eq,GI)", docCode);
                 break;
         }
     }

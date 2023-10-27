@@ -26,7 +26,10 @@ namespace SAPLink.Core.Models.Prism.StockManagement
         public Adjitem[] Adjitem { get; set; }
 
         [JsonProperty("storecode")]
-        public string StoreCode { get; set; }
+        public string StoreCode { get; set; }  
+        
+        [JsonProperty("createddatetime")]
+        public string CreateDate { get; set; }
     }
 
     public partial class Adjitem
