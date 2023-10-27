@@ -7,6 +7,8 @@ using InventoryPosting = SAPLink.Core.Models.Prism.StockManagement.InventoryPost
 using SAPLink.Handler.SAP.Application;
 using SAPLink.Handler.Prism.Connection.Auth;
 using System.Security.Cryptography.X509Certificates;
+using SAPLink.Handler.Prism.Handlers.OutboundData.StockManagement.GoodsReceipt;
+using SAPLink.Core.Models.Prism.Sales;
 
 namespace SAPLink.Forms;
 
@@ -31,6 +33,7 @@ public partial class OutboundData : Form
 
     private readonly InventoryPostingService _inventoryPostingService;
     private readonly InventoryPostingHandler _inventoryPostingHandler;
+    private readonly OutboundGoodsReceiptHandler _outboundGoodsReceiptHandler;
 
     public OutboundData(UnitOfWork unitOfWork, ServiceLayerHandler serviceLayer, DepartmentService departmentService,
         ItemsService itemsService, Clients client)
@@ -54,6 +57,8 @@ public partial class OutboundData : Form
 
         _inventoryPostingService = new InventoryPostingService(_client);
         _inventoryPostingHandler = new InventoryPostingHandler();
+
+        _outboundGoodsReceiptHandler = new OutboundGoodsReceiptHandler(_client, _invoiceService, serviceLayer);
 
         _itemsService = itemsService;
         _departmentService = departmentService;
@@ -95,7 +100,7 @@ public partial class OutboundData : Form
                             var invoiceResult = await _invoiceService.GetInvoiceDetailsBySidAsync(sInvoice.Sid);
                             var invoice = invoiceResult.EntityList.FirstOrDefault();
 
-                            Log(UpdateType.SyncInvoice,$"Invoice/s." +
+                            Log(UpdateType.SyncInvoice, $"Invoice/s." +
                                         $"\r\nFirst Request Message {salesInvoices.Message}" +
                                         $"\r\n\r\nSecond Request Message: {invoiceResult.Message}",
                                 "");
@@ -125,8 +130,8 @@ public partial class OutboundData : Form
 
 
                             if (isARDownPayment && !CheckInvoiceExist(sInvoice.Sid, "ODPI"))
-                                await HandleDownPayment(dataGridViewSync, invoiceResult.EntityList, UpdateType.SyncInvoice, treeView1);                         
-                            
+                                await HandleDownPayment(dataGridViewSync, invoiceResult.EntityList, UpdateType.SyncInvoice, treeView1);
+
                             else if (!isARDownPayment && !CheckInvoiceExist(sInvoice.Sid, "OINV"))
                                 await HandleInvoices(dataGridViewSync, invoiceResult.EntityList, UpdateType.SyncInvoice, treeView1);
                         }
@@ -171,7 +176,7 @@ public partial class OutboundData : Form
                             {
                                 var docNum = GetReturnInvoiceDocNum(returnInvoice.Sid);
 
-                                Log(UpdateType.SyncCreditMemo,$"\r\nPrism Invoice No. ({returnInvoice.DocumentNumber}) is Already Exist with SAP A/R Credit Payment No. ({docNum}).",
+                                Log(UpdateType.SyncCreditMemo, $"\r\nPrism Invoice No. ({returnInvoice.DocumentNumber}) is Already Exist with SAP A/R Credit Payment No. ({docNum}).",
                                      "");
                             }
                             var isCreditMemo = returnInvoice.Items.Any(p => p.Alu == "SP0012");
@@ -558,31 +563,120 @@ public partial class OutboundData : Form
 
         if (result.EntityList.Any())
         {
-            LogMessages($"Inventory Posting/s.\r\n\r\nRequest Message: {result.Message}", "");
-
             foreach (var inventoryPosting in result.EntityList)
             {
                 if (inventoryPosting == null) continue;
 
-                if (!CheckInventoryPostingExist(inventoryPosting.Sid)) // To-Do Add Check Exist in SAP by Sid in field U_PrismSid and U_SyncToPrism
+                if (documentType == OutboundDocuments.InventoryPosting)
                 {
-                    await HandleInventoryPosting(dataGridViewSync, result.EntityList, UpdateType.SyncInvoice, treeView1);
+                    LogMessages($"Inventory Posting/s.\r\n\r\nRequest Message: {result.Message}", "");
+
+                    if (!CheckInventoryPostingExist(inventoryPosting.Sid)) // To-Do Add Check Exist in SAP by Sid in field U_PrismSid and U_SyncToPrism
+                    {
+                        await HandleInventoryPosting(dataGridViewSync, result.EntityList, UpdateType.SyncInvoice, treeView1);
+                    }
+                    else
+                    {
+                        var docNum = GetInventoryPostingDocNum(inventoryPosting.Sid);
+                        var message = $"Prism Adjustment No. ({inventoryPosting.Adjno}) is Already Exist with SAP Inventory Posting No. ({docNum}).";
+                        LogMessages(message, message);
+                    }
                 }
-                else
+
+                if (documentType == OutboundDocuments.GoodsReceipt)
                 {
-                    var docNum = GetInventoryPostingDocNum(inventoryPosting.Sid);
-                    var message = $"Prism Adjustment No. ({inventoryPosting.Adjno}) is Already Exist with SAP Inventory Posting No. ({docNum}).";
-                    LogMessages(message, message);
+                    LogMessages($"Outbound Goods Receipt/s.\r\n\r\nRequest Message: {result.Message}", "");
+
+                    if (!CheckOutboundGoodsReceiptExist(inventoryPosting.Sid)) // To-Do Add Check Exist in SAP by Sid in field U_PrismSid and U_SyncToPrism
+                    {
+                        await HandleOutboundGoodsReceipt(dataGridViewSync, result.EntityList, UpdateType.SyncInvoice, treeView1);
+                    }
+                    else
+                    {
+                        var docNum = GetInventoryPostingDocNum(inventoryPosting.Sid);
+                        var message = $"Prism Adjustment No. ({inventoryPosting.Adjno}) is Already Exist with SAP Inventory Posting No. ({docNum}).";
+                        LogMessages(message, message);
+                    }
+
+
+                }
+                if (documentType == OutboundDocuments.GoodsIssue)
+                {
+                    LogMessages($"Outbound Goods Issue/s.\r\n\r\nRequest Message: {result.Message}", "");
+
                 }
             }
         }
         else
         {
             dataGridViewSync.DataSource = null;
-            LogMessages($"No Available Inventory Posting/s.\r\nResponse: {result.Response.Content} \r\n\r\nResult Message: {result.Message}\r\nStatus: {result.Status}",
-                $"No Available Inventory Posting/s.");
+            treeView1.Nodes.Clear();
+
+            if (documentType == OutboundDocuments.InventoryPosting)
+                LogMessages($"No Available Inventory Posting/s.\r\nResponse: {result.Response.Content} \r\n\r\nResult Message: {result.Message}\r\nStatus: {result.Status}",
+                    "No Available Inventory Posting/s.");
+
+            if (documentType == OutboundDocuments.GoodsReceipt)
+                LogMessages($"No Available Outbound Goods Receipt/s.\r\nResponse: {result.Response.Content} \r\n\r\nResult Message: {result.Message}\r\nStatus: {result.Status}",
+                    "No Available Outbound Goods Receipt/s.");
+
+            if (documentType == OutboundDocuments.GoodsIssue)
+                LogMessages($"No Available Outbound Goods Issue/s.\r\nResponse: {result.Response.Content} \r\n\r\nResult Message: {result.Message}\r\nStatus: {result.Status}",
+                    "No Available Outbound Goods Issue/s.");
         }
     }
+
+    private bool CheckOutboundGoodsReceiptExist(string inventoryPostingSid)
+    {
+        var query = $"SELECT CASE WHEN EXISTS (SELECT 1 FROM OIGN WHERE U_PrismSid = '{inventoryPostingSid}') THEN 1 ELSE 0 END";
+
+        var oRecordSet = (Recordset)ClientHandler.Company.GetBusinessObject(BoObjectTypes.BoRecordset);
+        oRecordSet.DoQuery(query);
+
+        if (oRecordSet.RecordCount > 0)
+            return oRecordSet.Fields.Item(0).Value.ToString() == "1";
+
+        return false;
+    }
+
+    private async Task HandleOutboundGoodsReceipt(Guna2DataGridView dt, List<InventoryPosting> inventoryPostings, UpdateType UpdateType, TreeView treeView)
+    {
+        PlaySound.Click();
+        var bindingList = dt.DataSource as BindingList<InventoryPosting>;
+
+        await foreach (var syncResult in _outboundGoodsReceiptHandler.AddGoodsReceiptAsync(inventoryPostings))
+        {
+            if (syncResult.EntityList != null && syncResult.EntityList.Count > 0)
+            {
+                foreach (var count in syncResult.EntityList)
+                {
+                    //dataGridViewSync.BringToFront();
+                    //dataGridViewSync.Visible = true;
+                    //dt.BindInventoryPosting(ref bindingList, count);
+                    //dt.SelectLastRow();
+
+
+                    treeView.BringToFront();
+                    treeView.Visible = true;
+                    treeView.BindInventoryCounting(ref bindingList, count);
+
+                    //Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+                }
+            }
+            else
+            {
+                dt.DataSource = null;
+                treeView.Nodes.Clear();
+            }
+
+            if (textBoxLogsSync.Text.Contains(syncResult.Message))
+                return;
+            Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+
+            //syncResult.UpdateResponse;
+        }
+    }
+
     private async Task HandleDownPayment(Guna2DataGridView dt, List<PrismInvoice> invoicesList, UpdateType UpdateType, TreeView treeView)
     {
         PlaySound.Click();
@@ -786,14 +880,14 @@ public partial class OutboundData : Form
 
     private void Log(UpdateType updateType, string message, string status)
     {
-        if (updateType 
-            is UpdateType.SyncInvoice 
-            or UpdateType.SyncCreditMemo 
-            or UpdateType.SyncOrders 
-            or UpdateType.SyncInventoryTransfer 
-            or UpdateType.SyncInventoryPosting 
-            or UpdateType.SyncOutGoodsReceipt 
-            or UpdateType.SyncOutGoodsIssue 
+        if (updateType
+            is UpdateType.SyncInvoice
+            or UpdateType.SyncCreditMemo
+            or UpdateType.SyncOrders
+            or UpdateType.SyncInventoryTransfer
+            or UpdateType.SyncInventoryPosting
+            or UpdateType.SyncOutGoodsReceipt
+            or UpdateType.SyncOutGoodsIssue
             )
         {
             //textBoxLogsSync.Clear();
