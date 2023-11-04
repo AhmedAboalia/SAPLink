@@ -47,7 +47,7 @@ namespace SAPLink.Forms
                 foreach (var client in clients)
                 {
                     var name = client.Name.Split(' ').FirstOrDefault();
-                    comboBoxClient.AddItem(client.Id, client.Id + " - " + name + " Subsidiary");
+                    Schedule.Utilities.Controls.AddItem(comboBoxClient, client.Id, client.Id + " - " + name + " Subsidiary");
                 }
             }
 
@@ -56,7 +56,7 @@ namespace SAPLink.Forms
                 foreach (var cred in allCredentials)
                 {
                     var name = cred.EnvironmentName.Replace(" Environment", "");
-                    comboBoxEnvironment.AddItem(cred.EnvironmentCode, cred.EnvironmentCode + " - " + name );
+                    Schedule.Utilities.Controls.AddItem(comboBoxEnvironment, cred.EnvironmentCode, cred.EnvironmentCode + " - " + name );
                 }
             }
 
@@ -131,7 +131,7 @@ namespace SAPLink.Forms
         private void LoadSubsidiary()
         {
             ComboBoxSubNum.Items.Clear();
-            ComboBoxSubNum.AddItem(_subsidiary.Number, $"{_subsidiary.Number} - {_subsidiary.Name}");
+            Schedule.Utilities.Controls.AddItem(ComboBoxSubNum, _subsidiary.Number, $"{_subsidiary.Number} - {_subsidiary.Name}");
 
             guna2TextBox1.Text = _subsidiary.Name;
             TextBoxSubSID.Text = _subsidiary.SID.ToString();

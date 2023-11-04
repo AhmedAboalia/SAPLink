@@ -1,12 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using SAPLink.Core.Connection;
-using SAPLink.Core.Models.System;
-using SAPLink.EF;
+﻿using SAPLink.Core.Connection;
 using SAPLink.EF.Data;
-using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Departments;
-using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Inventory;
 using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Vendors;
-using SAPLink.Handler.SAP.Handlers;
 using SAPLink.Schedule.Forms;
 using Serilog;
 
@@ -33,31 +27,31 @@ internal static class Program
     {
         ApplicationConfiguration.Initialize();
 
-        //_loger = Handler.Prism.Handlers.Helper.CreateLoggerConfiguration("SAP Link", "General Logs");
+        _loger = Handler.Prism.Handlers.Helper.CreateLoggerConfiguration("SAP Link Synchronization", "General Logs");
 
-        //MigrateDatabase();
-        //_loger.Information("Successfully Update Database.");
+        MigrateDatabase();
+        _loger.Information("Successfully Update Database.");
 
         GetActiveClient();
-        //_loger.Information("Successfully Loaded Get Active Client.");
+        _loger.Information("Successfully Loaded Get Active Client.");
 
-        //_serviceLayer = new ServiceLayerHandler(Client);
-        //_loger.Information("Successfully Initiate SAP Business One Service Layer.");
+        _serviceLayer = new ServiceLayerHandler(Client);
+        _loger.Information("Successfully Initiate SAP Business One Service Layer.");
 
-        //_departmentService = new DepartmentService(Client);
-        //_loger.Information("Successfully Initiate Department Service.");
+        _departmentService = new DepartmentService(Client);
+        _loger.Information("Successfully Initiate Department Synchronization Service.");
 
-        //_vendorsHandler = new VendorsService(Client);
-        //_loger.Information("Successfully Initiate Vendors Service.");
+        _vendorsHandler = new VendorsService(Client);
+        _loger.Information("Successfully Initiate Vendors Synchronization Service.");
 
-        //_itemsService = new ItemsService(Client, _departmentService, _vendorsHandler);
-        //_loger.Information("Successfully Initiate Items Service.");
+        _itemsService = new ItemsService(Client, _departmentService, _vendorsHandler);
+        _loger.Information("Successfully Initiate Items Synchronization Service.");
 
         Application.ThreadException += Application_ThreadException;
         AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
         Application.Run(new Login(UnitOfWork, _serviceLayer, _departmentService, _itemsService, Client));
-       // Log.CloseAndFlush();
+        Log.CloseAndFlush();
     }
 
     private static void GetActiveClient()

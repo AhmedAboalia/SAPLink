@@ -1,14 +1,16 @@
 ﻿using SAPLink.Core.Connection;
 using SAPLink.EF.Data.Configurations;
+using static SAPLink.EF.Data.Configurations.ScheduleConfiguration;
 
 namespace SAPLink.EF.Data
 {
     public class ApplicationDbContext : DbContext
     {
         public DbSet<Clients> Clients { get; set; }
-        public DbSet<Recurrence> Recurrences { get; set; }
+        //public DbSet<Recurrence> Recurrences { get; set; }
         public DbSet<Credentials> Credentials { get; set; }
-        public DbSet<Logger<ItemMasterData>> ItemsLog { get; set; }
+
+        //public DbSet<Logger<ItemMasterData>> ItemsLog { get; set; }
         //public DbSet<Logger<ItemGroups>> ItemGroupsLog { get; set; }
         //public DbSet<Logger<Vendor>> VendorsLog { get; set; }
         //public DbSet<Logger<GoodsReceiptPO>> GoodsReceiptPosLog { get; set; }
@@ -73,11 +75,13 @@ namespace SAPLink.EF.Data
             modelBuilder.ApplyConfiguration(new CredentialsConfiguration());
             modelBuilder.ApplyConfiguration(new SubsidiariesConfiguration());
 
-            modelBuilder.ApplyConfiguration(new RecurrencesConfiguration());
-            modelBuilder.ApplyConfiguration(new SyncConfiguration());
+            //modelBuilder.ApplyConfiguration(new RecurrencesConfiguration());
+            //modelBuilder.ApplyConfiguration(new SyncConfiguration());
 
-            modelBuilder.ApplyConfiguration(new ItemsLogConfiguration());
+            //modelBuilder.ApplyConfiguration(new ItemsLogConfiguration());
 
+            modelBuilder.ApplyConfiguration(new ScheduleConfiguration());
+            modelBuilder.ApplyConfiguration(new RecurringConfiguration());
 
             //modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 

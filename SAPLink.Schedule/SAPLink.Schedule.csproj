@@ -23,6 +23,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Images\SAPLinkSchedule.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ever.y" Version="2018.10.15.1" />
     <PackageReference Include="Guna.UI2.WinForms" Version="2.0.4.4" />
     <PackageReference Include="Humanizer.Core" Version="2.14.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
@@ -37,6 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SAPLink.API\SAPLink.Core\SAPLink.Core.csproj" />
     <ProjectReference Include="..\SAPLink.Handler\SAPLink.Handler.csproj" />
   </ItemGroup>
 
@@ -53,7 +59,7 @@
     <Compile Update="Forms\Settings.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\InboundData.cs">
+    <Compile Update="Forms\ScheduledSyncs.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\OutboundData.cs">

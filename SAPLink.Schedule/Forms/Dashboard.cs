@@ -1,11 +1,5 @@
-﻿using SAPLink.Core.Models.System;
-using SAPLink.Core.Utilities;
-using SAPLink.EF;
-using SAPLink.Handler.Prism.Connection.Auth;
-using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Departments;
-using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Inventory;
-using SAPLink.Handler.SAP.Handlers;
-using SAPLink.Utilities;
+﻿using SAPLink.Handler.Prism.Connection.Auth;
+using SAPLink.Schedule.Utilities;
 
 namespace SAPLink.Schedule.Forms
 {
@@ -114,7 +108,7 @@ namespace SAPLink.Schedule.Forms
 
         private void buttonDepartments_Click(object sender, EventArgs e)
         {
-            InboundData inboundData = new InboundData(_unitOfWork,_serviceLayer,_departmentService,_itemsService,_client);
+            ScheduledSyncs inboundData = new ScheduledSyncs(_unitOfWork,_serviceLayer,_departmentService,_itemsService,_client);
             inboundData.Show();
 
         }

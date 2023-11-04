@@ -94,25 +94,25 @@ namespace SAPLink.Handler.Integration
                         }";
         }
 
-        public static Recurrence GetRecurrence(UnitOfWork unitOfWork, int selectedIndex, Recurrence recurrence)
-        {
-            switch (selectedIndex)
-            {
-                case (int)Documents.Departments:
-                    recurrence = unitOfWork.Recurrences.Find(x => x.Document == Documents.Departments);
-                    break;
+        //public static Recurrence GetRecurrence(UnitOfWork unitOfWork, int selectedIndex, Recurrence recurrence)
+        //{
+        //    switch (selectedIndex)
+        //    {
+        //        case (int)Documents.Departments:
+        //            recurrence = unitOfWork.Recurrences.Find(x => x.Document == Documents.Departments);
+        //            break;
 
-                case (int)Documents.Items:
-                    recurrence = unitOfWork.Recurrences.Find(x => x.Document == Documents.Items);
-                    break;
+        //        case (int)Documents.Items:
+        //            recurrence = unitOfWork.Recurrences.Find(x => x.Document == Documents.Items);
+        //            break;
 
-                case (int)Documents.Vendors:
-                    recurrence = unitOfWork.Recurrences.Find(x => x.Document == Documents.Vendors);
-                    break;
-            }
+        //        case (int)Documents.Vendors:
+        //            recurrence = unitOfWork.Recurrences.Find(x => x.Document == Documents.Vendors);
+        //            break;
+        //    }
 
-            return recurrence;
-        }
+        //    return recurrence;
+        //}
 
     }
 }

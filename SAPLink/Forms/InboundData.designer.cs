@@ -1551,7 +1551,6 @@
             buttonScheduleIt.TextAlign = HorizontalAlignment.Left;
             buttonScheduleIt.TextOffset = new Point(40, -15);
             buttonScheduleIt.Tile = true;
-            buttonScheduleIt.Click += buttonScheduleIt_Click;
             // 
             // label3
             // 
@@ -1624,7 +1623,6 @@
             comboBoxDocTypeSchedule.ShadowDecoration.CustomizableEdges = customizableEdges57;
             comboBoxDocTypeSchedule.Size = new Size(230, 21);
             comboBoxDocTypeSchedule.TabIndex = 39;
-            comboBoxDocTypeSchedule.SelectedIndexChanged += ComboBoxDocuments_SelectedIndexChanged;
             // 
             // ComboBoxDaysOfWeek
             // 

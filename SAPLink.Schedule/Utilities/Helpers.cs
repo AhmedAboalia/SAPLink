@@ -1,8 +1,6 @@
 ﻿using System.Diagnostics;
-using System.Text.Json;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace SAPLink.Utilities
+namespace SAPLink.Schedule.Utilities
 {
     public static class Helper
     {
@@ -42,6 +40,30 @@ namespace SAPLink.Utilities
             }
         }
 
+        public static string To24HourFormat(this string time)
+        {
+            DateTime dateTime;
+            if (DateTime.TryParseExact(time, "h:mm tt", null, System.Globalization.DateTimeStyles.None, out dateTime))
+            {
+                return dateTime.ToString("HH:mm");
+            }
+            else
+            {
+                throw new FormatException("Invalid 12-hour time format!");
+            }
+        }
+        public static (int Hours, int Minutes) To24HourMinutesFormat(this string twelveHourTime)
+        {
+            DateTime dateTime;
+            if (DateTime.TryParseExact(twelveHourTime, "h:mm tt", null, System.Globalization.DateTimeStyles.None, out dateTime))
+            {
+                return (dateTime.Hour, dateTime.Minute);
+            }
+            else
+            {
+                throw new FormatException("Invalid 12-hour time format!");
+            }
+        }
         //TryKillProcess(KillSapLinkProcesses);
 
         public static void TryKillProcess()

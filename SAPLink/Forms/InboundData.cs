@@ -434,42 +434,6 @@ public partial class InboundData : Form
     }
 
 
-    private void buttonScheduleIt_Click(object sender, EventArgs e)
-    {
-        if (buttonScheduleIt.Enabled)
-        {
-            PlaySound.Click();
-            var document = (Documents)comboBoxDocTypeSchedule.SelectedIndex;
-            try
-            {
-                var recurrence = _unitOfWork.Recurrences.Find(x => x.Document == document);
-                if (recurrence != null)
-                {
-                    recurrence.Document = document;
-                    recurrence.Recurring = (Enums.Repeats)comboBoxRecurrenceSchedule.SelectedIndex;
-
-                    if (recurrence.Recurring == Enums.Repeats.Hourly)
-                        recurrence.Interval = int.Parse(TextBoxIntervalSchedule.Text);
-                    else
-                        recurrence.DayOfWeek = (DayOfWeek)ComboBoxDaysOfWeek.SelectedIndex;
-
-                    _unitOfWork.Recurrences.Update(recurrence);
-                    _unitOfWork.SaveChanges();
-                    ScheduleService.Run(recurrence, out var message);
-                    textBoxLogsSchedule.Text = message;
-                }
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
-                throw;
-            }
-
-            //webView.Source = new Uri("http://localhost:7208/dashboard");
-            //webView.Source = new Uri("http://localhost:7208/dashboard/recurring");
-        }
-    }
-
 
 
     private void comboBoxRecurrence_SelectedIndexChanged(object sender, EventArgs e)
@@ -503,32 +467,6 @@ public partial class InboundData : Form
         }
     }
 
-
-    private void ComboBoxDocuments_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        var selectedIndex = comboBoxDocTypeSchedule.SelectedIndex;
-        textBoxLogsSchedule.Clear();
-
-        buttonScheduleIt.Enabled = true;
-
-        PlaySound.Click();
-
-        var recurrence = new Recurrence();
-        recurrence = ScheduleService.GetRecurrence(_unitOfWork, selectedIndex, recurrence);
-
-        comboBoxRecurrenceSchedule.SelectedIndex = (int)recurrence.Recurring;
-        TextBoxIntervalSchedule.Text = recurrence.Interval.ToString();
-        ComboBoxDaysOfWeek.SelectedIndex = (int)recurrence.DayOfWeek;
-
-        label3.Visible = true;
-        comboBoxRecurrenceSchedule.Visible = true;
-
-        labelRepeatEvery.Visible = true;
-        TextBoxIntervalSchedule.Visible = true;
-
-        //buttonSchdeuleIt.Enabled = false; // disabled for Delivery
-
-    }
     public void OpenFormWithSettings(int tabControlInventoryIndex, int comboBoxDocTypeSyncIndex)
     {
         tabControlInventory.SelectedIndex = tabControlInventoryIndex;

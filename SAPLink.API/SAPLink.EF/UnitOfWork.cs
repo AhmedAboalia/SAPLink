@@ -5,14 +5,16 @@
         private readonly ApplicationDbContext _context;
         public IBaseRepository<Clients> Clients { get; }
         public IBaseRepository<Credentials> Credentials { get; }
-        public IBaseRepository<Recurrence> Recurrences { get; }
-        public IBaseRepository<Subsidiary> Subsidiary { get; }
-        public IBaseRepository<Logger<ItemMasterData>> ItemsLog { get; }
+        //public IBaseRepository<Recurrence> Recurrences { get; }
+        //public IBaseRepository<Subsidiary> Subsidiary { get; }
+        public IBaseRepository<Schedule> Schedule { get; }
+        //public IBaseRepository<Logger<ItemMasterData>> ItemsLog { get; }
         //public IBaseRepository<Logger<ItemGroups>> ItemGroupsLog { get; }
         //public IBaseRepository<Logger<Vendor>> VendorsLog { get; }
 
         ///public IBaseRepository<PriceLevel> PriceLevel { get; }
         //public IBaseRepository<Season> Season { get; }
+
         public IBaseRepository<Sync> Sync { get; }
 
         public UnitOfWork(ApplicationDbContext context)
@@ -21,12 +23,13 @@
 
             Clients = new BaseRepository<Clients>(context);
             Credentials = new BaseRepository<Credentials>(context);
-            Subsidiary = new BaseRepository<Subsidiary>(context);
+            ///Subsidiary = new BaseRepository<Subsidiary>(context);
 
-            Recurrences = new BaseRepository<Recurrence>(context);
-            Sync = new BaseRepository<Sync>(context);
+            Schedule = new BaseRepository<Schedule>(context);
+            //Recurrences = new BaseRepository<Recurrence>(context);
+            //Sync = new BaseRepository<Sync>(context);
 
-            ItemsLog = new BaseRepository<Logger<ItemMasterData>>(context);
+            //ItemsLog = new BaseRepository<Logger<ItemMasterData>>(context);
             //ItemGroupsLog = new BaseRepository<Logger<ItemGroups>>(context);
             //VendorsLog = new BaseRepository<Logger<Vendor>>(context);
 

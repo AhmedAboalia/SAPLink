@@ -59,5 +59,15 @@ namespace SAPLink.Schedule.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
+        /// </summary>
+        internal static System.Drawing.Icon SAPLinkSchedule {
+            get {
+                object obj = ResourceManager.GetObject("SAPLinkSchedule", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
     }
 }

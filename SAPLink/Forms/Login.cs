@@ -34,12 +34,12 @@ namespace SAPLink.Forms
 
             if (_clients.Any())
             {
-                comboBoxClients.AddItem(0, "--Choose Environment--");
+                Schedule.Utilities.Controls.AddItem(comboBoxClients, 0, "--Choose Environment--");
 
                 foreach (var cli in _clients)
                 {
                     var envName = cli.Credentials.FirstOrDefault().EnvironmentName.Replace(" Environment", " Env. - ");
-                    comboBoxClients.AddItem(cli.Id, envName + cli.Name);
+                    Schedule.Utilities.Controls.AddItem(comboBoxClients, cli.Id, envName + cli.Name);
                 }
 
                 comboBoxClients.SelectedIndex = _client.Id;

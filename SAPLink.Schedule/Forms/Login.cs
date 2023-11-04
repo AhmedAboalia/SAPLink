@@ -1,17 +1,8 @@
-﻿using System.Net;
-using SAPLink.Core;
-using SAPLink.Core.Models.System;
-using SAPLink.Core.Utilities;
-using SAPLink.EF;
-using SAPLink.Handler.Prism.Connection.Auth;
-using SAPLink.Handler.Prism.Handlers;
-using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Departments;
-using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Inventory;
+﻿using SAPLink.Handler.Prism.Connection.Auth;
 using SAPLink.Handler.SAP.Application;
-using SAPLink.Handler.SAP.Handlers;
-using SAPLink.Utilities;
+using SAPLink.Schedule.Utilities;
 using Serilog;
-using Helper = SAPLink.Utilities.Helper;
+using Helper = SAPLink.Schedule.Utilities.Helper;
 
 namespace SAPLink.Schedule.Forms
 {
@@ -93,7 +84,7 @@ namespace SAPLink.Schedule.Forms
             if ((userName.IsHasValue() && userName != "User Name")
                                 && (password.IsHasValue() && password != "Password"))
             {
-                Dashboard mainScreen = new Dashboard(_unitOfWork, _serviceLayer, _departmentService, _itemsService, _client);
+                ScheduledSyncs scheduledSyncs = new ScheduledSyncs(_unitOfWork, _serviceLayer, _departmentService, _itemsService, _client);
 
                 //GetNewPrismAuthSession(userName, password);
 
@@ -111,7 +102,7 @@ namespace SAPLink.Schedule.Forms
                     //mainScreen.CheckConnectivity(false);
 
                 Hide();
-                mainScreen.Show();
+                scheduledSyncs.Show();
             }
             else
                 MessageBox.Show("Wrong User Name Or Password!!");
