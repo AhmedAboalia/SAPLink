@@ -24,7 +24,7 @@ internal class ScheduleConfiguration : IEntityTypeConfiguration<Schedule>
             .HasConversion<int>();
 
         // Relationship configuration for the Recurring entity
-        builder.HasMany(s => s.Times)
+        builder.HasMany(s => s.Recurring)
             .WithOne(r => r.Schedule)
             .HasForeignKey(r => r.ScheduleId)
             .OnDelete(DeleteBehavior.Cascade);  // Deleting a Schedule will delete associated Recurring entities

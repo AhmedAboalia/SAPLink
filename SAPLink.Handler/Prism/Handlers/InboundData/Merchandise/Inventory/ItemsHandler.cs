@@ -35,185 +35,153 @@ namespace SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Inventory
         }
         public async IAsyncEnumerable<RequestResult<ItemMasterData>> SyncAsync(string filter)
         {
-            var items = new List<ItemMasterData>();
+            var items = filter.IsNullOrEmpty() 
+                ? GetItems("AND (T0.[U_SyncToPrism] IS NULL OR  T0.[U_SyncToPrism] = '' OR  T0.[U_SyncToPrism] = 'N')") 
+                : GetItems(filter);
+
             var itemsOut = new List<ItemMasterData>();
 
-            if (filter.IsNullOrEmpty())
-                items = GetItems("AND (T0.[U_SyncToPrism] IS NULL OR  T0.[U_SyncToPrism] = '' OR  T0.[U_SyncToPrism] = 'N')");
-            else
-                items = GetItems(filter);
-
-            if (items.Count > 0)
+            if (items.Count <= 0)
             {
-                for (var index = 0; index < items.Count; index++)
+                var message = "There are no items available to be synced, or they are flagged as synced to Prism or not active to be synced.";
+                var status = $"Status: {message}";
+
+                _loger.Information(message);
+
+                var requestResult = new RequestResult<ItemMasterData>(Enums.StatusType.Failed, message, status, itemsOut, new RestResponse());
+                yield return requestResult;
+                yield break;
+            }
+
+            for (var index = 0; index < items.Count; index++)
+            {
+                var item = items[index];
+                var remainingNo = items.Count - index;
+                var remaining = remainingNo == 0 ? "No Remaining Items" : $"Remaining ({remainingNo} of {items.Count})";
+
+                var checkResult = await _itemsService.GetByCodeAsync(item.ItemCode);
+
+                _loger.Information("-----------------------------------------------------------------");
+
+                if (checkResult.Status != Enums.StatusType.Success || checkResult.EntityList.Count == 0)
                 {
-                    var item = items[index];
+                    var requestBody = await _itemsService.CreateEntityPayload(item);
 
-                    var remainingNo = items.Count  - index;
-                    var remaining = remainingNo == 0 
-                        ? "No Remaining Items" 
-                        : $"Remaining ({remainingNo} of {items.Count})";
+                    var jsonObject = JsonConvert.DeserializeObject<OdataPrism<Product>>(requestBody).Data.FirstOrDefault().PrimaryItemDefinition;
 
-                    var checkResult = await _itemsService.GetByCodeAsync(item.ItemCode);
+                    var udf3Length = jsonObject.UDF3.Length;
+                    var udf4Length = jsonObject.UDF4.Length;
 
-                    _loger.Information("-----------------------------------------------------------------");
+                    var resultItemSync = await SyncItem(item, udf3Length, udf4Length, requestBody);
 
-                    if (checkResult.Status == Enums.StatusType.Success && checkResult.EntityList.Count > 0)
+                    if (resultItemSync.Response.StatusCode != HttpStatusCode.OK)
                     {
-                        var product = checkResult.EntityList.FirstOrDefault();
+                        var status = $"Cannot Add Item (Code: {item.ItemCode}, Name: {item.ItemName})";
+                        var message = GetErrorMessage(requestBody, resultItemSync.Response.Content);
 
+                        _loger.Error(message, "Error occurred.");
 
-                        var requestBody = await _itemsService.CreateEntityPayload(item, product.Sid);
-                        var resultSync = await _itemsService.Sync(requestBody);
+                        var requestResult = new RequestResult<ItemMasterData>(
+                            Enums.StatusType.Failed, $"{remaining}.\r\n{message}", status, itemsOut, resultItemSync.Response);
 
-                        if (resultSync.Response.StatusCode == HttpStatusCode.OK)
-                        {
-                            var products = JsonConvert
-                                .DeserializeObject<OdataPrism<Product>>(resultSync.Response.Content).Data.ToList();
-
-                            if (products.Any())
-                            {
-                                //await UpdateItem(item.ItemCode);
-                                UpdateItem(item.ItemCode);
-                                var message = $"Item (Code: {item.ItemCode}, Name: {item.ItemName}) is updated and synced.";
-                                var statusMessage =
-                                    $"Item (Code: {item.ItemCode}, Name: {item.ItemName}) is updated and synced, {remaining}.";
-                               
-                                _loger.Information(message);
-
-                                var itemc = new ItemMasterData
-                                {
-                                    ItemCode = item.ItemCode,
-                                    ItemName = item.ItemName,
-                                    ForeignName = item.ForeignName,
-                                    AveragePrice = item.AveragePrice,
-                                    SalesPrice = item.SalesPrice,
-                                    BarCode = item.BarCode,
-                                };
-
-                                itemsOut.Add(itemc);
-
-
-                                yield return new RequestResult<ItemMasterData>(Enums.StatusType.Success, $"{remaining}.\r\n" +
-                                    $"{message}",
-                                    statusMessage, itemsOut, resultSync.Response);
-                                _loger.Information(message);
-                                SyncEntityService.UpdateSyncEntityDate(_unitOfWork, Enums.UpdateType.InitialItems);
-                                SyncEntityService.UpdateSyncEntityDate(_unitOfWork, Enums.UpdateType.SyncItems);
-                            }
-                        }
-                        else
-                        {
-                            var status = $"Cannot Sync Item (Code: {item.ItemCode}, Name: {item.ItemName})";
-                            var message = $"\r\nCannot Add or Sync Item.\r\n" +
-                                          $"Request Body:\r\n" +
-                                          $"{requestBody.PrettyJson()}\r\n\r\n" +
-                                          $"Response Content:\r\n" +
-                                          $"{resultSync.Response.Content.PrettyJson()} \r\n";
-
-                            _loger.Error(message, "Error occurred.");
-
-                            var requestResult = new RequestResult<ItemMasterData>(
-                                Enums.StatusType.Failed, $"{remaining}.\r\n" +
-                                                         $"{message}", status, itemsOut, resultSync.Response);
-
-                            //_logger = new Logger<ItemMasterData>(Enums.StatusType.Failed, requestBody, message);
-
-                            //_unitOfWork.ItemsLog.Add(_logger);
-                            //_unitOfWork.SaveChanges();
-
-                            yield return requestResult;
-                        }
+                        yield return requestResult;
                     }
                     else
                     {
-                        var requestBody = await _itemsService.CreateEntityPayload(item);
-                        var resultItemSync = await _itemsService.Sync(requestBody);
+                        foreach (var requestResult in HandleSyncSuccess(item, remaining, resultItemSync)) yield return requestResult;
+                    }
+                }
+                else
+                {
+                    var product = checkResult.EntityList.FirstOrDefault();
+                    var requestBody = await _itemsService.CreateEntityPayload(item, product.Sid);
+                    var jsonObject = JsonConvert.DeserializeObject<OdataPrism<Product>>(requestBody).Data.FirstOrDefault().PrimaryItemDefinition;
 
-                        if (resultItemSync.Response.StatusCode == HttpStatusCode.OK)
-                        {
-                            var products = JsonConvert
-                                .DeserializeObject<OdataPrism<Product>>(resultItemSync.Response.Content).Data.ToList();
+                    var udf3Length = jsonObject.UDF3.Length;
+                    var udf4Length = jsonObject.UDF4.Length;
 
-                            if (products.Any())
-                            {
-                                //await UpdateItem(item.ItemCode);
-                                UpdateItem(item.ItemCode);
+                    var resultSync = await SyncItem(item, udf3Length, udf4Length, requestBody);
 
-                                var message = $"Item (Code: {item.ItemCode}, Name: {item.ItemName}) is Added, {remaining}.";
-                                var status = $"Item (Code: {item.ItemCode}, Name: {item.ItemName}) is Added, {remaining}.";
-                                SyncEntityService.UpdateSyncEntityDate(_unitOfWork, Enums.UpdateType.InitialItems);
-                                SyncEntityService.UpdateSyncEntityDate(_unitOfWork, Enums.UpdateType.SyncItems);
-                                _loger.Information(message);
+                    if (resultSync.Response.StatusCode == HttpStatusCode.OK)
+                    {
+                        foreach (var requestResult in HandleSyncSuccess(item, remaining, resultSync)) yield return requestResult;
+                    }
+                    else
+                    {
+                        var status = $"Cannot Sync Item (Code: {item.ItemCode}, Name: {item.ItemName})";
+                        var message = GetErrorMessage(requestBody, resultSync.Response.Content);
 
-                                var itemc = new ItemMasterData
-                                {
-                                    ItemCode = item.ItemCode,
-                                    ItemName = item.ItemName,
-                                    ForeignName = item.ForeignName,
-                                    AveragePrice = item.AveragePrice,
-                                    SalesPrice = item.SalesPrice,
-                                    BarCode = item.BarCode,
-                                };
+                        _loger.Error(message, "Error occurred.");
 
-                                itemsOut.Add(itemc);
+                        var requestResult = new RequestResult<ItemMasterData>(
+                            Enums.StatusType.Failed, $"{remaining}.\r\n{message}", status, itemsOut, resultSync.Response);
 
-
-                                var requestResult = new RequestResult<ItemMasterData>(
-                             Enums.StatusType.Failed, $"{remaining}.\r\n" +
-                                                      $"{message}", status, itemsOut, resultItemSync.Response);
-
-                              
-
-                                yield return requestResult;
-
-                                //yield return new RequestResult<ItemMasterData>(Enums.StatusType.Success,
-                                //    $"{remaining}.\r\n" +
-                                //    $"{message}  \r\n {requestBody.PrettyJson()} ",
-                                //    status, itemsOut, resultItemSync.Response);
-
-                            }
-                        }
-                        else
-                        {
-                            var status = $"Cannot Add Item (Code: {item.ItemCode}, Name: {item.ItemName})";
-                            var message = $"\r\nCannot Add Item.\r\n" +
-                                          $"Request Body:\r\n" +
-                                          $"{requestBody.PrettyJson()}\r\n\r\n" +
-                                          $"Response Content:\r\n" +
-                                          $"{resultItemSync.Response.Content.PrettyJson()} \r\n";
-
-                            _loger.Error(message, "Error occurred.");
-
-                            var requestResult = new RequestResult<ItemMasterData>(
-                                Enums.StatusType.Failed, $"{remaining}.\r\n" +
-                                                         $"{message}", status, itemsOut, resultItemSync.Response);
-
-                            //_logger = new Logger<ItemMasterData>(Enums.StatusType.Failed, requestBody, message);
-
-                            //_unitOfWork.ItemsLog.Add(_logger);
-                            //_unitOfWork.SaveChanges();
-
-                            yield return requestResult;
-                        }
+                        yield return requestResult;
                     }
                 }
             }
-            else
+        }
+        private async Task<RequestResult<ProductResponseModel>> SyncItem(ItemMasterData item, int udf3Length, int udf4Length, string requestBody)
+        {
+            if (udf3Length <= 50 && udf4Length <= 50)
             {
-                var message = "There is no items available to be synced, or may it flagged as synced to prism or not active to be synced.";
-                var Status = "Status: there is no items available to be synced, or may it flagged as synced to prism or not active to be synced.";
-
-                _loger.Information(message);
-                var requestResult = new RequestResult<ItemMasterData>(Enums.StatusType.Failed, message,
-                    Status, itemsOut, new RestResponse());
-
-                yield return requestResult;
-
+                var resultSync = await _itemsService.Sync(requestBody);
+                return resultSync;
             }
 
+            var message = $"UDF3 and UDF4 length validation failed for Item (Code: {item.ItemCode}, Name: {item.ItemName}).";
+            _loger.Information(message);
+
+            return new RequestResult<ProductResponseModel>(Enums.StatusType.Failed, message, 
+                "Validation Failed", new List<ProductResponseModel>(), new RestResponse());
         }
 
+        private IEnumerable<RequestResult<ItemMasterData>> HandleSyncSuccess(ItemMasterData item, string remaining, RequestResult<ProductResponseModel> resultSync)
+        {
+            var products = JsonConvert.DeserializeObject<OdataPrism<Product>>(resultSync.Response.Content).Data.ToList();
+
+            if (products.Any())
+            {
+                UpdateItem(item.ItemCode);
+
+                var message = $"Item (Code: {item.ItemCode}, Name: {item.ItemName}) is updated and synced.";
+                var statusMessage = $"Item (Code: {item.ItemCode}, Name: {item.ItemName}) is updated and synced, {remaining}.";
+
+                _loger.Information(message);
+
+                var itemc = new ItemMasterData
+                {
+                    ItemCode = item.ItemCode,
+                    ItemName = item.ItemName,
+                    ForeignName = item.ForeignName,
+                    AveragePrice = item.AveragePrice,
+                    SalesPrice = item.SalesPrice,
+                    BarCode = item.BarCode,
+                };
+
+                List<ItemMasterData> itemsOut =  new List<ItemMasterData>();
+
+                itemsOut.Add(itemc);
+
+
+                var requestResult = new RequestResult<ItemMasterData>(
+                    Enums.StatusType.Success, $"{remaining}.\r\n{message}", statusMessage, itemsOut, resultSync.Response);
+
+
+                _loger.Information(message);
+                SyncEntityService.UpdateSyncEntityDate(_unitOfWork, Enums.UpdateType.InitialItems);
+                SyncEntityService.UpdateSyncEntityDate(_unitOfWork, Enums.UpdateType.SyncItems);
+
+                yield return requestResult;
+            }
+        }
+
+        private string GetErrorMessage(string requestBody, string responseContent)
+        {
+            return $"\r\nCannot Add or Sync Item.\r\n" +
+                   $"Request Body:\r\n{requestBody.PrettyJson()}\r\n\r\n" +
+                   $"Response Content:\r\n{responseContent.PrettyJson()} \r\n";
+        }
         private static List<ItemMasterData> GetItems(string filter)
         {
 

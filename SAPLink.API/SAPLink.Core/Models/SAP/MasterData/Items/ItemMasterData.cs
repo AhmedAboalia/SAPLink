@@ -65,3 +65,17 @@ public class ItemMasterData
     public string ItemsPerSaleUoM { get; set; } // OITM.NumInSale
     public string SalesUoM { get; set; } // OITM.SalUnitMsr
 }
+
+public class ItemMasterDataGrid
+{
+    public ItemMasterDataGrid()
+    {
+    }
+   
+    public string ItemCode { get; set; }
+    public string ItemName { get; set; } 
+    public string ForeignName { get; set; } 
+    public double AveragePrice { get; set; }
+    public string SalesPrice { get; set; }
+    public string BarCode { get; set; } 
+}

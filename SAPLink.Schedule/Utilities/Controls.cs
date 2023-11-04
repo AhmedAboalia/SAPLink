@@ -1,4 +1,4 @@
-﻿namespace SAPLink.Schedule.Utilities
+﻿namespace SAPLink
 {
     public static class Controls
     {

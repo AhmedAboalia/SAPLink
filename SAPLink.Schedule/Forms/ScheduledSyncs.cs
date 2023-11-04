@@ -99,13 +99,19 @@ public partial class ScheduledSyncs : Form
         //catch (Exception e)
         //{
         //}
-        comboBoxDocTypeSchedule.SelectedIndex = (int)Documents.Departments;
+        comboBoxDocTypeSchedule.SelectedIndex = (int)Documents.Items;
 
-        string[] includes = { "Times" };
-        Schedules = _unitOfWork.Schedule.GetAll(includes).ToList();
+        Schedules = GetSchedules();
 
         InitializeDataGridView();
     }
+
+    private List<Core.Models.Schedule> GetSchedules()
+    {
+        string[] includes = { "Recurring" };
+        return _unitOfWork.Schedule.GetAll(includes).ToList();
+    }
+
     #endregion
     private bool hidden = false;
 
@@ -114,90 +120,43 @@ public partial class ScheduledSyncs : Form
     {
         if (buttonScheduleIt.Enabled)
         {
-            var document = (SyncDocuments)comboBoxDocTypeSchedule.SelectedIndex;
 
-            try
+            var schedules = GetSchedules();
+
+            foreach (var schedule in schedules)
             {
-                var schedule = Schedules.Find(x => x.Document == document);
-                if(schedule != null
-                  && checkBox1.Checked && comboBoxHour1.Text.IsHasValue()
-                  && checkBox2.Checked && comboBoxHour2.Text.IsHasValue()
-                  && checkBox3.Checked && comboBoxHour3.Text.IsHasValue()
-                  && checkBox4.Checked && comboBoxHour4.Text.IsHasValue()
-                    )
+                foreach (var recurring in schedule.Recurring)
                 {
-                    schedule.Document = document;
+                    var recurringTime = recurring.Time.ToString().To24HourMinutesFormat();
 
-                    var rec1 = schedule.Times.Find(t => t.TimeId == 1);
-
-                    //var recurring1 = textBoxHour1.Text.To24HourMinutesFormat();
-                    var recurring1 = comboBoxHour1.Text.To24HourMinutesFormat();
-
-                    rec1.Time = new TimeOnly(recurring1.Hours, recurring1.Minutes);
-                    rec1.Active = checkBox1.Checked;
-
-
-                    //var recurring2 = textBoxHour2.Text.To24HourMinutesFormat();
-                    var recurring2 = comboBoxHour1.Text.To24HourMinutesFormat();
-
-                    var rec2 = schedule.Times.Find(t => t.TimeId == 2);
-                    rec2.Time = new TimeOnly(recurring2.Hours, recurring2.Minutes);
-                    rec2.Active = checkBox1.Checked;
-
-                    //var recurring3 = textBoxHour3.Text.To24HourMinutesFormat();
-                    var recurring3 = comboBoxHour1.Text.To24HourMinutesFormat();
-
-                    var rec3 = schedule.Times.Find(t => t.TimeId == 3);
-                    rec3.Time = new TimeOnly(recurring3.Hours, recurring3.Minutes);
-                    rec3.Active = checkBox1.Checked;
-
-                    schedule.Times.Clear();
-                    schedule.Times.Add(rec1);
-                    schedule.Times.Add(rec2);
-                    schedule.Times.Add(rec3);
-
-                    _unitOfWork.Schedule.Update(schedule);
-                    _unitOfWork.SaveChanges();
-
-                    foreach (var rec in schedule.Times)
+                    if (recurring.Active && schedule.Document == SyncDocuments.Items)
                     {
-                        var recurring = rec.Time.ToString().To24HourMinutesFormat();
+                        Ever.y().Day.At(recurringTime.Hours).Do(HandleItems);
+                        //Ever.y().Minute.From(23, 35).To(23, 37).Do((() => HandleItems("")));
+                    }
+                    if (recurring.Active && schedule.Document == SyncDocuments.GoodsReceiptPos)
+                    {
+                        Ever.y().Day.At(recurringTime.Hours).Do(HandleGoodsReceiptPo);
+                        //Ever.y().Minute.From(23, 35).To(23, 37).Do((() => HandleItems("")));
+                    }
+                    if (recurring.Active && schedule.Document == SyncDocuments.SalesInvoices)
+                    {
+                        Ever.y().Day.At(recurringTime.Hours).Do(HandleSalesInvoices);
+                        //Ever.y().Minute.From(23, 35).To(23, 37).Do((() => HandleItems("")));
+                    }
 
-                        if (document == SyncDocuments.Items)
-                        {
-                            Ever.y().Day.At(recurring.Hours).Do(HandleItems);
-                            //Ever.y().Minute.From(23, 35).To(23, 37).Do((() => HandleItems("")));
-                        }
-                        if (document == SyncDocuments.GoodsReceiptPos)
-                        {
-                            Ever.y().Day.At(recurring.Hours).Do(HandleGoodsReceiptPo);
-                            //Ever.y().Minute.From(23, 35).To(23, 37).Do((() => HandleItems("")));
-                        }
-                        if (document == SyncDocuments.SalesInvoices)
-                        {
-                            Ever.y().Day.At(recurring.Hours).Do(HandleSalesInvoices);
-                            //Ever.y().Minute.From(23, 35).To(23, 37).Do((() => HandleItems("")));
-                        }
+                    if (recurring.Active && schedule.Document == SyncDocuments.ReturnInvoices)
+                    {
+                        Ever.y().Day.At(recurringTime.Hours).Do(HandleReturnInvoices);
+                        //Ever.y().Minute.From(23, 35).To(23, 37).Do((() => HandleItems("")));
+                    }
 
-                        if (document == SyncDocuments.ReturnInvoices)
-                        {
-                            Ever.y().Day.At(recurring.Hours).Do(HandleReturnInvoices);
-                            //Ever.y().Minute.From(23, 35).To(23, 37).Do((() => HandleItems("")));
-                        }
-
-                        if (document == SyncDocuments.StockTransfers)
-                        {
-                            Ever.y().Day.At(recurring.Hours).Do(HandleStockTransfer);
-                            //Ever.y().Minute.From(23, 35).To(23, 37).Do((() => HandleItems("")));
-                        }
+                    if (recurring.Active && schedule.Document == SyncDocuments.StockTransfers)
+                    {
+                        Ever.y().Day.At(recurringTime.Hours).Do(HandleStockTransfer);
+                        //Ever.y().Minute.From(23, 35).To(23, 37).Do((() => HandleItems("")));
                     }
                 }
-                labelStatus.Log("Selected Schedule is updated to database.", Logger.MessageTypes.Warning, Logger.MessageTime.Short);
-            }
-            catch (Exception exception)
-            {
-                MessageBox.Show(exception.Message);
-                throw;
             }
         }
     }
@@ -611,9 +570,9 @@ public partial class ScheduledSyncs : Form
 
         var schedule = GetSchedule(selectedIndex);
 
-        if (schedule.Times.Any())
+        if (schedule.Recurring.Any())
         {
-            foreach (var recurring in schedule.Times)
+            foreach (var recurring in schedule.Recurring)
             {
                 if (recurring.TimeId == 1)
                 {
@@ -837,7 +796,7 @@ public partial class ScheduledSyncs : Form
                 {
                     schedule.Document = document;
 
-                    var rec1 = schedule.Times.Find(t => t.TimeId == 1);
+                    var rec1 = schedule.Recurring.Find(t => t.TimeId == 1);
 
                     var recurring1 = comboBoxHour1.Text.To24HourMinutesFormat();
 
@@ -846,25 +805,25 @@ public partial class ScheduledSyncs : Form
 
                     var recurring2 = comboBoxHour1.Text.To24HourMinutesFormat();
 
-                    var rec2 = schedule.Times.Find(t => t.TimeId == 2);
+                    var rec2 = schedule.Recurring.Find(t => t.TimeId == 2);
                     rec2.Time = new TimeOnly(recurring2.Hours, recurring2.Minutes);
                     rec2.Active = checkBox1.Checked;
 
                     var recurring3 = comboBoxHour1.Text.To24HourMinutesFormat();
 
-                    var rec3 = schedule.Times.Find(t => t.TimeId == 3);
+                    var rec3 = schedule.Recurring.Find(t => t.TimeId == 3);
                     rec3.Time = new TimeOnly(recurring3.Hours, recurring3.Minutes);
                     rec3.Active = checkBox1.Checked;
 
-                    schedule.Times.Clear();
-                    schedule.Times.Add(rec1);
-                    schedule.Times.Add(rec2);
-                    schedule.Times.Add(rec3);
+                    schedule.Recurring.Clear();
+                    schedule.Recurring.Add(rec1);
+                    schedule.Recurring.Add(rec2);
+                    schedule.Recurring.Add(rec3);
 
                     _unitOfWork.Schedule.Update(schedule);
                     _unitOfWork.SaveChanges();
 
-                    dataGridView1.DataSource = GetSchedules();
+                    dataGridView1.DataSource = GetSchedulesViewModel();
 
                     labelStatus.Log("Selected Schedule is updated to database.", Logger.MessageTypes.Warning, Logger.MessageTime.Short);
                 }
@@ -881,12 +840,12 @@ public partial class ScheduledSyncs : Form
 
     private void ScheduledSyncs_Load(object sender, EventArgs e)
     {
-       dataGridView1.DataSource = GetSchedules();
+       dataGridView1.DataSource = GetSchedulesViewModel();
     }
 
-    private List<ScheduleViewModel> GetSchedules()
+    private List<ScheduleViewModel> GetSchedulesViewModel()
     {
-        string[] includes = { "Times" };
+        string[] includes = { "Recurring" };
         return _unitOfWork.Schedule.GetAll(includes).Select(schedule =>
         {
             var model = new ScheduleViewModel
@@ -895,8 +854,8 @@ public partial class ScheduledSyncs : Form
                 DocumentName = schedule.DocumentName
             };
 
-            if (schedule.Times.Count > 0)
-                model.Times = string.Join(", ", schedule.Times.Select(t => t.Time.ToString()));
+            if (schedule.Recurring.Count > 0)
+                model.Times = string.Join(", ", schedule.Recurring.Select(t => t.Time.ToString()));
             else
                 model.Times = "-- Not Defined --";
 

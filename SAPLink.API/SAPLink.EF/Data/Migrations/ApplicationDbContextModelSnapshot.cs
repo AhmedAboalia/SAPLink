@@ -8,7 +8,7 @@ using SAPLink.EF.Data;
 
 #nullable disable
 
-namespace SAPLink.EF.Migrations
+namespace SAPLink.EF.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -18,98 +18,256 @@ namespace SAPLink.EF.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.9");
 
-            modelBuilder.Entity("SAPLink.Core.Models.Prism.Settings.PriceLevel", b =>
+            modelBuilder.Entity("SAPLink.Core.Models.Recurring", b =>
                 {
-                    b.Property<string>("Sid")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Originapplication")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Pricelvl")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Pricelvlname")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<long>("Sbssid")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<long?>("SubsidiarySid")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Sid");
-
-                    b.HasIndex("SubsidiarySid");
-
-                    b.ToTable("PriceLevel");
-                });
-
-            modelBuilder.Entity("SAPLink.Core.Models.Prism.Settings.Season", b =>
-                {
-                    b.Property<string>("Sid")
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<long>("RowVersion")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("SeasonCode")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("SeasonId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Seasonname")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<long?>("SubsidiarySid")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Sid");
-
-                    b.HasIndex("SubsidiarySid");
-
-                    b.ToTable("Season");
-                });
-
-            modelBuilder.Entity("SAPLink.Core.Models.Prism.Settings.Subsidiary", b =>
-                {
-                    b.Property<long>("Sid")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1L)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Active")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("ActivePriceLevelSid")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("ActiveSeasonSid")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("PriceLevelName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("SubsidiaryName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<long>("SubsidiaryNumber")
+                    b.Property<int>("ScheduleId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Sid");
+                    b.Property<TimeOnly>("Time")
+                        .HasColumnType("TEXT");
 
-                    b.ToTable("Subsidiary");
+                    b.Property<int>("TimeId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ScheduleId");
+
+                    b.ToTable("Recurrings", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Active = true,
+                            ScheduleId = 3,
+                            Time = new TimeOnly(7, 0, 0),
+                            TimeId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Active = true,
+                            ScheduleId = 3,
+                            Time = new TimeOnly(12, 0, 0),
+                            TimeId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Active = true,
+                            ScheduleId = 3,
+                            Time = new TimeOnly(17, 0, 0),
+                            TimeId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Active = true,
+                            ScheduleId = 4,
+                            Time = new TimeOnly(7, 0, 0),
+                            TimeId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Active = true,
+                            ScheduleId = 4,
+                            Time = new TimeOnly(12, 0, 0),
+                            TimeId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Active = true,
+                            ScheduleId = 4,
+                            Time = new TimeOnly(17, 0, 0),
+                            TimeId = 3
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Active = true,
+                            ScheduleId = 7,
+                            Time = new TimeOnly(13, 0, 0),
+                            TimeId = 1
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Active = true,
+                            ScheduleId = 7,
+                            Time = new TimeOnly(18, 0, 0),
+                            TimeId = 2
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Active = true,
+                            ScheduleId = 7,
+                            Time = new TimeOnly(0, 0, 0),
+                            TimeId = 3
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Active = true,
+                            ScheduleId = 8,
+                            Time = new TimeOnly(13, 0, 0),
+                            TimeId = 1
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Active = true,
+                            ScheduleId = 8,
+                            Time = new TimeOnly(18, 0, 0),
+                            TimeId = 2
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Active = true,
+                            ScheduleId = 8,
+                            Time = new TimeOnly(0, 0, 0),
+                            TimeId = 3
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Active = true,
+                            ScheduleId = 10,
+                            Time = new TimeOnly(13, 0, 0),
+                            TimeId = 1
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Active = true,
+                            ScheduleId = 10,
+                            Time = new TimeOnly(18, 0, 0),
+                            TimeId = 2
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Active = true,
+                            ScheduleId = 10,
+                            Time = new TimeOnly(0, 0, 0),
+                            TimeId = 3
+                        });
+                });
+
+            modelBuilder.Entity("SAPLink.Core.Models.Schedule", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1L)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Document")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("DocumentName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Schedules", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Document = 1,
+                            DocumentName = "Departments"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Document = 2,
+                            DocumentName = "Vendors"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Document = 3,
+                            DocumentName = "Items"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Document = 4,
+                            DocumentName = "GoodsReceiptPos"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Document = 5,
+                            DocumentName = "GoodsReceipts_Inbound"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Document = 6,
+                            DocumentName = "GoodsIssues_Inbound"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Document = 7,
+                            DocumentName = "SalesInvoices"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Document = 8,
+                            DocumentName = "ReturnInvoices"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Document = 9,
+                            DocumentName = "CustomerOrders"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Document = 10,
+                            DocumentName = "StockTransfers"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Document = 11,
+                            DocumentName = "InventoryPosting"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Document = 12,
+                            DocumentName = "GoodsReceipts_Outbound"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Document = 13,
+                            DocumentName = "GoodsIssues_Outbound"
+                        });
                 });
 
             modelBuilder.Entity("SAPLink.Core.Models.System.Clients", b =>
@@ -141,6 +299,12 @@ namespace SAPLink.EF.Migrations
                             Id = 2,
                             Active = false,
                             Name = "Test Subsidiary - SAP Test DB (TESTDB)"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Active = true,
+                            Name = "Fakeeh Vision Subsidiary - SAP Local DB (SBODemoGB)"
                         });
                 });
 
@@ -436,234 +600,15 @@ namespace SAPLink.EF.Migrations
                         });
                 });
 
-            modelBuilder.Entity("SAPLink.Schedule.Recurring", b =>
+            modelBuilder.Entity("SAPLink.Core.Models.Recurring", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1L)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.HasOne("SAPLink.Core.Models.Schedule", "Schedule")
+                        .WithMany("Recurring")
+                        .HasForeignKey("ScheduleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<bool>("Active")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ScheduleId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<TimeOnly>("Time")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ScheduleId");
-
-                    b.ToTable("Recurrings", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Active = true,
-                            ScheduleId = 3,
-                            Time = new TimeOnly(7, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Active = true,
-                            ScheduleId = 3,
-                            Time = new TimeOnly(12, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Active = true,
-                            ScheduleId = 3,
-                            Time = new TimeOnly(17, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Active = true,
-                            ScheduleId = 4,
-                            Time = new TimeOnly(7, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Active = true,
-                            ScheduleId = 4,
-                            Time = new TimeOnly(12, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Active = true,
-                            ScheduleId = 4,
-                            Time = new TimeOnly(17, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Active = true,
-                            ScheduleId = 7,
-                            Time = new TimeOnly(13, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Active = true,
-                            ScheduleId = 7,
-                            Time = new TimeOnly(18, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Active = true,
-                            ScheduleId = 7,
-                            Time = new TimeOnly(0, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Active = true,
-                            ScheduleId = 8,
-                            Time = new TimeOnly(13, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Active = true,
-                            ScheduleId = 8,
-                            Time = new TimeOnly(18, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Active = true,
-                            ScheduleId = 8,
-                            Time = new TimeOnly(0, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Active = true,
-                            ScheduleId = 10,
-                            Time = new TimeOnly(13, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Active = true,
-                            ScheduleId = 10,
-                            Time = new TimeOnly(18, 0, 0)
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Active = true,
-                            ScheduleId = 10,
-                            Time = new TimeOnly(0, 0, 0)
-                        });
-                });
-
-            modelBuilder.Entity("SAPLink.Schedule.Schedule", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1L)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Document")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Schedules", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Document = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Document = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Document = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Document = 4
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Document = 5
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Document = 6
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Document = 7
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Document = 8
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Document = 9
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Document = 10
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Document = 11
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Document = 12
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Document = 13
-                        });
-                });
-
-            modelBuilder.Entity("SAPLink.Core.Models.Prism.Settings.PriceLevel", b =>
-                {
-                    b.HasOne("SAPLink.Core.Models.Prism.Settings.Subsidiary", null)
-                        .WithMany("PriceLevel")
-                        .HasForeignKey("SubsidiarySid");
-                });
-
-            modelBuilder.Entity("SAPLink.Core.Models.Prism.Settings.Season", b =>
-                {
-                    b.HasOne("SAPLink.Core.Models.Prism.Settings.Subsidiary", null)
-                        .WithMany("Season")
-                        .HasForeignKey("SubsidiarySid");
+                    b.Navigation("Schedule");
                 });
 
             modelBuilder.Entity("SAPLink.Core.Models.System.Credentials", b =>
@@ -688,22 +633,9 @@ namespace SAPLink.EF.Migrations
                     b.Navigation("Credential");
                 });
 
-            modelBuilder.Entity("SAPLink.Schedule.Recurring", b =>
+            modelBuilder.Entity("SAPLink.Core.Models.Schedule", b =>
                 {
-                    b.HasOne("SAPLink.Schedule.Schedule", "Schedule")
-                        .WithMany("Times")
-                        .HasForeignKey("ScheduleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Schedule");
-                });
-
-            modelBuilder.Entity("SAPLink.Core.Models.Prism.Settings.Subsidiary", b =>
-                {
-                    b.Navigation("PriceLevel");
-
-                    b.Navigation("Season");
+                    b.Navigation("Recurring");
                 });
 
             modelBuilder.Entity("SAPLink.Core.Models.System.Clients", b =>
@@ -714,11 +646,6 @@ namespace SAPLink.EF.Migrations
             modelBuilder.Entity("SAPLink.Core.Models.System.Credentials", b =>
                 {
                     b.Navigation("Subsidiaries");
-                });
-
-            modelBuilder.Entity("SAPLink.Schedule.Schedule", b =>
-                {
-                    b.Navigation("Times");
                 });
 #pragma warning restore 612, 618
         }

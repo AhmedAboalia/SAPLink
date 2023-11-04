@@ -19,7 +19,7 @@ namespace SAPLink.Core.Models
         }
         public string DocumentName { get; private set; }
 
-        public List<Recurring> Times { get; set; } = new List<Recurring>();
+        public List<Recurring> Recurring { get; set; } = new List<Recurring>();
 
         public enum SyncDocuments
         {

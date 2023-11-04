@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace SAPLink.EF.Migrations
+namespace SAPLink.EF.Data.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreateDatabase : Migration
@@ -33,28 +33,12 @@ namespace SAPLink.EF.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Document = table.Column<int>(type: "INTEGER", nullable: false)
+                    Document = table.Column<int>(type: "INTEGER", nullable: false),
+                    DocumentName = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Schedules", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Subsidiary",
-                columns: table => new
-                {
-                    Sid = table.Column<long>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    SubsidiaryNumber = table.Column<long>(type: "INTEGER", nullable: false),
-                    SubsidiaryName = table.Column<string>(type: "TEXT", nullable: false),
-                    ActivePriceLevelSid = table.Column<string>(type: "TEXT", nullable: false),
-                    ActiveSeasonSid = table.Column<string>(type: "TEXT", nullable: false),
-                    PriceLevelName = table.Column<string>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Subsidiary", x => x.Sid);
                 });
 
             migrationBuilder.CreateTable(
@@ -109,7 +93,8 @@ namespace SAPLink.EF.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Active = table.Column<bool>(type: "INTEGER", nullable: false),
                     Time = table.Column<TimeOnly>(type: "TEXT", nullable: false),
-                    ScheduleId = table.Column<int>(type: "INTEGER", nullable: false)
+                    ScheduleId = table.Column<int>(type: "INTEGER", nullable: false),
+                    TimeId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -120,50 +105,6 @@ namespace SAPLink.EF.Migrations
                         principalTable: "Schedules",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PriceLevel",
-                columns: table => new
-                {
-                    Sid = table.Column<string>(type: "TEXT", nullable: false),
-                    Originapplication = table.Column<string>(type: "TEXT", nullable: false),
-                    Sbssid = table.Column<long>(type: "INTEGER", nullable: false),
-                    Pricelvl = table.Column<int>(type: "INTEGER", nullable: false),
-                    Pricelvlname = table.Column<string>(type: "TEXT", nullable: false),
-                    Active = table.Column<bool>(type: "INTEGER", nullable: false),
-                    SubsidiarySid = table.Column<long>(type: "INTEGER", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PriceLevel", x => x.Sid);
-                    table.ForeignKey(
-                        name: "FK_PriceLevel_Subsidiary_SubsidiarySid",
-                        column: x => x.SubsidiarySid,
-                        principalTable: "Subsidiary",
-                        principalColumn: "Sid");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Season",
-                columns: table => new
-                {
-                    Sid = table.Column<string>(type: "TEXT", nullable: false),
-                    RowVersion = table.Column<long>(type: "INTEGER", nullable: false),
-                    SeasonCode = table.Column<string>(type: "TEXT", nullable: false),
-                    Seasonname = table.Column<string>(type: "TEXT", nullable: false),
-                    Active = table.Column<bool>(type: "INTEGER", nullable: false),
-                    SeasonId = table.Column<int>(type: "INTEGER", nullable: false),
-                    SubsidiarySid = table.Column<long>(type: "INTEGER", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Season", x => x.Sid);
-                    table.ForeignKey(
-                        name: "FK_Season_Subsidiary_SubsidiarySid",
-                        column: x => x.SubsidiarySid,
-                        principalTable: "Subsidiary",
-                        principalColumn: "Sid");
                 });
 
             migrationBuilder.CreateTable(
@@ -199,32 +140,28 @@ namespace SAPLink.EF.Migrations
                 values: new object[,]
                 {
                     { 1, false, "Al-Kaffary Subsidiary - SAP Live DB (KaffaryDB)" },
-                    { 2, false, "Test Subsidiary - SAP Test DB (TESTDB)" }
+                    { 2, false, "Test Subsidiary - SAP Test DB (TESTDB)" },
+                    { 3, true, "Fakeeh Vision Subsidiary - SAP Local DB (SBODemoGB)" }
                 });
 
             migrationBuilder.InsertData(
-                table: "Credentials",
-                columns: new[] { "Id", "Active", "AuthPassword", "AuthSession", "AuthUserName", "Authorization", "BackOfficeUri", "BaseUri", "ClientId", "CommonUri", "CompanyDb", "Cookie", "DbPassword", "DbUserName", "EnvironmentCode", "EnvironmentName", "IntegrationUrl", "Origin", "Password", "PrismPassword", "PrismUserName", "Referer", "RestUri", "Server", "ServerTypes", "ServiceLayerUri", "UserName" },
-                values: new object[] { 3, true, "manager", "F1726B4EC6304D969ED816D844617C02", "{{\"UserName\" : \"manager\",\"CompanyDB\" : \"SBODemoGB\"}}", "Basic eyJVc2VyTmFtZSI6ICJtYW5hZ2VyIiwgIkNvbXBhbnlEQiI6ICJTQk9EZW1vR0IifTptYW5hZ2Vy", "http://194.163.155.105/api/backoffice", "http://194.163.155.105", 3, "http://194.163.155.105/v1/rest", "SBODemoGB", "", "P@ssw0rd", "sa", 3, "Local Environment", "https://localhost:44326", "http://194.163.155.105", "manager", "sysadmin", "sysadmin", "http://194.163.155.105/prism.shtml", "http://194.163.155.105/api/common", "ABOALIA", 15, "https://Localhost:50000/b1s/v1/", "manager" });
-
-            migrationBuilder.InsertData(
                 table: "Schedules",
-                columns: new[] { "Id", "Document" },
+                columns: new[] { "Id", "Document", "DocumentName" },
                 values: new object[,]
                 {
-                    { 1, 1 },
-                    { 2, 2 },
-                    { 3, 3 },
-                    { 4, 4 },
-                    { 5, 5 },
-                    { 6, 6 },
-                    { 7, 7 },
-                    { 8, 8 },
-                    { 9, 9 },
-                    { 10, 10 },
-                    { 11, 11 },
-                    { 12, 12 },
-                    { 13, 13 }
+                    { 1, 1, "Departments" },
+                    { 2, 2, "Vendors" },
+                    { 3, 3, "Items" },
+                    { 4, 4, "GoodsReceiptPos" },
+                    { 5, 5, "GoodsReceipts_Inbound" },
+                    { 6, 6, "GoodsIssues_Inbound" },
+                    { 7, 7, "SalesInvoices" },
+                    { 8, 8, "ReturnInvoices" },
+                    { 9, 9, "CustomerOrders" },
+                    { 10, 10, "StockTransfers" },
+                    { 11, 11, "InventoryPosting" },
+                    { 12, 12, "GoodsReceipts_Outbound" },
+                    { 13, 13, "GoodsIssues_Outbound" }
                 });
 
             migrationBuilder.InsertData(
@@ -233,29 +170,30 @@ namespace SAPLink.EF.Migrations
                 values: new object[,]
                 {
                     { 1, false, "", "", "{{\"UserName\" : \"manager\",\"CompanyDB\" : \"\"}}", "", "http://kaffaryretail.alkaffary.com:8080/api/backoffice", "http://kaffaryretail.alkaffary.com:8080", 1, "http://kaffaryretail.alkaffary.com:8080/v1/rest", "", "", "sap123456*", "sa", 1, "Production Environment", "https://localhost:44326", "http://kaffaryretail.alkaffary.com:8080", "", "RetailTec@123", "SAPLINK", "http://kaffaryretail.alkaffary.com:8080/prism.shtml", "http://kaffaryretail.alkaffary.com:8080/api/common", "SAP-TEST", 10, "https://sap-test:50000/b1s/v1/", "manager" },
-                    { 2, false, "Ag123456*", "369B7B1BF58F469896B06B804BFBE272", "{{\"UserName\" : \"manager\",\"CompanyDB\" : \"TESTDB\"}}", "Basic eyJVc2VyTmFtZSI6ICJtYW5hZ2VyIiwgIkNvbXBhbnlEQiI6ICJURVNUREIifTpSczEyMzQ1Nio=", "http://postest.alkaffary.com:8080/api/backoffice", "http://postest.alkaffary.com:8080", 2, "http://postest.alkaffary.com:8080/v1/rest", "TESTDB", "", "sap123456*", "sa", 2, "Test Environment", "https://localhost:44326", "http://postest.alkaffary.com:8080", "Ag123456*", "sysadmin", "sysadmin", "http://postest.alkaffary.com:8080/prism.shtml", "http://postest.alkaffary.com:8080/api/common", "SAP-TEST", 10, "https://sap-test:50000/b1s/v1/", "manager" }
+                    { 2, false, "Ag123456*", "369B7B1BF58F469896B06B804BFBE272", "{{\"UserName\" : \"manager\",\"CompanyDB\" : \"TESTDB\"}}", "Basic eyJVc2VyTmFtZSI6ICJtYW5hZ2VyIiwgIkNvbXBhbnlEQiI6ICJURVNUREIifTpSczEyMzQ1Nio=", "http://postest.alkaffary.com:8080/api/backoffice", "http://postest.alkaffary.com:8080", 2, "http://postest.alkaffary.com:8080/v1/rest", "TESTDB", "", "sap123456*", "sa", 2, "Test Environment", "https://localhost:44326", "http://postest.alkaffary.com:8080", "Ag123456*", "sysadmin", "sysadmin", "http://postest.alkaffary.com:8080/prism.shtml", "http://postest.alkaffary.com:8080/api/common", "SAP-TEST", 10, "https://sap-test:50000/b1s/v1/", "manager" },
+                    { 3, true, "manager", "F1726B4EC6304D969ED816D844617C02", "{{\"UserName\" : \"manager\",\"CompanyDB\" : \"SBODemoGB\"}}", "Basic eyJVc2VyTmFtZSI6ICJtYW5hZ2VyIiwgIkNvbXBhbnlEQiI6ICJTQk9EZW1vR0IifTptYW5hZ2Vy", "http://194.163.155.105/api/backoffice", "http://194.163.155.105", 3, "http://194.163.155.105/v1/rest", "SBODemoGB", "", "P@ssw0rd", "sa", 3, "Local Environment", "https://localhost:44326", "http://194.163.155.105", "manager", "sysadmin", "sysadmin", "http://194.163.155.105/prism.shtml", "http://194.163.155.105/api/common", "ABOALIA", 15, "https://Localhost:50000/b1s/v1/", "manager" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Recurrings",
-                columns: new[] { "Id", "Active", "ScheduleId", "Time" },
+                columns: new[] { "Id", "Active", "ScheduleId", "Time", "TimeId" },
                 values: new object[,]
                 {
-                    { 1, true, 3, new TimeOnly(7, 0, 0) },
-                    { 2, true, 3, new TimeOnly(12, 0, 0) },
-                    { 3, true, 3, new TimeOnly(17, 0, 0) },
-                    { 4, true, 4, new TimeOnly(7, 0, 0) },
-                    { 5, true, 4, new TimeOnly(12, 0, 0) },
-                    { 6, true, 4, new TimeOnly(17, 0, 0) },
-                    { 7, true, 7, new TimeOnly(13, 0, 0) },
-                    { 8, true, 7, new TimeOnly(18, 0, 0) },
-                    { 9, true, 7, new TimeOnly(0, 0, 0) },
-                    { 10, true, 8, new TimeOnly(13, 0, 0) },
-                    { 11, true, 8, new TimeOnly(18, 0, 0) },
-                    { 12, true, 8, new TimeOnly(0, 0, 0) },
-                    { 13, true, 10, new TimeOnly(13, 0, 0) },
-                    { 14, true, 10, new TimeOnly(18, 0, 0) },
-                    { 15, true, 10, new TimeOnly(0, 0, 0) }
+                    { 1, true, 3, new TimeOnly(7, 0, 0), 1 },
+                    { 2, true, 3, new TimeOnly(12, 0, 0), 2 },
+                    { 3, true, 3, new TimeOnly(17, 0, 0), 3 },
+                    { 4, true, 4, new TimeOnly(7, 0, 0), 1 },
+                    { 5, true, 4, new TimeOnly(12, 0, 0), 2 },
+                    { 6, true, 4, new TimeOnly(17, 0, 0), 3 },
+                    { 7, true, 7, new TimeOnly(13, 0, 0), 1 },
+                    { 8, true, 7, new TimeOnly(18, 0, 0), 2 },
+                    { 9, true, 7, new TimeOnly(0, 0, 0), 3 },
+                    { 10, true, 8, new TimeOnly(13, 0, 0), 1 },
+                    { 11, true, 8, new TimeOnly(18, 0, 0), 2 },
+                    { 12, true, 8, new TimeOnly(0, 0, 0), 3 },
+                    { 13, true, 10, new TimeOnly(13, 0, 0), 1 },
+                    { 14, true, 10, new TimeOnly(18, 0, 0), 2 },
+                    { 15, true, 10, new TimeOnly(0, 0, 0), 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -263,9 +201,9 @@ namespace SAPLink.EF.Migrations
                 columns: new[] { "Id", "ActivePriceLevelid", "ActiveSeasonSid", "ActiveStoreSid", "ActiveTaxCode", "Clerksid", "CredentialId", "Name", "Number", "SID" },
                 values: new object[,]
                 {
-                    { 3, "675951940000193772", "675951941000138785", "675951888000150261", "", "675951888000149260", 3, "Local Environment (Public API)", 1, 675951888000146257L },
                     { 1, "664651377000135721", "664651377000169734", "664651285000116261", "664651377000183746", "674955099100039866", 1, "AlKaffary - (Production)", 1, 664651285000113257L },
-                    { 2, "663852140000113721", "663852140000143734", "674650601000132347", "663852140000157746", "674654182000171601", 2, "AlKaffary - (Test)", 1, 663852103000153257L }
+                    { 2, "663852140000113721", "663852140000143734", "674650601000132347", "663852140000157746", "674654182000171601", 2, "AlKaffary - (Test)", 1, 663852103000153257L },
+                    { 3, "675951940000193772", "675951941000138785", "675951888000150261", "", "675951888000149260", 3, "Local Environment (Public API)", 1, 675951888000146257L }
                 });
 
             migrationBuilder.CreateIndex(
@@ -274,19 +212,9 @@ namespace SAPLink.EF.Migrations
                 column: "ClientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PriceLevel_SubsidiarySid",
-                table: "PriceLevel",
-                column: "SubsidiarySid");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Recurrings_ScheduleId",
                 table: "Recurrings",
                 column: "ScheduleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Season_SubsidiarySid",
-                table: "Season",
-                column: "SubsidiarySid");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Subsidiaries_CredentialId",
@@ -298,22 +226,13 @@ namespace SAPLink.EF.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "PriceLevel");
-
-            migrationBuilder.DropTable(
                 name: "Recurrings");
-
-            migrationBuilder.DropTable(
-                name: "Season");
 
             migrationBuilder.DropTable(
                 name: "Subsidiaries");
 
             migrationBuilder.DropTable(
                 name: "Schedules");
-
-            migrationBuilder.DropTable(
-                name: "Subsidiary");
 
             migrationBuilder.DropTable(
                 name: "Credentials");
