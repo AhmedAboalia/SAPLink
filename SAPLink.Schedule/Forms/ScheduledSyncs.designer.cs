@@ -35,6 +35,10 @@ namespace SAPLink.Schedule.Forms
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             ComponentResourceManager resources = new ComponentResourceManager(typeof(ScheduledSyncs));
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -55,6 +59,8 @@ namespace SAPLink.Schedule.Forms
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -67,8 +73,6 @@ namespace SAPLink.Schedule.Forms
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2Panel1 = new Guna2Panel();
             contextMenuRefreshAuth = new ContextMenuStrip(components);
             MenuRefreshAuth = new ToolStripMenuItem();
@@ -76,13 +80,15 @@ namespace SAPLink.Schedule.Forms
             tabControlInventory = new Guna2TabControl();
             tabPageDaily = new TabPage();
             guna2TabControl4 = new Guna2TabControl();
+            tabPage1 = new TabPage();
+            dataGridView1 = new Guna2DataGridView();
             tabPage5 = new TabPage();
             textBoxLogsSchedule = new RichTextBox();
             guna2Panel4 = new Guna2Panel();
-            textBoxHour3 = new Guna2TextBox();
-            textBoxHour4 = new Guna2TextBox();
-            textBoxHour2 = new Guna2TextBox();
-            textBoxHour1 = new Guna2TextBox();
+            comboBoxHour4 = new Guna2ComboBox();
+            comboBoxHour3 = new Guna2ComboBox();
+            comboBoxHour2 = new Guna2ComboBox();
+            comboBoxHour1 = new Guna2ComboBox();
             checkBox4 = new Guna2CustomCheckBox();
             checkBox3 = new Guna2CustomCheckBox();
             checkBox2 = new Guna2CustomCheckBox();
@@ -90,6 +96,7 @@ namespace SAPLink.Schedule.Forms
             comboBoxDocTypeSchedule = new Guna2ComboBox();
             label4 = new Label();
             label3 = new Label();
+            guna2Button1 = new Guna2Button();
             buttonScheduleIt = new Guna2Button();
             label2 = new Label();
             label8 = new Label();
@@ -102,12 +109,13 @@ namespace SAPLink.Schedule.Forms
             guna2ShadowForm1 = new Guna2ShadowForm(components);
             guna2Elipse1 = new Guna2Elipse(components);
             notifyIcon1 = new NotifyIcon(components);
-            guna2Button1 = new Guna2Button();
             guna2Panel1.SuspendLayout();
             contextMenuRefreshAuth.SuspendLayout();
             tabControlInventory.SuspendLayout();
             tabPageDaily.SuspendLayout();
             guna2TabControl4.SuspendLayout();
+            tabPage1.SuspendLayout();
+            ((ISupportInitialize)dataGridView1).BeginInit();
             tabPage5.SuspendLayout();
             guna2Panel4.SuspendLayout();
             ((ISupportInitialize)guna2PictureBox2).BeginInit();
@@ -214,6 +222,7 @@ namespace SAPLink.Schedule.Forms
             // guna2TabControl4
             // 
             guna2TabControl4.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            guna2TabControl4.Controls.Add(tabPage1);
             guna2TabControl4.Controls.Add(tabPage5);
             guna2TabControl4.ItemSize = new Size(180, 30);
             guna2TabControl4.Location = new Point(19, 230);
@@ -240,6 +249,81 @@ namespace SAPLink.Schedule.Forms
             guna2TabControl4.TabIndex = 56;
             guna2TabControl4.TabMenuBackColor = Color.White;
             guna2TabControl4.TabMenuOrientation = TabMenuOrientation.HorizontalTop;
+            // 
+            // tabPage1
+            // 
+            tabPage1.Controls.Add(dataGridView1);
+            tabPage1.Location = new Point(4, 34);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new Padding(3);
+            tabPage1.Size = new Size(1142, 341);
+            tabPage1.TabIndex = 1;
+            tabPage1.Text = "Schedules";
+            tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // dataGridView1
+            // 
+            dataGridViewCellStyle1.BackColor = Color.White;
+            dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridView1.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.Black;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI Black", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridView1.ColumnHeadersHeight = 24;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.White;
+            dataGridViewCellStyle3.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridView1.Dock = DockStyle.Fill;
+            dataGridView1.GridColor = Color.FromArgb(231, 229, 255);
+            dataGridView1.Location = new Point(3, 3);
+            dataGridView1.MultiSelect = false;
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = SystemColors.Control;
+            dataGridViewCellStyle4.Font = new Font("Segoe UI Black", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridView1.RowHeadersVisible = false;
+            dataGridView1.RowTemplate.Height = 25;
+            dataGridView1.Size = new Size(1136, 335);
+            dataGridView1.TabIndex = 0;
+            dataGridView1.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
+            dataGridView1.ThemeStyle.AlternatingRowsStyle.Font = null;
+            dataGridView1.ThemeStyle.AlternatingRowsStyle.ForeColor = Color.Empty;
+            dataGridView1.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.Empty;
+            dataGridView1.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.Empty;
+            dataGridView1.ThemeStyle.BackColor = Color.White;
+            dataGridView1.ThemeStyle.GridColor = Color.FromArgb(231, 229, 255);
+            dataGridView1.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(100, 88, 255);
+            dataGridView1.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridView1.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridView1.ThemeStyle.HeaderStyle.ForeColor = Color.White;
+            dataGridView1.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+            dataGridView1.ThemeStyle.HeaderStyle.Height = 24;
+            dataGridView1.ThemeStyle.ReadOnly = true;
+            dataGridView1.ThemeStyle.RowsStyle.BackColor = Color.White;
+            dataGridView1.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGridView1.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridView1.ThemeStyle.RowsStyle.ForeColor = Color.White;
+            dataGridView1.ThemeStyle.RowsStyle.Height = 25;
+            dataGridView1.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridView1.ThemeStyle.RowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridView1.SelectionChanged += dataGridView1_SelectionChanged;
             // 
             // tabPage5
             // 
@@ -273,10 +357,10 @@ namespace SAPLink.Schedule.Forms
             guna2Panel4.BorderRadius = 20;
             guna2Panel4.BorderThickness = 1;
             guna2Panel4.ContextMenuStrip = contextMenuRefreshAuth;
-            guna2Panel4.Controls.Add(textBoxHour3);
-            guna2Panel4.Controls.Add(textBoxHour4);
-            guna2Panel4.Controls.Add(textBoxHour2);
-            guna2Panel4.Controls.Add(textBoxHour1);
+            guna2Panel4.Controls.Add(comboBoxHour4);
+            guna2Panel4.Controls.Add(comboBoxHour3);
+            guna2Panel4.Controls.Add(comboBoxHour2);
+            guna2Panel4.Controls.Add(comboBoxHour1);
             guna2Panel4.Controls.Add(checkBox4);
             guna2Panel4.Controls.Add(checkBox3);
             guna2Panel4.Controls.Add(checkBox2);
@@ -296,90 +380,82 @@ namespace SAPLink.Schedule.Forms
             guna2Panel4.Size = new Size(1150, 196);
             guna2Panel4.TabIndex = 50;
             // 
-            // textBoxHour3
+            // comboBoxHour4
             // 
-            textBoxHour3.CustomizableEdges = customizableEdges1;
-            textBoxHour3.DefaultText = "";
-            textBoxHour3.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            textBoxHour3.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            textBoxHour3.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            textBoxHour3.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            textBoxHour3.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            textBoxHour3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxHour3.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            textBoxHour3.Location = new Point(163, 109);
-            textBoxHour3.Margin = new Padding(3, 4, 3, 4);
-            textBoxHour3.Name = "textBoxHour3";
-            textBoxHour3.PasswordChar = '\0';
-            textBoxHour3.PlaceholderText = "";
-            textBoxHour3.SelectedText = "";
-            textBoxHour3.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            textBoxHour3.Size = new Size(230, 21);
-            textBoxHour3.TabIndex = 42;
+            comboBoxHour4.AutoCompleteCustomSource.AddRange(new string[] { "Hourly", "Daily", "None" });
+            comboBoxHour4.BackColor = Color.Transparent;
+            comboBoxHour4.CustomizableEdges = customizableEdges1;
+            comboBoxHour4.DrawMode = DrawMode.OwnerDrawFixed;
+            comboBoxHour4.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxHour4.Enabled = false;
+            comboBoxHour4.FocusedColor = Color.FromArgb(94, 148, 255);
+            comboBoxHour4.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            comboBoxHour4.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxHour4.ForeColor = Color.FromArgb(68, 88, 112);
+            comboBoxHour4.ItemHeight = 15;
+            comboBoxHour4.Items.AddRange(new object[] { "", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM", "09:00 PM", "10:00 PM", "11:00 PM", "12:00 AM", "01:00 AM", "02:00 AM", "03:00 AM", "04:00 AM", "05:00 AM", "06:00 AM", "07:00 AM", "08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM" });
+            comboBoxHour4.Location = new Point(163, 136);
+            comboBoxHour4.Name = "comboBoxHour4";
+            comboBoxHour4.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            comboBoxHour4.Size = new Size(230, 21);
+            comboBoxHour4.TabIndex = 57;
             // 
-            // textBoxHour4
+            // comboBoxHour3
             // 
-            textBoxHour4.CustomizableEdges = customizableEdges3;
-            textBoxHour4.DefaultText = "";
-            textBoxHour4.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            textBoxHour4.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            textBoxHour4.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            textBoxHour4.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            textBoxHour4.Enabled = false;
-            textBoxHour4.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            textBoxHour4.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxHour4.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            textBoxHour4.Location = new Point(163, 136);
-            textBoxHour4.Margin = new Padding(3, 4, 3, 4);
-            textBoxHour4.Name = "textBoxHour4";
-            textBoxHour4.PasswordChar = '\0';
-            textBoxHour4.PlaceholderText = "";
-            textBoxHour4.SelectedText = "";
-            textBoxHour4.ShadowDecoration.CustomizableEdges = customizableEdges4;
-            textBoxHour4.Size = new Size(230, 21);
-            textBoxHour4.TabIndex = 42;
+            comboBoxHour3.AutoCompleteCustomSource.AddRange(new string[] { "Hourly", "Daily", "None" });
+            comboBoxHour3.BackColor = Color.Transparent;
+            comboBoxHour3.CustomizableEdges = customizableEdges3;
+            comboBoxHour3.DrawMode = DrawMode.OwnerDrawFixed;
+            comboBoxHour3.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxHour3.FocusedColor = Color.FromArgb(94, 148, 255);
+            comboBoxHour3.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            comboBoxHour3.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxHour3.ForeColor = Color.FromArgb(68, 88, 112);
+            comboBoxHour3.ItemHeight = 15;
+            comboBoxHour3.Items.AddRange(new object[] { "", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM", "09:00 PM", "10:00 PM", "11:00 PM", "12:00 AM", "01:00 AM", "02:00 AM", "03:00 AM", "04:00 AM", "05:00 AM", "06:00 AM", "07:00 AM", "08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM" });
+            comboBoxHour3.Location = new Point(163, 109);
+            comboBoxHour3.Name = "comboBoxHour3";
+            comboBoxHour3.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            comboBoxHour3.Size = new Size(230, 21);
+            comboBoxHour3.TabIndex = 57;
             // 
-            // textBoxHour2
+            // comboBoxHour2
             // 
-            textBoxHour2.CustomizableEdges = customizableEdges5;
-            textBoxHour2.DefaultText = "";
-            textBoxHour2.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            textBoxHour2.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            textBoxHour2.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            textBoxHour2.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            textBoxHour2.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            textBoxHour2.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxHour2.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            textBoxHour2.Location = new Point(163, 83);
-            textBoxHour2.Margin = new Padding(3, 4, 3, 4);
-            textBoxHour2.Name = "textBoxHour2";
-            textBoxHour2.PasswordChar = '\0';
-            textBoxHour2.PlaceholderText = "";
-            textBoxHour2.SelectedText = "";
-            textBoxHour2.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            textBoxHour2.Size = new Size(230, 21);
-            textBoxHour2.TabIndex = 42;
+            comboBoxHour2.AutoCompleteCustomSource.AddRange(new string[] { "Hourly", "Daily", "None" });
+            comboBoxHour2.BackColor = Color.Transparent;
+            comboBoxHour2.CustomizableEdges = customizableEdges5;
+            comboBoxHour2.DrawMode = DrawMode.OwnerDrawFixed;
+            comboBoxHour2.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxHour2.FocusedColor = Color.FromArgb(94, 148, 255);
+            comboBoxHour2.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            comboBoxHour2.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxHour2.ForeColor = Color.FromArgb(68, 88, 112);
+            comboBoxHour2.ItemHeight = 15;
+            comboBoxHour2.Items.AddRange(new object[] { "", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM", "09:00 PM", "10:00 PM", "11:00 PM", "12:00 AM", "01:00 AM", "02:00 AM", "03:00 AM", "04:00 AM", "05:00 AM", "06:00 AM", "07:00 AM", "08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM" });
+            comboBoxHour2.Location = new Point(163, 84);
+            comboBoxHour2.Name = "comboBoxHour2";
+            comboBoxHour2.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            comboBoxHour2.Size = new Size(230, 21);
+            comboBoxHour2.TabIndex = 57;
             // 
-            // textBoxHour1
+            // comboBoxHour1
             // 
-            textBoxHour1.CustomizableEdges = customizableEdges7;
-            textBoxHour1.DefaultText = "";
-            textBoxHour1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            textBoxHour1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            textBoxHour1.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            textBoxHour1.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            textBoxHour1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            textBoxHour1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxHour1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            textBoxHour1.Location = new Point(163, 57);
-            textBoxHour1.Margin = new Padding(3, 4, 3, 4);
-            textBoxHour1.Name = "textBoxHour1";
-            textBoxHour1.PasswordChar = '\0';
-            textBoxHour1.PlaceholderText = "";
-            textBoxHour1.SelectedText = "";
-            textBoxHour1.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            textBoxHour1.Size = new Size(230, 21);
-            textBoxHour1.TabIndex = 42;
+            comboBoxHour1.AutoCompleteCustomSource.AddRange(new string[] { "Hourly", "Daily", "None" });
+            comboBoxHour1.BackColor = Color.Transparent;
+            comboBoxHour1.CustomizableEdges = customizableEdges7;
+            comboBoxHour1.DrawMode = DrawMode.OwnerDrawFixed;
+            comboBoxHour1.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxHour1.FocusedColor = Color.FromArgb(94, 148, 255);
+            comboBoxHour1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            comboBoxHour1.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxHour1.ForeColor = Color.FromArgb(68, 88, 112);
+            comboBoxHour1.ItemHeight = 15;
+            comboBoxHour1.Items.AddRange(new object[] { "", "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM", "04:00 PM", "05:00 PM", "06:00 PM", "07:00 PM", "08:00 PM", "09:00 PM", "10:00 PM", "11:00 PM", "12:00 AM", "01:00 AM", "02:00 AM", "03:00 AM", "04:00 AM", "05:00 AM", "06:00 AM", "07:00 AM", "08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM" });
+            comboBoxHour1.Location = new Point(163, 57);
+            comboBoxHour1.Name = "comboBoxHour1";
+            comboBoxHour1.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            comboBoxHour1.Size = new Size(230, 21);
+            comboBoxHour1.TabIndex = 57;
             // 
             // checkBox4
             // 
@@ -498,6 +574,41 @@ namespace SAPLink.Schedule.Forms
             label3.TabIndex = 27;
             label3.Text = "Run Everday at:";
             // 
+            // guna2Button1
+            // 
+            guna2Button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            guna2Button1.BackColor = Color.White;
+            guna2Button1.BorderColor = Color.Gold;
+            guna2Button1.BorderRadius = 15;
+            guna2Button1.BorderThickness = 2;
+            guna2Button1.CustomBorderColor = Color.White;
+            guna2Button1.CustomBorderThickness = new Padding(1);
+            guna2Button1.CustomizableEdges = customizableEdges19;
+            guna2Button1.DisabledState.BorderColor = Color.DarkGray;
+            guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
+            guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            guna2Button1.FillColor = Color.Ivory;
+            guna2Button1.Font = new Font("Bahnschrift", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            guna2Button1.ForeColor = Color.Black;
+            guna2Button1.HoverState.FillColor = Color.Gold;
+            guna2Button1.Image = (Image)resources.GetObject("guna2Button1.Image");
+            guna2Button1.ImageAlign = HorizontalAlignment.Left;
+            guna2Button1.ImageOffset = new Point(0, 15);
+            guna2Button1.ImageSize = new Size(30, 30);
+            guna2Button1.Location = new Point(965, 29);
+            guna2Button1.Name = "guna2Button1";
+            guna2Button1.PressedColor = Color.SeaGreen;
+            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges20;
+            guna2Button1.Size = new Size(155, 60);
+            guna2Button1.TabIndex = 23;
+            guna2Button1.Tag = "";
+            guna2Button1.Text = "Save to Database";
+            guna2Button1.TextAlign = HorizontalAlignment.Left;
+            guna2Button1.TextOffset = new Point(35, -15);
+            guna2Button1.Tile = true;
+            guna2Button1.Click += buttonSaveToDatabase_Click;
+            // 
             // buttonScheduleIt
             // 
             buttonScheduleIt.Anchor = AnchorStyles.Top | AnchorStyles.Right;
@@ -520,14 +631,14 @@ namespace SAPLink.Schedule.Forms
             buttonScheduleIt.ImageAlign = HorizontalAlignment.Left;
             buttonScheduleIt.ImageOffset = new Point(0, 15);
             buttonScheduleIt.ImageSize = new Size(30, 30);
-            buttonScheduleIt.Location = new Point(957, 45);
+            buttonScheduleIt.Location = new Point(965, 95);
             buttonScheduleIt.Name = "buttonScheduleIt";
             buttonScheduleIt.PressedColor = Color.SeaGreen;
             buttonScheduleIt.ShadowDecoration.CustomizableEdges = customizableEdges22;
-            buttonScheduleIt.Size = new Size(146, 60);
+            buttonScheduleIt.Size = new Size(155, 60);
             buttonScheduleIt.TabIndex = 23;
             buttonScheduleIt.Tag = "";
-            buttonScheduleIt.Text = "Schedule It";
+            buttonScheduleIt.Text = "Schedule";
             buttonScheduleIt.TextAlign = HorizontalAlignment.Left;
             buttonScheduleIt.TextOffset = new Point(40, -15);
             buttonScheduleIt.Tile = true;
@@ -662,41 +773,6 @@ namespace SAPLink.Schedule.Forms
             notifyIcon1.BalloonTipClicked += notifyIcon1_BalloonTipClicked;
             notifyIcon1.Click += notifyIcon1_Click;
             // 
-            // guna2Button1
-            // 
-            guna2Button1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            guna2Button1.BackColor = Color.White;
-            guna2Button1.BorderColor = Color.Gold;
-            guna2Button1.BorderRadius = 15;
-            guna2Button1.BorderThickness = 2;
-            guna2Button1.CustomBorderColor = Color.White;
-            guna2Button1.CustomBorderThickness = new Padding(1);
-            guna2Button1.CustomizableEdges = customizableEdges19;
-            guna2Button1.DisabledState.BorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
-            guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            guna2Button1.FillColor = Color.Ivory;
-            guna2Button1.Font = new Font("Bahnschrift", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            guna2Button1.ForeColor = Color.Black;
-            guna2Button1.HoverState.FillColor = Color.Gold;
-            guna2Button1.Image = (Image)resources.GetObject("guna2Button1.Image");
-            guna2Button1.ImageAlign = HorizontalAlignment.Left;
-            guna2Button1.ImageOffset = new Point(0, 15);
-            guna2Button1.ImageSize = new Size(30, 30);
-            guna2Button1.Location = new Point(458, 43);
-            guna2Button1.Name = "guna2Button1";
-            guna2Button1.PressedColor = Color.SeaGreen;
-            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges20;
-            guna2Button1.Size = new Size(146, 60);
-            guna2Button1.TabIndex = 23;
-            guna2Button1.Tag = "";
-            guna2Button1.Text = "Update";
-            guna2Button1.TextAlign = HorizontalAlignment.Left;
-            guna2Button1.TextOffset = new Point(40, -15);
-            guna2Button1.Tile = true;
-            guna2Button1.Click += guna2Button1_Click;
-            // 
             // ScheduledSyncs
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -710,6 +786,7 @@ namespace SAPLink.Schedule.Forms
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Inbound Data";
             WindowState = FormWindowState.Maximized;
+            Load += ScheduledSyncs_Load;
             guna2Panel1.ResumeLayout(false);
             guna2Panel1.PerformLayout();
             contextMenuRefreshAuth.ResumeLayout(false);
@@ -717,6 +794,8 @@ namespace SAPLink.Schedule.Forms
             tabPageDaily.ResumeLayout(false);
             tabPageDaily.PerformLayout();
             guna2TabControl4.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            ((ISupportInitialize)dataGridView1).EndInit();
             tabPage5.ResumeLayout(false);
             guna2Panel4.ResumeLayout(false);
             guna2Panel4.PerformLayout();
@@ -755,12 +834,14 @@ namespace SAPLink.Schedule.Forms
         private Guna2CustomCheckBox checkBox3;
         private Guna2CustomCheckBox checkBox2;
         private Guna2CustomCheckBox checkBox1;
-        private Guna2TextBox textBoxHour3;
-        private Guna2TextBox textBoxHour2;
-        private Guna2TextBox textBoxHour1;
-        private Guna2TextBox textBoxHour4;
         private Guna2CustomCheckBox checkBox4;
         private NotifyIcon notifyIcon1;
         private Guna2Button guna2Button1;
+        private TabPage tabPage1;
+        private Guna2DataGridView dataGridView1;
+        private Guna2ComboBox comboBoxHour1;
+        private Guna2ComboBox comboBoxHour4;
+        private Guna2ComboBox comboBoxHour3;
+        private Guna2ComboBox comboBoxHour2;
     }
 }

@@ -32,24 +32,24 @@ namespace SAPLink.Schedule.Forms
         private void InitializeComponent()
         {
             components = new Container();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             ComponentResourceManager resources = new ComponentResourceManager(typeof(Login));
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges8 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges9 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2Panel1 = new Guna2Panel();
             label1 = new Label();
             guna2PictureBox2 = new Guna2PictureBox();
@@ -85,12 +85,12 @@ namespace SAPLink.Schedule.Forms
             guna2Panel1.Controls.Add(guna2ControlBox1);
             guna2Panel1.Controls.Add(buttonLogin);
             guna2Panel1.CustomBorderColor = Color.Transparent;
-            guna2Panel1.CustomizableEdges = customizableEdges33;
+            guna2Panel1.CustomizableEdges = customizableEdges16;
             guna2Panel1.Dock = DockStyle.Fill;
             guna2Panel1.Location = new Point(0, 0);
             guna2Panel1.Margin = new Padding(4);
             guna2Panel1.Name = "guna2Panel1";
-            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges34;
+            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges17;
             guna2Panel1.Size = new Size(836, 420);
             guna2Panel1.TabIndex = 0;
             guna2Panel1.Click += guna2Panel1_Click;
@@ -101,7 +101,7 @@ namespace SAPLink.Schedule.Forms
             label1.AutoSize = true;
             label1.BackColor = Color.WhiteSmoke;
             label1.Font = new Font("Agency FB", 16.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label1.Location = new Point(688, 110);
+            label1.Location = new Point(732, 110);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(47, 26);
@@ -111,13 +111,13 @@ namespace SAPLink.Schedule.Forms
             // guna2PictureBox2
             // 
             guna2PictureBox2.BackColor = Color.WhiteSmoke;
-            guna2PictureBox2.CustomizableEdges = customizableEdges18;
+            guna2PictureBox2.CustomizableEdges = customizableEdges1;
             guna2PictureBox2.Image = (Image)resources.GetObject("guna2PictureBox2.Image");
             guna2PictureBox2.ImageRotate = 0F;
             guna2PictureBox2.InitialImage = null;
             guna2PictureBox2.Location = new Point(383, 69);
             guna2PictureBox2.Name = "guna2PictureBox2";
-            guna2PictureBox2.ShadowDecoration.CustomizableEdges = customizableEdges19;
+            guna2PictureBox2.ShadowDecoration.CustomizableEdges = customizableEdges2;
             guna2PictureBox2.Size = new Size(39, 41);
             guna2PictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             guna2PictureBox2.TabIndex = 16;
@@ -131,9 +131,9 @@ namespace SAPLink.Schedule.Forms
             label3.Location = new Point(422, 69);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(299, 50);
+            label3.Size = new Size(361, 50);
             label3.TabIndex = 1;
-            label3.Text = "SAP-Link Integration";
+            label3.Text = "SAP Link Synchronization";
             // 
             // guna2CirclePictureBox1
             // 
@@ -141,7 +141,7 @@ namespace SAPLink.Schedule.Forms
             guna2CirclePictureBox1.ImageRotate = 0F;
             guna2CirclePictureBox1.Location = new Point(27, 47);
             guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
-            guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges20;
+            guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges3;
             guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             guna2CirclePictureBox1.Size = new Size(288, 306);
             guna2CirclePictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -154,7 +154,7 @@ namespace SAPLink.Schedule.Forms
             comboBoxClients.BorderColor = Color.Goldenrod;
             comboBoxClients.BorderRadius = 12;
             comboBoxClients.BorderThickness = 2;
-            comboBoxClients.CustomizableEdges = customizableEdges21;
+            comboBoxClients.CustomizableEdges = customizableEdges4;
             comboBoxClients.DrawMode = DrawMode.OwnerDrawFixed;
             comboBoxClients.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxClients.FocusedColor = Color.FromArgb(94, 148, 255);
@@ -165,7 +165,7 @@ namespace SAPLink.Schedule.Forms
             comboBoxClients.Location = new Point(370, 153);
             comboBoxClients.Margin = new Padding(3, 2, 3, 2);
             comboBoxClients.Name = "comboBoxClients";
-            comboBoxClients.ShadowDecoration.CustomizableEdges = customizableEdges22;
+            comboBoxClients.ShadowDecoration.CustomizableEdges = customizableEdges5;
             comboBoxClients.Size = new Size(402, 36);
             comboBoxClients.TabIndex = 4;
             comboBoxClients.SelectedIndexChanged += comboBoxClients_SelectedIndexChanged;
@@ -179,7 +179,7 @@ namespace SAPLink.Schedule.Forms
             textBoxUserName.BorderRadius = 15;
             textBoxUserName.BorderThickness = 3;
             textBoxUserName.Cursor = Cursors.IBeam;
-            textBoxUserName.CustomizableEdges = customizableEdges23;
+            textBoxUserName.CustomizableEdges = customizableEdges6;
             textBoxUserName.DefaultText = "User Name";
             textBoxUserName.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             textBoxUserName.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -200,7 +200,7 @@ namespace SAPLink.Schedule.Forms
             textBoxUserName.PlaceholderForeColor = Color.Black;
             textBoxUserName.PlaceholderText = "";
             textBoxUserName.SelectedText = "";
-            textBoxUserName.ShadowDecoration.CustomizableEdges = customizableEdges24;
+            textBoxUserName.ShadowDecoration.CustomizableEdges = customizableEdges7;
             textBoxUserName.Size = new Size(402, 33);
             textBoxUserName.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             textBoxUserName.TabIndex = 2;
@@ -214,13 +214,13 @@ namespace SAPLink.Schedule.Forms
             guna2ControlBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             guna2ControlBox2.BorderRadius = 8;
             guna2ControlBox2.ControlBoxType = Guna.UI2.WinForms.Enums.ControlBoxType.MinimizeBox;
-            guna2ControlBox2.CustomizableEdges = customizableEdges25;
+            guna2ControlBox2.CustomizableEdges = customizableEdges8;
             guna2ControlBox2.FillColor = Color.Transparent;
             guna2ControlBox2.IconColor = Color.Black;
             guna2ControlBox2.Location = new Point(739, 14);
             guna2ControlBox2.Margin = new Padding(4);
             guna2ControlBox2.Name = "guna2ControlBox2";
-            guna2ControlBox2.ShadowDecoration.CustomizableEdges = customizableEdges26;
+            guna2ControlBox2.ShadowDecoration.CustomizableEdges = customizableEdges9;
             guna2ControlBox2.Size = new Size(32, 28);
             guna2ControlBox2.TabIndex = 5;
             // 
@@ -233,7 +233,7 @@ namespace SAPLink.Schedule.Forms
             textBoxPassword.BorderRadius = 15;
             textBoxPassword.BorderThickness = 3;
             textBoxPassword.Cursor = Cursors.IBeam;
-            textBoxPassword.CustomizableEdges = customizableEdges27;
+            textBoxPassword.CustomizableEdges = customizableEdges10;
             textBoxPassword.DefaultText = "Password";
             textBoxPassword.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             textBoxPassword.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -254,7 +254,7 @@ namespace SAPLink.Schedule.Forms
             textBoxPassword.PlaceholderForeColor = Color.Black;
             textBoxPassword.PlaceholderText = "";
             textBoxPassword.SelectedText = "";
-            textBoxPassword.ShadowDecoration.CustomizableEdges = customizableEdges28;
+            textBoxPassword.ShadowDecoration.CustomizableEdges = customizableEdges11;
             textBoxPassword.Size = new Size(402, 33);
             textBoxPassword.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             textBoxPassword.TabIndex = 3;
@@ -267,13 +267,13 @@ namespace SAPLink.Schedule.Forms
             // 
             guna2ControlBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             guna2ControlBox1.BorderRadius = 8;
-            guna2ControlBox1.CustomizableEdges = customizableEdges29;
+            guna2ControlBox1.CustomizableEdges = customizableEdges12;
             guna2ControlBox1.FillColor = Color.Transparent;
             guna2ControlBox1.IconColor = Color.Black;
             guna2ControlBox1.Location = new Point(777, 14);
             guna2ControlBox1.Margin = new Padding(4);
             guna2ControlBox1.Name = "guna2ControlBox1";
-            guna2ControlBox1.ShadowDecoration.CustomizableEdges = customizableEdges30;
+            guna2ControlBox1.ShadowDecoration.CustomizableEdges = customizableEdges13;
             guna2ControlBox1.Size = new Size(32, 28);
             guna2ControlBox1.TabIndex = 6;
             guna2ControlBox1.Click += guna2ControlBox1_Click;
@@ -282,7 +282,7 @@ namespace SAPLink.Schedule.Forms
             // 
             buttonLogin.AutoRoundedCorners = true;
             buttonLogin.BorderRadius = 25;
-            buttonLogin.CustomizableEdges = customizableEdges31;
+            buttonLogin.CustomizableEdges = customizableEdges14;
             buttonLogin.FillColor = Color.Goldenrod;
             buttonLogin.FillColor2 = Color.DarkOrange;
             buttonLogin.Font = new Font("Segoe Print", 12F, FontStyle.Bold, GraphicsUnit.Point);
@@ -295,7 +295,7 @@ namespace SAPLink.Schedule.Forms
             buttonLogin.Location = new Point(370, 301);
             buttonLogin.Margin = new Padding(4);
             buttonLogin.Name = "buttonLogin";
-            buttonLogin.ShadowDecoration.CustomizableEdges = customizableEdges32;
+            buttonLogin.ShadowDecoration.CustomizableEdges = customizableEdges15;
             buttonLogin.Size = new Size(402, 52);
             buttonLogin.TabIndex = 1;
             buttonLogin.Text = "Login";

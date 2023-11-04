@@ -13,6 +13,12 @@ using System.Reflection.Emit;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 using SAPLink.Schedule.Utilities;
+using System.ComponentModel.DataAnnotations;
+using static SAPLink.Schedule.Forms.ScheduledSyncs;
+using static Guna.UI2.Native.WinApi;
+using SAPLink.Core.Models;
+using SAPLink.EF;
+using SAPLink.Utilities;
 
 namespace SAPLink.Schedule.Forms;
 
@@ -95,11 +101,10 @@ public partial class ScheduledSyncs : Form
         //}
         comboBoxDocTypeSchedule.SelectedIndex = (int)Documents.Departments;
 
-        string[] includes = { "Schedules", "Schedules.Recurrings" };
-        string[] includes1 = { "Times" };
-        //Client = UnitOfWork.Clients.FindAsync(c => c.Id == activeConnection.Id, includes).Result;
+        string[] includes = { "Times" };
+        Schedules = _unitOfWork.Schedule.GetAll(includes).ToList();
 
-        Schedules = unitOfWork.Schedule.GetAll(includes1).ToList();
+        InitializeDataGridView();
     }
     #endregion
     private bool hidden = false;
@@ -114,23 +119,34 @@ public partial class ScheduledSyncs : Form
             try
             {
                 var schedule = Schedules.Find(x => x.Document == document);
-                if (schedule != null)
+                if(schedule != null
+                  && checkBox1.Checked && comboBoxHour1.Text.IsHasValue()
+                  && checkBox2.Checked && comboBoxHour2.Text.IsHasValue()
+                  && checkBox3.Checked && comboBoxHour3.Text.IsHasValue()
+                  && checkBox4.Checked && comboBoxHour4.Text.IsHasValue()
+                    )
                 {
                     schedule.Document = document;
 
                     var rec1 = schedule.Times.Find(t => t.TimeId == 1);
 
-                    var recurring1 = textBoxHour1.Text.To24HourMinutesFormat();
+                    //var recurring1 = textBoxHour1.Text.To24HourMinutesFormat();
+                    var recurring1 = comboBoxHour1.Text.To24HourMinutesFormat();
+
                     rec1.Time = new TimeOnly(recurring1.Hours, recurring1.Minutes);
                     rec1.Active = checkBox1.Checked;
 
 
-                    var recurring2 = textBoxHour2.Text.To24HourMinutesFormat();
+                    //var recurring2 = textBoxHour2.Text.To24HourMinutesFormat();
+                    var recurring2 = comboBoxHour1.Text.To24HourMinutesFormat();
+
                     var rec2 = schedule.Times.Find(t => t.TimeId == 2);
                     rec2.Time = new TimeOnly(recurring2.Hours, recurring2.Minutes);
                     rec2.Active = checkBox1.Checked;
 
-                    var recurring3 = textBoxHour3.Text.To24HourMinutesFormat();
+                    //var recurring3 = textBoxHour3.Text.To24HourMinutesFormat();
+                    var recurring3 = comboBoxHour1.Text.To24HourMinutesFormat();
+
                     var rec3 = schedule.Times.Find(t => t.TimeId == 3);
                     rec3.Time = new TimeOnly(recurring3.Hours, recurring3.Minutes);
                     rec3.Active = checkBox1.Checked;
@@ -176,6 +192,7 @@ public partial class ScheduledSyncs : Form
                         }
                     }
                 }
+                labelStatus.Log("Selected Schedule is updated to database.", Logger.MessageTypes.Warning, Logger.MessageTime.Short);
             }
             catch (Exception exception)
             {
@@ -184,7 +201,19 @@ public partial class ScheduledSyncs : Form
             }
         }
     }
+    private int FindComboBoxIndexByTime(ComboBox comboBox, string targetTime)
+    {
+        for (int i = 0; i < comboBox.Items.Count; i++)
+        {
+            string comboBoxItem = comboBox.Items[i].ToString();
+            if (comboBoxItem == targetTime)
+            {
+                return i; // Return the index of the matching item
+            }
+        }
 
+        return -1; // Return -1 if the target time is not found
+    }
     private async Task HandleItems()
     {
         var filter = GetSyncQueryByRangOfDate();
@@ -582,23 +611,76 @@ public partial class ScheduledSyncs : Form
 
         var schedule = GetSchedule(selectedIndex);
 
-        foreach (var recurring in schedule.Times)
+        if (schedule.Times.Any())
         {
-            if (recurring.TimeId == 1)
+            foreach (var recurring in schedule.Times)
             {
-                textBoxHour1.Text = recurring.Time.ToString("t");
-                checkBox1.Checked = recurring.Active;
+                if (recurring.TimeId == 1)
+                {
+                    if (recurring.Active)
+                    {
+                        int indexToSelect = FindComboBoxIndexByTime(comboBoxHour1, recurring.Time.ToString("hh:mm tt"));
+
+                        if (indexToSelect != -1)
+                            comboBoxHour1.SelectedIndex = indexToSelect;
+
+                        checkBox1.Checked = recurring.Active;
+                    }
+                    else
+                    {
+                        comboBoxHour1.SelectedIndex = 0;
+                        checkBox1.Checked = recurring.Active;
+                    }
+                }
+
+
+                if (recurring.TimeId == 2)
+                {
+                    if (recurring.Active)
+                    {
+                        int indexToSelect = FindComboBoxIndexByTime(comboBoxHour2, recurring.Time.ToString("hh:mm tt"));
+
+                        if (indexToSelect != -1)
+                            comboBoxHour2.SelectedIndex = indexToSelect;
+
+                        checkBox2.Checked = recurring.Active;
+                    }
+                    else
+                    {
+                        comboBoxHour2.SelectedIndex = 0;
+                        checkBox2.Checked = recurring.Active;
+                    }
+                }
+
+                if (recurring.TimeId == 3)
+                {
+                    if (recurring.Active)
+                    {
+                        int indexToSelect = FindComboBoxIndexByTime(comboBoxHour3, recurring.Time.ToString("hh:mm tt"));
+
+                        if (indexToSelect != -1)
+                            comboBoxHour3.SelectedIndex = indexToSelect;
+
+                        checkBox3.Checked = recurring.Active;
+                    }
+                    else
+                    {
+                        comboBoxHour3.SelectedIndex = 0;
+                        checkBox3.Checked = recurring.Active;
+                    }
+                }
             }
-            if (recurring.TimeId == 2)
-            {
-                textBoxHour2.Text = recurring.Time.ToString("t");
-                checkBox2.Checked = recurring.Active;
-            }
-            if (recurring.TimeId == 3)
-            {
-                textBoxHour3.Text = recurring.Time.ToString("t");
-                checkBox3.Checked = recurring.Active;
-            }
+        }
+        else
+        {
+            comboBoxHour1.SelectedIndex = 0;
+            checkBox1.Checked = false;
+
+            comboBoxHour2.SelectedIndex = 0;
+            checkBox2.Checked = false;
+
+            comboBoxHour3.SelectedIndex = 0;
+            checkBox3.Checked = false;
         }
     }
 
@@ -737,8 +819,133 @@ public partial class ScheduledSyncs : Form
         }
     }
 
-    private void guna2Button1_Click(object sender, EventArgs e)
+    private void buttonSaveToDatabase_Click(object sender, EventArgs e)
     {
+        if (buttonScheduleIt.Enabled)
+        {
+            var document = (SyncDocuments)comboBoxDocTypeSchedule.SelectedIndex;
 
+            try
+            {
+                var schedule = Schedules.Find(x => x.Document == document);
+                if (schedule != null 
+                    && checkBox1.Checked && comboBoxHour1.Text.IsHasValue()
+                    && checkBox2.Checked && comboBoxHour2.Text.IsHasValue()
+                    && checkBox3.Checked && comboBoxHour3.Text.IsHasValue()
+                    && checkBox4.Checked && comboBoxHour4.Text.IsHasValue()
+                    )
+                {
+                    schedule.Document = document;
+
+                    var rec1 = schedule.Times.Find(t => t.TimeId == 1);
+
+                    var recurring1 = comboBoxHour1.Text.To24HourMinutesFormat();
+
+                    rec1.Time = new TimeOnly(recurring1.Hours, recurring1.Minutes);
+                    rec1.Active = checkBox1.Checked;
+
+                    var recurring2 = comboBoxHour1.Text.To24HourMinutesFormat();
+
+                    var rec2 = schedule.Times.Find(t => t.TimeId == 2);
+                    rec2.Time = new TimeOnly(recurring2.Hours, recurring2.Minutes);
+                    rec2.Active = checkBox1.Checked;
+
+                    var recurring3 = comboBoxHour1.Text.To24HourMinutesFormat();
+
+                    var rec3 = schedule.Times.Find(t => t.TimeId == 3);
+                    rec3.Time = new TimeOnly(recurring3.Hours, recurring3.Minutes);
+                    rec3.Active = checkBox1.Checked;
+
+                    schedule.Times.Clear();
+                    schedule.Times.Add(rec1);
+                    schedule.Times.Add(rec2);
+                    schedule.Times.Add(rec3);
+
+                    _unitOfWork.Schedule.Update(schedule);
+                    _unitOfWork.SaveChanges();
+
+                    dataGridView1.DataSource = GetSchedules();
+
+                    labelStatus.Log("Selected Schedule is updated to database.", Logger.MessageTypes.Warning, Logger.MessageTime.Short);
+                }
+                else
+                    labelStatus.Log("Kindly Check at least 1 and select a valid time.", Logger.MessageTypes.Error, Logger.MessageTime.Short);
+
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+        }
+    }
+
+    private void ScheduledSyncs_Load(object sender, EventArgs e)
+    {
+       dataGridView1.DataSource = GetSchedules();
+    }
+
+    private List<ScheduleViewModel> GetSchedules()
+    {
+        string[] includes = { "Times" };
+        return _unitOfWork.Schedule.GetAll(includes).Select(schedule =>
+        {
+            var model = new ScheduleViewModel
+            {
+                Id = schedule.Id,
+                DocumentName = schedule.DocumentName
+            };
+
+            if (schedule.Times.Count > 0)
+                model.Times = string.Join(", ", schedule.Times.Select(t => t.Time.ToString()));
+            else
+                model.Times = "-- Not Defined --";
+
+            return model;
+        }).ToList();
+    }
+
+    private void InitializeDataGridView()
+    {
+        dataGridView1.AutoGenerateColumns = false;
+
+        dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+        {
+            DataPropertyName = "Id",
+            HeaderText = "Schedule ID"
+        });
+        dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+        {
+            DataPropertyName = "DocumentName",
+            HeaderText = "Document Name"
+        });
+        dataGridView1.Columns.Add(new DataGridViewTextBoxColumn
+        {
+            DataPropertyName = "Times",
+            HeaderText = "Recurring Times"
+        });
+    }
+
+    public class ScheduleViewModel
+    {
+        public int Id { get; set; }
+        public string DocumentName { get; set; }
+        public string Times { get; set; }
+    }
+
+ 
+
+    private void dataGridView1_SelectionChanged(object sender, EventArgs e)
+    {
+        if (dataGridView1.SelectedRows.Count > 0)
+        {
+            // Get the selected ScheduleViewModel
+            ScheduleViewModel selectedSchedule = dataGridView1.SelectedRows[0].DataBoundItem as ScheduleViewModel;
+
+            // Now, you can access the Id of the selected item
+            int selectedId = selectedSchedule.Id;
+
+            // Set the ComboBox selection based on the selectedId
+            comboBoxDocTypeSchedule.SelectedIndex = selectedId;
+        }
     }
 }
