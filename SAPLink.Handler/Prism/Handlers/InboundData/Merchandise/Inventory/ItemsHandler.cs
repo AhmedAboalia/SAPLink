@@ -35,8 +35,8 @@ namespace SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Inventory
         }
         public async IAsyncEnumerable<RequestResult<ItemMasterData>> SyncAsync(string filter)
         {
-            var items = filter.IsNullOrEmpty() 
-                ? GetItems("AND (T0.[U_SyncToPrism] IS NULL OR  T0.[U_SyncToPrism] = '' OR  T0.[U_SyncToPrism] = 'N')") 
+            var items = filter.IsNullOrEmpty()
+                ? GetItems("AND (T0.[U_SyncToPrism] IS NULL OR  T0.[U_SyncToPrism] = '' OR  T0.[U_SyncToPrism] = 'N')")
                 : GetItems(filter);
 
             var itemsOut = new List<ItemMasterData>();
@@ -66,7 +66,6 @@ namespace SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Inventory
                 if (checkResult.Status != Enums.StatusType.Success || checkResult.EntityList.Count == 0)
                 {
                     var requestBody = await _itemsService.CreateEntityPayload(item);
-
                     var jsonObject = JsonConvert.DeserializeObject<OdataPrism<Product>>(requestBody).Data.FirstOrDefault().PrimaryItemDefinition;
 
                     var udf3Length = jsonObject.UDF3.Length;
@@ -132,7 +131,7 @@ namespace SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Inventory
             var message = $"UDF3 and UDF4 length validation failed for Item (Code: {item.ItemCode}, Name: {item.ItemName}).";
             _loger.Information(message);
 
-            return new RequestResult<ProductResponseModel>(Enums.StatusType.Failed, message, 
+            return new RequestResult<ProductResponseModel>(Enums.StatusType.Failed, message,
                 "Validation Failed", new List<ProductResponseModel>(), new RestResponse());
         }
 
@@ -159,7 +158,7 @@ namespace SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Inventory
                     BarCode = item.BarCode,
                 };
 
-                List<ItemMasterData> itemsOut =  new List<ItemMasterData>();
+                List<ItemMasterData> itemsOut = new List<ItemMasterData>();
 
                 itemsOut.Add(itemc);
 
