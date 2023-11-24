@@ -251,7 +251,7 @@ public partial class ScheduledSyncs : Form
                     await HandleDownPayment(invoiceResult.EntityList);
 
                 else if (!isARDownPayment && !CheckInvoiceExist(sInvoice.Sid, "OINV"))
-                    await HandleInvoices(invoiceResult.EntityList);
+                    await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncInvoice);
             }
 
         }
@@ -371,11 +371,9 @@ public partial class ScheduledSyncs : Form
             Log(syncResult.Message);
         }
     }
-    private async Task HandleInvoices(List<PrismInvoice> invoicesList)
+    private async Task HandleInvoices(List<PrismInvoice> invoicesList, UpdateType updateType)
     {
-
-
-        await foreach (var syncResult in _invoiceHandler.AddSalesInvoiceAsync(invoicesList))
+        await foreach (var syncResult in _invoiceHandler.AddSalesInvoiceAsync(invoicesList, updateType))
         {
             if (syncResult.EntityList != null && syncResult.EntityList.Count > 0)
             {

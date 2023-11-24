@@ -123,12 +123,18 @@ public partial class OutboundData : Form
                                      "");
                             }
 
+                            var isWholesale = invoice.Items.Any(p => p.IsWholesale == "Yes");
+                            var wholesaleCustomerCode = invoice.Items.Any(p => p.WholesaleCustomerCode.IsHasValue());
+
 
                             if (isARDownPayment && !CheckInvoiceExist(sInvoice.Sid, "ODPI"))
-                                await HandleDownPayment(dataGridViewSync, invoiceResult.EntityList, UpdateType.SyncInvoice, treeView1);
+                                await HandleDownPayment(dataGridViewSync, invoiceResult.EntityList, UpdateType.SyncInvoice);
 
                             else if (!isARDownPayment && !CheckInvoiceExist(sInvoice.Sid, "OINV"))
-                                await HandleInvoices(dataGridViewSync, invoiceResult.EntityList, UpdateType.SyncInvoice, treeView1);
+                                await HandleInvoices(dataGridViewSync, invoiceResult.EntityList, UpdateType.SyncInvoice);
+
+                            else if (!isWholesale && !CheckInvoiceExist(sInvoice.Sid, "OINV"))
+                                await HandleInvoices(dataGridViewSync, invoiceResult.EntityList, UpdateType.SyncWholesale);
                         }
 
                     }
@@ -291,20 +297,20 @@ public partial class OutboundData : Form
         }
     }
 
-    private async Task HandleInvoices(Guna2DataGridView dt, List<PrismInvoice> invoicesList, UpdateType UpdateType, TreeView treeView)
+    private async Task HandleInvoices(Guna2DataGridView dt, List<PrismInvoice> invoicesList, UpdateType UpdateType)
     {
         PlaySound.Click();
         //var BpList = new List<BusinessPartner>();
         var bindingList = dt.DataSource as BindingList<SAPInvoice>;
 
-        await foreach (var syncResult in _invoiceHandler.AddSalesInvoiceAsync(invoicesList))
+        await foreach (var syncResult in _invoiceHandler.AddSalesInvoiceAsync(invoicesList, UpdateType))
         {
             if (syncResult.EntityList != null && syncResult.EntityList.Count > 0)
             {
                 foreach (var invoice in syncResult.EntityList)
                 {
                     dt.BindInvoices(ref bindingList, invoice);
-                    treeView.BindInvoices(ref bindingList, invoice);
+                    treeView1.BindInvoices(ref bindingList, invoice);
 
                     //Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
                 }
@@ -312,7 +318,7 @@ public partial class OutboundData : Form
             else
             {
                 dt.DataSource = null;
-                treeView.Nodes.Clear();
+                treeView1.Nodes.Clear();
             }
 
 
@@ -583,7 +589,7 @@ public partial class OutboundData : Form
                 $"No Available Inventory Posting/s.");
         }
     }
-    private async Task HandleDownPayment(Guna2DataGridView dt, List<PrismInvoice> invoicesList, UpdateType UpdateType, TreeView treeView)
+    private async Task HandleDownPayment(Guna2DataGridView dt, List<PrismInvoice> invoicesList, UpdateType UpdateType)
     {
         PlaySound.Click();
         //var BpList = new List<BusinessPartner>();
@@ -608,7 +614,7 @@ public partial class OutboundData : Form
             else
             {
                 dt.DataSource = null;
-                treeView.Nodes.Clear();
+                treeView1.Nodes.Clear();
             }
 
             if (textBoxLogsSync.Text.Contains(syncResult.Message))

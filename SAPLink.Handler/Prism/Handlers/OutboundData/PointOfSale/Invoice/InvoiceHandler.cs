@@ -28,7 +28,7 @@ public partial class InvoiceHandler
         _loger = Helper.CreateLoggerConfiguration("Sale - (AR Invoice)", "Handler", LogsTypes.OutboundData);
 
     }
-    public async IAsyncEnumerable<RequestResult<SAPInvoice>> AddSalesInvoiceAsync(List<PrismInvoice> invoicesList)
+    public async IAsyncEnumerable<RequestResult<SAPInvoice>> AddSalesInvoiceAsync(List<PrismInvoice> invoicesList, Enums.UpdateType UpdateType)
     {
         var result = new RequestResult<SAPInvoice>();
         if (!_serviceLayer.Connected())
@@ -51,9 +51,12 @@ public partial class InvoiceHandler
                     if (invoice.Tenders != null && SAPInvoice != null)
                     {
 
-                        resultIncoming = IncomingPayment.AddMultiplePaymentsInvoice(invoice, SAPInvoice.DocEntry, customerCode);
-                        result.Message += $"\r\n{resultIncoming.Message}";
-                        result.Status = resultIncoming.Status;
+                        if (UpdateType == Enums.UpdateType.SyncInvoice)
+                        {
+                            resultIncoming = IncomingPayment.AddMultiplePaymentsInvoice(invoice, SAPInvoice.DocEntry, customerCode);
+                            result.Message += $"\r\n{resultIncoming.Message}";
+                            result.Status = resultIncoming.Status;
+                        }
 
                         if (result.Status == Enums.StatusType.Success)
                         {

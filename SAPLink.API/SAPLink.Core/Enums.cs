@@ -196,7 +196,10 @@ public static class Enums
         SyncOutGoodsIssue,
 
         InitialOrders,
-        SyncOrders
+        SyncOrders,
+
+        InitialWholesale,
+        SyncWholesale,
     }
     public enum BoDataServerTypes
     {
