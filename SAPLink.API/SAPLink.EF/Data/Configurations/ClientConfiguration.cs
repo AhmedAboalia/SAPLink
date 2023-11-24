@@ -35,12 +35,12 @@ internal static class ClientsList
                 Name = "Test Subsidiary - SAP Test DB (TESTDB)",//Test Env. - 
                 Active = false,
             },
-            //new()
-            //{
-            //    Id = (int)Environments.Local,
-            //    Name = "Fakeeh Vision Subsidiary - SAP Local DB (SBODemoGB)",//Local Env. - 
-            //    Active = true,
-            //},
+            new()
+            {
+                Id = (int)Environments.Local,
+                Name = "Fakeeh Vision Subsidiary - SAP Local DB (SBODemoGB)",//Local Env. - 
+                Active = true,
+            },
         };
     }
 }

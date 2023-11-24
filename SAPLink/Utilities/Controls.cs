@@ -133,7 +133,6 @@ namespace SAPLink.Utilities
             //else
             //    control.Image = Properties.Resources.NoImage;
         }
-
         /// <summary>
         /// Adds an item with integer value to a ComboBox.
         /// </summary>
