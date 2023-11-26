@@ -1,7 +1,7 @@
 ﻿using SAPLink.Core.Models.Prism.StockManagement;
 using SAPLink.Handler.Prism.Handlers.OutboundData.StockManagement.InventoryPosting;
-using VerifiedVouchersService = SAPLink.Handler.Prism.Handlers.OutboundData.StockManagement.VerifiedVouchers.Service;
-using VerifiedVouchersHandler = SAPLink.Handler.Prism.Handlers.OutboundData.StockManagement.InventoryTransfer.Handler;
+using InventoryTransferService = SAPLink.Handler.Prism.Handlers.OutboundData.StockManagement.InventoryTransfer.InventoryTransferService;
+using InventoryTransferHandler = SAPLink.Handler.Prism.Handlers.OutboundData.StockManagement.InventoryTransfer.InventoryTransferHandler;
 using SAPLink.Utilities.Forms;
 using InventoryPosting = SAPLink.Core.Models.Prism.StockManagement.InventoryPosting;
 using SAPLink.Handler.SAP.Application;
@@ -26,8 +26,8 @@ public partial class OutboundData : Form
     private readonly InvoiceService _invoiceService;
     private readonly DepartmentService _departmentService;
 
-    private readonly VerifiedVouchersService _verifiedVoucherService;
-    private readonly VerifiedVouchersHandler _verifiedVoucherHandler;
+    private readonly InventoryTransferService _inventoryTransferService;
+    private readonly InventoryTransferHandler _verifiedVoucherHandler;
 
     private readonly InventoryPostingService _inventoryPostingService;
     private readonly InventoryPostingHandler _inventoryPostingHandler;
@@ -49,8 +49,8 @@ public partial class OutboundData : Form
         _downPaymentHandler = new DownPaymentHandler(_client, _serviceLayer);
         _creditMemoHandler = new CreditMemoHandler(_client);
 
-        _verifiedVoucherService = new VerifiedVouchersService(_client);
-        _verifiedVoucherHandler = new VerifiedVouchersHandler(_client);
+        _inventoryTransferService = new InventoryTransferService(_client);
+        _verifiedVoucherHandler = new InventoryTransferHandler(_client);
 
         _inventoryPostingService = new InventoryPostingService(_client);
         _inventoryPostingHandler = new InventoryPostingHandler();
@@ -246,9 +246,9 @@ public partial class OutboundData : Form
 
 
                     if (docCode.IsHasValue())
-                        verifiedVouchers = await _verifiedVoucherService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value, storeNum, docCode);
+                        verifiedVouchers = await _inventoryTransferService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value, storeNum, docCode);
                     else
-                        verifiedVouchers = await _verifiedVoucherService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value, storeNum);
+                        verifiedVouchers = await _inventoryTransferService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value, storeNum);
 
 
                     if (verifiedVouchers.EntityList.Any())

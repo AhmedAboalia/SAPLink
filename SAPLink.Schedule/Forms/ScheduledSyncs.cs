@@ -4,8 +4,8 @@ using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Vendors;
 using SAPLink.Handler.Prism.Handlers.InboundData.Receiving;
 using SAPLink.Handler.Prism.Handlers.OutboundData.StockManagement.InventoryPosting;
 using static SAPLink.Core.Models.Schedules;
-using VerifiedVouchersService = SAPLink.Handler.Prism.Handlers.OutboundData.StockManagement.VerifiedVouchers.Service;
-using VerifiedVouchersHandler = SAPLink.Handler.Prism.Handlers.OutboundData.StockManagement.InventoryTransfer.Handler;
+using InventoryTransferService = SAPLink.Handler.Prism.Handlers.OutboundData.StockManagement.InventoryTransfer.InventoryTransferService;
+using InventoryTransferHandler = SAPLink.Handler.Prism.Handlers.OutboundData.StockManagement.InventoryTransfer.InventoryTransferHandler;
 using Documents = SAPLink.Core.InboundEnums.Documents;
 using SAPLink.Handler.SAP.Application;
 using SAPLink.Core.Models.Prism.StockManagement;
@@ -19,6 +19,7 @@ using static Guna.UI2.Native.WinApi;
 using SAPLink.Core.Models;
 using SAPLink.EF;
 using SAPLink.Utilities;
+using SAPLink.Handler.Prism.Handlers.InboundData.Receiving.GRPO;
 
 namespace SAPLink.Schedule.Forms;
 
@@ -49,8 +50,8 @@ public partial class ScheduledSyncs : Form
     private readonly InvoiceService _invoiceService;
     private readonly DepartmentService _departmentService;
 
-    private readonly VerifiedVouchersService _verifiedVoucherService;
-    private readonly VerifiedVouchersHandler _verifiedVoucherHandler;
+    private readonly InventoryTransferService _verifiedVoucherService;
+    private readonly InventoryTransferHandler _verifiedVoucherHandler;
 
     private readonly InventoryPostingService _inventoryPostingService;
     private readonly InventoryPostingHandler _inventoryPostingHandler;
@@ -84,8 +85,8 @@ public partial class ScheduledSyncs : Form
         _downPaymentHandler = new DownPaymentHandler(_client, _serviceLayer);
         _creditMemoHandler = new CreditMemoHandler(_client);
 
-        _verifiedVoucherService = new VerifiedVouchersService(_client);
-        _verifiedVoucherHandler = new VerifiedVouchersHandler(_client);
+        _verifiedVoucherService = new InventoryTransferService(_client);
+        _verifiedVoucherHandler = new InventoryTransferHandler(_client);
 
         _inventoryPostingService = new InventoryPostingService(_client);
         _inventoryPostingHandler = new InventoryPostingHandler();

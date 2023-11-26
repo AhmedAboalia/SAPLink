@@ -1,19 +1,16 @@
 ﻿using SAPLink.Core;
 using SAPLink.Core.Models;
 using SAPLink.Core.Models.Prism.Receiving;
-using SAPLink.Core.Models.Prism.Sales;
 using SAPLink.Core.Models.Prism.StockManagement;
 using SAPLink.Core.Models.System;
 using SAPLink.Core.Utilities;
 using SAPLink.Handler.Prism.Settings;
 using Serilog;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 using HttpClientFactory = SAPLink.Handler.Connection.HttpClientFactory;
-using PrismInvoice = SAPLink.Core.Models.Prism.Sales.Invoice;
 
-namespace SAPLink.Handler.Prism.Handlers.OutboundData.StockManagement.VerifiedVouchers;
+namespace SAPLink.Handler.Prism.Handlers.OutboundData.StockManagement.InventoryTransfer;
 
-public partial class Service
+public partial class InventoryTransferService
 {
     private readonly Credentials? _credentials;
     private readonly Subsidiaries? _subsidiary;
@@ -24,12 +21,12 @@ public partial class Service
     public StoresService? StoresService;
     public List<Store>? Stores;
 
-    static Service()
+    static InventoryTransferService()
     {
         _loger =  Helper.CreateLoggerConfiguration("Verified Vouchers", "Service", LogsTypes.OutboundData);
     }
 
-    public Service(Clients client)
+    public InventoryTransferService(Clients client)
     {
         _credentials = client.Credentials.FirstOrDefault();
         _subsidiary = _credentials?.Subsidiaries.FirstOrDefault();

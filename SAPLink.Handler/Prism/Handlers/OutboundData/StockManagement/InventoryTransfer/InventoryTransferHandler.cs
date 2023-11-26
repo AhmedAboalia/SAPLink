@@ -8,13 +8,13 @@ using Serilog;
 
 namespace SAPLink.Handler.Prism.Handlers.OutboundData.StockManagement.InventoryTransfer;
 
-public partial class Handler
+public partial class InventoryTransferHandler
 {
     private static Clients _client;
     private static ILogger _loger;
 
 
-    public Handler(Clients client)
+    public InventoryTransferHandler(Clients client)
     {
         _client = client;
         _loger = Helper.CreateLoggerConfiguration("Verified Vouchers - (Inventory Transfer)", "Handler", LogsTypes.OutboundData);
@@ -26,8 +26,6 @@ public partial class Handler
 
         var oStockTransfer = (SAPbobsCOM.StockTransfer)ClientHandler.Company.GetBusinessObject(BoObjectTypes.oStockTransfer);
 
-
-        // source warehouse
         oStockTransfer.TaxDate = Convert.ToDateTime(verifiedVoucher.CreatedDate);
         oStockTransfer.DocDate = Convert.ToDateTime(verifiedVoucher.CreatedDate);
         oStockTransfer.DueDate = Convert.ToDateTime(verifiedVoucher.CreatedDate);
