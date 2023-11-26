@@ -19,7 +19,7 @@ public class GoodsReceiptHandler
 {
     private static UnitOfWork UnitOfWork;
 
-    private readonly GoodsReceiptPoService _receivingService;
+    private readonly ReceivingService _receivingService;
     private readonly ItemsHandler _itemsHandler;
     private static ItemsService _itemsService;
     private static DepartmentService _departmentServicess;
@@ -30,7 +30,7 @@ public class GoodsReceiptHandler
     public GoodsReceiptHandler(UnitOfWork unitOfWork, Clients client)
     {
         UnitOfWork = unitOfWork;
-        _receivingService = new GoodsReceiptPoService(client);
+        _receivingService = new ReceivingService(client);
 
         _departmentServicess = new(client);
         _vendorsService = new(client);

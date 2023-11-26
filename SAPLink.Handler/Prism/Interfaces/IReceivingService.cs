@@ -4,7 +4,7 @@ using SAPLink.Core.Models.SAP.Documents;
 
 namespace SAPLink.Handler.Prism.Interfaces;
 
-public interface IGoodsReceiptPoService
+public interface IReceivingService
 {
     Task<ReceivingResponseDto> GenerateVoucherSid(string storeSid);
     Task<IRestResponse> AddConsolidateItem(string body, string receivingSid);

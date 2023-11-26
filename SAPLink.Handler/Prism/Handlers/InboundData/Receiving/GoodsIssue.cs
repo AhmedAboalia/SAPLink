@@ -21,7 +21,7 @@ public class GoodsIssueHandler
 {
     private static UnitOfWork UnitOfWork;
 
-    private readonly GoodsReceiptPoService _receivingService;
+    private readonly ReceivingService _receivingService;
     private readonly ItemsHandler _itemsHandler;
     private static ItemsService _itemsService;
     private static DepartmentService _departmentServicess;
@@ -32,7 +32,7 @@ public class GoodsIssueHandler
     public GoodsIssueHandler(UnitOfWork unitOfWork, Clients client)
     {
         UnitOfWork = unitOfWork;
-        _receivingService = new GoodsReceiptPoService(client);
+        _receivingService = new ReceivingService(client);
 
         _departmentServicess = new(client);
         _vendorsService = new(client);
@@ -65,7 +65,7 @@ public class GoodsIssueHandler
                 {
                     var result = await _itemsService.GetByCodeAsync(line.ItemCode);
                     var product = result.EntityList.FirstOrDefault();
-                    
+
                     if (product != null)
                     {
                         var itemPayload = _receivingService.CreateAddConsolidateItemPayload(product, receiving.Sid, line);
@@ -120,7 +120,7 @@ public class GoodsIssueHandler
                 //var AddGrpoTrackingNumAndNote = _receivingService.AddGrpoTrackingNumAndNote(GoodsReceiptPO.DocNum,receiving.Sid,receiving.RowVersion, GoodsReceiptPO.Remarks);
                 var receiving2 = await _receivingService.GetReceiving(receiving);
 
-           
+
                 var response = await _receivingService.AddReceiving(receiving, receiving2.RowVersion, goodsIssue.DocNum, goodsIssue.Remarks, store.Sid);
 
                 if (response.StatusCode == HttpStatusCode.OK)

@@ -14,13 +14,13 @@ using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Vendors;
 using SAPLink.Handler.Prism.Settings;
 using Serilog;
 
-namespace SAPLink.Handler.Prism.Handlers.InboundData.Receiving;
+namespace SAPLink.Handler.Prism.Handlers.InboundData.Receiving.GRPO;
 
 public class GoodsReceiptPOHandler
 {
     private static UnitOfWork UnitOfWork;
 
-    private readonly GoodsReceiptPoService _receivingService;
+    private readonly ReceivingService _receivingService;
     private readonly ItemsHandler _itemsHandler;
     private static ItemsService _itemsService;
     private static DepartmentService _departmentServicess;
@@ -33,7 +33,7 @@ public class GoodsReceiptPOHandler
     public GoodsReceiptPOHandler(UnitOfWork unitOfWork, Clients client)
     {
         UnitOfWork = unitOfWork;
-        _receivingService = new GoodsReceiptPoService(client);
+        _receivingService = new ReceivingService(client);
 
         _departmentServicess = new(client);
         _vendorsService = new(client);
@@ -88,9 +88,9 @@ public class GoodsReceiptPOHandler
                             if (item.Any())
                             {
                                 logMessage += $"Goods Receipt PO No.: {goodsReceiptPo.DocEntry} >> Line item ({line.ItemCode} : {line.ItemName}) is Added.\r\n";
-                                
+
                                 _loger.Information($"Goods Receipt PO No.: {goodsReceiptPo.DocEntry} >> Line item ({line.ItemCode} : {line.ItemName}) is Added.");
-                                
+
                                 result.Message = logMessage;
                                 yield return result;
                             }
@@ -228,7 +228,7 @@ public class GoodsReceiptPOHandler
             // Update the GRPO in the database
             int updateResult = documents.Update();
 
-            return updateResult == 0 
+            return updateResult == 0
                 ? Task.CompletedTask.IsCompletedSuccessfully
                 : Task.CompletedTask.IsFaulted;
         }

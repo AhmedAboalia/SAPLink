@@ -12,18 +12,17 @@ using HttpClientFactory = SAPLink.Handler.Connection.HttpClientFactory;
 
 namespace SAPLink.Handler.Prism.Handlers.InboundData.Receiving;
 
-public class GoodsReceiptPoService : IGoodsReceiptPoService
+public class ReceivingService : IReceivingService
 {
     private static ItemsService _itemsService;
     private static DepartmentService _departmentServicess;
     private static VendorsService _vendorsService;
-    private IGoodsReceiptPoService _receivingServiceImplementation;
 
     private readonly Clients _client;
     private readonly Credentials _credentials;
     private readonly Subsidiaries _subsidiary;
 
-    public GoodsReceiptPoService(Clients client)
+    public ReceivingService(Clients client)
     {
         _client = client;
         _credentials = _client.Credentials.FirstOrDefault();
