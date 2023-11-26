@@ -44,10 +44,10 @@ namespace SAPLink.Core.Models.Prism.StockManagement
         public string Itemsid { get; set; }
 
         [JsonProperty("origvalue")]
-        public long Origvalue { get; set; }
+        public double Origvalue { get; set; }
 
         [JsonProperty("adjvalue")]
-        public long Adjvalue { get; set; }
+        public double Adjvalue { get; set; }
 
         [JsonProperty("cost")]
         public long Cost { get; set; }
@@ -63,6 +63,9 @@ namespace SAPLink.Core.Models.Prism.StockManagement
 
         [JsonProperty("alu")]
         public string Alu { get; set; }
+
+        [JsonProperty("size")]
+        public string SalesPerUnitFactor { get; set; }
     }
 
     public partial class InventoryPosting
