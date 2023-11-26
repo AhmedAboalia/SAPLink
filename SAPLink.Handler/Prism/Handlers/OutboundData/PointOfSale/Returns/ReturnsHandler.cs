@@ -14,14 +14,12 @@ namespace SAPLink.Handler.Prism.Handlers.OutboundData.PointOfSale.Returns;
 public partial class ReturnsHandler
 {
     private static Clients _client;
-    private static InvoiceService _invoiceService;
     private readonly ServiceLayerHandler _serviceLayer;
     private static ILogger _loger;
 
-    public ReturnsHandler(Clients client, InvoiceService invoiceService, ServiceLayerHandler serviceLayer)
+    public ReturnsHandler(Clients client, ServiceLayerHandler serviceLayer)
     {
         _client = client;
-        _invoiceService = invoiceService;
         _serviceLayer = serviceLayer;
         _loger = Helper.CreateLoggerConfiguration("Return - (AR Credit Memo)", "Handler", LogsTypes.OutboundData);
     }

@@ -90,7 +90,7 @@
             tabControlManualSync = new Guna2TabControl();
             tabPage7 = new TabPage();
             treeView1 = new TreeView();
-            dataGridViewSync = new Guna2DataGridView();
+            dataGridView = new Guna2DataGridView();
             tabPage8 = new TabPage();
             textBoxLogsSync = new RichTextBox();
             guna2Panel2 = new Guna2Panel();
@@ -158,7 +158,7 @@
             tabPageSync.SuspendLayout();
             tabControlManualSync.SuspendLayout();
             tabPage7.SuspendLayout();
-            ((ISupportInitialize)dataGridViewSync).BeginInit();
+            ((ISupportInitialize)dataGridView).BeginInit();
             tabPage8.SuspendLayout();
             guna2Panel2.SuspendLayout();
             tabPageSchedule.SuspendLayout();
@@ -298,7 +298,7 @@
             // tabPage7
             // 
             tabPage7.Controls.Add(treeView1);
-            tabPage7.Controls.Add(dataGridViewSync);
+            tabPage7.Controls.Add(dataGridView);
             tabPage7.Location = new Point(4, 34);
             tabPage7.Margin = new Padding(3, 2, 3, 2);
             tabPage7.Name = "tabPage7";
@@ -318,20 +318,20 @@
             treeView1.Size = new Size(857, 291);
             treeView1.TabIndex = 2;
             // 
-            // dataGridViewSync
+            // dataGridView
             // 
-            dataGridViewSync.AllowUserToAddRows = false;
-            dataGridViewSync.AllowUserToDeleteRows = false;
-            dataGridViewSync.AllowUserToOrderColumns = true;
-            dataGridViewSync.AllowUserToResizeColumns = false;
-            dataGridViewSync.AllowUserToResizeRows = false;
+            dataGridView.AllowUserToAddRows = false;
+            dataGridView.AllowUserToDeleteRows = false;
+            dataGridView.AllowUserToOrderColumns = true;
+            dataGridView.AllowUserToResizeColumns = false;
+            dataGridView.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = Color.White;
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
             dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dataGridViewCellStyle1.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewSync.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewSync.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            dataGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(232, 234, 237);
             dataGridViewCellStyle2.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
@@ -339,8 +339,8 @@
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dataGridViewSync.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            dataGridViewSync.ColumnHeadersHeight = 30;
+            dataGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridView.ColumnHeadersHeight = 30;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.White;
             dataGridViewCellStyle3.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
@@ -348,41 +348,41 @@
             dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(239, 241, 243);
             dataGridViewCellStyle3.SelectionForeColor = Color.Black;
             dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dataGridViewSync.DefaultCellStyle = dataGridViewCellStyle3;
-            dataGridViewSync.Dock = DockStyle.Fill;
-            dataGridViewSync.GridColor = Color.FromArgb(239, 241, 243);
-            dataGridViewSync.Location = new Point(3, 2);
-            dataGridViewSync.Margin = new Padding(3, 2, 3, 2);
-            dataGridViewSync.Name = "dataGridViewSync";
-            dataGridViewSync.ReadOnly = true;
-            dataGridViewSync.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewSync.RowHeadersVisible = false;
-            dataGridViewSync.RowHeadersWidth = 51;
-            dataGridViewSync.RowTemplate.Height = 29;
-            dataGridViewSync.Size = new Size(857, 291);
-            dataGridViewSync.TabIndex = 2;
-            dataGridViewSync.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.LightGrid;
-            dataGridViewSync.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
-            dataGridViewSync.ThemeStyle.AlternatingRowsStyle.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewSync.ThemeStyle.AlternatingRowsStyle.ForeColor = SystemColors.ControlText;
-            dataGridViewSync.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
-            dataGridViewSync.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
-            dataGridViewSync.ThemeStyle.BackColor = Color.White;
-            dataGridViewSync.ThemeStyle.GridColor = Color.FromArgb(239, 241, 243);
-            dataGridViewSync.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(232, 234, 237);
-            dataGridViewSync.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewSync.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewSync.ThemeStyle.HeaderStyle.ForeColor = Color.Black;
-            dataGridViewSync.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewSync.ThemeStyle.HeaderStyle.Height = 30;
-            dataGridViewSync.ThemeStyle.ReadOnly = true;
-            dataGridViewSync.ThemeStyle.RowsStyle.BackColor = Color.White;
-            dataGridViewSync.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewSync.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            dataGridViewSync.ThemeStyle.RowsStyle.ForeColor = Color.Black;
-            dataGridViewSync.ThemeStyle.RowsStyle.Height = 29;
-            dataGridViewSync.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(239, 241, 243);
-            dataGridViewSync.ThemeStyle.RowsStyle.SelectionForeColor = Color.Black;
+            dataGridView.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridView.Dock = DockStyle.Fill;
+            dataGridView.GridColor = Color.FromArgb(239, 241, 243);
+            dataGridView.Location = new Point(3, 2);
+            dataGridView.Margin = new Padding(3, 2, 3, 2);
+            dataGridView.Name = "dataGridView";
+            dataGridView.ReadOnly = true;
+            dataGridView.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridView.RowHeadersVisible = false;
+            dataGridView.RowHeadersWidth = 51;
+            dataGridView.RowTemplate.Height = 29;
+            dataGridView.Size = new Size(857, 291);
+            dataGridView.TabIndex = 2;
+            dataGridView.Theme = Guna.UI2.WinForms.Enums.DataGridViewPresetThemes.LightGrid;
+            dataGridView.ThemeStyle.AlternatingRowsStyle.BackColor = Color.White;
+            dataGridView.ThemeStyle.AlternatingRowsStyle.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridView.ThemeStyle.AlternatingRowsStyle.ForeColor = SystemColors.ControlText;
+            dataGridView.ThemeStyle.AlternatingRowsStyle.SelectionBackColor = Color.FromArgb(231, 229, 255);
+            dataGridView.ThemeStyle.AlternatingRowsStyle.SelectionForeColor = Color.FromArgb(71, 69, 94);
+            dataGridView.ThemeStyle.BackColor = Color.White;
+            dataGridView.ThemeStyle.GridColor = Color.FromArgb(239, 241, 243);
+            dataGridView.ThemeStyle.HeaderStyle.BackColor = Color.FromArgb(232, 234, 237);
+            dataGridView.ThemeStyle.HeaderStyle.BorderStyle = DataGridViewHeaderBorderStyle.None;
+            dataGridView.ThemeStyle.HeaderStyle.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridView.ThemeStyle.HeaderStyle.ForeColor = Color.Black;
+            dataGridView.ThemeStyle.HeaderStyle.HeaightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridView.ThemeStyle.HeaderStyle.Height = 30;
+            dataGridView.ThemeStyle.ReadOnly = true;
+            dataGridView.ThemeStyle.RowsStyle.BackColor = Color.White;
+            dataGridView.ThemeStyle.RowsStyle.BorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGridView.ThemeStyle.RowsStyle.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridView.ThemeStyle.RowsStyle.ForeColor = Color.Black;
+            dataGridView.ThemeStyle.RowsStyle.Height = 29;
+            dataGridView.ThemeStyle.RowsStyle.SelectionBackColor = Color.FromArgb(239, 241, 243);
+            dataGridView.ThemeStyle.RowsStyle.SelectionForeColor = Color.Black;
             // 
             // tabPage8
             // 
@@ -1382,7 +1382,7 @@
             tabPageSync.PerformLayout();
             tabControlManualSync.ResumeLayout(false);
             tabPage7.ResumeLayout(false);
-            ((ISupportInitialize)dataGridViewSync).EndInit();
+            ((ISupportInitialize)dataGridView).EndInit();
             tabPage8.ResumeLayout(false);
             guna2Panel2.ResumeLayout(false);
             guna2Panel2.PerformLayout();
@@ -1425,7 +1425,7 @@
         private TabPage tabPageSync;
         private Guna2TabControl tabControlManualSync;
         private TabPage tabPage7;
-        private Guna2DataGridView dataGridViewSync;
+        private Guna2DataGridView dataGridView;
         private TabPage tabPage8;
         private RichTextBox textBoxLogsSync;
         private Guna2Panel guna2Panel2;

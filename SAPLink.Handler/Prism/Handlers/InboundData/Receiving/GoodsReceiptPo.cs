@@ -247,7 +247,7 @@ public class GoodsReceiptPOHandler
                         T0.[CardName],  
                         T0.[Comments],
                         T0.[U_WhsCode]
-                            FROM OPDN T0 ";
+                            FROM OPDN T0 WHERE T0.[WddStatus] = 'A' ";
 
             if (filter.IsHasValue())
             {

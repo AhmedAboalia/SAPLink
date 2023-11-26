@@ -15,20 +15,16 @@ namespace SAPLink.Handler.Prism.Handlers.OutboundData.PointOfSale.Invoice;
 
 public partial class InvoiceHandler
 {
-    private static Clients _client;
-    private static InvoiceService _invoiceService;
     private readonly ServiceLayerHandler _serviceLayer;
     private static ILogger _loger;
 
-    public InvoiceHandler(Clients client, InvoiceService invoiceService, ServiceLayerHandler serviceLayer)
+    public InvoiceHandler(ServiceLayerHandler serviceLayer)
     {
-        _client = client;
-        _invoiceService = invoiceService;
         _serviceLayer = serviceLayer;
         _loger = Helper.CreateLoggerConfiguration("Sale - (AR Invoice)", "Handler", LogsTypes.OutboundData);
 
     }
-    public async IAsyncEnumerable<RequestResult<SAPInvoice>> AddSalesInvoiceAsync(List<PrismInvoice> invoicesList, Enums.UpdateType UpdateType)
+    public async IAsyncEnumerable<RequestResult<SAPInvoice>> AddSalesInvoiceAsync(List<PrismInvoice> invoicesList, Enums.UpdateType updateType, string wholesaleCustomerCode)
     {
         var result = new RequestResult<SAPInvoice>();
         if (!_serviceLayer.Connected())
@@ -38,7 +34,10 @@ public partial class InvoiceHandler
         {
             foreach (var invoice in invoicesList)
             {
-                var customerCode = Handler.GetCustomerCodeByStoreCode(invoice.StoreCode, out string message);
+                var customerCode = updateType == Enums.UpdateType.SyncWholesale 
+                    ? wholesaleCustomerCode 
+                    : Handler.GetCustomerCodeByStoreCode(invoice.StoreCode, out string message);
+
                 var series = Handler.GetSeriesCode(invoice.StoreCode, out string message2);
 
                 result = _serviceLayer.AddSalesInvoice(invoice, customerCode, series);
@@ -51,7 +50,7 @@ public partial class InvoiceHandler
                     if (invoice.Tenders != null && SAPInvoice != null)
                     {
 
-                        if (UpdateType == Enums.UpdateType.SyncInvoice)
+                        if (updateType == Enums.UpdateType.SyncInvoice)
                         {
                             resultIncoming = IncomingPayment.AddMultiplePaymentsInvoice(invoice, SAPInvoice.DocEntry, customerCode);
                             result.Message += $"\r\n{resultIncoming.Message}";

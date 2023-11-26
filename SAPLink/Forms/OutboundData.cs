@@ -43,11 +43,11 @@ public partial class OutboundData : Form
 
         _invoiceService = new InvoiceService(_client);
         _handler = new Handler.Prism.Handlers.OutboundData.PointOfSale.Handler(_client);
-        _invoiceHandler = new InvoiceHandler(_client, _invoiceService, _serviceLayer);
-        _returnsHandler = new ReturnsHandler(_client, _invoiceService, _serviceLayer);
-        _ordersHandler = new OrdersHandler(_client, _invoiceService, _serviceLayer);
-        _downPaymentHandler = new DownPaymentHandler(_client, _invoiceService, _serviceLayer);
-        _creditMemoHandler = new CreditMemoHandler(_client, _invoiceService, _serviceLayer);
+        _invoiceHandler = new InvoiceHandler(_serviceLayer);
+        _returnsHandler = new ReturnsHandler(_client, _serviceLayer);
+        _ordersHandler = new OrdersHandler(_serviceLayer);
+        _downPaymentHandler = new DownPaymentHandler(_client, _serviceLayer);
+        _creditMemoHandler = new CreditMemoHandler(_client);
 
         _verifiedVoucherService = new VerifiedVouchersService(_client);
         _verifiedVoucherHandler = new VerifiedVouchersHandler(_client);
@@ -75,7 +75,7 @@ public partial class OutboundData : Form
             docCode = textBoxDocCode.Text;
 
         textBoxLogsSync.Clear();
-        dataGridViewSync.DataSource = null;
+        dataGridView.DataSource = null;
 
         switch (documentType)
         {
@@ -124,23 +124,23 @@ public partial class OutboundData : Form
                             }
 
                             var isWholesale = invoice.Items.Any(p => p.IsWholesale == "Yes");
-                            var wholesaleCustomerCode = invoice.Items.Any(p => p.WholesaleCustomerCode.IsHasValue());
+                            var wholesaleCustomerCode = invoice.Items.FirstOrDefault().WholesaleCustomerCode;
 
 
                             if (isARDownPayment && !CheckInvoiceExist(sInvoice.Sid, "ODPI"))
-                                await HandleDownPayment(dataGridViewSync, invoiceResult.EntityList, UpdateType.SyncInvoice);
+                                await HandleDownPayment(invoiceResult.EntityList, UpdateType.SyncInvoice);
 
                             else if (!isARDownPayment && !CheckInvoiceExist(sInvoice.Sid, "OINV"))
-                                await HandleInvoices(dataGridViewSync, invoiceResult.EntityList, UpdateType.SyncInvoice);
+                                await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncInvoice);
 
                             else if (!isWholesale && !CheckInvoiceExist(sInvoice.Sid, "OINV"))
-                                await HandleInvoices(dataGridViewSync, invoiceResult.EntityList, UpdateType.SyncWholesale);
+                                await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncWholesale, wholesaleCustomerCode);
                         }
 
                     }
                     else
                     {
-                        dataGridViewSync.DataSource = null;
+                        dataGridView.DataSource = null;
                         LogMessages($"No Available invoice/s." +
                                     $"\r\nResponse: {salesInvoices.Response.Content} " +
                                     $"\r\nResult Message: {salesInvoices.Message}" +
@@ -183,17 +183,17 @@ public partial class OutboundData : Form
                             var isCreditMemo = returnInvoice.Items.Any(p => p.Alu == "SP0012");
 
                             if (isCreditMemo && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
-                                await HandleCreditMemo(dataGridViewSync, invoiceResult.EntityList, UpdateType.SyncInvoice, treeView1);
+                                await HandleCreditMemo(invoiceResult.EntityList, UpdateType.SyncInvoice);
 
 
                             else if (!isCreditMemo && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
-                                await HandleInvoiceReturn(dataGridViewSync, invoiceResult.EntityList, UpdateType.SyncCreditMemo, treeView1);
+                                await HandleInvoiceReturn(invoiceResult.EntityList, UpdateType.SyncCreditMemo);
 
                         }
                     }
                     else
                     {
-                        dataGridViewSync.DataSource = null;
+                        dataGridView.DataSource = null;
                         LogMessages($"No Available Return invoice/s." +
                                     $"\r\nResponse: {returnInvoices.Response.Content} " +
                                     $"\r\nResult Message: {returnInvoices.Message}" +
@@ -224,13 +224,13 @@ public partial class OutboundData : Form
                                         $"\r\n\r\nSecond Request Message: {order.Message}",
                                 "");
 
-                            await HandleOrders(dataGridViewSync, order.EntityList, UpdateType.SyncInvoice, treeView1);
+                            await HandleOrders(order.EntityList, UpdateType.SyncInvoice);
                         }
 
                     }
                     else
                     {
-                        dataGridViewSync.DataSource = null;
+                        dataGridView.DataSource = null;
                         LogMessages($"No Available Order/s." +
                                     $"\r\nResponse: {customerOrders.Response.Content} " +
                                     $"\r\nResult Message: {customerOrders.Message}" +
@@ -261,7 +261,7 @@ public partial class OutboundData : Form
                             if (verifiedVoucher == null) continue;
 
                             if (!CheckStockTransferExist(verifiedVoucher.Sid))// To-Do Add Check Exist in SAP by Sid in field U_PrismSid and U_SyncToPrism
-                                await HandleVerifiedVoucher(dataGridViewSync, verifiedVoucher, UpdateType.SyncInvoice, treeView1);
+                                await HandleVerifiedVoucher(verifiedVoucher, UpdateType.SyncInvoice);
                             else
                             {
                                 var docNum = GetStockTransferDocNum(verifiedVoucher.Sid);
@@ -273,7 +273,7 @@ public partial class OutboundData : Form
                     }
                     else
                     {
-                        dataGridViewSync.DataSource = null;
+                        dataGridView.DataSource = null;
                         LogMessages($"No Available Verified Voucher/s." +
                                     $"\r\nResponse:\r\n{verifiedVouchers.Response.Content.PrettyJson()} " +
                                     $"\r\n\r\nResult Message: {verifiedVouchers.Message}" +
@@ -297,19 +297,18 @@ public partial class OutboundData : Form
         }
     }
 
-    private async Task HandleInvoices(Guna2DataGridView dt, List<PrismInvoice> invoicesList, UpdateType UpdateType)
+    private async Task HandleInvoices(List<PrismInvoice> invoicesList, UpdateType updateType, string wholesaleCustomerCode = "")
     {
         PlaySound.Click();
-        //var BpList = new List<BusinessPartner>();
-        var bindingList = dt.DataSource as BindingList<SAPInvoice>;
+        var bindingList = dataGridView.DataSource as BindingList<SAPInvoice>;
 
-        await foreach (var syncResult in _invoiceHandler.AddSalesInvoiceAsync(invoicesList, UpdateType))
+        await foreach (var syncResult in _invoiceHandler.AddSalesInvoiceAsync(invoicesList, updateType, wholesaleCustomerCode))
         {
             if (syncResult.EntityList != null && syncResult.EntityList.Count > 0)
             {
                 foreach (var invoice in syncResult.EntityList)
                 {
-                    dt.BindInvoices(ref bindingList, invoice);
+                    dataGridView.BindInvoices(ref bindingList, invoice);
                     treeView1.BindInvoices(ref bindingList, invoice);
 
                     //Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
@@ -317,7 +316,7 @@ public partial class OutboundData : Form
             }
             else
             {
-                dt.DataSource = null;
+                dataGridView.DataSource = null;
                 treeView1.Nodes.Clear();
             }
 
@@ -325,7 +324,7 @@ public partial class OutboundData : Form
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
 
-            Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+            Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
         }
@@ -401,11 +400,10 @@ public partial class OutboundData : Form
             ? oRecordSet.Fields.Item(0).Value.ToString()
             : "";
     }
-    private async Task HandleInvoiceReturn(Guna2DataGridView dt, List<PrismInvoice> invoicesList, UpdateType UpdateType, TreeView treeView)
+    private async Task HandleInvoiceReturn(List<PrismInvoice> invoicesList, UpdateType updateType)
     {
         PlaySound.Click();
-        //var BpList = new List<BusinessPartner>();
-        var bindingList = dt.DataSource as BindingList<SAPInvoice>;
+        var bindingList = dataGridView.DataSource as BindingList<SAPInvoice>;
 
         await foreach (var syncResult in _returnsHandler.AddReturnInvoiceAsync(invoicesList))
         {
@@ -413,30 +411,29 @@ public partial class OutboundData : Form
             {
                 foreach (var invoice in syncResult.EntityList)
                 {
-                    dt.BindInvoices(ref bindingList, invoice);
-                    treeView.BindInvoices(ref bindingList, invoice);
+                    dataGridView.BindInvoices(ref bindingList, invoice);
+                    treeView1.BindInvoices(ref bindingList, invoice);
 
                     //Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
                 }
             }
             else
             {
-                dt.DataSource = null;
-                treeView.Nodes.Clear();
+                dataGridView.DataSource = null;
+                treeView1.Nodes.Clear();
             }
 
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
-            Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+            Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
         }
     }
-    private async Task HandleOrders(Guna2DataGridView dt, List<PrismInvoice> invoicesList, UpdateType UpdateType, TreeView treeView)
+    private async Task HandleOrders(List<PrismInvoice> invoicesList, UpdateType UpdateType)
     {
         PlaySound.Click();
-        //var BpList = new List<BusinessPartner>();
-        var bindingList = dt.DataSource as BindingList<SAPInvoice>;
+        var bindingList = dataGridView.DataSource as BindingList<SAPInvoice>;
 
         await foreach (var syncResult in _ordersHandler.AddOrdersAsync(invoicesList))
         {
@@ -444,16 +441,16 @@ public partial class OutboundData : Form
             {
                 foreach (var invoice in syncResult.EntityList)
                 {
-                    dt.BindInvoices(ref bindingList, invoice);
-                    treeView.BindInvoices(ref bindingList, invoice);
+                    dataGridView.BindInvoices(ref bindingList, invoice);
+                    treeView1.BindInvoices(ref bindingList, invoice);
 
                     //Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
                 }
             }
             else
             {
-                dt.DataSource = null;
-                treeView.Nodes.Clear();
+                dataGridView.DataSource = null;
+                treeView1.Nodes.Clear();
             }
 
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
@@ -464,35 +461,35 @@ public partial class OutboundData : Form
         }
     }
 
-    private async Task HandleVerifiedVoucher(Guna2DataGridView dt, VerifiedVoucher verifiedVoucher, UpdateType UpdateType, TreeView treeView)
+    private async Task HandleVerifiedVoucher(VerifiedVoucher verifiedVoucher, UpdateType updateType)
     {
         PlaySound.Click();
-        var bindingList = dt.DataSource as BindingList<VerifiedVoucher>;
+        var bindingList = dataGridView.DataSource as BindingList<VerifiedVoucher>;
 
         await foreach (var syncResult in _verifiedVoucherHandler.SyncVerifiedVoucher(verifiedVoucher))
         {
             if (syncResult.EntityList != null && syncResult.EntityList.Count > 0)
             {
-                dt.BringToFront();
-                dt.Visible = true;
-                dt.BindVerifiedVouchers(ref bindingList, verifiedVoucher);
-                dt.SelectLastRow();
+                dataGridView.BringToFront();
+                dataGridView.Visible = true;
+                dataGridView.BindVerifiedVouchers(ref bindingList, verifiedVoucher);
+                dataGridView.SelectLastRow();
 
                 //treeView.BindVerifiedVouchers(ref bindingList, verifiedVoucher);
 
                 if (textBoxLogsSync.Text.Contains(syncResult.Message))
                     return;
-                Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+                Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
             }
             else
             {
-                dt.DataSource = null;
-                treeView.Nodes.Clear();
+                dataGridView.DataSource = null;
+                treeView1.Nodes.Clear();
             }
 
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
-            Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+            Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
         }
@@ -521,10 +518,10 @@ public partial class OutboundData : Form
             ? oRecordSet.Fields.Item(0).Value.ToString()
             : "";
     }
-    private async Task HandleInventoryPosting(Guna2DataGridView dt, List<InventoryPosting> inventoryPostings, UpdateType UpdateType, TreeView treeView)
+    private async Task HandleInventoryPosting(List<InventoryPosting> inventoryPostings, UpdateType updateType)
     {
         PlaySound.Click();
-        var bindingList = dt.DataSource as BindingList<InventoryPosting>;
+        var bindingList = dataGridView.DataSource as BindingList<InventoryPosting>;
 
         await foreach (var syncResult in _inventoryPostingHandler.SyncInventoryPosting(inventoryPostings))
         {
@@ -532,28 +529,28 @@ public partial class OutboundData : Form
             {
                 foreach (var count in syncResult.EntityList)
                 {
-                    //dataGridViewSync.BringToFront();
-                    //dataGridViewSync.Visible = true;
+                    //dataGridView.BringToFront();
+                    //dataGridView.Visible = true;
                     //dt.BindInventoryPosting(ref bindingList, count);
                     //dt.SelectLastRow();
 
 
-                    treeView.BringToFront();
-                    treeView.Visible = true;
-                    treeView.BindInventoryCounting(ref bindingList, count);
+                    treeView1.BringToFront();
+                    treeView1.Visible = true;
+                    treeView1.BindInventoryCounting(ref bindingList, count);
 
                     //Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
                 }
             }
             else
             {
-                dt.DataSource = null;
-                treeView.Nodes.Clear();
+                dataGridView.DataSource = null;
+                treeView1.Nodes.Clear();
             }
 
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
-            Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+            Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
         }
@@ -572,7 +569,7 @@ public partial class OutboundData : Form
 
                 if (!CheckInventoryPostingExist(inventoryPosting.Sid)) // To-Do Add Check Exist in SAP by Sid in field U_PrismSid and U_SyncToPrism
                 {
-                    await HandleInventoryPosting(dataGridViewSync, result.EntityList, UpdateType.SyncInvoice, treeView1);
+                    await HandleInventoryPosting(result.EntityList, UpdateType.SyncInvoice);
                 }
                 else
                 {
@@ -584,16 +581,15 @@ public partial class OutboundData : Form
         }
         else
         {
-            dataGridViewSync.DataSource = null;
+            dataGridView.DataSource = null;
             LogMessages($"No Available Inventory Posting/s.\r\nResponse: {result.Response.Content} \r\n\r\nResult Message: {result.Message}\r\nStatus: {result.Status}",
                 $"No Available Inventory Posting/s.");
         }
     }
-    private async Task HandleDownPayment(Guna2DataGridView dt, List<PrismInvoice> invoicesList, UpdateType UpdateType)
+    private async Task HandleDownPayment(List<PrismInvoice> invoicesList, UpdateType updateType)
     {
         PlaySound.Click();
-        //var BpList = new List<BusinessPartner>();
-        var bindingList = dt.DataSource as BindingList<SAPInvoice>;
+        var bindingList = dataGridView.DataSource as BindingList<SAPInvoice>;
 
         await foreach (var syncResult in _downPaymentHandler.AddDownPaymentAsync(invoicesList))
         {
@@ -601,10 +597,10 @@ public partial class OutboundData : Form
             {
                 foreach (var invoice in syncResult.EntityList)
                 {
-                    dt.BringToFront();
-                    dt.Visible = true;
-                    dt.BindInvoices(ref bindingList, invoice);
-                    dt.SelectLastRow();
+                    dataGridView.BringToFront();
+                    dataGridView.Visible = true;
+                    dataGridView.BindInvoices(ref bindingList, invoice);
+                    dataGridView.SelectLastRow();
 
                     //treeView.BindInvoices(ref bindingList, invoice);
 
@@ -613,22 +609,22 @@ public partial class OutboundData : Form
             }
             else
             {
-                dt.DataSource = null;
+                dataGridView.DataSource = null;
                 treeView1.Nodes.Clear();
             }
 
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
-            Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+            Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
         }
     }
-    private async Task HandleCreditMemo(Guna2DataGridView dt, List<PrismInvoice> invoicesList, UpdateType UpdateType, TreeView treeView)
+    private async Task HandleCreditMemo(List<PrismInvoice> invoicesList, UpdateType UpdateType)
     {
         PlaySound.Click();
         //var BpList = new List<BusinessPartner>();
-        var bindingList = dt.DataSource as BindingList<SAPInvoice>;
+        var bindingList = dataGridView.DataSource as BindingList<SAPInvoice>;
 
         await foreach (var syncResult in _creditMemoHandler.AddCreditMemoAsync(invoicesList))
         {
@@ -636,10 +632,10 @@ public partial class OutboundData : Form
             {
                 foreach (var invoice in syncResult.EntityList)
                 {
-                    dt.BringToFront();
-                    dt.Visible = true;
-                    dt.BindInvoices(ref bindingList, invoice);
-                    dt.SelectLastRow();
+                    dataGridView.BringToFront();
+                    dataGridView.Visible = true;
+                    dataGridView.BindInvoices(ref bindingList, invoice);
+                    dataGridView.SelectLastRow();
 
                     //treeView.BindInvoices(ref bindingList, invoice);
 
@@ -648,8 +644,8 @@ public partial class OutboundData : Form
             }
             else
             {
-                dt.DataSource = null;
-                treeView.Nodes.Clear();
+                dataGridView.DataSource = null;
+                treeView1.Nodes.Clear();
             }
 
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
@@ -918,8 +914,8 @@ public partial class OutboundData : Form
 
     private void ClearSyncDataGridView()
     {
-        dataGridViewSync.DataSource = null;
-        dataGridViewSync.Rows.Clear();
+        dataGridView.DataSource = null;
+        dataGridView.Rows.Clear();
 
         treeView1.Nodes.Clear();
     }

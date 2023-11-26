@@ -11,15 +11,11 @@ namespace SAPLink.Handler.Prism.Handlers.OutboundData.PointOfSale.Orders;
 
 public partial class OrdersHandler
 {
-    private static Clients _client;
-    private static InvoiceService _invoiceService;
     private readonly ServiceLayerHandler _serviceLayer;
     private static ILogger _loger;
 
-    public OrdersHandler(Clients client, InvoiceService invoiceService, ServiceLayerHandler serviceLayer)
+    public OrdersHandler(ServiceLayerHandler serviceLayer)
     {
-        _client = client;
-        _invoiceService = invoiceService;
         _serviceLayer = serviceLayer;
         _loger = Helper.CreateLoggerConfiguration("Customer Order - (Incoming Payment)", "Handler", LogsTypes.OutboundData);
     }

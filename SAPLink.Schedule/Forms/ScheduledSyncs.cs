@@ -78,11 +78,11 @@ public partial class ScheduledSyncs : Form
 
         _invoiceService = new InvoiceService(_client);
         _handler = new Handler.Prism.Handlers.OutboundData.PointOfSale.Handler(_client);
-        _invoiceHandler = new InvoiceHandler(_client, _invoiceService, _serviceLayer);
-        _returnsHandler = new ReturnsHandler(_client, _invoiceService, _serviceLayer);
-        _ordersHandler = new OrdersHandler(_client, _invoiceService, _serviceLayer);
-        _downPaymentHandler = new DownPaymentHandler(_client, _invoiceService, _serviceLayer);
-        _creditMemoHandler = new CreditMemoHandler(_client, _invoiceService, _serviceLayer);
+        _invoiceHandler = new InvoiceHandler(_serviceLayer);
+        _returnsHandler = new ReturnsHandler(_client, _serviceLayer);
+        _ordersHandler = new OrdersHandler(_serviceLayer);
+        _downPaymentHandler = new DownPaymentHandler(_client, _serviceLayer);
+        _creditMemoHandler = new CreditMemoHandler(_client);
 
         _verifiedVoucherService = new VerifiedVouchersService(_client);
         _verifiedVoucherHandler = new VerifiedVouchersHandler(_client);
@@ -246,12 +246,18 @@ public partial class ScheduledSyncs : Form
                     Log($"\r\nPrism Invoice No. ({sInvoice.DocumentNumber}) is Already Exist with SAP Invoice No. ({docNum}).");
                 }
 
+                var isWholesale = invoice.Items.Any(p => p.IsWholesale == "Yes");
+                var wholesaleCustomerCode = invoice.Items.FirstOrDefault().WholesaleCustomerCode;
+
 
                 if (isARDownPayment && !CheckInvoiceExist(sInvoice.Sid, "ODPI"))
                     await HandleDownPayment(invoiceResult.EntityList);
 
                 else if (!isARDownPayment && !CheckInvoiceExist(sInvoice.Sid, "OINV"))
-                    await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncInvoice);
+                    await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncInvoice,"");
+
+                else if (!isWholesale && !CheckInvoiceExist(sInvoice.Sid, "OINV"))
+                    await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncWholesale, wholesaleCustomerCode);
             }
 
         }
@@ -371,9 +377,9 @@ public partial class ScheduledSyncs : Form
             Log(syncResult.Message);
         }
     }
-    private async Task HandleInvoices(List<PrismInvoice> invoicesList, UpdateType updateType)
+    private async Task HandleInvoices(List<PrismInvoice> invoicesList, UpdateType updateType, string wholesaleCustomerCode)
     {
-        await foreach (var syncResult in _invoiceHandler.AddSalesInvoiceAsync(invoicesList, updateType))
+        await foreach (var syncResult in _invoiceHandler.AddSalesInvoiceAsync(invoicesList, updateType, wholesaleCustomerCode))
         {
             if (syncResult.EntityList != null && syncResult.EntityList.Count > 0)
             {

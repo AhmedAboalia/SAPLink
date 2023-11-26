@@ -15,15 +15,12 @@ namespace SAPLink.Handler.Prism.Handlers.OutboundData.PointOfSale.Orders;
 public partial class CreditMemoHandler
 {
     private static Clients _client;
-    private static InvoiceService _invoiceService;
-    private readonly ServiceLayerHandler _serviceLayer;
+
     private static ILogger _loger;
 
-    public CreditMemoHandler(Clients client, InvoiceService invoiceService, ServiceLayerHandler serviceLayer)
+    public CreditMemoHandler(Clients client)
     {
         _client = client;
-        _invoiceService = invoiceService;
-        _serviceLayer = serviceLayer;
         _loger = Helper.CreateLoggerConfiguration("AR Credit Memo", "Handler", LogsTypes.OutboundData);
 
     }

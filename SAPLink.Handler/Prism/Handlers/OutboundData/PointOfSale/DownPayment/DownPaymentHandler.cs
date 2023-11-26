@@ -15,14 +15,12 @@ namespace SAPLink.Handler.Prism.Handlers.OutboundData.PointOfSale.Orders;
 public partial class DownPaymentHandler
 {
     private static Clients _client;
-    private static InvoiceService _invoiceService;
     private readonly ServiceLayerHandler _serviceLayer;
     private static ILogger _loger;
 
-    public DownPaymentHandler(Clients client, InvoiceService invoiceService, ServiceLayerHandler serviceLayer)
+    public DownPaymentHandler(Clients client, ServiceLayerHandler serviceLayer)
     {
         _client = client;
-        _invoiceService = invoiceService;
         _serviceLayer = serviceLayer;
         _loger = Helper.CreateLoggerConfiguration("AR Down Payments", "Handler", LogsTypes.OutboundData);
 
