@@ -50,7 +50,7 @@ public partial class InvoiceHandler
                     if (invoice.Tenders != null && SAPInvoice != null)
                     {
 
-                        if (updateType == Enums.UpdateType.SyncInvoice)
+                        if (updateType != Enums.UpdateType.SyncWholesale)
                         {
                             resultIncoming = IncomingPayment.AddMultiplePaymentsInvoice(invoice, SAPInvoice.DocEntry, customerCode);
                             result.Message += $"\r\n{resultIncoming.Message}";

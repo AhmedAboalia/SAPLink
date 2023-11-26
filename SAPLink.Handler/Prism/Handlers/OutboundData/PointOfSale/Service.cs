@@ -73,7 +73,7 @@ public partial class InvoiceService
 
             var resource = $"/v1/rest/document" +
                            $"?filter=(subsidiary_uid,eq,{_subsidiary.SID}){dateRange}{storeFilter}{codeFilter}{docFilter}" + //AND(pos_flag3,nq,Yes)
-                           $"&cols=employee1_login_name,subsidiary_uid,store_uid,bt_first_name,bt_last_name,invoice_posted_date,document_number,order_qty,order_quantity_filled,cashier_login_name,order_qty,return_qty,sid,sold_qty,tender_name,transaction_total_amt,row_version,order_document_number,send_sale_status,order_status,send_sale_fulfillment,item.order_quantity_filled,item.order_type,receipt_type,order_type,store_number,eft_invoice_number,so_deposit_amt_paid,transaction_total_tax_amt,store_code,comment1,comment2,doc_tender_type,has_sale,has_return,pos_flag3";
+                           $"&cols=employee1_login_name,subsidiary_uid,store_uid,bt_first_name,bt_last_name,bt_companyname,bt_title,invoice_posted_date,document_number,order_qty,order_quantity_filled,cashier_login_name,order_qty,return_qty,sid,sold_qty,tender_name,transaction_total_amt,row_version,order_document_number,send_sale_status,order_status,send_sale_fulfillment,item.order_quantity_filled,item.order_type,receipt_type,order_type,store_number,eft_invoice_number,so_deposit_amt_paid,transaction_total_tax_amt,store_code,comment1,comment2,doc_tender_type,has_sale,has_return,pos_flag3";
 
             result.Message = $"Resource: \r\n" +
                              $"{query}{resource}\r\n" +
