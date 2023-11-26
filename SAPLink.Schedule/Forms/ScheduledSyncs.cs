@@ -1,7 +1,6 @@
 ﻿using Every;
 using SAPLink.Handler.Prism.Connection.Auth;
 using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Vendors;
-using SAPLink.Handler.Prism.Handlers.InboundData.Receiving;
 using SAPLink.Handler.Prism.Handlers.OutboundData.StockManagement.InventoryPosting;
 using static SAPLink.Core.Models.Schedules;
 using InventoryTransferService = SAPLink.Handler.Prism.Handlers.OutboundData.StockManagement.InventoryTransfer.InventoryTransferService;
@@ -18,8 +17,11 @@ using static SAPLink.Schedule.Forms.ScheduledSyncs;
 using static Guna.UI2.Native.WinApi;
 using SAPLink.Core.Models;
 using SAPLink.EF;
+using SAPLink.Handler.Prism.Handlers.InboundData.Receiving.GoodsReceiptPo;
 using SAPLink.Utilities;
 using SAPLink.Handler.Prism.Handlers.InboundData.Receiving.GRPO;
+using SAPLink.Handler.Prism.Handlers.InboundData.Receiving.GoodsIssue;
+using SAPLink.Handler.Prism.Handlers.InboundData.Receiving.GoodsReceipt;
 
 namespace SAPLink.Schedule.Forms;
 
@@ -36,7 +38,7 @@ public partial class ScheduledSyncs : Form
     private readonly DepartmentService _departmentServices;
     private readonly DepartmentsHandler _departmentsHandler;
     private readonly VendorsHandler _vendorsHandler;
-    private readonly GoodsReceiptPOHandler _goodsReceiptPoHandler;
+    private readonly GoodsReceiptPoHandler _goodsReceiptPoHandler;
     private readonly GoodsReceiptHandler _goodsReceiptHandler;
     private readonly GoodsIssueHandler _goodsIssueHandler;
     private readonly Credentials _credentials;
@@ -67,7 +69,7 @@ public partial class ScheduledSyncs : Form
         _client = client;
         _credentials = _client.Credentials.FirstOrDefault();
 
-        _goodsReceiptPoHandler = new GoodsReceiptPOHandler(unitOfWork, client);
+        _goodsReceiptPoHandler = new GoodsReceiptPoHandler(unitOfWork, client);
         _goodsReceiptHandler = new GoodsReceiptHandler(unitOfWork, client);
         _goodsIssueHandler = new GoodsIssueHandler(unitOfWork, client);
 

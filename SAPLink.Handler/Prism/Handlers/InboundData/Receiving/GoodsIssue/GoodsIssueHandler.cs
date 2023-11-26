@@ -1,21 +1,23 @@
 ﻿using SAPLink.EF;
-using SAPLink.Core;
 using SAPLink.Core.Models;
 using SAPLink.Core.Models.SAP.Documents;
 using SAPLink.Core.Models.System;
 using SAPbobsCOM;
 using SAPLink.Core.Utilities;
 using SAPLink.Handler.Connected_Services;
+using static SAPLink.Core.Enums;
+using Documents = SAPbobsCOM.Documents;
 using SAPLink.Handler.Integration;
 using SAPLink.Handler.SAP.Application;
 using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Departments;
 using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Inventory;
 using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Vendors;
 using Serilog;
+using ServiceLayerHelper.RefranceModels;
 
-namespace SAPLink.Handler.Prism.Handlers.InboundData.Receiving;
+namespace SAPLink.Handler.Prism.Handlers.InboundData.Receiving.GoodsIssue;
 
-public class GoodsReceiptHandler
+public class GoodsIssueHandler
 {
     private static UnitOfWork UnitOfWork;
 
@@ -27,7 +29,7 @@ public class GoodsReceiptHandler
     private static Clients _client;
     private static ILogger _loger;
 
-    public GoodsReceiptHandler(UnitOfWork unitOfWork, Clients client)
+    public GoodsIssueHandler(UnitOfWork unitOfWork, Clients client)
     {
         UnitOfWork = unitOfWork;
         _receivingService = new ReceivingService(client);
@@ -37,7 +39,8 @@ public class GoodsReceiptHandler
         _client = client;
         _itemsService = new ItemsService(client, _departmentServicess, _vendorsService);
         _itemsHandler = new ItemsHandler(unitOfWork, _itemsService, client);
-        _loger = Helper.CreateLoggerConfiguration("Goods Receipt (GR)", "Handler", LogsTypes.InboundData);
+        _loger = Helper.CreateLoggerConfiguration("Goods Issues (GI)", "Handler", LogsTypes.InboundData);
+
     }
     public async IAsyncEnumerable<RequestResult<Goods>> SyncAsync(string filter = "")
     {
@@ -45,18 +48,20 @@ public class GoodsReceiptHandler
         string logMessage = null;
 
         var outList = new List<Goods>();
-        var goodsReceipts = GetGoodsReceipts(filter);
+        var goodsIssues = GetGoodsIssues(filter);
 
-        if (goodsReceipts.Count > 0)
+        if (goodsIssues.Count > 0)
         {
-            foreach (var goodsReceipt in goodsReceipts)
+            foreach (var goodsIssue in goodsIssues)
             {
-               var store =  await GetStore(goodsReceipt);
+                //var store = await _receivingService.GetStore(goodsIssue.WarehouseCode);
+                //var storeSid = store.Sid;
+                var store = await GetStore(goodsIssue);
 
-               var IsLocationChanged = _receivingService.ChangeLocation(store.Sid);
-               var receiving = await _receivingService.GenerateVoucherSid(store.Sid);
+                var IsLocationChanged = _receivingService.ChangeLocation(store.Sid);
 
-                foreach (var line in goodsReceipt.Lines)
+                var receiving = await _receivingService.GenerateVoucherSid(store.Sid);
+                foreach (var line in goodsIssue.Lines)
                 {
                     var result = await _itemsService.GetByCodeAsync(line.ItemCode);
                     var product = result.EntityList.FirstOrDefault();
@@ -76,18 +81,29 @@ public class GoodsReceiptHandler
 
                                 if (item.Any())
                                 {
-                                    logMessage += $"Goods Receipt (GR) No.: {goodsReceipt.DocEntry} >> Line item ({line.ItemCode} : {line.ItemName}) is Added.\r\n";
-                                    _loger.Information($"Goods Receipt (GR) No.: {goodsReceipt.DocEntry} >> Line item ({line.ItemCode} : {line.ItemName}) is Added.");
+                                    logMessage += $"Goods Issue (GI) No.: {goodsIssue.DocEntry} >> Line item ({line.ItemCode} : {line.ItemName}) is Added.\r\n";
+                                    _loger.Information($"Goods Issue (GI) No.: {goodsIssue.DocEntry} >> Line item ({line.ItemCode} : {line.ItemName}) is Added.");
                                 }
                             }
                             catch (Exception e)
                             {
-                                logMessage = $"Exception: Cannot Add or Sync Goods Receipt (GR). SID: ({receiving.Sid}). \r\n" +
-                                             $"GR Line item ({line.ItemCode} : {line.ItemName}) \r\n" +
+                                logMessage = $"Exception: Cannot Add or Sync Goods Issue (GI). SID: ({receiving.Sid}). \r\n" +
+                                             $"GI Line item ({line.ItemCode} : {line.ItemName}) \r\n" +
                                              $"Response Content: {itemRespose.Content}";
-
                                 _loger.Error(logMessage);
                             }
+                        }
+                        else
+                        {
+                            logStatus = $"Cannot Add or Sync Goods Issue (GI). SID: ({receiving.Sid}).";
+                            logMessage = $"Cannot Add or Sync Goods Issue (GI). SID: ({receiving.Sid}).\r\n" +
+                                         $"Response Content:\r\n" +
+                                         $"{itemRespose.Content}";
+
+                            _loger.Information(logMessage);
+
+                            yield return new RequestResult<Goods>(StatusType.Failed, logMessage, logStatus, outList, itemRespose);
+
                         }
                     }
                     else
@@ -104,7 +120,8 @@ public class GoodsReceiptHandler
                 //var AddGrpoTrackingNumAndNote = _receivingService.AddGrpoTrackingNumAndNote(GoodsReceiptPO.DocNum,receiving.Sid,receiving.RowVersion, GoodsReceiptPO.Remarks);
                 var receiving2 = await _receivingService.GetReceiving(receiving);
 
-                var response = await _receivingService.AddReceiving(receiving, receiving2.RowVersion, goodsReceipt.DocNum, goodsReceipt.Remarks, store.Sid);
+
+                var response = await _receivingService.AddReceiving(receiving, receiving2.RowVersion, goodsIssue.DocNum, goodsIssue.Remarks, store.Sid);
 
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
@@ -112,46 +129,65 @@ public class GoodsReceiptHandler
 
                     if (goodsReceiptPos.Any())
                     {
-                        await UpdateGR(goodsReceipt.DocEntry, receiving.Sid);
+                        await UpdateGI(goodsIssue.DocEntry, receiving.Sid);
 
-                        outList.Add(goodsReceipt);
+                        outList.Add(goodsIssue);
 
-                        var message = $"Goods Receipt (GR) ({goodsReceipt.DocNum}) - SID: ({receiving.Sid}) is Added.";
+                        var message = $"Goods Issue (GI) ({goodsIssue.DocNum}) - SID: ({receiving.Sid}) is Added.";
                         logMessage += $"{message}\r\n";
                         logStatus = message;
 
                         _loger.Information(message);
-                        yield return new RequestResult<Goods>(Enums.StatusType.Success, logMessage, logStatus, outList, response);
 
-                        SyncEntityService.UpdateSyncEntityDate(UnitOfWork, Enums.UpdateType.InitialGoodsReceiptPO);
-                        SyncEntityService.UpdateSyncEntityDate(UnitOfWork, Enums.UpdateType.SyncGoodsReceiptPO);
+                        yield return new RequestResult<Goods>(StatusType.Success, logMessage, logStatus, outList, response);
+
+                        SyncEntityService.UpdateSyncEntityDate(UnitOfWork, UpdateType.InitialGoodsReceiptPO);
+                        SyncEntityService.UpdateSyncEntityDate(UnitOfWork, UpdateType.SyncGoodsReceiptPO);
                     }
                 }
                 else
                 {
-                    logStatus = $"Cannot Add or Sync Goods Receipt (GR). SID: ({receiving.Sid}).";
-                    logMessage = $"Cannot Add or Sync Goods Receipt (GR). SID: ({receiving.Sid}).\r\n" +
+                    logStatus = $"Cannot Add or Sync Goods Issue (GI). SID: ({receiving.Sid}).";
+                    logMessage = $"Cannot Add or Sync Goods Issue (GI). SID: ({receiving.Sid}).\r\n" +
                                  $"Response Content:\r\n" +
                                  $"{response.Content}";
 
-                    _loger.Error(logMessage);
-
-                    yield return new RequestResult<Goods>(Enums.StatusType.Failed, logMessage, logStatus, outList, response);
+                    _loger.Information(logMessage);
+                    yield return new RequestResult<Goods>(StatusType.Failed, logMessage, logStatus, outList, response);
 
                 }
             }
         }
         else
         {
-            logMessage = "There is no Goods Receipt available to be synced, or may it flagged as synced to prism.";
-            logStatus = "Status: there is no Goods Receipt available to be synced, or it flagged as synced to prism.";
+            logMessage = "There is no Goods Issues available to be synced, or may it flagged as synced to prism.";
+            logStatus = "Status: there is no Goods Issues available to be synced, or it flagged as synced to prism.";
 
             _loger.Information(logMessage);
 
-            yield return new RequestResult<Goods>(Enums.StatusType.Success, logMessage, logStatus, outList, new RestResponse());
+            yield return new RequestResult<Goods>(StatusType.Success, logMessage, logStatus, outList, new RestResponse());
         }
     }
 
+    private static async Task<bool> UpdateGI(string docCode, string Sid)
+    {
+        var businessPartners = (Documents)ClientHandler.Company.GetBusinessObject(BoObjectTypes.oInventoryGenExit);
+
+        if (businessPartners.GetByKey(Convert.ToInt32(docCode))) // Retrieve the GR by its Doc code
+        {
+            // Update the field value
+            businessPartners.UserFields.Fields.Item("U_SyncToPrism").Value = "Y";
+            businessPartners.UserFields.Fields.Item("U_PrismSid").Value = Sid;
+
+            // Update the GRPO in the database
+            int updateResult = businessPartners.Update();
+
+            return updateResult == 0 ? // Update successful
+                Task.CompletedTask.IsCompletedSuccessfully
+                : Task.CompletedTask.IsFaulted;
+        }
+        return false;
+    }
     private async Task<Store> GetStore(Goods good)
     {
         Store store = null;
@@ -170,39 +206,18 @@ public class GoodsReceiptHandler
 
         return store;
     }
-
-    private static async Task<bool> UpdateGR(string docCode, string Sid)
-    {
-        var businessPartners = (Documents)ClientHandler.Company.GetBusinessObject(BoObjectTypes.oInventoryGenEntry);
-
-        if (businessPartners.GetByKey(Convert.ToInt32(docCode))) // Retrieve the GR by its Doc code
-        {
-            // Update the field value
-            businessPartners.UserFields.Fields.Item("U_SyncToPrism").Value = "Y";
-            businessPartners.UserFields.Fields.Item("U_PrismSid").Value = Sid;
-
-            // Update the GRPO in the database
-            int updateResult = businessPartners.Update();
-
-            return updateResult == 0 ? // Update successful
-                Task.CompletedTask.IsCompletedSuccessfully
-                : Task.CompletedTask.IsFaulted;
-        }
-        return false;
-    }
-
-    public List<Goods> GetGoodsReceipts(string filter = "")
+    public List<Goods> GetGoodsIssues(string filter = "")
     {
         var goodsReceiptPOs = new List<Goods>();
         try
         {
             var query = @"SELECT 
-                              T0.[DocEntry], 
+                              T0.[DocEntry],
                               T0.[DocNum], 
                               T0.[DocDate], 
                               T0.[DocDueDate], 
                               T0.[Comments] 
-                                        FROM OIGN T0";
+                                        FROM OIGE T0";
 
             if (filter.IsHasValue())
             {
@@ -253,7 +268,7 @@ public class GoodsReceiptHandler
                         T0.[Quantity], 
                         T0.[Price],
                         T0.[WhsCode]
-                            FROM IGN1 T0  
+                            FROM IGE1 T0  
                                 WHERE T0.[DocEntry] = '{docEntry}'";
 
         //T0.[U_QTY], T0.[OpenQty]
@@ -274,7 +289,7 @@ public class GoodsReceiptHandler
             line.DocEntry = oRecordSet.Fields.Item("DocEntry").Value.ToString();
             line.ItemCode = oRecordSet.Fields.Item("ItemCode").Value.ToString();
             line.ItemName = oRecordSet.Fields.Item("Dscription").Value.ToString();
-            line.Quantity = Convert.ToDecimal(oRecordSet.Fields.Item("U_QTY").Value.ToString());
+            line.Quantity = -Convert.ToDecimal(oRecordSet.Fields.Item("U_QTY").Value.ToString());
             line.Price = Convert.ToDecimal(oRecordSet.Fields.Item("Price").Value.ToString());
             line.WarehouseCode = oRecordSet.Fields.Item("WhsCode").Value.ToString();
 

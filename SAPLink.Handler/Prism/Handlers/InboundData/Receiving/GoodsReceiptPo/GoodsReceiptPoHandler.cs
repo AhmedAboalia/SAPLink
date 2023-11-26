@@ -1,22 +1,21 @@
-﻿using SAPLink.EF;
+﻿using SAPbobsCOM;
 using SAPLink.Core;
 using SAPLink.Core.Models;
 using SAPLink.Core.Models.SAP.Documents;
 using SAPLink.Core.Models.System;
-using SAPbobsCOM;
 using SAPLink.Core.Utilities;
+using SAPLink.EF;
 using SAPLink.Handler.Connected_Services;
 using SAPLink.Handler.Integration;
-using SAPLink.Handler.SAP.Application;
 using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Departments;
 using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Inventory;
 using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Vendors;
-using SAPLink.Handler.Prism.Settings;
+using SAPLink.Handler.SAP.Application;
 using Serilog;
 
-namespace SAPLink.Handler.Prism.Handlers.InboundData.Receiving.GRPO;
+namespace SAPLink.Handler.Prism.Handlers.InboundData.Receiving.GoodsReceiptPo;
 
-public class GoodsReceiptPOHandler
+public class GoodsReceiptPoHandler
 {
     private static UnitOfWork UnitOfWork;
 
@@ -30,7 +29,7 @@ public class GoodsReceiptPOHandler
     public List<Store>? Stores;
 
 
-    public GoodsReceiptPOHandler(UnitOfWork unitOfWork, Clients client)
+    public GoodsReceiptPoHandler(UnitOfWork unitOfWork, Clients client)
     {
         UnitOfWork = unitOfWork;
         _receivingService = new ReceivingService(client);
