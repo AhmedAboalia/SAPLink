@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <ApplicationIcon>Images\link.ico</ApplicationIcon>
+    <ApplicationIcon>Images\SAPLink.ico</ApplicationIcon>
     <RunPostBuildEvent>Always</RunPostBuildEvent>
     <AssemblyName>$(MSBuildProjectName)</AssemblyName>
     <AssemblyVersion>1.0.1</AssemblyVersion>
@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Images\link.ico" />
+    <Content Include="Images\SAPLink.ico" />
     <Content Include="Images\Price-Checker.ico" />
   </ItemGroup>
 
