@@ -301,5 +301,29 @@ namespace SAPLink.Forms
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
             => Helper.TryKillProcess();
+
+        private void buttonPrismActiveItems_Click(object sender, EventArgs e)
+        {
+            var reports = new Reports(_unitOfWork, _serviceLayer, _departmentService, _itemsService, _client);
+            reports.Show();
+            reports.OpenFormWithSettings(0, (int)Enums.Reports.PrismActiveItems);
+            Hide();
+        }
+
+        private void buttonSyncedItems_Click(object sender, EventArgs e)
+        {
+            var reports = new Reports(_unitOfWork, _serviceLayer, _departmentService, _itemsService, _client);
+            reports.Show();
+            reports.OpenFormWithSettings(0, (int)Enums.Reports.SyncedItems);
+            Hide();
+        }
+
+        private void buttonNotSyncedItems_Click(object sender, EventArgs e)
+        {
+            var reports = new Reports(_unitOfWork, _serviceLayer, _departmentService, _itemsService, _client);
+            reports.Show();
+            reports.OpenFormWithSettings(0, (int)Enums.Reports.NotSynced);
+            Hide();
+        }
     }
 }

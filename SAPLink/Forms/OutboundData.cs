@@ -660,7 +660,7 @@ public partial class OutboundData : Form
     {
         tabControlInventory.SelectedIndex = tabControlInventoryIndex;
         comboBoxDocTypeSync.SelectedIndex = comboBoxDocTypeSyncIndex;
-        comboBoxDocTypeSchedule.SelectedIndex = comboBoxDocTypeSyncIndex;
+        //comboBoxDocTypeSchedule.SelectedIndex = comboBoxDocTypeSyncIndex;
 
         //if (comboBoxDocTypeSyncIndex == (int)Documents.Invoice)
         //    toggleARInvoice.Checked = true;
@@ -725,11 +725,11 @@ public partial class OutboundData : Form
         comboBoxBranch.DisplayMember = "DisplayMember"; // The property to display
 
 
-        var isReachable = await Helper.IsDashboardAvailable();
-        if (isReachable)
-            webViewSchedule.Visible = true;
-        else
-            webViewSchedule.Visible = false;
+        //var isReachable = await Helper.IsDashboardAvailable();
+        //if (isReachable)
+        //    webViewSchedule.Visible = true;
+        //else
+        //    webViewSchedule.Visible = false;
 
         textBoxDocCode.Focus();
     }

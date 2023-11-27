@@ -48,14 +48,14 @@ public partial class InboundData : Form
         _itemsHandler = new ItemsHandler(_unitOfWork, _itemsService, client);
         _vendorsHandler = new VendorsHandler(_unitOfWork, client);
 
-        try
-        {
-            string Url = _client.Credentials.FirstOrDefault().IntegrationUrl;
-            webViewSchedule.Source = new Uri($"{Url}/dashboard/recurring");
-        }
-        catch (Exception e)
-        {
-        }
+        //try
+        //{
+        //    string Url = _client.Credentials.FirstOrDefault().IntegrationUrl;
+        //    webViewSchedule.Source = new Uri($"{Url}/dashboard/recurring");
+        //}
+        //catch (Exception e)
+        //{
+        //}
 
         comboBoxDocTypeSchedule.SelectedIndex = (int)Documents.Departments;
         comboBoxRecurrenceSchedule.SelectedIndex = (int)Repeats.None;
@@ -596,7 +596,7 @@ public partial class InboundData : Form
     }
     private void InboundData_Resize(object sender, EventArgs e)
     {
-        webViewSchedule.Size = ClientSize - new Size(webViewSchedule.Location);
+        //webViewSchedule.Size = ClientSize - new Size(webViewSchedule.Location);
     }
 
 
@@ -617,11 +617,11 @@ public partial class InboundData : Form
 
         dateTimePickerTo.Value = DateTime.Now;
 
-        var isReachable = await Helper.IsDashboardAvailable();
-        if (isReachable)
-            webViewSchedule.Visible = true;
-        else
-            webViewSchedule.Visible = false;
+        //var isReachable = await Helper.IsDashboardAvailable();
+        //if (isReachable)
+        //    webViewSchedule.Visible = true;
+        //else
+        //    webViewSchedule.Visible = false;
 
         textBoxDocCode.Focus();
     }

@@ -35,6 +35,16 @@ public static class OutboundEnums
 
 public static class Enums
 {
+    public enum Reports
+    {
+        PrismActiveItems = 0,
+        SyncedItems = 1,
+        NotSynced = 2,
+        //GoodsReceiptPo = 3,
+        //GoodsReceipt = 4,
+        //GoodsIssue = 5,
+    }
+
     public enum PaymentTypesEnum
     {
         Cash = 0,
