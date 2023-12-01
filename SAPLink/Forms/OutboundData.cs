@@ -130,7 +130,7 @@ public partial class OutboundData : Form
                             if (isARDownPayment && !CheckInvoiceExist(sInvoice.Sid, "ODPI"))
                                 await HandleDownPayment(invoiceResult.EntityList, UpdateType.SyncInvoice);
 
-                            else if (!isARDownPayment && !CheckInvoiceExist(sInvoice.Sid, "OINV"))
+                            else if (!isARDownPayment && !isWholesale && !CheckInvoiceExist(sInvoice.Sid, "OINV"))
                                 await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncInvoice);
 
                             else if (isWholesale && !CheckInvoiceExist(sInvoice.Sid, "OINV"))
@@ -796,6 +796,7 @@ public partial class OutboundData : Form
             or UpdateType.SyncInventoryPosting
             or UpdateType.SyncOutGoodsReceipt
             or UpdateType.SyncOutGoodsIssue
+            or UpdateType.SyncWholesale
             )
         {
             //textBoxLogsSync.Clear();

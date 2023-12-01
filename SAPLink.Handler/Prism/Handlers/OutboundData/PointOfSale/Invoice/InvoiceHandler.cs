@@ -40,7 +40,7 @@ public partial class InvoiceHandler
 
                 var series = Handler.GetSeriesCode(invoice.StoreCode, out string message2);
 
-                result = _serviceLayer.AddSalesInvoice(invoice, customerCode, series);
+                result = _serviceLayer.AddSalesInvoice(invoice, customerCode, series, updateType);
 
                 var SAPInvoice = result.EntityList.FirstOrDefault();
 

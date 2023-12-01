@@ -37,6 +37,7 @@ public partial class Invoice
 
     [JsonProperty("bt_title", NullValueHandling = NullValueHandling.Ignore)]
     public string IsWholesale { get; set; }
+
     [JsonProperty("row_version", NullValueHandling = NullValueHandling.Ignore)]
     public string RowVersion { get; set; }
 
