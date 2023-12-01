@@ -1,11 +1,13 @@
 ﻿using SAPbobsCOM;
 using SAPLink.Core;
 using SAPLink.Core.Models;
+using SAPLink.Core.Models.SAP;
 using SAPLink.Core.Models.SAP.Sales;
 using SAPLink.Core.Utilities;
 using SAPLink.Handler.SAP.Application;
 using SAPLink.Handler.SAP.Connection;
 using ServiceLayerHelper.RefranceModels;
+using static SAPLink.Core.Enums;
 using DocumentLine = SAPLink.Core.Models.SAP.Sales.DocumentLine;
 using HttpClientFactory = SAPLink.Handler.Connection.HttpClientFactory;
 using PrismInvoice = SAPLink.Core.Models.Prism.Sales.Invoice;
@@ -16,7 +18,7 @@ namespace SAPLink.Handler.SAP.Handlers;
 
 partial class ServiceLayerHandler 
 {
-    public RequestResult<SAPInvoice> AddSalesInvoice(PrismInvoice PrismInvoice, string customerCode, string series)
+    public RequestResult<SAPInvoice> AddSalesInvoice(PrismInvoice PrismInvoice, string customerCode, string series, Enums.UpdateType updateType)
     {
         RequestResult<SAPInvoice> result = new RequestResult<SAPInvoice>();
 
@@ -27,7 +29,7 @@ partial class ServiceLayerHandler
 
                 var taxCodes = GetTaxCodes();
 
-                var body = CreateBody(PrismInvoice, taxCodes, customerCode, series);
+                var body = CreateBody(PrismInvoice, taxCodes, customerCode, series, updateType);
 
 
                 result.Response = HttpClientFactory.Initialize("Invoices", Method.POST, LoginModel.LoginTypes.Basic, null, body);
@@ -52,17 +54,22 @@ partial class ServiceLayerHandler
                     if (result.Response.Content.Contains("To generate this document, first define the numbering series in the Administration module"))
                         message = "Can`t find document series, Please make sure you define Whs series in Street/PO Box that Linked to document numbring (Series Name)";
                     else
-                        message = result.Response.Content;
+                    {
+                        ErrorResponse errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(result.Response.Content);
+
+                        message = errorResponse.Error.Message.Value;
+                    }
+
 
                     result.Message = $"\r\nCan`t Add Invoice - Prism Invoice ({PrismInvoice.DocumentNumber})" +
-                              $"\r\n\r\nErrors in Response Content:" +
+                              $"\r\n\r\nErrors:" +
                               $"\r\n{message}" +
                               $"\r\n\r\nRequest Body:" +
                               $"\r\n{body}";
 
                     return result;
                 }
-
+              
             }
         }
         catch (Exception e)
@@ -198,7 +205,7 @@ partial class ServiceLayerHandler
         return result;
     }
 
-    public static string CreateBody(PrismInvoice invoice, List<TaxCodes> taxCodes, string customerCode, string series)
+    public static string CreateBody(PrismInvoice invoice, List<TaxCodes> taxCodes, string customerCode, string series, UpdateType updateType)
     {
 
         var lines = new List<DocumentLine>();
@@ -209,13 +216,27 @@ partial class ServiceLayerHandler
             try { vatGroup = taxCodes.FirstOrDefault(x => x.Rate == -item.TaxPercent).Code; }
             catch (Exception e) { }
 
-            //var region = GetRegion(customerCode);
-            //if (region.IsHasValue())
-            //    region = region.Substring(1, 1);
+            
+            string region, city, branch;
 
-            //var city = GetCity(customerCode);
-            //if (city.IsHasValue())
-            //    city = city.Substring(1, 3);
+            if (updateType == UpdateType.SyncWholesale) 
+            {
+                region = GetRegion(customerCode);
+                //if (region.IsHasValue())
+                //    region = region.Substring(1, 1);
+
+                city = GetCity(customerCode);
+                //if (city.IsHasValue())
+                //    city = city.Substring(1, 3);
+
+                branch = "101003";
+            }
+            else
+            {
+                 region = customerCode.Substring(0, 1);
+                 city = customerCode.Substring(0, 3);
+                 branch = customerCode;
+            }
 
             var line = new DocumentLine
             {
@@ -225,9 +246,10 @@ partial class ServiceLayerHandler
                 UnitPrice = item.Price,
 
                 CostCenter = GetCostCenter(item.Alu),
-                Region = customerCode.Substring(0, 1),
-                City = customerCode.Substring(0, 3),
-                Branch = customerCode,
+
+                Region = region,
+                City = city,
+                Branch = branch,
                 //line.DiscountPercent = ((item.OriginalPrice - item.Price) / item.OriginalPrice) * 100;
                 //line.DiscountPercent = item.TotalDiscountPercent;
                 WarehouseCode = invoice.StoreCode
@@ -557,16 +579,33 @@ partial class ServiceLayerHandler
     }
     private static string GetRegion(string cardCode)
     {
-        //var query = $"SELECT SUBSTRING(AddID,1,1) As Region FROM OCRD WHERE CardCode = '{cardCode}')";
-        var query = $"SELECT AddID As Region FROM OCRD WHERE CardCode = '{cardCode}')";
-        return GetValueByQuery(query, "Region");
+        var query = $"SELECT SUBSTRING(AddID,1,1) As Region FROM OCRD WHERE CardCode = '{cardCode}'";
+        //var query = $"SELECT AddID As Region FROM OCRD WHERE CardCode = '{cardCode}')";
+        return GetValueByQuery(query);
     }
 
     private static string GetCity(string cardCode)
     {
-        //var query = $"SELECT SUBSTRING(AddID,1,3) As City FROM OCRD WHERE CardCode = '{cardCode}')";
-        var query = $"SELECT AddID As City FROM OCRD WHERE CardCode = '{cardCode}')";
-        return GetValueByQuery(query, "City");
+        var query = $"SELECT SUBSTRING(AddID,1,3) As City FROM OCRD WHERE CardCode = '{cardCode}'";
+        //var query = $"SELECT AddID As City FROM OCRD WHERE CardCode = '{cardCode}')";
+        return GetValueByQuery(query);
+    }
+    private static string GetValueByQuery(string query)
+    {
+        var output = "";
+        try
+        {
+            if (!ClientHandler.Company.Connected)
+                ClientHandler.InitializeClientObjects(_client, out _, out _);
+
+            var oRecordSet = (Recordset)ClientHandler.Company.GetBusinessObject(BoObjectTypes.BoRecordset);
+            oRecordSet.DoQuery(query);
+
+            output = oRecordSet.Fields.Item(0).Value.ToString();
+        }
+        catch (Exception e) { }
+
+        return output;
     }
 
     private static string GetValueByQuery(string query, string field)

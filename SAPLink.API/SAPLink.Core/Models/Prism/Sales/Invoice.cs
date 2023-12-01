@@ -32,6 +32,12 @@ public partial class Invoice
     [JsonProperty("created_datetime", NullValueHandling = NullValueHandling.Ignore)]
     public DateTime CreatedDatetime { get; set; }
 
+    [JsonProperty("bt_company_name", NullValueHandling = NullValueHandling.Ignore)]
+    public string WholesaleCustomerCode { get; set; }
+
+    [JsonProperty("bt_title", NullValueHandling = NullValueHandling.Ignore)]
+    public string IsWholesale { get; set; }
+
     [JsonProperty("row_version", NullValueHandling = NullValueHandling.Ignore)]
     public string RowVersion { get; set; }
 
@@ -228,12 +234,6 @@ public partial class Item
 
     [JsonProperty("alu", NullValueHandling = NullValueHandling.Ignore)]
     public string Alu { get; set; }
-
-    [JsonProperty("bt_companyname", NullValueHandling = NullValueHandling.Ignore)]
-    public string WholesaleCustomerCode  { get; set; }
-
-    [JsonProperty("bt_title", NullValueHandling = NullValueHandling.Ignore)]
-    public string IsWholesale { get; set; }
 
     [JsonProperty("discount_amt", NullValueHandling = NullValueHandling.Ignore)]
     public double DiscountAmt { get; set; }
