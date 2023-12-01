@@ -249,8 +249,8 @@ public partial class ScheduledSyncs : Form
                     Log($"\r\nPrism Invoice No. ({sInvoice.DocumentNumber}) is Already Exist with SAP Invoice No. ({docNum}).");
                 }
 
-                var isWholesale = invoice.Items.Any(p => p.IsWholesale == "Yes");
-                var wholesaleCustomerCode = invoice.Items.FirstOrDefault().WholesaleCustomerCode;
+                var isWholesale = invoice.IsWholesale == "Yes";
+                var wholesaleCustomerCode = invoice.WholesaleCustomerCode;
 
 
                 if (isARDownPayment && !CheckInvoiceExist(sInvoice.Sid, "ODPI"))

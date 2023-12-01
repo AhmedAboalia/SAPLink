@@ -123,8 +123,8 @@ public partial class OutboundData : Form
                                      "");
                             }
                             
-                            var isWholesale = invoice.Items.Any(p => p.IsWholesale == "B2P");
-                            var wholesaleCustomerCode = invoice.Items.FirstOrDefault().WholesaleCustomerCode;
+                            var isWholesale = invoice.IsWholesale == "B2P";
+                            var wholesaleCustomerCode = invoice.WholesaleCustomerCode;
 
 
                             if (isARDownPayment && !CheckInvoiceExist(sInvoice.Sid, "ODPI"))

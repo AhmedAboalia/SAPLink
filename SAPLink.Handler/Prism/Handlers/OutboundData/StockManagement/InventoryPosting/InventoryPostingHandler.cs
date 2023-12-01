@@ -35,24 +35,22 @@ public class InventoryPostingHandler
                 {
                     InventoryPostingLines oInventoryPostingLines = oInventoryPosting.InventoryPostingLines;
                     InventoryPostingLine oInventoryPostingLine = oInventoryPostingLines.Add();
-                    
+
                     decimal.TryParse(item.SalesPerUnitFactor, out var factor);
 
                     oInventoryPostingLine.ItemCode = item.Alu;
-                    oInventoryPostingLine.CountedQuantity = item.Adjvalue;
                     oInventoryPostingLine.WarehouseCode = count.StoreCode;
                     //oInventoryPostingLine.BinEntry = 2;
                     oInventoryPostingLine.Price = item.Price;
                     //oInventoryPostingLine.UoMCode = "Carton";
                     //oInventoryPostingLine.UoMCountedQuantity = 12;
-                    InventoryPostingBatchNumber oInventoryPostingBatchNumber = oInventoryPostingLine.InventoryPostingBatchNumbers.Add();
+                    //InventoryPostingBatchNumber oInventoryPostingBatchNumber = oInventoryPostingLine.InventoryPostingBatchNumbers.Add();
                     //oInventoryPostingBatchNumber.BatchNumber = "B-B1234";
+                    //oInventoryPostingBatchNumber.Quantity = 
 
-                    var qty = decimal.Parse(item.Origvalue.ToString());
+                    var qty = decimal.Parse(item.Adjvalue.ToString());
                     if (factor > 0)
-                        oInventoryPostingBatchNumber.Quantity = double.Parse((qty * factor).ToString());
-                    oInventoryPostingBatchNumber.Quantity = item.Origvalue;
-
+                        oInventoryPostingLine.CountedQuantity = double.Parse((qty * factor).ToString());
                 }
                 oInventoryPosting.Remarks = $"Adjustment No. : {count.Adjno}\r\nAdjustment Sid : {count.Sid}";
 

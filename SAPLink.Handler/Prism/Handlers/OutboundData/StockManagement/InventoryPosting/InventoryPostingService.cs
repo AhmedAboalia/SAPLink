@@ -63,7 +63,7 @@ public partial class InventoryPostingService
             //
             var resource = $"/adjustment" +
                            $"?filter=(sbssid,eq,{_subsidiary.SID}){storeCodeFilter}{DocCodeFilter}{filter}" +
-                           $"&cols=sid,rowversion,adjno,adjtype,status,verified,reasonname,storecode,creatingdoctype,adjitem.sid,adjitem.rowversion,adjitem.itemsid,adjitem.alu,adjitem.origvalue,adjitem.adjvalue,adjitem.description1,adjitem.description2,adjitem.price,adjitem.cost";
+                           $"&cols=sid,rowversion,adjno,adjtype,status,verified,reasonname,storecode,creatingdoctype,adjitem.sid,adjitem.rowversion,adjitem.itemsid,adjitem.alu,adjitem.origvalue,adjitem.adjvalue,adjitem.description1,adjitem.description2,adjitem.price,adjitem.cost,adjitem.size";
 
             //api/backoffice/adjustment
             //?filter=(creatingdoctype,eq,1)AND(status,eq,4)

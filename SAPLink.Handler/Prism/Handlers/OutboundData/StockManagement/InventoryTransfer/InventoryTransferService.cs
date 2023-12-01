@@ -23,7 +23,7 @@ public partial class InventoryTransferService
 
     static InventoryTransferService()
     {
-        _loger =  Helper.CreateLoggerConfiguration("Verified Vouchers", "Service", LogsTypes.OutboundData);
+        _loger = Helper.CreateLoggerConfiguration("Verified Vouchers", "Service", LogsTypes.OutboundData);
     }
 
     public InventoryTransferService(Clients client)
@@ -33,7 +33,7 @@ public partial class InventoryTransferService
         TaxCodesService = new TaxCodesService(client);
         StoresService = new StoresService(client);
     }
-   
+
     public async Task<RequestResult<VerifiedVoucher>> GetVerifiedVoucher(DateTime dateFrom, DateTime dateTo, int storeNumber, string vouchersNo = "")
     {
         RequestResult<VerifiedVoucher> result = new();
@@ -61,7 +61,7 @@ public partial class InventoryTransferService
 
             var resource = $"/receiving" +
                            $"?filter=(sbssid,eq,{_subsidiary.SID}){storeFilter}{dateRange}AND(status,eq,4)AND(vouclass,ne,2)AND(slipflag,eq,1)AND(verified,eq,true){vouchersFilter}" + ///AND(Trackingno,ne,)
-                           $"&cols=slipsbsno,createddatetime,vouno,storesid,origstoresid,slipstorecode,rowversion,storeno,storename,storecode,origstorecode,origstoreno,origstorename,recvitem.qty,recvitem.itemsid,recvitem.udfvalue5,recvitem.itemsid,recvitem.description1,recvitem.description2,recvitem.alu,recvitem.price,recvitem.upc,pkgno,slipno";
+                           $"&cols=slipsbsno,createddatetime,vouno,storesid,origstoresid,slipstorecode,rowversion,storeno,storename,storecode,origstorecode,origstoreno,origstorename,recvitem.qty,recvitem.itemsid,recvitem.udfvalue5,recvitem.itemsid,recvitem.size,recvitem.description1,recvitem.description2,recvitem.alu,recvitem.price,recvitem.upc,pkgno,slipno";
 
             result.Message = $"Resource: \r\n" +
                              $"{query}{resource}\r\n" +
@@ -136,7 +136,7 @@ public partial class InventoryTransferService
                              $"{body.PrettyJson()}\r\n" +
                              $"\r\nStatus Code: {result.Response.StatusCode}" +
                              $"\r\nContent: {result.Response.Content.PrettyJson()}\r\n";
-            
+
             _loger.Error(result.Message);
         }
 
