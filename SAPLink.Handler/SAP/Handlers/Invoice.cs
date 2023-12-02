@@ -52,7 +52,7 @@ partial class ServiceLayerHandler
                     var message = "";
                     result.Status = Enums.StatusType.NotFound;
                     if (result.Response.Content.Contains("To generate this document, first define the numbering series in the Administration module"))
-                        message = "Can`t find document series, Please make sure you define Whs series in Street/PO Box that Linked to document numbring (Series Name)";
+                        message = "Can`t find document series, Please make sure you define Whs series in Street/PO Box that Linked to document numbering (Series Name)";
                     else
                     {
                         ErrorResponse errorResponse = JsonConvert.DeserializeObject<ErrorResponse>(result.Response.Content);

@@ -7,7 +7,7 @@ namespace SAPLink.EF
         private readonly ApplicationDbContext _context;
         public IBaseRepository<Clients> Clients { get; }
         public IBaseRepository<Credentials> Credentials { get; }
-        public IBaseRepository<Recurrence> Recurrences { get; }
+        //public IBaseRepository<Recurrence> Recurrences { get; }
         public IBaseRepository<Subsidiary> Subsidiary { get; }
         public IBaseRepository<Schedules> Schedule { get; }
         public IBaseRepository<Logger<ItemMasterData>> ItemsLog { get; }
@@ -27,7 +27,7 @@ namespace SAPLink.EF
             Subsidiary = new BaseRepository<Subsidiary>(context);
             Schedule = new BaseRepository<Schedules>(context);
 
-            Recurrences = new BaseRepository<Recurrence>(context);
+            //Recurrences = new BaseRepository<Recurrence>(context);
             Sync = new BaseRepository<Sync>(context);
 
             ItemsLog = new BaseRepository<Logger<ItemMasterData>>(context);

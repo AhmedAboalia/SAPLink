@@ -51,7 +51,7 @@ namespace SAPLink.Forms
                     _ => "Unknown Environment"
                 };
 
-                label4.Text += $"({databaseType})";
+                label4.Text = $"{databaseType} ({_credentials.CompanyDb})";
             }
 
             timer1.Enabled = true;

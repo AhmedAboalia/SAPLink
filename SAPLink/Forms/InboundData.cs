@@ -445,22 +445,22 @@ public partial class InboundData : Form
             var document = (Documents)comboBoxDocTypeSchedule.SelectedIndex;
             try
             {
-                var recurrence = _unitOfWork.Recurrences.Find(x => x.Document == document);
-                if (recurrence != null)
-                {
-                    recurrence.Document = document;
-                    recurrence.Recurring = (Enums.Repeats)comboBoxRecurrenceSchedule.SelectedIndex;
+                //var recurrence = _unitOfWork.Recurrences.Find(x => x.Document == document);
+                //if (recurrence != null)
+                //{
+                //    recurrence.Document = document;
+                //    recurrence.Recurring = (Enums.Repeats)comboBoxRecurrenceSchedule.SelectedIndex;
 
-                    if (recurrence.Recurring == Enums.Repeats.Hourly)
-                        recurrence.Interval = int.Parse(TextBoxIntervalSchedule.Text);
-                    else
-                        recurrence.DayOfWeek = (DayOfWeek)ComboBoxDaysOfWeek.SelectedIndex;
+                //    if (recurrence.Recurring == Enums.Repeats.Hourly)
+                //        recurrence.Interval = int.Parse(TextBoxIntervalSchedule.Text);
+                //    else
+                //        recurrence.DayOfWeek = (DayOfWeek)ComboBoxDaysOfWeek.SelectedIndex;
 
-                    _unitOfWork.Recurrences.Update(recurrence);
-                    _unitOfWork.SaveChanges();
-                    ScheduleService.Run(recurrence, out var message);
-                    textBoxLogsSchedule.Text = message;
-                }
+                //    _unitOfWork.Recurrences.Update(recurrence);
+                //    _unitOfWork.SaveChanges();
+                //    ScheduleService.Run(recurrence, out var message);
+                //    textBoxLogsSchedule.Text = message;
+                //}
             }
             catch (Exception exception)
             {
@@ -517,7 +517,7 @@ public partial class InboundData : Form
         PlaySound.Click();
 
         var recurrence = new Recurrence();
-        recurrence = ScheduleService.GetRecurrence(_unitOfWork, selectedIndex, recurrence);
+        //recurrence = ScheduleService.GetRecurrence(_unitOfWork, selectedIndex, recurrence);
 
         comboBoxRecurrenceSchedule.SelectedIndex = (int)recurrence.Recurring;
         TextBoxIntervalSchedule.Text = recurrence.Interval.ToString();
@@ -536,7 +536,7 @@ public partial class InboundData : Form
     {
         tabControlInventory.SelectedIndex = tabControlInventoryIndex;
         comboBoxDocTypeSync.SelectedIndex = comboBoxDocTypeSyncIndex;
-        comboBoxDocTypeSchedule.SelectedIndex = comboBoxDocTypeSyncIndex;
+        //comboBoxDocTypeSchedule.SelectedIndex = comboBoxDocTypeSyncIndex;
 
         if (comboBoxDocTypeSyncIndex == (int)Documents.Departments)
             toggleDepartments.Checked = true;

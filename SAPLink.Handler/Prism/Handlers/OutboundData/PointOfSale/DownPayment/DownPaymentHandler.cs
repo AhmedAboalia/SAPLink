@@ -45,6 +45,10 @@ public partial class DownPaymentHandler
                 if (result.EntityList.Any())
                 {
                     result.Message += $"\r\nSuccessfully Update Sync Flag for the Prism invoice No.: {invoice.DocumentNumber} - SAP A/R Down Payments No: {SAPInvoice.DocNum}.\r\n " ;
+
+                    var resultIncoming = IncomingPayment.AddMultiplePaymentsInvoice(invoice, SAPInvoice.DocEntry, customerCode);
+                    result.Message += $"\r\n{resultIncoming.Message}";
+                    result.Status = resultIncoming.Status;
                 }
                 _loger.Information(result.Message);
 

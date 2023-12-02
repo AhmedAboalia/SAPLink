@@ -1532,6 +1532,7 @@
             buttonScheduleIt.DisabledState.CustomBorderColor = Color.DarkGray;
             buttonScheduleIt.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             buttonScheduleIt.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            buttonScheduleIt.Enabled = false;
             buttonScheduleIt.FillColor = Color.WhiteSmoke;
             buttonScheduleIt.Font = new Font("Bahnschrift", 9F, FontStyle.Regular, GraphicsUnit.Point);
             buttonScheduleIt.ForeColor = Color.DarkSlateGray;
@@ -1551,7 +1552,7 @@
             buttonScheduleIt.TextAlign = HorizontalAlignment.Left;
             buttonScheduleIt.TextOffset = new Point(40, -15);
             buttonScheduleIt.Tile = true;
-            buttonScheduleIt.Click += buttonScheduleIt_Click;
+            //buttonScheduleIt.Click += buttonScheduleIt_Click;
             // 
             // label2
             // 
