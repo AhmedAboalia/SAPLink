@@ -152,6 +152,19 @@ public class GoodsReceiptPoHandler
                     {
                         var updated = await UpdateGrpo(goodsReceiptPo.DocEntry, receiving.Sid);
 
+
+                       // check if grpolines has a return 
+                       if (goodsReceiptPo.Lines.Any(x=>x.IsReturn))
+                       {
+                           var goodsReturnDocNum = goodsReceiptPo.Lines.FirstOrDefault().RefDocEntry;
+                           // Get return data
+                           var goodsReturn = GetGoodsReturn(goodsReturnDocNum);
+                           var goodsReturnLines = GetGoodsReturnLines(goodsReturnDocNum);
+
+                           // Add goods return 
+
+                       }
+
                         outList.Add(goodsReceiptPo);
 
                         var message = $"Goods Receipt PO No. ({goodsReceiptPo.DocEntry}) - SID: ({receiving.Sid}) is Added.";
@@ -196,6 +209,9 @@ public class GoodsReceiptPoHandler
             yield return new RequestResult<Goods>(Enums.StatusType.Success, logMessage, logStatus, outList, new RestResponse());
         }
     }
+
+   
+
     private async Task<Store> GetStore(Goods good)
     {
         Store store = null;
@@ -233,6 +249,97 @@ public class GoodsReceiptPoHandler
         }
         return false;
     }
+    private List<Goods> GetGoodsReturn(string docNum)
+    {
+        var goodsReceiptPOs = new List<Goods>();
+        try
+        {
+            var query = @$"SELECT 
+                        T0.[DocEntry], 
+                        T0.[DocNum], 
+                        T0.[CardCode], 
+                        T0.[CardName],  
+                        T0.[Comments],
+                        T0.[U_WhsCode]
+                            FROM ORPD T0 WHERE T0.[DocNum] = '{docNum}'";
+
+         
+
+            if (!ClientHandler.Company.Connected)
+            {
+                ClientHandler.InitializeClientObjects(_client, out _, out _);
+            }
+
+            var oRecordSet = (Recordset)ClientHandler.Company.GetBusinessObject(BoObjectTypes.BoRecordset);
+            oRecordSet.DoQuery(query);
+
+
+
+            for (var i = 0; i < oRecordSet.RecordCount; i++)
+            {
+                var grpo = new Goods();
+                grpo.DocEntry = oRecordSet.Fields.Item("DocEntry").Value.ToString();
+                grpo.DocNum = oRecordSet.Fields.Item("DocNum").Value.ToString();
+                grpo.CardCode = oRecordSet.Fields.Item("CardCode").Value.ToString();
+                grpo.CardName = oRecordSet.Fields.Item("CardName").Value.ToString();
+                grpo.WarehouseCode = oRecordSet.Fields.Item("U_WhsCode").Value.ToString();
+                grpo.Remarks = oRecordSet.Fields.Item("Comments").Value.ToString();
+
+                grpo.Lines = GetGoodsReceiptPOLines(grpo.DocEntry);
+
+                goodsReceiptPOs.Add(grpo);
+
+                oRecordSet.MoveNext();
+            }
+        }
+        catch (Exception e)
+        {
+
+        }
+
+        return goodsReceiptPOs;
+    }
+
+    public List<Line> GetGoodsReturnLines(string docEntry = "")
+    {
+        var query = @$"SELECT 
+                        T0.[DocEntry],
+                        T0.[ItemCode], 
+                        T0.[Dscription], 
+                        T0.[U_QTY], 
+                        T0.[Quantity], 
+                        T0.[Price],
+                        T0.[WhsCode],
+                            FROM RPD1 T0  
+                                WHERE T0.[DocEntry] = '{docEntry}'";
+
+        if (!ClientHandler.Company.Connected)
+        {
+            ClientHandler.InitializeClientObjects(_client, out _, out _);
+        }
+
+        var oRecordSet = (Recordset)ClientHandler.Company.GetBusinessObject(BoObjectTypes.BoRecordset);
+        oRecordSet.DoQuery(query);
+
+        var lines = new List<Line>();
+
+        for (var i = 0; i < oRecordSet.RecordCount; i++)
+        {
+            var line = new Line();
+            line.DocEntry = oRecordSet.Fields.Item("DocEntry").Value.ToString();
+            line.ItemCode = oRecordSet.Fields.Item("ItemCode").Value.ToString();
+            line.ItemName = oRecordSet.Fields.Item("Dscription").Value.ToString();
+            line.Quantity = Convert.ToDecimal(oRecordSet.Fields.Item("U_QTY").Value.ToString());
+            line.Price = Convert.ToDecimal(oRecordSet.Fields.Item("Price").Value.ToString());
+            line.WarehouseCode = oRecordSet.Fields.Item("WhsCode").Value.ToString();
+
+            lines.Add(line);
+
+            oRecordSet.MoveNext();
+        }
+
+        return lines;
+    }
 
     public List<Goods> GetGoodsReceiptPOs(string filter = "")
     {
@@ -246,11 +353,15 @@ public class GoodsReceiptPoHandler
                         T0.[CardName],  
                         T0.[Comments],
                         T0.[U_WhsCode]
-                            FROM OPDN T0 WHERE T0.[WddStatus] = 'A' ";
+                            FROM OPDN T0 ";
 
             if (filter.IsHasValue())
             {
-                query += filter;
+                query += filter + " AND T0.[WddStatus] IN ('A','P') ";
+            }
+            else
+            {
+                query += "WHERE T0.[WddStatus] IN ('A','P') ";
             }
 
             if (!ClientHandler.Company.Connected)
@@ -297,7 +408,9 @@ public class GoodsReceiptPoHandler
                         T0.[U_QTY], 
                         T0.[Quantity], 
                         T0.[Price],
-                        T0.[WhsCode]
+                        T0.[WhsCode],
+                        T0.[TargetType], 
+                        T0.[TrgetEntry]
                             FROM PDN1 T0  
                                 WHERE T0.[DocEntry] = '{docEntry}'";
 
@@ -321,6 +434,8 @@ public class GoodsReceiptPoHandler
             line.Quantity = Convert.ToDecimal(oRecordSet.Fields.Item("U_QTY").Value.ToString());
             line.Price = Convert.ToDecimal(oRecordSet.Fields.Item("Price").Value.ToString());
             line.WarehouseCode = oRecordSet.Fields.Item("WhsCode").Value.ToString();
+            line.IsReturn = oRecordSet.Fields.Item("TargetType").Value.ToString() == "21"; //21 is goods return
+            line.RefDocEntry = oRecordSet.Fields.Item("TrgetEntry").Value.ToString();
 
             lines.Add(line);
 

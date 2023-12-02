@@ -18,4 +18,6 @@ public class Line
     public decimal Quantity { get; set; }
     public decimal Price { get; set; }
     public string WarehouseCode { get; set; }
+    public bool IsReturn { get; set; }
+    public string RefDocEntry { get; set; }
 }
