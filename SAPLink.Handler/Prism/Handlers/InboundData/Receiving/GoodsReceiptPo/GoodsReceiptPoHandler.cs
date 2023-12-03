@@ -357,11 +357,11 @@ public class GoodsReceiptPoHandler
 
             if (filter.IsHasValue())
             {
-                query += filter + " AND T0.[WddStatus] IN ('A','P') ";
+                query += filter + " AND T0.[WddStatus] IN ('Y','A','P') ";
             }
             else
             {
-                query += "WHERE T0.[WddStatus] IN ('A','P') ";
+                query += "WHERE T0.[WddStatus] IN ('Y','A','P') ";
             }
 
             if (!ClientHandler.Company.Connected)
