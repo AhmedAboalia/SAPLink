@@ -131,19 +131,120 @@ public class GoodsReceiptPoHandler
                     {
                         var updated = await UpdateGrpo(goodsReceiptPo.DocEntry, receiving.Sid);
 
-                       // check if grpolines has a return 
-                       if (goodsReceiptPo.Lines.Any(x=>x.IsReturn))
-                       {
-                           var goodsReturnDocNum = goodsReceiptPo.Lines.FirstOrDefault().RefDocEntry;
-                           // Get return data
-                           var goodsReturn = GetGoodsReturn(goodsReturnDocNum);
-                           var goodsReturnLines = GetGoodsReturnLines(goodsReturnDocNum);
+                        //-------------------------------------------------------------------------------------------------
+
+                        #region Add Goods Return
+                        
+                        // Check if GRPO if has a return 
+                        if (goodsReceiptPo.Lines.Any(x => x.IsReturn) &&
+                            goodsReceiptPo.Lines.FirstOrDefault().RefDocEntry.IsHasValue())
+                        {
+                            var goodsReturnDocNum = goodsReceiptPo.Lines.FirstOrDefault().RefDocEntry;
+
+                            // Get return data
+                            var goodsReturn = GetGoodsReturn(goodsReturnDocNum).FirstOrDefault();
+                            var goodsReturnLines = GetGoodsReturnLines(goodsReturnDocNum);
 
                             // Add goods return 
+                            var IsReturnLocationChanged = _receivingService.ChangeLocation(store.Sid);
+                            var goodsReturnReceiving = await _receivingService.GenerateVoucherSid(store.Sid);
 
+                            foreach (var line in goodsReturnLines)
+                            {
+                                var itemResult = await _itemsService.GetByCodeAsync(line.ItemCode);
+                                var product = itemResult.EntityList.FirstOrDefault();
+
+                                if (product != null)
+                                {
+                                    var itemPayload =
+                                        _receivingService.CreateAddConsolidateItemPayload(product,
+                                            goodsReturnReceiving.Sid, line);
+
+                                    var itemRespose =
+                                        await _receivingService.AddConsolidateItem(itemPayload,
+                                            goodsReturnReceiving.Sid);
+
+                                    if (itemRespose.StatusCode == HttpStatusCode.OK)
+                                    {
+                                        var item = JsonConvert.DeserializeObject<OdataPrism<Goods>>(itemRespose.Content)
+                                            .Data
+                                            .ToList();
+
+                                        if (item.Any())
+                                        {
+                                            logMessage +=
+                                                $"Goods Receipt Return No.: {goodsReceiptPo.DocEntry} >> Line item ({line.ItemCode} : {line.ItemName}) is Added.";
+
+                                            LogInformation(logMessage);
+                                            result.Message = logMessage + "\r\n";
+                                            yield return result;
+                                        }
+                                        else
+                                        {
+                                            logMessage =
+                                                $"Exception: Cannot Add or Sync Receiving. SID: ({goodsReturnReceiving.Sid}). \r\n" +
+                                                $"Po Line item ({line.ItemCode} : {line.ItemName}) \r\n" +
+                                                $"Response Content: {itemRespose.Content}";
+
+                                            LogError(logMessage);
+                                            result.Message = logMessage;
+                                            yield return result;
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    var logsMessage =
+                                        $"Item Not found {line.ItemCode} : {line.ItemName} will try to add it.";
+                                    logMessage += $"\r\n{logsMessage}\n\r";
+
+                                    LogInformation(logMessage);
+
+                                    result.Message = logMessage;
+                                    yield return result;
+
+                                    var filterQuery = $" AND T0.ItemCode = '{line.ItemCode}'";
+                                    _itemsHandler.SyncAsync(filterQuery);
+                                }
+                            }
 
                             //voutype (receiving = 0, return = 1)
+
+                            //var AddGrpoTrackingNumAndNote = _receivingService.AddGrpoTrackingNumAndNote(GoodsReceiptPO.DocNum,receiving.Sid,receiving.RowVersion, GoodsReceiptPO.Remarks);
+                            var goodsReturnsReceiving = await _receivingService.GetReceiving(goodsReturnReceiving);
+
+                            var newResponse = await _receivingService.AddReceiving(goodsReturnReceiving, 
+                                goodsReturnsReceiving.RowVersion, goodsReturn.DocNum, goodsReturn.Remarks, store.Sid);
+
+                            if (response.StatusCode == HttpStatusCode.OK)
+                            {
+                                var goodsReturns = JsonConvert.DeserializeObject<OdataPrism<Goods>>(response.Content)
+                                    .Data.ToList();
+
+                                if (goodsReturns.Any())
+                                {
+                                    var ReturnUpdated = await UpdateGoodsReturn(goodsReturn.DocEntry, goodsReturnsReceiving.Sid);
+
+                                    var messages = $"Goods Receipt PO No. ({goodsReturn.DocEntry}) - SID: ({goodsReturnsReceiving.Sid}) is Added.";
+
+                                    if (updated)
+                                        messages += $"\r\nSuccessfully Update Sync Flag for Goods Receipt PO No. ({goodsReturn.DocEntry}).";
+
+                                    else
+                                        messages += $" Can`t Updated Sync Flag for Goods Receipt PO No. ({goodsReturn.DocEntry}).";
+
+                                    logMessage += $"{messages}\r\n";
+                                    logStatus = messages;
+
+                                    LogInformation(messages);
+                                }
+                            }
                         }
+
+                        #endregion
+
+                        //-------------------------------------------------------------------------------------------------
+
 
                         outList.Add(goodsReceiptPo);
 
@@ -214,6 +315,26 @@ public class GoodsReceiptPoHandler
     public static async Task<bool> UpdateGrpo(string docCode, string Sid)
     {
         var documents = (Documents)ClientHandler.Company.GetBusinessObject(BoObjectTypes.oPurchaseDeliveryNotes);
+
+        if (documents.GetByKey(Convert.ToInt32(docCode))) // Retrieve the GRPO by its Doc code
+        {
+            // Update the field value
+            documents.UserFields.Fields.Item("U_SyncToPrism").Value = "Y";
+            documents.UserFields.Fields.Item("U_PrismSid").Value = Sid;
+
+            // Update the GRPO in the database
+            int updateResult = documents.Update();
+
+            return updateResult == 0
+                ? Task.CompletedTask.IsCompletedSuccessfully
+                : Task.CompletedTask.IsFaulted;
+        }
+        return false;
+    }
+
+    public static async Task<bool> UpdateGoodsReturn(string docCode, string Sid)
+    {
+        var documents = (Documents)ClientHandler.Company.GetBusinessObject(BoObjectTypes.oPurchaseReturns);
 
         if (documents.GetByKey(Convert.ToInt32(docCode))) // Retrieve the GRPO by its Doc code
         {
