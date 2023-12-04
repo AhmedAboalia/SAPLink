@@ -86,11 +86,10 @@ public class GoodsReceiptPoHandler
 
                             if (item.Any())
                             {
-                                logMessage += $"Goods Receipt PO No.: {goodsReceiptPo.DocEntry} >> Line item ({line.ItemCode} : {line.ItemName}) is Added.\r\n";
+                                logMessage += $"Goods Receipt PO No.: {goodsReceiptPo.DocEntry} >> Line item ({line.ItemCode} : {line.ItemName}) is Added.";
 
-                                _loger.Information($"Goods Receipt PO No.: {goodsReceiptPo.DocEntry} >> Line item ({line.ItemCode} : {line.ItemName}) is Added.");
-
-                                result.Message = logMessage;
+                                LogInformation(logMessage);
+                                result.Message = logMessage + "\r\n";
                                 yield return result;
                             }
                             else
@@ -99,7 +98,7 @@ public class GoodsReceiptPoHandler
                                              $"Po Line item ({line.ItemCode} : {line.ItemName}) \r\n" +
                                              $"Response Content: {itemRespose.Content}";
 
-                                _loger.Error(logMessage);
+                                LogError(logMessage);
                                 result.Message = logMessage;
                                 yield return result;
                             }
@@ -110,7 +109,7 @@ public class GoodsReceiptPoHandler
                         var message = $"Item Not found {line.ItemCode} : {line.ItemName} will try to add it.";
                         logMessage += $"\r\n{message}\n\r";
 
-                        _loger.Information(logMessage);
+                        LogInformation(logMessage);
 
                         result.Message = logMessage;
                         yield return result;
@@ -122,26 +121,6 @@ public class GoodsReceiptPoHandler
                 //var AddGrpoTrackingNumAndNote = _receivingService.AddGrpoTrackingNumAndNote(GoodsReceiptPO.DocNum,receiving.Sid,receiving.RowVersion, GoodsReceiptPO.Remarks);
                 var Grpo = await _receivingService.GetReceiving(receiving);
 
-                var credentials = _client.Credentials.FirstOrDefault();
-                //var storeSid = credentials.Subsidiaries.FirstOrDefault().ActiveStoreSid;
-
-
-                //store = null;
-                //var storeCode = "";
-                //try
-                //{
-                //    storeCode = goodsReceiptPo.WarehouseCode != null
-                //        ? goodsReceiptPo.WarehouseCode
-                //        : goodsReceiptPo.Lines.Select(x => x.WarehouseCode).FirstOrDefault();
-
-                //    store = await _receivingService.GetStore(storeCode);
-                //}
-                //catch (Exception e)
-                //{
-                //    _loger.Error(e,"Cant find Store Code.");
-                //}
-
-
                 var response = await _receivingService.AddReceiving(receiving, Grpo.RowVersion, goodsReceiptPo.DocNum, goodsReceiptPo.Remarks, store.Sid);
 
                 if (response.StatusCode == HttpStatusCode.OK)
@@ -152,7 +131,6 @@ public class GoodsReceiptPoHandler
                     {
                         var updated = await UpdateGrpo(goodsReceiptPo.DocEntry, receiving.Sid);
 
-
                        // check if grpolines has a return 
                        if (goodsReceiptPo.Lines.Any(x=>x.IsReturn))
                        {
@@ -161,9 +139,11 @@ public class GoodsReceiptPoHandler
                            var goodsReturn = GetGoodsReturn(goodsReturnDocNum);
                            var goodsReturnLines = GetGoodsReturnLines(goodsReturnDocNum);
 
-                           // Add goods return 
+                            // Add goods return 
 
-                       }
+
+                            //voutype (receiving = 0, return = 1)
+                        }
 
                         outList.Add(goodsReceiptPo);
 
@@ -178,7 +158,8 @@ public class GoodsReceiptPoHandler
                         logMessage += $"{message}\r\n";
                         logStatus = message;
 
-                        _loger.Information(logMessage);
+                        LogInformation(message);
+
 
                         yield return new RequestResult<Goods>(Enums.StatusType.Success, logMessage, logStatus, outList, response);
 
@@ -193,7 +174,7 @@ public class GoodsReceiptPoHandler
                                  $"Response Content:\r\n" +
                                  $"{response.Content}";
 
-                    _loger.Error(logMessage);
+                    LogError(logMessage);
 
                     yield return new RequestResult<Goods>(Enums.StatusType.Failed, logMessage, logStatus, outList, response);
 
@@ -443,5 +424,15 @@ public class GoodsReceiptPoHandler
         }
 
         return lines;
+    }
+
+    private void LogInformation(string message)
+    {
+        _loger.Information(message);
+    }
+
+    private void LogError(string message)
+    {
+        _loger.Error(message);
     }
 }
