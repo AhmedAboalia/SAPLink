@@ -12,6 +12,7 @@ using SAPLink.Handler.SAP.Application;
 using Serilog;
 using ServiceLayerHelper.RefranceModels;
 using SAPLink.Core.Models.SAP.MasterData.BusinessPartners;
+using Newtonsoft.Json.Linq;
 
 namespace SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Inventory
 {
@@ -80,8 +81,24 @@ namespace SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Inventory
 
                         _loger.Error(message, "Error occurred.");
 
+                        // Parse the JSON
+                        JObject response = JObject.Parse(resultItemSync.Response.Content);
+
+                        // Get the value of the "errors" property
+                        string errorsString = response["errors"]?.ToString();
+                        string errors = "";
+                        if (!string.IsNullOrEmpty(errorsString))
+                        {
+                            List<Error> errorsList = JsonConvert.DeserializeObject<List<Error>>(errorsString);
+ 
+                            foreach (Error error in errorsList)
+                            {
+                                errors += $"Code: {error.ErrorCode}\r\nMessage: {error.ErrorMessage}\r\n";
+                            }
+                        }
+
                         var requestResult = new RequestResult<ItemMasterData>(
-                            Enums.StatusType.Failed, $"{remaining}.\r\n{message}", status, itemsOut, resultItemSync.Response);
+                            Enums.StatusType.Failed, $"{remaining}.\r\n\r\nErrors: \r\n{errors}\r\n\r\n{message}", status, itemsOut, resultItemSync.Response);
 
                         yield return requestResult;
                     }
@@ -112,8 +129,24 @@ namespace SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Inventory
 
                         _loger.Error(message, "Error occurred.");
 
+                        // Parse the JSON
+                        JObject response = JObject.Parse(resultSync.Response.Content);
+
+                        // Get the value of the "errors" property
+                        string errorsString = response["errors"]?.ToString();
+                        string errors = "";
+                        if (!string.IsNullOrEmpty(errorsString))
+                        {
+                            List<Error> errorsList = JsonConvert.DeserializeObject<List<Error>>(errorsString);
+
+                            foreach (Error error in errorsList)
+                            {
+                                errors += $"Code: {error.ErrorCode}\r\nMessage: {error.ErrorMessage}\r\n";
+                            }
+                        }
+
                         var requestResult = new RequestResult<ItemMasterData>(
-                            Enums.StatusType.Failed, $"{remaining}.\r\n{message}", status, itemsOut, resultSync.Response);
+                            Enums.StatusType.Failed, $"{remaining}.\r\n\r\nErrors: \r\n{errors}\r\n\r\n{message}", status, itemsOut, resultSync.Response);
 
                         yield return requestResult;
                     }
