@@ -15,6 +15,7 @@ public static class InboundEnums
         GoodsReceiptPo = 3,
         GoodsReceipt = 4,
         GoodsIssue = 5,
+        GoodsReturn = 6,
     }
 
 }
@@ -124,6 +125,11 @@ public static class Enums
                     Initial = UpdateType.InitialInGoodsIssue,
                     Sync = UpdateType.SyncInGoodsIssue
                 },
+                InboundDocuments.GoodsReturn => new SyncType
+                {
+                    Initial = UpdateType.InitialInGoodsReturn,
+                    Sync = UpdateType.SyncInGoodsReturn
+                },
                 _ => null
             };
         }
@@ -210,6 +216,9 @@ public static class Enums
 
         InitialWholesale,
         SyncWholesale,
+
+        InitialInGoodsReturn,
+        SyncInGoodsReturn,
     }
     public enum BoDataServerTypes
     {

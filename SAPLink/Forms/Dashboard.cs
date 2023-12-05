@@ -69,13 +69,13 @@ namespace SAPLink.Forms
             //else
             //    CheckConnectivity(false);
 
-            var isReachable = await Helper.IsDashboardAvailable();
-            if (isReachable)
-            {
-                //hangFireDashBoard.Visible = true;
-                guna2Button6.Visible = true;
-                guna2GroupBox3.Visible = true;
-            }
+            //var isReachable = await Helper.IsDashboardAvailable();
+            //if (isReachable)
+            //{
+            //    //hangFireDashBoard.Visible = true;
+            //    guna2Button6.Visible = true;
+            //    guna2GroupBox3.Visible = true;
+            //}
         }
         private void UpdateWelcomingMessage()
         {
@@ -175,24 +175,24 @@ namespace SAPLink.Forms
 
 
         private void buttonInvoice_Click(object sender, EventArgs e)
-            => OpenOutboundData(OutboundEnums.Documents.SalesInvoice);
+            => OpenOutboundData(OutboundDocuments.SalesInvoice);
 
         private void buttonReturnInvoice_Click(object sender, EventArgs e)
-            => OpenOutboundData(OutboundEnums.Documents.ReturnInvoice);
+            => OpenOutboundData(OutboundDocuments.ReturnInvoice);
         private void buttonStockTransfer_Click(object sender, EventArgs e)
-            => OpenOutboundData(OutboundEnums.Documents.StockTransfer);
+            => OpenOutboundData(OutboundDocuments.StockTransfer);
 
         private void buttonStockTaking_Click(object sender, EventArgs e)
-            => OpenOutboundData(OutboundEnums.Documents.InventoryPosting);
+            => OpenOutboundData(OutboundDocuments.InventoryPosting);
 
         private void buttonOutGoodsReceipt_Click(object sender, EventArgs e)
-            => OpenOutboundData(OutboundEnums.Documents.GoodsReceipt);
+            => OpenOutboundData(OutboundDocuments.GoodsReceipt);
 
         private void buttonOrders_Click(object sender, EventArgs e)
-            => OpenOutboundData(OutboundEnums.Documents.CustomerOrder);
+            => OpenOutboundData(OutboundDocuments.CustomerOrder);
 
         private void buttonOutGoodsIssue_Click(object sender, EventArgs e)
-            => OpenOutboundData(OutboundEnums.Documents.GoodsIssue);
+            => OpenOutboundData(OutboundDocuments.GoodsIssue);
 
         private void buttonSettings_Click(object sender, EventArgs e)
         {
@@ -212,7 +212,7 @@ namespace SAPLink.Forms
             Hide();
         }
 
-        private void OpenOutboundData(OutboundEnums.Documents documents)
+        private void OpenOutboundData(OutboundDocuments documents)
         {
             var outboundData = new OutboundData(_unitOfWork, _serviceLayer, _departmentService, _itemsService, _client);
             outboundData.Show();
@@ -325,5 +325,8 @@ namespace SAPLink.Forms
             reports.OpenFormWithSettings(0, (int)Enums.Reports.NotSynced);
             Hide();
         }
+
+        private void buttonGoodsReturn_Click(object sender, EventArgs e) 
+            => OpenInboundData(Documents.GoodsReturn);
     }
 }

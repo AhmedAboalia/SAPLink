@@ -103,5 +103,30 @@ namespace SAPLink.Utilities.Forms
                 gridView.Rows[gridView.Rows.Count - 1].Cells["#"].Value = gridView.Rows.Count.ToString();
             }
         }
+
+        public static void BindGoodsReturn(this Guna2DataGridView gridView, ref BindingList<Goods>? bindingList, Goods item)
+        {
+            if (bindingList == null)
+            {
+                bindingList = new BindingList<Goods>();
+                var source = new BindingSource(bindingList, null);
+                gridView.DataSource = source;
+
+                // Add the count column as the first column.
+                DataGridViewTextBoxColumn countColumn = new DataGridViewTextBoxColumn();
+                countColumn.Name = "#";
+                countColumn.HeaderText = "#";
+                gridView.Columns.Insert(0, countColumn); // Insert the count column at the first position.
+            }
+
+            if (!bindingList.Contains(item))
+            {
+                bindingList.Add(item);
+                //gridView.Refresh(); // Refresh the grid after adding the new row
+
+                // Set the count value.
+                gridView.Rows[gridView.Rows.Count - 1].Cells["#"].Value = gridView.Rows.Count.ToString();
+            }
+        }
     }
 }

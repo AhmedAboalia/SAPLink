@@ -23,6 +23,7 @@ public partial class InboundData : Form
     private readonly GoodsReceiptPoHandler _goodsReceiptPoHandler;
     private readonly GoodsReceiptHandler _goodsReceiptHandler;
     private readonly GoodsIssueHandler _goodsIssueHandler;
+    private readonly GoodsReturnHandler _goodsReturnPoHandler;
     private readonly Credentials _credentials;
 
     public InboundData(UnitOfWork unitOfWork, ServiceLayerHandler serviceLayer, DepartmentService departmentServices,
@@ -39,6 +40,7 @@ public partial class InboundData : Form
         _goodsReceiptPoHandler = new GoodsReceiptPoHandler(unitOfWork, client);
         _goodsReceiptHandler = new GoodsReceiptHandler(unitOfWork, client);
         _goodsIssueHandler = new GoodsIssueHandler(unitOfWork, client);
+        _goodsReturnPoHandler = new GoodsReturnHandler(unitOfWork, client);
 
         _departmentsHandler = new DepartmentsHandler(_unitOfWork, _departmentServices, client);
         _itemsHandler = new ItemsHandler(_unitOfWork, _itemsService, client);
@@ -88,27 +90,34 @@ public partial class InboundData : Form
                 await HandleItems(dataGridViewInitial, "");
         }
 
-        if (toggleGoodsRecepitPO.Checked)
-        {
-            PlaySound.Click();
-            var result = MessageBox.Show("The initial Goods Recepit PO (GRPO) may take some time. Would you like to continue?", "Confirmation", MessageBoxButtons.YesNoCancel);
-            if (result == DialogResult.Yes)
-                await HandleGoodsReceiptPo(dataGridViewInitial, "");
-        }
-        if (toggleGoodsRecepit.Checked)
-        {
-            PlaySound.Click();
-            var result = MessageBox.Show("The initial Goods Recepit (GR) may take some time. Would you like to continue?", "Confirmation", MessageBoxButtons.YesNoCancel);
-            if (result == DialogResult.Yes)
-                await HandleGoodsReceipt(dataGridViewInitial, "");
-        }
-        if (toggleGoodsIssue.Checked)
-        {
-            PlaySound.Click();
-            var result = MessageBox.Show("The initial Goods Issue (GI) may take some time. Would you like to continue?", "Confirmation", MessageBoxButtons.YesNoCancel);
-            if (result == DialogResult.Yes)
-                await HandleGoodsIssue(dataGridViewInitial, "");
-        }
+        //if (toggleGoodsReceiptPO.Checked)
+        //{
+        //    PlaySound.Click();
+        //    var result = MessageBox.Show("The initial Goods Receipt PO (GRPO) may take some time. Would you like to continue?", "Confirmation", MessageBoxButtons.YesNoCancel);
+        //    if (result == DialogResult.Yes)
+        //        await HandleGoodsReceiptPo(dataGridViewInitial, "");
+        //}
+        //if (toggleGoodsReceipt.Checked)
+        //{
+        //    PlaySound.Click();
+        //    var result = MessageBox.Show("The initial Goods Receipt (GR) may take some time. Would you like to continue?", "Confirmation", MessageBoxButtons.YesNoCancel);
+        //    if (result == DialogResult.Yes)
+        //        await HandleGoodsReceipt(dataGridViewInitial, "");
+        //}
+        //if (toggleGoodsIssue.Checked)
+        //{
+        //    PlaySound.Click();
+        //    var result = MessageBox.Show("The initial Goods Issue (GI) may take some time. Would you like to continue?", "Confirmation", MessageBoxButtons.YesNoCancel);
+        //    if (result == DialogResult.Yes)
+        //        await HandleGoodsIssue(dataGridViewInitial, "");
+        //}
+        //if (toggleGoodsReturn.Checked)
+        //{
+        //    PlaySound.Click();
+        //    var result = MessageBox.Show("The initial Goods Return may take some time. Would you like to continue?", "Confirmation", MessageBoxButtons.YesNoCancel);
+        //    if (result == DialogResult.Yes)
+        //        await HandleGoodsIssue(dataGridViewInitial, "");
+        //}
     }
 
     private async void buttonSyncNow_Click(object sender, EventArgs e)
@@ -156,6 +165,12 @@ public partial class InboundData : Form
                     var shouldSyncGi = ShouldSync("Goods Issues", Documents.GoodsIssue, " WHERE", out filter);
                     if (shouldSyncGi)
                         await HandleGoodsIssue(dataGridViewSync, filter);
+                    break;
+
+                case Documents.GoodsReturn:
+                    var shouldSyncGoodsReturn = ShouldSync("Goods Return", Documents.GoodsReturn, " WHERE", out filter);
+                    if (shouldSyncGoodsReturn)
+                        await HandleGoodsReturn(dataGridViewSync, filter);
                     break;
             }
         }
@@ -359,8 +374,8 @@ public partial class InboundData : Form
             }
 
             Log(filter.IsNullOrEmpty()
-                ? UpdateType.InitialItems
-                : UpdateType.SyncItems, syncResult.Message, syncResult.StatusBarMessage);
+                ? UpdateType.InitialGoodsReceiptPO
+                : UpdateType.SyncGoodsReceiptPO, syncResult.Message, syncResult.StatusBarMessage);
 
         }
     }
@@ -387,8 +402,8 @@ public partial class InboundData : Form
             }
 
             Log(filter.IsNullOrEmpty()
-                ? UpdateType.InitialItems
-                : UpdateType.SyncItems, syncResult.Message, syncResult.StatusBarMessage);
+                ? UpdateType.InitialInGoodsReceipt
+                : UpdateType.SyncInGoodsReceipt, syncResult.Message, syncResult.StatusBarMessage);
         }
     }
     private async Task HandleGoodsIssue(Guna2DataGridView dt, string filter)
@@ -416,14 +431,45 @@ public partial class InboundData : Form
             LogMessage += syncResult.Message;
 
             Log(filter.IsNullOrEmpty()
-                ? UpdateType.InitialItems
-                : UpdateType.SyncItems, syncResult.Message, syncResult.StatusBarMessage);
+                ? UpdateType.InitialInGoodsIssue
+                : UpdateType.SyncInGoodsIssue, syncResult.Message, syncResult.StatusBarMessage);
+        }
+        //Log(filter.IsNullOrEmpty()
+        //    ? UpdateType.InitialInGoodsIssue
+        //    : UpdateType.SyncInGoodsIssue, LogMessage, "");
+    }
+    private async Task HandleGoodsReturn(Guna2DataGridView dt, string filter)
+    {
+        PlaySound.Click();
+        var bindingList = dt.DataSource as BindingList<Goods>;
+
+        var LogMessage = "";
+        await foreach (var syncResult in _goodsReturnPoHandler.SyncAsync(filter))
+        {
+            if (syncResult.EntityList != null && syncResult.EntityList.Count > 0)
+            {
+                foreach (var itemMaster in syncResult.EntityList)
+                {
+                    dt.BindGoodsReceiptPo(ref bindingList, itemMaster);
+                    dt.SelectLastRow();
+                }
+            }
+            else
+            {
+                dt.DataSource = null;
+
+            }
+
+            LogMessage += syncResult.Message;
+
+            Log(filter.IsNullOrEmpty()
+                ? UpdateType.InitialInGoodsReturn
+                : UpdateType.SyncInGoodsReturn, syncResult.Message, syncResult.StatusBarMessage);
         }
         Log(filter.IsNullOrEmpty()
-            ? UpdateType.InitialItems
-            : UpdateType.SyncItems, LogMessage, "");
+            ? UpdateType.InitialInGoodsReturn
+            : UpdateType.SyncInGoodsReturn, LogMessage, "");
     }
-
     private string GetSyncQueryByRangOfDate()
     {
         var dateFrom = dateTimePickerFrom.Value.ToSAPDateFormat();
@@ -550,7 +596,11 @@ public partial class InboundData : Form
         if (updateType == UpdateType.SyncVendors ||
             updateType == UpdateType.SyncDepartment ||
             updateType == UpdateType.SyncItems ||
-            updateType == UpdateType.SyncGoodsReceiptPO)
+            updateType == UpdateType.SyncGoodsReceiptPO ||
+            updateType == UpdateType.SyncInGoodsReceipt ||
+            updateType == UpdateType.SyncInGoodsIssue ||
+            updateType == UpdateType.SyncInGoodsReturn
+            )
         {
             textBoxLogsSync.Clear();
             textBoxLogsSync.AppendText(message);
@@ -681,14 +731,17 @@ public partial class InboundData : Form
             if (toggleItems.Checked)
                 toggleItems.InvokeUnCheck();
 
-            if (toggleGoodsRecepitPO.Checked)
-                toggleGoodsRecepitPO.InvokeUnCheck();
+            if (toggleGoodsReceiptPO.Checked)
+                toggleGoodsReceiptPO.InvokeUnCheck();
 
-            if (toggleGoodsRecepit.Checked)
-                toggleGoodsRecepit.InvokeUnCheck();
+            if (toggleGoodsReceipt.Checked)
+                toggleGoodsReceipt.InvokeUnCheck();
 
             if (toggleGoodsIssue.Checked)
                 toggleGoodsIssue.InvokeUnCheck();
+
+            if (toggleGoodsReturn.Checked)
+                toggleGoodsReturn.InvokeUnCheck();
         }
     }
 
@@ -706,14 +759,17 @@ public partial class InboundData : Form
             if (toggleItems.Checked)
                 toggleItems.InvokeUnCheck();
 
-            if (toggleGoodsRecepitPO.Checked)
-                toggleGoodsRecepitPO.InvokeUnCheck();
+            if (toggleGoodsReceiptPO.Checked)
+                toggleGoodsReceiptPO.InvokeUnCheck();
 
-            if (toggleGoodsRecepit.Checked)
-                toggleGoodsRecepit.InvokeUnCheck();
+            if (toggleGoodsReceipt.Checked)
+                toggleGoodsReceipt.InvokeUnCheck();
 
             if (toggleGoodsIssue.Checked)
                 toggleGoodsIssue.InvokeUnCheck();
+
+            if (toggleGoodsReturn.Checked)
+                toggleGoodsReturn.InvokeUnCheck();
         }
     }
     private void ToggleItemsCheckedChanged(object sender, EventArgs e)
@@ -730,20 +786,23 @@ public partial class InboundData : Form
             //if (toggleItems.Checked)
             //    toggleItems.InvokeUnCheck();
 
-            if (toggleGoodsRecepitPO.Checked)
-                toggleGoodsRecepitPO.InvokeUnCheck();
+            if (toggleGoodsReceiptPO.Checked)
+                toggleGoodsReceiptPO.InvokeUnCheck();
 
-            if (toggleGoodsRecepit.Checked)
-                toggleGoodsRecepit.InvokeUnCheck();
+            if (toggleGoodsReceipt.Checked)
+                toggleGoodsReceipt.InvokeUnCheck();
 
             if (toggleGoodsIssue.Checked)
                 toggleGoodsIssue.InvokeUnCheck();
+
+            if (toggleGoodsReturn.Checked)
+                toggleGoodsReturn.InvokeUnCheck();
         }
     }
 
-    private void toggleGoodsRecepitPO_CheckedChanged(object sender, EventArgs e)
+    private void toggleGoodsReceiptPO_CheckedChanged(object sender, EventArgs e)
     {
-        if (toggleGoodsRecepitPO.Checked)
+        if (toggleGoodsReceiptPO.Checked)
         {
             PlaySound.Click();
             if (toggleDepartments.Checked)
@@ -755,20 +814,23 @@ public partial class InboundData : Form
             if (toggleItems.Checked)
                 toggleItems.InvokeUnCheck();
 
-            //if (toggleGoodsRecepitPO.Checked)
-            //    toggleGoodsRecepitPO.InvokeUnCheck();
+            //if (toggleGoodsReceiptPO.Checked)
+            //    toggleGoodsReceiptPO.InvokeUnCheck();
 
-            if (toggleGoodsRecepit.Checked)
-                toggleGoodsRecepit.InvokeUnCheck();
+            if (toggleGoodsReceipt.Checked)
+                toggleGoodsReceipt.InvokeUnCheck();
 
             if (toggleGoodsIssue.Checked)
                 toggleGoodsIssue.InvokeUnCheck();
+
+            if (toggleGoodsReturn.Checked)
+                toggleGoodsReturn.InvokeUnCheck();
         }
     }
 
-    private void toggleGoodsRecepit_CheckedChanged(object sender, EventArgs e)
+    private void toggleGoodsReceipt_CheckedChanged(object sender, EventArgs e)
     {
-        if (toggleGoodsRecepit.Checked)
+        if (toggleGoodsReceipt.Checked)
         {
             PlaySound.Click();
             if (toggleDepartments.Checked)
@@ -780,14 +842,17 @@ public partial class InboundData : Form
             if (toggleItems.Checked)
                 toggleItems.InvokeUnCheck();
 
-            if (toggleGoodsRecepitPO.Checked)
-                toggleGoodsRecepitPO.InvokeUnCheck();
+            if (toggleGoodsReceiptPO.Checked)
+                toggleGoodsReceiptPO.InvokeUnCheck();
 
-            //if (toggleGoodsRecepit.Checked)
-            //    toggleGoodsRecepit.InvokeUnCheck();
+            //if (toggleGoodsReceipt.Checked)
+            //    toggleGoodsReceipt.InvokeUnCheck();
 
             if (toggleGoodsIssue.Checked)
                 toggleGoodsIssue.InvokeUnCheck();
+
+            if (toggleGoodsReturn.Checked)
+                toggleGoodsReturn.InvokeUnCheck();
         }
     }
 
@@ -805,17 +870,46 @@ public partial class InboundData : Form
             if (toggleItems.Checked)
                 toggleItems.InvokeUnCheck();
 
-            if (toggleGoodsRecepitPO.Checked)
-                toggleGoodsRecepitPO.InvokeUnCheck();
+            if (toggleGoodsReceiptPO.Checked)
+                toggleGoodsReceiptPO.InvokeUnCheck();
 
-            if (toggleGoodsRecepit.Checked)
-                toggleGoodsRecepit.InvokeUnCheck();
+            if (toggleGoodsReceipt.Checked)
+                toggleGoodsReceipt.InvokeUnCheck();
 
             //if (toggleGoodsIssue.Checked)
             //    toggleGoodsIssue.InvokeUnCheck();
+
+            if (toggleGoodsReturn.Checked)
+                toggleGoodsReturn.InvokeUnCheck();
         }
     }
+    private void toggleGoodsReturn_CheckedChanged(object sender, EventArgs e)
+    {
+        if (toggleGoodsReturn.Checked)
+        {
+            PlaySound.Click();
+            if (toggleDepartments.Checked)
+                toggleDepartments.InvokeUnCheck();
 
+            if (toggleVendors.Checked)
+                toggleVendors.InvokeUnCheck();
+
+            if (toggleItems.Checked)
+                toggleItems.InvokeUnCheck();
+
+            if (toggleGoodsReceiptPO.Checked)
+                toggleGoodsReceiptPO.InvokeUnCheck();
+
+            if (toggleGoodsReceipt.Checked)
+                toggleGoodsReceipt.InvokeUnCheck();
+
+            if (toggleGoodsIssue.Checked)
+                toggleGoodsIssue.InvokeUnCheck();
+
+            //if (toggleGoodsReturn.Checked)
+            //    toggleGoodsReturn.InvokeUnCheck();
+        }
+    }
     private void PlayClickSound(object sender, EventArgs e)
         => PlaySound.KeyPress();
 
@@ -899,7 +993,7 @@ public partial class InboundData : Form
             buttonSyncNow.PerformClick();
     }
 
-    private void toggleGoodsRecepitPO_KeyDown(object sender, KeyEventArgs e)
+    private void toggleGoodsReceiptPO_KeyDown(object sender, KeyEventArgs e)
     {
         if (e.KeyCode == Keys.Enter)
             buttonInitialzeNow.PerformClick();
