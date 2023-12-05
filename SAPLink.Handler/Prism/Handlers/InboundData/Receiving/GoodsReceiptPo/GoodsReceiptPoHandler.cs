@@ -94,7 +94,7 @@ public class GoodsReceiptPoHandler
                             }
                             else
                             {
-                                logMessage = $"Exception: Cannot Add or Sync Receiving. SID: ({receiving.Sid}). \r\n" +
+                                logMessage = $"Exception: Cannot Add or Sync Receiving (Receive). SID: ({receiving.Sid}). \r\n" +
                                              $"Po Line item ({line.ItemCode} : {line.ItemName}) \r\n" +
                                              $"Response Content: {itemRespose.Content}";
 
@@ -147,6 +147,7 @@ public class GoodsReceiptPoHandler
 
                             // Add goods return 
                             var IsReturnLocationChanged = _receivingService.ChangeLocation(store.Sid);
+
                             var goodsReturnReceiving = await _receivingService.GenerateVoucherSid(store.Sid);
 
                             foreach (var line in goodsReturnLines)
@@ -156,24 +157,18 @@ public class GoodsReceiptPoHandler
 
                                 if (product != null)
                                 {
-                                    var itemPayload =
-                                        _receivingService.CreateAddConsolidateItemPayload(product,
-                                            goodsReturnReceiving.Sid, line);
+                                    var itemPayload = _receivingService.CreateAddConsolidateItemPayload(product, goodsReturnReceiving.Sid, line);
 
-                                    var itemRespose =
-                                        await _receivingService.AddConsolidateItem(itemPayload,
-                                            goodsReturnReceiving.Sid);
+                                    var itemResponse = await _receivingService.AddConsolidateItem(itemPayload, goodsReturnReceiving.Sid);
 
-                                    if (itemRespose.StatusCode == HttpStatusCode.OK)
+                                    if (itemResponse.StatusCode == HttpStatusCode.OK)
                                     {
-                                        var item = JsonConvert.DeserializeObject<OdataPrism<Goods>>(itemRespose.Content)
-                                            .Data
-                                            .ToList();
+                                        var item = JsonConvert.DeserializeObject<OdataPrism<Goods>>(itemResponse.Content).Data.ToList();
 
                                         if (item.Any())
                                         {
                                             logMessage +=
-                                                $"Goods Receipt Return No.: {goodsReceiptPo.DocEntry} >> Line item ({line.ItemCode} : {line.ItemName}) is Added.";
+                                                $"Goods Return No.: {goodsReceiptPo.DocEntry} >> Line item ({line.ItemCode} : {line.ItemName}) is Added.";
 
                                             LogInformation(logMessage);
                                             result.Message = logMessage + "\r\n";
@@ -182,9 +177,9 @@ public class GoodsReceiptPoHandler
                                         else
                                         {
                                             logMessage =
-                                                $"Exception: Cannot Add or Sync Receiving. SID: ({goodsReturnReceiving.Sid}). \r\n" +
-                                                $"Po Line item ({line.ItemCode} : {line.ItemName}) \r\n" +
-                                                $"Response Content: {itemRespose.Content}";
+                                                $"Exception: Cannot Add or Sync Receiving (Return). SID: ({goodsReturnReceiving.Sid}). \r\n" +
+                                                $"Goods Return Line item ({line.ItemCode} : {line.ItemName}) \r\n" +
+                                                $"Response Content: {itemResponse.Content}";
 
                                             LogError(logMessage);
                                             result.Message = logMessage;
@@ -212,9 +207,9 @@ public class GoodsReceiptPoHandler
 
                             //var AddGrpoTrackingNumAndNote = _receivingService.AddGrpoTrackingNumAndNote(GoodsReceiptPO.DocNum,receiving.Sid,receiving.RowVersion, GoodsReceiptPO.Remarks);
                             var goodsReturnsReceiving = await _receivingService.GetReceiving(goodsReturnReceiving);
+                            var isReceivingChangedToReturn = _receivingService.ChangeReceivingToReturn(goodsReturnsReceiving.Sid, goodsReturnsReceiving.RowVersion);
 
-                            var newResponse = await _receivingService.AddReceiving(goodsReturnReceiving, 
-                                goodsReturnsReceiving.RowVersion, goodsReturn.DocNum, goodsReturn.Remarks, store.Sid);
+                            var newResponse = await _receivingService.AddReceiving(goodsReturnReceiving, goodsReturnsReceiving.RowVersion, goodsReturn.DocNum, goodsReturn.Remarks, store.Sid);
 
                             if (response.StatusCode == HttpStatusCode.OK)
                             {
@@ -225,13 +220,13 @@ public class GoodsReceiptPoHandler
                                 {
                                     var ReturnUpdated = await UpdateGoodsReturn(goodsReturn.DocEntry, goodsReturnsReceiving.Sid);
 
-                                    var messages = $"Goods Receipt PO No. ({goodsReturn.DocEntry}) - SID: ({goodsReturnsReceiving.Sid}) is Added.";
+                                    var messages = $"Goods Return No. ({goodsReturn.DocEntry}) - SID: ({goodsReturnsReceiving.Sid}) is Added.";
 
                                     if (updated)
-                                        messages += $"\r\nSuccessfully Update Sync Flag for Goods Receipt PO No. ({goodsReturn.DocEntry}).";
+                                        messages += $"\r\nSuccessfully Update Sync Flag for Goods Return No. ({goodsReturn.DocEntry}).";
 
                                     else
-                                        messages += $" Can`t Updated Sync Flag for Goods Receipt PO No. ({goodsReturn.DocEntry}).";
+                                        messages += $" Can`t Updated Sync Flag for Goods Return No. ({goodsReturn.DocEntry}).";
 
                                     logMessage += $"{messages}\r\n";
                                     logStatus = messages;

@@ -104,6 +104,24 @@ public class ReceivingService : IReceivingService
 
         return response.StatusCode == HttpStatusCode.OK;
     }
+
+    public async Task<bool> ChangeReceivingToReturn(string receivingSid, string rowVersion)
+    {
+        string query = _credentials.BackOfficeUri;
+        var resource = $"/receiving/{receivingSid}";
+
+        string body = @"{
+                          ""data"": [
+                              {
+                                  ""rowversion"": """ + rowVersion + @""",
+                                  ""voutype"": ""1""
+                              }
+                          }";
+
+        var response = await HttpClientFactory.InitializeAsync(query, resource, Method.POST, body);
+
+        return response.StatusCode == HttpStatusCode.OK;
+    }
     public Comment AddGrpoTrackingNumAndNote(string GrpoNo, string receivingSid, string rowVersion, string note)
     {
         string query = _credentials.BackOfficeUri;
