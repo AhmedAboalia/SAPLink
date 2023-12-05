@@ -94,7 +94,7 @@ public class GoodsReturnHandler
                             }
                             else
                             {
-                                logMessage = $"Exception: Cannot Add or Sync Receiving (Receive). SID: ({receiving.Sid}). \r\n" +
+                                logMessage = $"Exception: Cannot Add or Sync Receiving (Return). SID: ({receiving.Sid}). \r\n" +
                                              $"Goods Return Line item ({line.ItemCode} : {line.ItemName}) \r\n" +
                                              $"Response Content: {itemResponse.Content}";
 
@@ -233,7 +233,7 @@ public class GoodsReturnHandler
                         T0.[U_WhsCode]
                             FROM ORPD T0 ";
 
-          
+
 
             if (!ClientHandler.Company.Connected)
             {

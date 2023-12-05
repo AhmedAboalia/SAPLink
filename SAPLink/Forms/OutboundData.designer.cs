@@ -575,14 +575,14 @@
             buttonSync.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             buttonSync.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             buttonSync.FillColor = Color.WhiteSmoke;
-            buttonSync.Font = new Font("Bahnschrift", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonSync.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             buttonSync.ForeColor = Color.DarkSlateGray;
             buttonSync.HoverState.FillColor = Color.Gold;
             buttonSync.Image = (Image)resources.GetObject("buttonSync.Image");
             buttonSync.ImageAlign = HorizontalAlignment.Left;
-            buttonSync.ImageOffset = new Point(7, 15);
+            buttonSync.ImageOffset = new Point(3, 18);
             buttonSync.ImageSize = new Size(35, 35);
-            buttonSync.Location = new Point(838, 42);
+            buttonSync.Location = new Point(825, 42);
             buttonSync.Name = "buttonSync";
             buttonSync.PressedColor = Color.PaleTurquoise;
             buttonSync.ShadowDecoration.CustomizableEdges = customizableEdges4;
@@ -922,22 +922,23 @@
             buttonSchedule.DisabledState.CustomBorderColor = Color.DarkGray;
             buttonSchedule.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             buttonSchedule.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            buttonSchedule.Enabled = false;
             buttonSchedule.FillColor = Color.WhiteSmoke;
-            buttonSchedule.Font = new Font("Bahnschrift", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonSchedule.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             buttonSchedule.ForeColor = Color.DarkSlateGray;
             buttonSchedule.HoverState.FillColor = Color.Gold;
             buttonSchedule.Image = (Image)resources.GetObject("buttonSchedule.Image");
             buttonSchedule.ImageAlign = HorizontalAlignment.Left;
-            buttonSchedule.ImageOffset = new Point(7, 15);
+            buttonSchedule.ImageOffset = new Point(3, 18);
             buttonSchedule.ImageSize = new Size(35, 35);
             buttonSchedule.Location = new Point(825, 42);
             buttonSchedule.Name = "buttonSchedule";
             buttonSchedule.PressedColor = Color.PaleTurquoise;
             buttonSchedule.ShadowDecoration.CustomizableEdges = customizableEdges20;
-            buttonSchedule.Size = new Size(146, 60);
+            buttonSchedule.Size = new Size(158, 60);
             buttonSchedule.TabIndex = 53;
             buttonSchedule.Tag = "";
-            buttonSchedule.Text = "Sync Now";
+            buttonSchedule.Text = "Run Schedule";
             buttonSchedule.TextAlign = HorizontalAlignment.Left;
             buttonSchedule.TextOffset = new Point(45, -18);
             buttonSchedule.Tile = true;
@@ -950,6 +951,7 @@
             TextBoxIntervalSchedule.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
             TextBoxIntervalSchedule.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
             TextBoxIntervalSchedule.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            TextBoxIntervalSchedule.Enabled = false;
             TextBoxIntervalSchedule.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             TextBoxIntervalSchedule.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             TextBoxIntervalSchedule.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
@@ -991,6 +993,7 @@
             comboBoxDocTypeSchedule.CustomizableEdges = customizableEdges25;
             comboBoxDocTypeSchedule.DrawMode = DrawMode.OwnerDrawFixed;
             comboBoxDocTypeSchedule.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxDocTypeSchedule.Enabled = false;
             comboBoxDocTypeSchedule.FocusedColor = Color.FromArgb(94, 148, 255);
             comboBoxDocTypeSchedule.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             comboBoxDocTypeSchedule.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
@@ -1022,6 +1025,7 @@
             comboBoxRecurrenceSchedule.CustomizableEdges = customizableEdges27;
             comboBoxRecurrenceSchedule.DrawMode = DrawMode.OwnerDrawFixed;
             comboBoxRecurrenceSchedule.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxRecurrenceSchedule.Enabled = false;
             comboBoxRecurrenceSchedule.FocusedColor = Color.FromArgb(94, 148, 255);
             comboBoxRecurrenceSchedule.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             comboBoxRecurrenceSchedule.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
@@ -1134,11 +1138,11 @@
             // 
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
-            label4.Font = new Font("Agency FB", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label4.Font = new Font("Agency FB", 22F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             label4.ForeColor = Color.FromArgb(31, 57, 69);
             label4.Location = new Point(52, 40);
             label4.Name = "label4";
-            label4.Size = new Size(81, 31);
+            label4.Size = new Size(94, 36);
             label4.TabIndex = 28;
             label4.Text = "SAP Link";
             // 

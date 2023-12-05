@@ -1905,11 +1905,11 @@
             // 
             label4.AutoSize = true;
             label4.BackColor = Color.Transparent;
-            label4.Font = new Font("Agency FB", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label4.Font = new Font("Agency FB", 22F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             label4.ForeColor = Color.FromArgb(31, 57, 69);
             label4.Location = new Point(52, 40);
             label4.Name = "label4";
-            label4.Size = new Size(81, 31);
+            label4.Size = new Size(94, 36);
             label4.TabIndex = 28;
             label4.Text = "SAP Link";
             // 

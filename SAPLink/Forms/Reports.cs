@@ -88,12 +88,12 @@ public partial class Reports : Form
             SetDataGridViewHeaders(dataGridView, typeof(ItemMasterDataReport));
         }
 
-        if (toggleGoodsRecepitPO.Checked)
+        if (toggleGoodsReceiptPO.Checked)
         {
             PlaySound.Click();
 
         }
-        if (toggleGoodsRecepit.Checked)
+        if (toggleGoodsReceipt.Checked)
         {
             PlaySound.Click();
 
@@ -196,11 +196,11 @@ public partial class Reports : Form
             if (toggleNotSyncedItems.Checked)
                 toggleNotSyncedItems.InvokeUnCheck();
 
-            if (toggleGoodsRecepitPO.Checked)
-                toggleGoodsRecepitPO.InvokeUnCheck();
+            if (toggleGoodsReceiptPO.Checked)
+                toggleGoodsReceiptPO.InvokeUnCheck();
 
-            if (toggleGoodsRecepit.Checked)
-                toggleGoodsRecepit.InvokeUnCheck();
+            if (toggleGoodsReceipt.Checked)
+                toggleGoodsReceipt.InvokeUnCheck();
 
             if (toggleGoodsIssue.Checked)
                 toggleGoodsIssue.InvokeUnCheck();
@@ -221,11 +221,11 @@ public partial class Reports : Form
             if (toggleNotSyncedItems.Checked)
                 toggleNotSyncedItems.InvokeUnCheck();
 
-            if (toggleGoodsRecepitPO.Checked)
-                toggleGoodsRecepitPO.InvokeUnCheck();
+            if (toggleGoodsReceiptPO.Checked)
+                toggleGoodsReceiptPO.InvokeUnCheck();
 
-            if (toggleGoodsRecepit.Checked)
-                toggleGoodsRecepit.InvokeUnCheck();
+            if (toggleGoodsReceipt.Checked)
+                toggleGoodsReceipt.InvokeUnCheck();
 
             if (toggleGoodsIssue.Checked)
                 toggleGoodsIssue.InvokeUnCheck();
@@ -245,20 +245,20 @@ public partial class Reports : Form
             //if (toggleItems.Checked)
             //    toggleItems.InvokeUnCheck();
 
-            if (toggleGoodsRecepitPO.Checked)
-                toggleGoodsRecepitPO.InvokeUnCheck();
+            if (toggleGoodsReceiptPO.Checked)
+                toggleGoodsReceiptPO.InvokeUnCheck();
 
-            if (toggleGoodsRecepit.Checked)
-                toggleGoodsRecepit.InvokeUnCheck();
+            if (toggleGoodsReceipt.Checked)
+                toggleGoodsReceipt.InvokeUnCheck();
 
             if (toggleGoodsIssue.Checked)
                 toggleGoodsIssue.InvokeUnCheck();
         }
     }
 
-    private void toggleGoodsRecepitPO_CheckedChanged(object sender, EventArgs e)
+    private void toggleGoodsReceiptPO_CheckedChanged(object sender, EventArgs e)
     {
-        if (toggleGoodsRecepitPO.Checked)
+        if (toggleGoodsReceiptPO.Checked)
         {
             PlaySound.Click();
             if (togglePrismActiveItems.Checked)
@@ -270,20 +270,20 @@ public partial class Reports : Form
             if (toggleNotSyncedItems.Checked)
                 toggleNotSyncedItems.InvokeUnCheck();
 
-            //if (toggleGoodsRecepitPO.Checked)
-            //    toggleGoodsRecepitPO.InvokeUnCheck();
+            //if (toggleGoodsReceiptPO.Checked)
+            //    toggleGoodsReceiptPO.InvokeUnCheck();
 
-            if (toggleGoodsRecepit.Checked)
-                toggleGoodsRecepit.InvokeUnCheck();
+            if (toggleGoodsReceipt.Checked)
+                toggleGoodsReceipt.InvokeUnCheck();
 
             if (toggleGoodsIssue.Checked)
                 toggleGoodsIssue.InvokeUnCheck();
         }
     }
 
-    private void toggleGoodsRecepit_CheckedChanged(object sender, EventArgs e)
+    private void toggleGoodsReceipt_CheckedChanged(object sender, EventArgs e)
     {
-        if (toggleGoodsRecepit.Checked)
+        if (toggleGoodsReceipt.Checked)
         {
             PlaySound.Click();
             if (togglePrismActiveItems.Checked)
@@ -295,11 +295,11 @@ public partial class Reports : Form
             if (toggleNotSyncedItems.Checked)
                 toggleNotSyncedItems.InvokeUnCheck();
 
-            if (toggleGoodsRecepitPO.Checked)
-                toggleGoodsRecepitPO.InvokeUnCheck();
+            if (toggleGoodsReceiptPO.Checked)
+                toggleGoodsReceiptPO.InvokeUnCheck();
 
-            //if (toggleGoodsRecepit.Checked)
-            //    toggleGoodsRecepit.InvokeUnCheck();
+            //if (toggleGoodsReceipt.Checked)
+            //    toggleGoodsReceipt.InvokeUnCheck();
 
             if (toggleGoodsIssue.Checked)
                 toggleGoodsIssue.InvokeUnCheck();
@@ -320,11 +320,11 @@ public partial class Reports : Form
             if (toggleNotSyncedItems.Checked)
                 toggleNotSyncedItems.InvokeUnCheck();
 
-            if (toggleGoodsRecepitPO.Checked)
-                toggleGoodsRecepitPO.InvokeUnCheck();
+            if (toggleGoodsReceiptPO.Checked)
+                toggleGoodsReceiptPO.InvokeUnCheck();
 
-            if (toggleGoodsRecepit.Checked)
-                toggleGoodsRecepit.InvokeUnCheck();
+            if (toggleGoodsReceipt.Checked)
+                toggleGoodsReceipt.InvokeUnCheck();
 
             //if (toggleGoodsIssue.Checked)
             //    toggleGoodsIssue.InvokeUnCheck();
@@ -363,7 +363,7 @@ public partial class Reports : Form
     }
 
 
-    private void toggleGoodsRecepitPO_KeyDown(object sender, KeyEventArgs e)
+    private void toggleGoodsReceiptPO_KeyDown(object sender, KeyEventArgs e)
     {
         if (e.KeyCode == Keys.Enter)
             buttonInitialzeNow.PerformClick();

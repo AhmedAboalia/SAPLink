@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             components = new Container();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges64 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges65 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges66 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges67 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             ComponentResourceManager resources = new ComponentResourceManager(typeof(InboundData));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -53,13 +53,13 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -71,10 +71,10 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges44 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges45 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges46 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges47 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges37 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges38 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -83,8 +83,8 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges41 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges42 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges43 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges46 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges47 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges44 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges45 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges48 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges49 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges50 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -101,6 +101,8 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges61 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges62 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges63 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges64 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges65 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2Panel1 = new Guna2Panel();
             contextMenuRefreshAuth = new ContextMenuStrip(components);
             MenuRefreshAuth = new ToolStripMenuItem();
@@ -121,11 +123,13 @@
             tabPage4 = new TabPage();
             textBoxLogsInitialize = new RichTextBox();
             guna2Panel5 = new Guna2Panel();
+            toggleGoodsReturn = new Guna2ToggleSwitch();
             toggleGoodsIssue = new Guna2ToggleSwitch();
-            toggleGoodsRecepitPO = new Guna2ToggleSwitch();
+            label6 = new Label();
+            toggleGoodsReceiptPO = new Guna2ToggleSwitch();
             label20 = new Label();
             label18 = new Label();
-            toggleGoodsRecepit = new Guna2ToggleSwitch();
+            toggleGoodsReceipt = new Guna2ToggleSwitch();
             toggleItems = new Guna2ToggleSwitch();
             label19 = new Label();
             label12 = new Label();
@@ -237,12 +241,12 @@
             guna2Panel1.Controls.Add(guna2ControlBox1);
             guna2Panel1.Controls.Add(MainPanel);
             guna2Panel1.CustomBorderColor = Color.Transparent;
-            guna2Panel1.CustomizableEdges = customizableEdges64;
+            guna2Panel1.CustomizableEdges = customizableEdges66;
             guna2Panel1.Dock = DockStyle.Fill;
             guna2Panel1.Location = new Point(0, 0);
             guna2Panel1.Margin = new Padding(4);
             guna2Panel1.Name = "guna2Panel1";
-            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges65;
+            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges67;
             guna2Panel1.Size = new Size(1284, 836);
             guna2Panel1.TabIndex = 0;
             // 
@@ -542,11 +546,13 @@
             guna2Panel5.BorderRadius = 20;
             guna2Panel5.BorderThickness = 1;
             guna2Panel5.ContextMenuStrip = contextMenuRefreshAuth;
+            guna2Panel5.Controls.Add(toggleGoodsReturn);
             guna2Panel5.Controls.Add(toggleGoodsIssue);
-            guna2Panel5.Controls.Add(toggleGoodsRecepitPO);
+            guna2Panel5.Controls.Add(label6);
+            guna2Panel5.Controls.Add(toggleGoodsReceiptPO);
             guna2Panel5.Controls.Add(label20);
             guna2Panel5.Controls.Add(label18);
-            guna2Panel5.Controls.Add(toggleGoodsRecepit);
+            guna2Panel5.Controls.Add(toggleGoodsReceipt);
             guna2Panel5.Controls.Add(toggleItems);
             guna2Panel5.Controls.Add(label19);
             guna2Panel5.Controls.Add(label12);
@@ -557,14 +563,34 @@
             guna2Panel5.Controls.Add(label5);
             guna2Panel5.CustomBorderColor = Color.Gainsboro;
             guna2Panel5.CustomBorderThickness = new Padding(1);
-            guna2Panel5.CustomizableEdges = customizableEdges17;
+            guna2Panel5.CustomizableEdges = customizableEdges19;
             guna2Panel5.FillColor = Color.White;
             guna2Panel5.Location = new Point(19, 29);
             guna2Panel5.Margin = new Padding(3, 2, 3, 2);
             guna2Panel5.Name = "guna2Panel5";
-            guna2Panel5.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            guna2Panel5.ShadowDecoration.CustomizableEdges = customizableEdges20;
             guna2Panel5.Size = new Size(1029, 137);
             guna2Panel5.TabIndex = 42;
+            // 
+            // toggleGoodsReturn
+            // 
+            toggleGoodsReturn.CheckedState.BorderColor = Color.FromArgb(94, 148, 255);
+            toggleGoodsReturn.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
+            toggleGoodsReturn.CheckedState.InnerBorderColor = Color.White;
+            toggleGoodsReturn.CheckedState.InnerColor = Color.White;
+            toggleGoodsReturn.CustomizableEdges = customizableEdges3;
+            toggleGoodsReturn.Location = new Point(363, 100);
+            toggleGoodsReturn.Name = "toggleGoodsReturn";
+            toggleGoodsReturn.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            toggleGoodsReturn.Size = new Size(45, 21);
+            toggleGoodsReturn.TabIndex = 59;
+            toggleGoodsReturn.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
+            toggleGoodsReturn.UncheckedState.FillColor = Color.FromArgb(125, 137, 149);
+            toggleGoodsReturn.UncheckedState.InnerBorderColor = Color.White;
+            toggleGoodsReturn.UncheckedState.InnerColor = Color.White;
+            toggleGoodsReturn.Visible = false;
+            toggleGoodsReturn.CheckedChanged += toggleGoodsReturn_CheckedChanged;
+            toggleGoodsReturn.KeyDown += toggleGoodsReceiptPO_KeyDown;
             // 
             // toggleGoodsIssue
             // 
@@ -572,10 +598,10 @@
             toggleGoodsIssue.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
             toggleGoodsIssue.CheckedState.InnerBorderColor = Color.White;
             toggleGoodsIssue.CheckedState.InnerColor = Color.White;
-            toggleGoodsIssue.CustomizableEdges = customizableEdges3;
-            toggleGoodsIssue.Location = new Point(363, 88);
+            toggleGoodsIssue.CustomizableEdges = customizableEdges5;
+            toggleGoodsIssue.Location = new Point(363, 75);
             toggleGoodsIssue.Name = "toggleGoodsIssue";
-            toggleGoodsIssue.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            toggleGoodsIssue.ShadowDecoration.CustomizableEdges = customizableEdges6;
             toggleGoodsIssue.Size = new Size(45, 21);
             toggleGoodsIssue.TabIndex = 59;
             toggleGoodsIssue.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
@@ -584,27 +610,40 @@
             toggleGoodsIssue.UncheckedState.InnerColor = Color.White;
             toggleGoodsIssue.Visible = false;
             toggleGoodsIssue.CheckedChanged += toggleGoodsIssue_CheckedChanged;
-            toggleGoodsIssue.KeyDown += toggleGoodsRecepitPO_KeyDown;
+            toggleGoodsIssue.KeyDown += toggleGoodsReceiptPO_KeyDown;
             // 
-            // toggleGoodsRecepitPO
+            // label6
             // 
-            toggleGoodsRecepitPO.CheckedState.BorderColor = Color.FromArgb(94, 148, 255);
-            toggleGoodsRecepitPO.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
-            toggleGoodsRecepitPO.CheckedState.InnerBorderColor = Color.White;
-            toggleGoodsRecepitPO.CheckedState.InnerColor = Color.White;
-            toggleGoodsRecepitPO.CustomizableEdges = customizableEdges5;
-            toggleGoodsRecepitPO.Location = new Point(362, 34);
-            toggleGoodsRecepitPO.Name = "toggleGoodsRecepitPO";
-            toggleGoodsRecepitPO.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            toggleGoodsRecepitPO.Size = new Size(45, 21);
-            toggleGoodsRecepitPO.TabIndex = 59;
-            toggleGoodsRecepitPO.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
-            toggleGoodsRecepitPO.UncheckedState.FillColor = Color.FromArgb(125, 137, 149);
-            toggleGoodsRecepitPO.UncheckedState.InnerBorderColor = Color.White;
-            toggleGoodsRecepitPO.UncheckedState.InnerColor = Color.White;
-            toggleGoodsRecepitPO.Visible = false;
-            toggleGoodsRecepitPO.CheckedChanged += toggleGoodsRecepitPO_CheckedChanged;
-            toggleGoodsRecepitPO.KeyDown += toggleGoodsRecepitPO_KeyDown;
+            label6.AutoSize = true;
+            label6.BackColor = Color.White;
+            label6.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+            label6.ForeColor = Color.DimGray;
+            label6.Location = new Point(413, 102);
+            label6.Name = "label6";
+            label6.Size = new Size(85, 16);
+            label6.TabIndex = 58;
+            label6.Text = "Goods Return";
+            label6.Visible = false;
+            // 
+            // toggleGoodsReceiptPO
+            // 
+            toggleGoodsReceiptPO.CheckedState.BorderColor = Color.FromArgb(94, 148, 255);
+            toggleGoodsReceiptPO.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
+            toggleGoodsReceiptPO.CheckedState.InnerBorderColor = Color.White;
+            toggleGoodsReceiptPO.CheckedState.InnerColor = Color.White;
+            toggleGoodsReceiptPO.CustomizableEdges = customizableEdges7;
+            toggleGoodsReceiptPO.Location = new Point(362, 21);
+            toggleGoodsReceiptPO.Name = "toggleGoodsReceiptPO";
+            toggleGoodsReceiptPO.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            toggleGoodsReceiptPO.Size = new Size(45, 21);
+            toggleGoodsReceiptPO.TabIndex = 59;
+            toggleGoodsReceiptPO.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
+            toggleGoodsReceiptPO.UncheckedState.FillColor = Color.FromArgb(125, 137, 149);
+            toggleGoodsReceiptPO.UncheckedState.InnerBorderColor = Color.White;
+            toggleGoodsReceiptPO.UncheckedState.InnerColor = Color.White;
+            toggleGoodsReceiptPO.Visible = false;
+            toggleGoodsReceiptPO.CheckedChanged += toggleGoodsReceiptPO_CheckedChanged;
+            toggleGoodsReceiptPO.KeyDown += toggleGoodsReceiptPO_KeyDown;
             // 
             // label20
             // 
@@ -612,7 +651,7 @@
             label20.BackColor = Color.White;
             label20.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
             label20.ForeColor = Color.DimGray;
-            label20.Location = new Point(413, 90);
+            label20.Location = new Point(413, 77);
             label20.Name = "label20";
             label20.Size = new Size(101, 16);
             label20.TabIndex = 58;
@@ -625,32 +664,32 @@
             label18.BackColor = Color.White;
             label18.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
             label18.ForeColor = Color.DimGray;
-            label18.Location = new Point(413, 36);
+            label18.Location = new Point(413, 23);
             label18.Name = "label18";
             label18.Size = new Size(150, 16);
             label18.TabIndex = 58;
             label18.Text = "Goods Receipt PO (GRPO)";
             label18.Visible = false;
             // 
-            // toggleGoodsRecepit
+            // toggleGoodsReceipt
             // 
-            toggleGoodsRecepit.CheckedState.BorderColor = Color.FromArgb(94, 148, 255);
-            toggleGoodsRecepit.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
-            toggleGoodsRecepit.CheckedState.InnerBorderColor = Color.White;
-            toggleGoodsRecepit.CheckedState.InnerColor = Color.White;
-            toggleGoodsRecepit.CustomizableEdges = customizableEdges7;
-            toggleGoodsRecepit.Location = new Point(362, 61);
-            toggleGoodsRecepit.Name = "toggleGoodsRecepit";
-            toggleGoodsRecepit.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            toggleGoodsRecepit.Size = new Size(45, 21);
-            toggleGoodsRecepit.TabIndex = 57;
-            toggleGoodsRecepit.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
-            toggleGoodsRecepit.UncheckedState.FillColor = Color.FromArgb(125, 137, 149);
-            toggleGoodsRecepit.UncheckedState.InnerBorderColor = Color.White;
-            toggleGoodsRecepit.UncheckedState.InnerColor = Color.White;
-            toggleGoodsRecepit.Visible = false;
-            toggleGoodsRecepit.CheckedChanged += toggleGoodsRecepit_CheckedChanged;
-            toggleGoodsRecepit.KeyDown += toggleGoodsRecepitPO_KeyDown;
+            toggleGoodsReceipt.CheckedState.BorderColor = Color.FromArgb(94, 148, 255);
+            toggleGoodsReceipt.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
+            toggleGoodsReceipt.CheckedState.InnerBorderColor = Color.White;
+            toggleGoodsReceipt.CheckedState.InnerColor = Color.White;
+            toggleGoodsReceipt.CustomizableEdges = customizableEdges9;
+            toggleGoodsReceipt.Location = new Point(362, 48);
+            toggleGoodsReceipt.Name = "toggleGoodsReceipt";
+            toggleGoodsReceipt.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            toggleGoodsReceipt.Size = new Size(45, 21);
+            toggleGoodsReceipt.TabIndex = 57;
+            toggleGoodsReceipt.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
+            toggleGoodsReceipt.UncheckedState.FillColor = Color.FromArgb(125, 137, 149);
+            toggleGoodsReceipt.UncheckedState.InnerBorderColor = Color.White;
+            toggleGoodsReceipt.UncheckedState.InnerColor = Color.White;
+            toggleGoodsReceipt.Visible = false;
+            toggleGoodsReceipt.CheckedChanged += toggleGoodsReceipt_CheckedChanged;
+            toggleGoodsReceipt.KeyDown += toggleGoodsReceiptPO_KeyDown;
             // 
             // toggleItems
             // 
@@ -658,10 +697,10 @@
             toggleItems.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
             toggleItems.CheckedState.InnerBorderColor = Color.White;
             toggleItems.CheckedState.InnerColor = Color.White;
-            toggleItems.CustomizableEdges = customizableEdges9;
+            toggleItems.CustomizableEdges = customizableEdges11;
             toggleItems.Location = new Point(47, 88);
             toggleItems.Name = "toggleItems";
-            toggleItems.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            toggleItems.ShadowDecoration.CustomizableEdges = customizableEdges12;
             toggleItems.Size = new Size(45, 21);
             toggleItems.TabIndex = 57;
             toggleItems.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
@@ -669,7 +708,7 @@
             toggleItems.UncheckedState.InnerBorderColor = Color.White;
             toggleItems.UncheckedState.InnerColor = Color.White;
             toggleItems.CheckedChanged += ToggleItemsCheckedChanged;
-            toggleItems.KeyDown += toggleGoodsRecepitPO_KeyDown;
+            toggleItems.KeyDown += toggleGoodsReceiptPO_KeyDown;
             // 
             // label19
             // 
@@ -677,7 +716,7 @@
             label19.BackColor = Color.White;
             label19.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
             label19.ForeColor = Color.DimGray;
-            label19.Location = new Point(413, 63);
+            label19.Location = new Point(413, 50);
             label19.Name = "label19";
             label19.Size = new Size(115, 16);
             label19.TabIndex = 56;
@@ -702,10 +741,10 @@
             toggleDepartments.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
             toggleDepartments.CheckedState.InnerBorderColor = Color.White;
             toggleDepartments.CheckedState.InnerColor = Color.White;
-            toggleDepartments.CustomizableEdges = customizableEdges11;
+            toggleDepartments.CustomizableEdges = customizableEdges13;
             toggleDepartments.Location = new Point(47, 34);
             toggleDepartments.Name = "toggleDepartments";
-            toggleDepartments.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            toggleDepartments.ShadowDecoration.CustomizableEdges = customizableEdges14;
             toggleDepartments.Size = new Size(45, 21);
             toggleDepartments.TabIndex = 57;
             toggleDepartments.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
@@ -713,7 +752,7 @@
             toggleDepartments.UncheckedState.InnerBorderColor = Color.White;
             toggleDepartments.UncheckedState.InnerColor = Color.White;
             toggleDepartments.CheckedChanged += toggleDepartments_CheckedChanged;
-            toggleDepartments.KeyDown += toggleGoodsRecepitPO_KeyDown;
+            toggleDepartments.KeyDown += toggleGoodsReceiptPO_KeyDown;
             // 
             // label10
             // 
@@ -733,10 +772,10 @@
             toggleVendors.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
             toggleVendors.CheckedState.InnerBorderColor = Color.White;
             toggleVendors.CheckedState.InnerColor = Color.White;
-            toggleVendors.CustomizableEdges = customizableEdges13;
+            toggleVendors.CustomizableEdges = customizableEdges15;
             toggleVendors.Location = new Point(47, 61);
             toggleVendors.Name = "toggleVendors";
-            toggleVendors.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            toggleVendors.ShadowDecoration.CustomizableEdges = customizableEdges16;
             toggleVendors.Size = new Size(45, 21);
             toggleVendors.TabIndex = 55;
             toggleVendors.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
@@ -744,7 +783,7 @@
             toggleVendors.UncheckedState.InnerBorderColor = Color.White;
             toggleVendors.UncheckedState.InnerColor = Color.White;
             toggleVendors.CheckedChanged += toggleVendors_CheckedChanged;
-            toggleVendors.KeyDown += toggleGoodsRecepitPO_KeyDown;
+            toggleVendors.KeyDown += toggleGoodsReceiptPO_KeyDown;
             // 
             // buttonInitialzeNow
             // 
@@ -755,27 +794,27 @@
             buttonInitialzeNow.BorderThickness = 1;
             buttonInitialzeNow.CustomBorderColor = Color.WhiteSmoke;
             buttonInitialzeNow.CustomBorderThickness = new Padding(1);
-            buttonInitialzeNow.CustomizableEdges = customizableEdges15;
+            buttonInitialzeNow.CustomizableEdges = customizableEdges17;
             buttonInitialzeNow.DisabledState.BorderColor = Color.DarkGray;
             buttonInitialzeNow.DisabledState.CustomBorderColor = Color.DarkGray;
             buttonInitialzeNow.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             buttonInitialzeNow.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             buttonInitialzeNow.FillColor = Color.WhiteSmoke;
-            buttonInitialzeNow.Font = new Font("Bahnschrift", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonInitialzeNow.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             buttonInitialzeNow.ForeColor = Color.DarkSlateGray;
             buttonInitialzeNow.HoverState.FillColor = Color.Gold;
             buttonInitialzeNow.Image = (Image)resources.GetObject("buttonInitialzeNow.Image");
             buttonInitialzeNow.ImageAlign = HorizontalAlignment.Left;
-            buttonInitialzeNow.ImageOffset = new Point(7, 10);
-            buttonInitialzeNow.ImageSize = new Size(25, 25);
-            buttonInitialzeNow.Location = new Point(839, 32);
+            buttonInitialzeNow.ImageOffset = new Point(3, 18);
+            buttonInitialzeNow.ImageSize = new Size(35, 35);
+            buttonInitialzeNow.Location = new Point(825, 42);
             buttonInitialzeNow.Name = "buttonInitialzeNow";
             buttonInitialzeNow.PressedColor = Color.PaleTurquoise;
-            buttonInitialzeNow.ShadowDecoration.CustomizableEdges = customizableEdges16;
-            buttonInitialzeNow.Size = new Size(146, 60);
+            buttonInitialzeNow.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            buttonInitialzeNow.Size = new Size(158, 60);
             buttonInitialzeNow.TabIndex = 23;
             buttonInitialzeNow.Tag = "";
-            buttonInitialzeNow.Text = "Initialize Now";
+            buttonInitialzeNow.Text = "Run Initialize";
             buttonInitialzeNow.TextAlign = HorizontalAlignment.Left;
             buttonInitialzeNow.TextOffset = new Point(40, -15);
             buttonInitialzeNow.Tile = true;
@@ -1029,12 +1068,12 @@
             guna2Panel2.Controls.Add(buttonSyncNow);
             guna2Panel2.CustomBorderColor = Color.Gainsboro;
             guna2Panel2.CustomBorderThickness = new Padding(1);
-            guna2Panel2.CustomizableEdges = customizableEdges32;
+            guna2Panel2.CustomizableEdges = customizableEdges34;
             guna2Panel2.FillColor = Color.White;
             guna2Panel2.Location = new Point(19, 29);
             guna2Panel2.Margin = new Padding(3, 2, 3, 2);
             guna2Panel2.Name = "guna2Panel2";
-            guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges33;
+            guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges35;
             guna2Panel2.Size = new Size(1029, 152);
             guna2Panel2.TabIndex = 56;
             // 
@@ -1048,7 +1087,7 @@
             radioButtonDocId.Location = new Point(136, 80);
             radioButtonDocId.Margin = new Padding(3, 2, 3, 2);
             radioButtonDocId.Name = "radioButtonDocId";
-            radioButtonDocId.ShadowDecoration.CustomizableEdges = customizableEdges19;
+            radioButtonDocId.ShadowDecoration.CustomizableEdges = customizableEdges21;
             radioButtonDocId.Size = new Size(19, 26);
             radioButtonDocId.TabIndex = 51;
             radioButtonDocId.Text = "guna2CustomRadioButton3";
@@ -1072,7 +1111,7 @@
             // 
             // textBoxDocCode
             // 
-            textBoxDocCode.CustomizableEdges = customizableEdges20;
+            textBoxDocCode.CustomizableEdges = customizableEdges22;
             textBoxDocCode.DefaultText = "";
             textBoxDocCode.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             textBoxDocCode.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -1087,7 +1126,7 @@
             textBoxDocCode.PasswordChar = '\0';
             textBoxDocCode.PlaceholderText = "";
             textBoxDocCode.SelectedText = "";
-            textBoxDocCode.ShadowDecoration.CustomizableEdges = customizableEdges21;
+            textBoxDocCode.ShadowDecoration.CustomizableEdges = customizableEdges23;
             textBoxDocCode.Size = new Size(409, 20);
             textBoxDocCode.TabIndex = 49;
             textBoxDocCode.TextChanged += textBoxDocCode_TextChanged;
@@ -1098,7 +1137,7 @@
             // 
             dateTimePickerTo.Checked = true;
             dateTimePickerTo.CustomFormat = "dd/MM/yyyy";
-            dateTimePickerTo.CustomizableEdges = customizableEdges22;
+            dateTimePickerTo.CustomizableEdges = customizableEdges24;
             dateTimePickerTo.FillColor = Color.White;
             dateTimePickerTo.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
             dateTimePickerTo.Format = DateTimePickerFormat.Short;
@@ -1107,7 +1146,7 @@
             dateTimePickerTo.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             dateTimePickerTo.MinDate = new DateTime(2000, 1, 1, 0, 0, 0, 0);
             dateTimePickerTo.Name = "dateTimePickerTo";
-            dateTimePickerTo.ShadowDecoration.CustomizableEdges = customizableEdges23;
+            dateTimePickerTo.ShadowDecoration.CustomizableEdges = customizableEdges25;
             dateTimePickerTo.Size = new Size(171, 19);
             dateTimePickerTo.TabIndex = 48;
             dateTimePickerTo.Value = new DateTime(2023, 6, 12, 0, 0, 0, 0);
@@ -1118,7 +1157,7 @@
             // 
             dateTimePickerFrom.Checked = true;
             dateTimePickerFrom.CustomFormat = "dd/MM/yyyy";
-            dateTimePickerFrom.CustomizableEdges = customizableEdges24;
+            dateTimePickerFrom.CustomizableEdges = customizableEdges26;
             dateTimePickerFrom.FillColor = Color.White;
             dateTimePickerFrom.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
             dateTimePickerFrom.Format = DateTimePickerFormat.Short;
@@ -1127,7 +1166,7 @@
             dateTimePickerFrom.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             dateTimePickerFrom.MinDate = new DateTime(2000, 1, 1, 0, 0, 0, 0);
             dateTimePickerFrom.Name = "dateTimePickerFrom";
-            dateTimePickerFrom.ShadowDecoration.CustomizableEdges = customizableEdges25;
+            dateTimePickerFrom.ShadowDecoration.CustomizableEdges = customizableEdges27;
             dateTimePickerFrom.Size = new Size(157, 19);
             dateTimePickerFrom.TabIndex = 47;
             dateTimePickerFrom.Value = new DateTime(2023, 6, 12, 0, 0, 0, 0);
@@ -1167,7 +1206,7 @@
             radioButtonDate.Location = new Point(136, 51);
             radioButtonDate.Margin = new Padding(3, 2, 3, 2);
             radioButtonDate.Name = "radioButtonDate";
-            radioButtonDate.ShadowDecoration.CustomizableEdges = customizableEdges26;
+            radioButtonDate.ShadowDecoration.CustomizableEdges = customizableEdges28;
             radioButtonDate.Size = new Size(19, 26);
             radioButtonDate.TabIndex = 44;
             radioButtonDate.Text = "guna2CustomRadioButton2";
@@ -1198,7 +1237,7 @@
             radioButtonNewDoc.Location = new Point(136, 111);
             radioButtonNewDoc.Margin = new Padding(3, 2, 3, 2);
             radioButtonNewDoc.Name = "radioButtonNewDoc";
-            radioButtonNewDoc.ShadowDecoration.CustomizableEdges = customizableEdges27;
+            radioButtonNewDoc.ShadowDecoration.CustomizableEdges = customizableEdges29;
             radioButtonNewDoc.Size = new Size(19, 26);
             radioButtonNewDoc.TabIndex = 42;
             radioButtonNewDoc.Text = "guna2CustomRadioButton1";
@@ -1212,7 +1251,7 @@
             // 
             comboBoxDocTypeSync.AutoCompleteCustomSource.AddRange(new string[] { "Departments", "Vendors", "Items", "Goods Receipt Po (GRPO)", "Goods Receipt (GR)", "Goods Issue (GI)" });
             comboBoxDocTypeSync.BackColor = Color.Goldenrod;
-            comboBoxDocTypeSync.CustomizableEdges = customizableEdges28;
+            comboBoxDocTypeSync.CustomizableEdges = customizableEdges30;
             comboBoxDocTypeSync.DrawMode = DrawMode.OwnerDrawFixed;
             comboBoxDocTypeSync.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxDocTypeSync.FocusedColor = Color.FromArgb(94, 148, 255);
@@ -1220,10 +1259,10 @@
             comboBoxDocTypeSync.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxDocTypeSync.ForeColor = Color.FromArgb(68, 88, 112);
             comboBoxDocTypeSync.ItemHeight = 15;
-            comboBoxDocTypeSync.Items.AddRange(new object[] { "Departments - (Item Groups)", "Vendors - (Business Partners)", "Inventory - (Items Master Data)", "Goods Receipt Po (GRPO)", "Goods Receipt (GR)", "Goods Issue (GI)" });
+            comboBoxDocTypeSync.Items.AddRange(new object[] { "Departments - (Item Groups)", "Vendors - (Business Partners)", "Inventory - (Items Master Data)", "Goods Receipt Po (GRPO)", "Goods Receipt (GR)", "Goods Issue (GI)", "Goods Return" });
             comboBoxDocTypeSync.Location = new Point(163, 23);
             comboBoxDocTypeSync.Name = "comboBoxDocTypeSync";
-            comboBoxDocTypeSync.ShadowDecoration.CustomizableEdges = customizableEdges29;
+            comboBoxDocTypeSync.ShadowDecoration.CustomizableEdges = customizableEdges31;
             comboBoxDocTypeSync.Size = new Size(409, 21);
             comboBoxDocTypeSync.TabIndex = 41;
             comboBoxDocTypeSync.SelectedIndexChanged += PlayClickSound;
@@ -1261,27 +1300,27 @@
             buttonSyncNow.BorderThickness = 1;
             buttonSyncNow.CustomBorderColor = Color.WhiteSmoke;
             buttonSyncNow.CustomBorderThickness = new Padding(1);
-            buttonSyncNow.CustomizableEdges = customizableEdges30;
+            buttonSyncNow.CustomizableEdges = customizableEdges32;
             buttonSyncNow.DisabledState.BorderColor = Color.DarkGray;
             buttonSyncNow.DisabledState.CustomBorderColor = Color.DarkGray;
             buttonSyncNow.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             buttonSyncNow.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             buttonSyncNow.FillColor = Color.WhiteSmoke;
-            buttonSyncNow.Font = new Font("Bahnschrift", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonSyncNow.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             buttonSyncNow.ForeColor = Color.DarkSlateGray;
             buttonSyncNow.HoverState.FillColor = Color.Gold;
             buttonSyncNow.Image = (Image)resources.GetObject("buttonSyncNow.Image");
             buttonSyncNow.ImageAlign = HorizontalAlignment.Left;
-            buttonSyncNow.ImageOffset = new Point(7, 10);
-            buttonSyncNow.ImageSize = new Size(25, 25);
+            buttonSyncNow.ImageOffset = new Point(3, 18);
+            buttonSyncNow.ImageSize = new Size(35, 35);
             buttonSyncNow.Location = new Point(825, 42);
             buttonSyncNow.Name = "buttonSyncNow";
             buttonSyncNow.PressedColor = Color.PaleTurquoise;
-            buttonSyncNow.ShadowDecoration.CustomizableEdges = customizableEdges31;
-            buttonSyncNow.Size = new Size(146, 60);
+            buttonSyncNow.ShadowDecoration.CustomizableEdges = customizableEdges33;
+            buttonSyncNow.Size = new Size(158, 60);
             buttonSyncNow.TabIndex = 23;
             buttonSyncNow.Tag = "";
-            buttonSyncNow.Text = "Sync Now";
+            buttonSyncNow.Text = "Run Sync";
             buttonSyncNow.TextAlign = HorizontalAlignment.Left;
             buttonSyncNow.TextOffset = new Point(40, -15);
             buttonSyncNow.Tile = true;
@@ -1389,22 +1428,23 @@
             guna2Panel4.Controls.Add(buttonScheduleIt);
             guna2Panel4.CustomBorderColor = Color.White;
             guna2Panel4.CustomBorderThickness = new Padding(1);
-            guna2Panel4.CustomizableEdges = customizableEdges44;
+            guna2Panel4.CustomizableEdges = customizableEdges46;
             guna2Panel4.FillColor = Color.White;
             guna2Panel4.Location = new Point(19, 29);
             guna2Panel4.Name = "guna2Panel4";
-            guna2Panel4.ShadowDecoration.CustomizableEdges = customizableEdges45;
+            guna2Panel4.ShadowDecoration.CustomizableEdges = customizableEdges47;
             guna2Panel4.Size = new Size(1029, 156);
             guna2Panel4.TabIndex = 50;
             // 
             // TextBoxIntervalSchedule
             // 
-            TextBoxIntervalSchedule.CustomizableEdges = customizableEdges34;
+            TextBoxIntervalSchedule.CustomizableEdges = customizableEdges36;
             TextBoxIntervalSchedule.DefaultText = "1";
             TextBoxIntervalSchedule.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             TextBoxIntervalSchedule.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
             TextBoxIntervalSchedule.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
             TextBoxIntervalSchedule.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            TextBoxIntervalSchedule.Enabled = false;
             TextBoxIntervalSchedule.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             TextBoxIntervalSchedule.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             TextBoxIntervalSchedule.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
@@ -1415,7 +1455,7 @@
             TextBoxIntervalSchedule.PlaceholderForeColor = Color.Black;
             TextBoxIntervalSchedule.PlaceholderText = "";
             TextBoxIntervalSchedule.SelectedText = "";
-            TextBoxIntervalSchedule.ShadowDecoration.CustomizableEdges = customizableEdges35;
+            TextBoxIntervalSchedule.ShadowDecoration.CustomizableEdges = customizableEdges37;
             TextBoxIntervalSchedule.Size = new Size(239, 24);
             TextBoxIntervalSchedule.TabIndex = 45;
             TextBoxIntervalSchedule.TextChanged += TextBoxIntervalSchedule_TextChanged;
@@ -1426,7 +1466,7 @@
             // 
             ComboBoxDaysOfWeek.AutoCompleteCustomSource.AddRange(new string[] { "Hourly", "Daily", "None" });
             ComboBoxDaysOfWeek.BackColor = Color.Transparent;
-            ComboBoxDaysOfWeek.CustomizableEdges = customizableEdges36;
+            ComboBoxDaysOfWeek.CustomizableEdges = customizableEdges38;
             ComboBoxDaysOfWeek.DrawMode = DrawMode.OwnerDrawFixed;
             ComboBoxDaysOfWeek.DropDownStyle = ComboBoxStyle.DropDownList;
             ComboBoxDaysOfWeek.FocusedColor = Color.FromArgb(94, 148, 255);
@@ -1437,7 +1477,7 @@
             ComboBoxDaysOfWeek.Items.AddRange(new object[] { "Sunday", "Monday", "Thursday", "Wednesday", "Friday", "Saturday" });
             ComboBoxDaysOfWeek.Location = new Point(173, 83);
             ComboBoxDaysOfWeek.Name = "ComboBoxDaysOfWeek";
-            ComboBoxDaysOfWeek.ShadowDecoration.CustomizableEdges = customizableEdges37;
+            ComboBoxDaysOfWeek.ShadowDecoration.CustomizableEdges = customizableEdges39;
             ComboBoxDaysOfWeek.Size = new Size(239, 21);
             ComboBoxDaysOfWeek.TabIndex = 40;
             ComboBoxDaysOfWeek.Visible = false;
@@ -1446,9 +1486,10 @@
             // 
             comboBoxDocTypeSchedule.AutoCompleteCustomSource.AddRange(new string[] { "Departments", "Vendors", "Items", "Goods Receipt Po (GRPO)", "Goods Receipt (GR)", "Goods Issue (GI)" });
             comboBoxDocTypeSchedule.BackColor = Color.Transparent;
-            comboBoxDocTypeSchedule.CustomizableEdges = customizableEdges38;
+            comboBoxDocTypeSchedule.CustomizableEdges = customizableEdges40;
             comboBoxDocTypeSchedule.DrawMode = DrawMode.OwnerDrawFixed;
             comboBoxDocTypeSchedule.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxDocTypeSchedule.Enabled = false;
             comboBoxDocTypeSchedule.FocusedColor = Color.FromArgb(94, 148, 255);
             comboBoxDocTypeSchedule.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             comboBoxDocTypeSchedule.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
@@ -1457,7 +1498,7 @@
             comboBoxDocTypeSchedule.Items.AddRange(new object[] { "Departments", "Vendors", "Items", "Goods Receipt Po (GRPO)", "Goods Receipt (GR)", "Goods Issue (GI)" });
             comboBoxDocTypeSchedule.Location = new Point(163, 29);
             comboBoxDocTypeSchedule.Name = "comboBoxDocTypeSchedule";
-            comboBoxDocTypeSchedule.ShadowDecoration.CustomizableEdges = customizableEdges39;
+            comboBoxDocTypeSchedule.ShadowDecoration.CustomizableEdges = customizableEdges41;
             comboBoxDocTypeSchedule.Size = new Size(230, 21);
             comboBoxDocTypeSchedule.TabIndex = 39;
             comboBoxDocTypeSchedule.SelectedIndexChanged += ComboBoxDocuments_SelectedIndexChanged;
@@ -1478,9 +1519,10 @@
             // 
             comboBoxRecurrenceSchedule.AutoCompleteCustomSource.AddRange(new string[] { "Hourly", "Daily", "None" });
             comboBoxRecurrenceSchedule.BackColor = Color.Transparent;
-            comboBoxRecurrenceSchedule.CustomizableEdges = customizableEdges40;
+            comboBoxRecurrenceSchedule.CustomizableEdges = customizableEdges42;
             comboBoxRecurrenceSchedule.DrawMode = DrawMode.OwnerDrawFixed;
             comboBoxRecurrenceSchedule.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxRecurrenceSchedule.Enabled = false;
             comboBoxRecurrenceSchedule.FocusedColor = Color.FromArgb(94, 148, 255);
             comboBoxRecurrenceSchedule.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             comboBoxRecurrenceSchedule.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
@@ -1489,7 +1531,7 @@
             comboBoxRecurrenceSchedule.Items.AddRange(new object[] { "--None--", "Hourly", "Daily" });
             comboBoxRecurrenceSchedule.Location = new Point(163, 56);
             comboBoxRecurrenceSchedule.Name = "comboBoxRecurrenceSchedule";
-            comboBoxRecurrenceSchedule.ShadowDecoration.CustomizableEdges = customizableEdges41;
+            comboBoxRecurrenceSchedule.ShadowDecoration.CustomizableEdges = customizableEdges43;
             comboBoxRecurrenceSchedule.Size = new Size(230, 21);
             comboBoxRecurrenceSchedule.TabIndex = 37;
             comboBoxRecurrenceSchedule.SelectedIndexChanged += comboBoxRecurrence_SelectedIndexChanged;
@@ -1527,32 +1569,31 @@
             buttonScheduleIt.BorderThickness = 1;
             buttonScheduleIt.CustomBorderColor = Color.WhiteSmoke;
             buttonScheduleIt.CustomBorderThickness = new Padding(1);
-            buttonScheduleIt.CustomizableEdges = customizableEdges42;
+            buttonScheduleIt.CustomizableEdges = customizableEdges44;
             buttonScheduleIt.DisabledState.BorderColor = Color.DarkGray;
             buttonScheduleIt.DisabledState.CustomBorderColor = Color.DarkGray;
             buttonScheduleIt.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             buttonScheduleIt.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             buttonScheduleIt.Enabled = false;
             buttonScheduleIt.FillColor = Color.WhiteSmoke;
-            buttonScheduleIt.Font = new Font("Bahnschrift", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonScheduleIt.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             buttonScheduleIt.ForeColor = Color.DarkSlateGray;
             buttonScheduleIt.HoverState.FillColor = Color.Gold;
             buttonScheduleIt.Image = (Image)resources.GetObject("buttonScheduleIt.Image");
             buttonScheduleIt.ImageAlign = HorizontalAlignment.Left;
-            buttonScheduleIt.ImageOffset = new Point(7, 10);
-            buttonScheduleIt.ImageSize = new Size(25, 25);
-            buttonScheduleIt.Location = new Point(839, 32);
+            buttonScheduleIt.ImageOffset = new Point(3, 18);
+            buttonScheduleIt.ImageSize = new Size(35, 35);
+            buttonScheduleIt.Location = new Point(825, 42);
             buttonScheduleIt.Name = "buttonScheduleIt";
             buttonScheduleIt.PressedColor = Color.PaleTurquoise;
-            buttonScheduleIt.ShadowDecoration.CustomizableEdges = customizableEdges43;
-            buttonScheduleIt.Size = new Size(146, 60);
+            buttonScheduleIt.ShadowDecoration.CustomizableEdges = customizableEdges45;
+            buttonScheduleIt.Size = new Size(158, 60);
             buttonScheduleIt.TabIndex = 23;
             buttonScheduleIt.Tag = "";
-            buttonScheduleIt.Text = "Schedule It";
+            buttonScheduleIt.Text = "Run Schedule";
             buttonScheduleIt.TextAlign = HorizontalAlignment.Left;
             buttonScheduleIt.TextOffset = new Point(40, -15);
             buttonScheduleIt.Tile = true;
-            //buttonScheduleIt.Click += buttonScheduleIt_Click;
             // 
             // label2
             // 
@@ -1570,11 +1611,11 @@
             // 
             label8.AutoSize = true;
             label8.BackColor = Color.Transparent;
-            label8.Font = new Font("Agency FB", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label8.Font = new Font("Agency FB", 22F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             label8.ForeColor = Color.FromArgb(31, 57, 69);
             label8.Location = new Point(52, 40);
             label8.Name = "label8";
-            label8.Size = new Size(81, 31);
+            label8.Size = new Size(94, 36);
             label8.TabIndex = 24;
             label8.Text = "SAP Link";
             // 
@@ -1593,13 +1634,13 @@
             // guna2PictureBox2
             // 
             guna2PictureBox2.BackColor = SystemColors.Control;
-            guna2PictureBox2.CustomizableEdges = customizableEdges46;
+            guna2PictureBox2.CustomizableEdges = customizableEdges48;
             guna2PictureBox2.Image = (Image)resources.GetObject("guna2PictureBox2.Image");
             guna2PictureBox2.ImageRotate = 0F;
             guna2PictureBox2.InitialImage = null;
             guna2PictureBox2.Location = new Point(14, 36);
             guna2PictureBox2.Name = "guna2PictureBox2";
-            guna2PictureBox2.ShadowDecoration.CustomizableEdges = customizableEdges47;
+            guna2PictureBox2.ShadowDecoration.CustomizableEdges = customizableEdges49;
             guna2PictureBox2.Size = new Size(33, 32);
             guna2PictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             guna2PictureBox2.TabIndex = 15;
@@ -1610,7 +1651,7 @@
             guna2Button4.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             guna2Button4.BackColor = SystemColors.Control;
             guna2Button4.BorderRadius = 10;
-            guna2Button4.CustomizableEdges = customizableEdges48;
+            guna2Button4.CustomizableEdges = customizableEdges50;
             guna2Button4.DisabledState.BorderColor = Color.DarkGray;
             guna2Button4.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button4.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -1624,7 +1665,7 @@
             guna2Button4.ImageSize = new Size(30, 30);
             guna2Button4.Location = new Point(10, 768);
             guna2Button4.Name = "guna2Button4";
-            guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges49;
+            guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges51;
             guna2Button4.Size = new Size(128, 40);
             guna2Button4.TabIndex = 18;
             guna2Button4.Text = "Settings";
@@ -1635,7 +1676,7 @@
             // 
             guna2Button3.BackColor = SystemColors.Control;
             guna2Button3.BorderRadius = 10;
-            guna2Button3.CustomizableEdges = customizableEdges50;
+            guna2Button3.CustomizableEdges = customizableEdges52;
             guna2Button3.DisabledState.BorderColor = Color.DarkGray;
             guna2Button3.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button3.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -1649,7 +1690,7 @@
             guna2Button3.ImageSize = new Size(30, 30);
             guna2Button3.Location = new Point(10, 290);
             guna2Button3.Name = "guna2Button3";
-            guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges51;
+            guna2Button3.ShadowDecoration.CustomizableEdges = customizableEdges53;
             guna2Button3.Size = new Size(128, 40);
             guna2Button3.TabIndex = 18;
             guna2Button3.Text = "Outbound Data";
@@ -1660,7 +1701,7 @@
             // 
             guna2Button2.BackColor = Color.Transparent;
             guna2Button2.BorderRadius = 10;
-            guna2Button2.CustomizableEdges = customizableEdges52;
+            guna2Button2.CustomizableEdges = customizableEdges54;
             guna2Button2.DisabledState.BorderColor = Color.DarkGray;
             guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -1674,7 +1715,7 @@
             guna2Button2.Location = new Point(10, 234);
             guna2Button2.Name = "guna2Button2";
             guna2Button2.ShadowDecoration.Color = Color.Gainsboro;
-            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges53;
+            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges55;
             guna2Button2.ShadowDecoration.Depth = 40;
             guna2Button2.ShadowDecoration.Enabled = true;
             guna2Button2.Size = new Size(128, 40);
@@ -1687,7 +1728,7 @@
             // 
             guna2Button1.BackColor = SystemColors.Control;
             guna2Button1.BorderRadius = 10;
-            guna2Button1.CustomizableEdges = customizableEdges54;
+            guna2Button1.CustomizableEdges = customizableEdges56;
             guna2Button1.DisabledState.BorderColor = Color.DarkGray;
             guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -1701,7 +1742,7 @@
             guna2Button1.ImageSize = new Size(30, 30);
             guna2Button1.Location = new Point(10, 178);
             guna2Button1.Name = "guna2Button1";
-            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges55;
+            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges57;
             guna2Button1.Size = new Size(128, 40);
             guna2Button1.TabIndex = 17;
             guna2Button1.Text = "Dashboard";
@@ -1714,13 +1755,13 @@
             guna2ControlBox3.BackColor = SystemColors.Control;
             guna2ControlBox3.BorderRadius = 8;
             guna2ControlBox3.ControlBoxType = Guna.UI2.WinForms.Enums.ControlBoxType.MaximizeBox;
-            guna2ControlBox3.CustomizableEdges = customizableEdges56;
+            guna2ControlBox3.CustomizableEdges = customizableEdges58;
             guna2ControlBox3.FillColor = Color.Transparent;
             guna2ControlBox3.IconColor = Color.Black;
             guna2ControlBox3.Location = new Point(1197, 9);
             guna2ControlBox3.Margin = new Padding(4);
             guna2ControlBox3.Name = "guna2ControlBox3";
-            guna2ControlBox3.ShadowDecoration.CustomizableEdges = customizableEdges57;
+            guna2ControlBox3.ShadowDecoration.CustomizableEdges = customizableEdges59;
             guna2ControlBox3.Size = new Size(32, 28);
             guna2ControlBox3.TabIndex = 2;
             guna2ControlBox3.Click += guna2ControlBox3_Click;
@@ -1731,13 +1772,13 @@
             guna2ControlBox2.BackColor = SystemColors.Control;
             guna2ControlBox2.BorderRadius = 8;
             guna2ControlBox2.ControlBoxType = Guna.UI2.WinForms.Enums.ControlBoxType.MinimizeBox;
-            guna2ControlBox2.CustomizableEdges = customizableEdges58;
+            guna2ControlBox2.CustomizableEdges = customizableEdges60;
             guna2ControlBox2.FillColor = Color.Transparent;
             guna2ControlBox2.IconColor = Color.Black;
             guna2ControlBox2.Location = new Point(1157, 9);
             guna2ControlBox2.Margin = new Padding(4);
             guna2ControlBox2.Name = "guna2ControlBox2";
-            guna2ControlBox2.ShadowDecoration.CustomizableEdges = customizableEdges59;
+            guna2ControlBox2.ShadowDecoration.CustomizableEdges = customizableEdges61;
             guna2ControlBox2.Size = new Size(32, 28);
             guna2ControlBox2.TabIndex = 0;
             guna2ControlBox2.Click += MinimizeButton_Click;
@@ -1747,13 +1788,13 @@
             guna2ControlBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             guna2ControlBox1.BackColor = SystemColors.Control;
             guna2ControlBox1.BorderRadius = 8;
-            guna2ControlBox1.CustomizableEdges = customizableEdges60;
+            guna2ControlBox1.CustomizableEdges = customizableEdges62;
             guna2ControlBox1.FillColor = Color.Transparent;
             guna2ControlBox1.IconColor = Color.Black;
             guna2ControlBox1.Location = new Point(1237, 9);
             guna2ControlBox1.Margin = new Padding(4);
             guna2ControlBox1.Name = "guna2ControlBox1";
-            guna2ControlBox1.ShadowDecoration.CustomizableEdges = customizableEdges61;
+            guna2ControlBox1.ShadowDecoration.CustomizableEdges = customizableEdges63;
             guna2ControlBox1.Size = new Size(32, 28);
             guna2ControlBox1.TabIndex = 1;
             guna2ControlBox1.Click += guna2ControlBox1_Click;
@@ -1763,12 +1804,12 @@
             MainPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             MainPanel.BorderRadius = 30;
             MainPanel.ContextMenuStrip = contextMenuRefreshAuth;
-            MainPanel.CustomizableEdges = customizableEdges62;
+            MainPanel.CustomizableEdges = customizableEdges64;
             MainPanel.ImageRotate = 0F;
             MainPanel.Location = new Point(145, 99);
             MainPanel.Margin = new Padding(4);
             MainPanel.Name = "MainPanel";
-            MainPanel.ShadowDecoration.CustomizableEdges = customizableEdges63;
+            MainPanel.ShadowDecoration.CustomizableEdges = customizableEdges65;
             MainPanel.Size = new Size(1126, 737);
             MainPanel.SizeMode = PictureBoxSizeMode.StretchImage;
             MainPanel.TabIndex = 0;
@@ -1903,7 +1944,7 @@
         private Label label17;
         private Guna2TextBox textBoxDocCode;
         private Guna2DateTimePicker dateTimePickerTo;
-        private Guna2ToggleSwitch toggleGoodsRecepitPO;
+        private Guna2ToggleSwitch toggleGoodsReceiptPO;
         private Label label18;
         private TabPage tabPage9;
         private Guna2DataGridView dataGridViewInitial;
@@ -1912,7 +1953,7 @@
         private ToolStripMenuItem MenuISyncClearLogs;
         private Guna2ToggleSwitch toggleGoodsIssue;
         private Label label20;
-        private Guna2ToggleSwitch toggleGoodsRecepit;
+        private Guna2ToggleSwitch toggleGoodsReceipt;
         private Label label19;
         private ToolStripMenuItem MenuISyncRefreshAuth;
         private ToolStripMenuItem MenuISyncCopy;
@@ -1929,5 +1970,7 @@
         private ToolStripSeparator toolStripSeparator4;
         private ToolStripSeparator toolStripSeparator3;
         private Guna2Button guna2Button5;
+        private Guna2ToggleSwitch toggleGoodsReturn;
+        private Label label6;
     }
 }

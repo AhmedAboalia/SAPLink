@@ -30,8 +30,8 @@ namespace SAPLink.Forms
         private void InitializeComponent()
         {
             components = new Container();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges63 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges64 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges65 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges66 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             ComponentResourceManager resources = new ComponentResourceManager(typeof(Dashboard));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -47,8 +47,8 @@ namespace SAPLink.Forms
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges10 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -61,10 +61,10 @@ namespace SAPLink.Forms
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges26 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges43 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges44 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges27 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges45 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges46 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -77,16 +77,16 @@ namespace SAPLink.Forms
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges40 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges41 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges42 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges51 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges52 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges45 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges46 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges43 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges44 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges53 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges54 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges47 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges48 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges49 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges50 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges53 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges54 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges51 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges52 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges55 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges56 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges57 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -95,6 +95,8 @@ namespace SAPLink.Forms
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges60 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges61 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges62 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges63 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges64 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2Panel1 = new Guna2Panel();
             contextMenu = new ContextMenuStrip(components);
             toolStripMenuItem6 = new ToolStripMenuItem();
@@ -111,6 +113,7 @@ namespace SAPLink.Forms
             button_InGoodsReceipt = new Guna2Button();
             button_InGoodsIssue = new Guna2Button();
             buttonDepartments = new Guna2Button();
+            buttonGoodsReturn = new Guna2Button();
             button_InGoodsReceiptPo = new Guna2Button();
             buttonVendors = new Guna2Button();
             buttonItems = new Guna2Button();
@@ -170,12 +173,12 @@ namespace SAPLink.Forms
             guna2Panel1.Controls.Add(guna2ControlBox1);
             guna2Panel1.Controls.Add(MainPanel);
             guna2Panel1.CustomBorderColor = Color.Transparent;
-            guna2Panel1.CustomizableEdges = customizableEdges63;
+            guna2Panel1.CustomizableEdges = customizableEdges65;
             guna2Panel1.Dock = DockStyle.Fill;
             guna2Panel1.Location = new Point(0, 0);
             guna2Panel1.Margin = new Padding(4);
             guna2Panel1.Name = "guna2Panel1";
-            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges64;
+            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges66;
             guna2Panel1.Size = new Size(1204, 978);
             guna2Panel1.TabIndex = 0;
             guna2Panel1.DoubleClick += guna2Panel1_DoubleClick;
@@ -456,18 +459,19 @@ namespace SAPLink.Forms
             guna2GroupBox2.Controls.Add(button_InGoodsReceipt);
             guna2GroupBox2.Controls.Add(button_InGoodsIssue);
             guna2GroupBox2.Controls.Add(buttonDepartments);
+            guna2GroupBox2.Controls.Add(buttonGoodsReturn);
             guna2GroupBox2.Controls.Add(button_InGoodsReceiptPo);
             guna2GroupBox2.Controls.Add(buttonVendors);
             guna2GroupBox2.Controls.Add(buttonItems);
             guna2GroupBox2.CustomBorderColor = Color.FromArgb(245, 246, 247);
             guna2GroupBox2.CustomBorderThickness = new Padding(0, 32, 0, 0);
-            guna2GroupBox2.CustomizableEdges = customizableEdges27;
+            guna2GroupBox2.CustomizableEdges = customizableEdges29;
             guna2GroupBox2.FillColor = Color.FromArgb(245, 246, 247);
             guna2GroupBox2.Font = new Font("Yu Gothic UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             guna2GroupBox2.ForeColor = Color.Black;
             guna2GroupBox2.Location = new Point(59, 278);
             guna2GroupBox2.Name = "guna2GroupBox2";
-            guna2GroupBox2.ShadowDecoration.CustomizableEdges = customizableEdges28;
+            guna2GroupBox2.ShadowDecoration.CustomizableEdges = customizableEdges30;
             guna2GroupBox2.Size = new Size(1121, 185);
             guna2GroupBox2.TabIndex = 53;
             guna2GroupBox2.Text = "    Inbound Data";
@@ -494,7 +498,7 @@ namespace SAPLink.Forms
             button_InGoodsReceipt.ImageAlign = HorizontalAlignment.Left;
             button_InGoodsReceipt.ImageOffset = new Point(0, 45);
             button_InGoodsReceipt.ImageSize = new Size(35, 35);
-            button_InGoodsReceipt.Location = new Point(643, 45);
+            button_InGoodsReceipt.Location = new Point(801, 45);
             button_InGoodsReceipt.Name = "button_InGoodsReceipt";
             button_InGoodsReceipt.PressedColor = Color.SeaGreen;
             button_InGoodsReceipt.ShadowDecoration.CustomizableEdges = customizableEdges16;
@@ -529,7 +533,7 @@ namespace SAPLink.Forms
             button_InGoodsIssue.ImageAlign = HorizontalAlignment.Left;
             button_InGoodsIssue.ImageOffset = new Point(0, 45);
             button_InGoodsIssue.ImageSize = new Size(35, 35);
-            button_InGoodsIssue.Location = new Point(801, 45);
+            button_InGoodsIssue.Location = new Point(959, 45);
             button_InGoodsIssue.Name = "button_InGoodsIssue";
             button_InGoodsIssue.PressedColor = Color.SeaGreen;
             button_InGoodsIssue.ShadowDecoration.CustomizableEdges = customizableEdges18;
@@ -578,6 +582,41 @@ namespace SAPLink.Forms
             buttonDepartments.Click += buttonDepartments_Click;
             buttonDepartments.MouseHover += MouseHover;
             // 
+            // buttonGoodsReturn
+            // 
+            buttonGoodsReturn.BackColor = Color.FromArgb(245, 246, 247);
+            buttonGoodsReturn.BorderColor = Color.FromArgb(245, 246, 247);
+            buttonGoodsReturn.BorderRadius = 15;
+            buttonGoodsReturn.BorderThickness = 1;
+            buttonGoodsReturn.CustomBorderColor = Color.FromArgb(245, 246, 247);
+            buttonGoodsReturn.CustomBorderThickness = new Padding(1);
+            buttonGoodsReturn.CustomizableEdges = customizableEdges21;
+            buttonGoodsReturn.DisabledState.BorderColor = Color.DarkGray;
+            buttonGoodsReturn.DisabledState.CustomBorderColor = Color.DarkGray;
+            buttonGoodsReturn.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            buttonGoodsReturn.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            buttonGoodsReturn.FillColor = Color.White;
+            buttonGoodsReturn.Font = new Font("Bahnschrift SemiCondensed", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonGoodsReturn.ForeColor = Color.Black;
+            buttonGoodsReturn.HoverState.FillColor = Color.LightGoldenrodYellow;
+            buttonGoodsReturn.Image = (Image)resources.GetObject("buttonGoodsReturn.Image");
+            buttonGoodsReturn.ImageAlign = HorizontalAlignment.Left;
+            buttonGoodsReturn.ImageOffset = new Point(0, 45);
+            buttonGoodsReturn.ImageSize = new Size(35, 35);
+            buttonGoodsReturn.Location = new Point(640, 48);
+            buttonGoodsReturn.Name = "buttonGoodsReturn";
+            buttonGoodsReturn.PressedColor = Color.SeaGreen;
+            buttonGoodsReturn.ShadowDecoration.CustomizableEdges = customizableEdges22;
+            buttonGoodsReturn.Size = new Size(149, 137);
+            buttonGoodsReturn.TabIndex = 48;
+            buttonGoodsReturn.Tag = "";
+            buttonGoodsReturn.Text = "Goods Return";
+            buttonGoodsReturn.TextAlign = HorizontalAlignment.Left;
+            buttonGoodsReturn.TextOffset = new Point(0, -52);
+            buttonGoodsReturn.Tile = true;
+            buttonGoodsReturn.Click += buttonGoodsReturn_Click;
+            buttonGoodsReturn.MouseHover += MouseHover;
+            // 
             // button_InGoodsReceiptPo
             // 
             button_InGoodsReceiptPo.BackColor = Color.FromArgb(245, 246, 247);
@@ -586,7 +625,7 @@ namespace SAPLink.Forms
             button_InGoodsReceiptPo.BorderThickness = 1;
             button_InGoodsReceiptPo.CustomBorderColor = Color.FromArgb(245, 246, 247);
             button_InGoodsReceiptPo.CustomBorderThickness = new Padding(1);
-            button_InGoodsReceiptPo.CustomizableEdges = customizableEdges21;
+            button_InGoodsReceiptPo.CustomizableEdges = customizableEdges23;
             button_InGoodsReceiptPo.DisabledState.BorderColor = Color.DarkGray;
             button_InGoodsReceiptPo.DisabledState.CustomBorderColor = Color.DarkGray;
             button_InGoodsReceiptPo.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -599,14 +638,14 @@ namespace SAPLink.Forms
             button_InGoodsReceiptPo.ImageAlign = HorizontalAlignment.Left;
             button_InGoodsReceiptPo.ImageOffset = new Point(0, 45);
             button_InGoodsReceiptPo.ImageSize = new Size(35, 35);
-            button_InGoodsReceiptPo.Location = new Point(485, 45);
+            button_InGoodsReceiptPo.Location = new Point(485, 48);
             button_InGoodsReceiptPo.Name = "button_InGoodsReceiptPo";
             button_InGoodsReceiptPo.PressedColor = Color.SeaGreen;
-            button_InGoodsReceiptPo.ShadowDecoration.CustomizableEdges = customizableEdges22;
+            button_InGoodsReceiptPo.ShadowDecoration.CustomizableEdges = customizableEdges24;
             button_InGoodsReceiptPo.Size = new Size(149, 137);
             button_InGoodsReceiptPo.TabIndex = 48;
             button_InGoodsReceiptPo.Tag = "";
-            button_InGoodsReceiptPo.Text = "Vouchers (GRPO)";
+            button_InGoodsReceiptPo.Text = "Goods Receipt PO";
             button_InGoodsReceiptPo.TextAlign = HorizontalAlignment.Left;
             button_InGoodsReceiptPo.TextOffset = new Point(0, -52);
             button_InGoodsReceiptPo.Tile = true;
@@ -621,7 +660,7 @@ namespace SAPLink.Forms
             buttonVendors.BorderThickness = 1;
             buttonVendors.CustomBorderColor = Color.FromArgb(245, 246, 247);
             buttonVendors.CustomBorderThickness = new Padding(1);
-            buttonVendors.CustomizableEdges = customizableEdges23;
+            buttonVendors.CustomizableEdges = customizableEdges25;
             buttonVendors.DisabledState.BorderColor = Color.DarkGray;
             buttonVendors.DisabledState.CustomBorderColor = Color.DarkGray;
             buttonVendors.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -637,7 +676,7 @@ namespace SAPLink.Forms
             buttonVendors.Location = new Point(327, 45);
             buttonVendors.Name = "buttonVendors";
             buttonVendors.PressedColor = Color.SeaGreen;
-            buttonVendors.ShadowDecoration.CustomizableEdges = customizableEdges24;
+            buttonVendors.ShadowDecoration.CustomizableEdges = customizableEdges26;
             buttonVendors.Size = new Size(149, 137);
             buttonVendors.TabIndex = 46;
             buttonVendors.Tag = "";
@@ -656,7 +695,7 @@ namespace SAPLink.Forms
             buttonItems.BorderThickness = 1;
             buttonItems.CustomBorderColor = Color.FromArgb(245, 246, 247);
             buttonItems.CustomBorderThickness = new Padding(1);
-            buttonItems.CustomizableEdges = customizableEdges25;
+            buttonItems.CustomizableEdges = customizableEdges27;
             buttonItems.DisabledState.BorderColor = Color.DarkGray;
             buttonItems.DisabledState.CustomBorderColor = Color.DarkGray;
             buttonItems.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -672,7 +711,7 @@ namespace SAPLink.Forms
             buttonItems.Location = new Point(169, 45);
             buttonItems.Name = "buttonItems";
             buttonItems.PressedColor = Color.SeaGreen;
-            buttonItems.ShadowDecoration.CustomizableEdges = customizableEdges26;
+            buttonItems.ShadowDecoration.CustomizableEdges = customizableEdges28;
             buttonItems.Size = new Size(149, 137);
             buttonItems.TabIndex = 46;
             buttonItems.Tag = "";
@@ -698,13 +737,13 @@ namespace SAPLink.Forms
             guna2GroupBox1.Controls.Add(buttonInvoice);
             guna2GroupBox1.CustomBorderColor = Color.FromArgb(245, 246, 247);
             guna2GroupBox1.CustomBorderThickness = new Padding(0, 32, 0, 0);
-            guna2GroupBox1.CustomizableEdges = customizableEdges43;
+            guna2GroupBox1.CustomizableEdges = customizableEdges45;
             guna2GroupBox1.FillColor = Color.FromArgb(245, 246, 247);
             guna2GroupBox1.Font = new Font("Yu Gothic UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             guna2GroupBox1.ForeColor = Color.Black;
             guna2GroupBox1.Location = new Point(59, 496);
             guna2GroupBox1.Name = "guna2GroupBox1";
-            guna2GroupBox1.ShadowDecoration.CustomizableEdges = customizableEdges44;
+            guna2GroupBox1.ShadowDecoration.CustomizableEdges = customizableEdges46;
             guna2GroupBox1.Size = new Size(1121, 204);
             guna2GroupBox1.TabIndex = 47;
             guna2GroupBox1.Text = "   Outbound Data";
@@ -718,7 +757,7 @@ namespace SAPLink.Forms
             buttonOutGoodsReceipt.BorderThickness = 1;
             buttonOutGoodsReceipt.CustomBorderColor = Color.FromArgb(245, 246, 247);
             buttonOutGoodsReceipt.CustomBorderThickness = new Padding(1);
-            buttonOutGoodsReceipt.CustomizableEdges = customizableEdges29;
+            buttonOutGoodsReceipt.CustomizableEdges = customizableEdges31;
             buttonOutGoodsReceipt.DisabledState.BorderColor = Color.DarkGray;
             buttonOutGoodsReceipt.DisabledState.CustomBorderColor = Color.DarkGray;
             buttonOutGoodsReceipt.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -734,7 +773,7 @@ namespace SAPLink.Forms
             buttonOutGoodsReceipt.Location = new Point(801, 38);
             buttonOutGoodsReceipt.Name = "buttonOutGoodsReceipt";
             buttonOutGoodsReceipt.PressedColor = Color.SeaGreen;
-            buttonOutGoodsReceipt.ShadowDecoration.CustomizableEdges = customizableEdges30;
+            buttonOutGoodsReceipt.ShadowDecoration.CustomizableEdges = customizableEdges32;
             buttonOutGoodsReceipt.Size = new Size(149, 137);
             buttonOutGoodsReceipt.TabIndex = 48;
             buttonOutGoodsReceipt.Tag = "";
@@ -753,7 +792,7 @@ namespace SAPLink.Forms
             buttonCreditMemo.BorderThickness = 1;
             buttonCreditMemo.CustomBorderColor = Color.FromArgb(245, 246, 247);
             buttonCreditMemo.CustomBorderThickness = new Padding(1);
-            buttonCreditMemo.CustomizableEdges = customizableEdges31;
+            buttonCreditMemo.CustomizableEdges = customizableEdges33;
             buttonCreditMemo.DisabledState.BorderColor = Color.DarkGray;
             buttonCreditMemo.DisabledState.CustomBorderColor = Color.DarkGray;
             buttonCreditMemo.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -769,7 +808,7 @@ namespace SAPLink.Forms
             buttonCreditMemo.Location = new Point(169, 38);
             buttonCreditMemo.Name = "buttonCreditMemo";
             buttonCreditMemo.PressedColor = Color.SeaGreen;
-            buttonCreditMemo.ShadowDecoration.CustomizableEdges = customizableEdges32;
+            buttonCreditMemo.ShadowDecoration.CustomizableEdges = customizableEdges34;
             buttonCreditMemo.Size = new Size(149, 137);
             buttonCreditMemo.TabIndex = 52;
             buttonCreditMemo.Tag = "";
@@ -788,7 +827,7 @@ namespace SAPLink.Forms
             buttonStockTransfer.BorderThickness = 1;
             buttonStockTransfer.CustomBorderColor = Color.FromArgb(245, 246, 247);
             buttonStockTransfer.CustomBorderThickness = new Padding(1);
-            buttonStockTransfer.CustomizableEdges = customizableEdges33;
+            buttonStockTransfer.CustomizableEdges = customizableEdges35;
             buttonStockTransfer.DisabledState.BorderColor = Color.DarkGray;
             buttonStockTransfer.DisabledState.CustomBorderColor = Color.DarkGray;
             buttonStockTransfer.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -804,7 +843,7 @@ namespace SAPLink.Forms
             buttonStockTransfer.Location = new Point(485, 38);
             buttonStockTransfer.Name = "buttonStockTransfer";
             buttonStockTransfer.PressedColor = Color.SeaGreen;
-            buttonStockTransfer.ShadowDecoration.CustomizableEdges = customizableEdges34;
+            buttonStockTransfer.ShadowDecoration.CustomizableEdges = customizableEdges36;
             buttonStockTransfer.Size = new Size(149, 137);
             buttonStockTransfer.TabIndex = 51;
             buttonStockTransfer.Tag = "";
@@ -823,7 +862,7 @@ namespace SAPLink.Forms
             buttonCustomerOrder.BorderThickness = 1;
             buttonCustomerOrder.CustomBorderColor = Color.FromArgb(245, 246, 247);
             buttonCustomerOrder.CustomBorderThickness = new Padding(1);
-            buttonCustomerOrder.CustomizableEdges = customizableEdges35;
+            buttonCustomerOrder.CustomizableEdges = customizableEdges37;
             buttonCustomerOrder.DisabledState.BorderColor = Color.DarkGray;
             buttonCustomerOrder.DisabledState.CustomBorderColor = Color.DarkGray;
             buttonCustomerOrder.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -839,7 +878,7 @@ namespace SAPLink.Forms
             buttonCustomerOrder.Location = new Point(327, 38);
             buttonCustomerOrder.Name = "buttonCustomerOrder";
             buttonCustomerOrder.PressedColor = Color.SeaGreen;
-            buttonCustomerOrder.ShadowDecoration.CustomizableEdges = customizableEdges36;
+            buttonCustomerOrder.ShadowDecoration.CustomizableEdges = customizableEdges38;
             buttonCustomerOrder.Size = new Size(149, 137);
             buttonCustomerOrder.TabIndex = 50;
             buttonCustomerOrder.Tag = "";
@@ -858,7 +897,7 @@ namespace SAPLink.Forms
             buttonStockTaking.BorderThickness = 1;
             buttonStockTaking.CustomBorderColor = Color.FromArgb(245, 246, 247);
             buttonStockTaking.CustomBorderThickness = new Padding(1);
-            buttonStockTaking.CustomizableEdges = customizableEdges37;
+            buttonStockTaking.CustomizableEdges = customizableEdges39;
             buttonStockTaking.DisabledState.BorderColor = Color.DarkGray;
             buttonStockTaking.DisabledState.CustomBorderColor = Color.DarkGray;
             buttonStockTaking.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -874,7 +913,7 @@ namespace SAPLink.Forms
             buttonStockTaking.Location = new Point(643, 38);
             buttonStockTaking.Name = "buttonStockTaking";
             buttonStockTaking.PressedColor = Color.SeaGreen;
-            buttonStockTaking.ShadowDecoration.CustomizableEdges = customizableEdges38;
+            buttonStockTaking.ShadowDecoration.CustomizableEdges = customizableEdges40;
             buttonStockTaking.Size = new Size(149, 137);
             buttonStockTaking.TabIndex = 51;
             buttonStockTaking.Tag = "";
@@ -893,7 +932,7 @@ namespace SAPLink.Forms
             buttonOutGoodsIssue.BorderThickness = 1;
             buttonOutGoodsIssue.CustomBorderColor = Color.FromArgb(245, 246, 247);
             buttonOutGoodsIssue.CustomBorderThickness = new Padding(1);
-            buttonOutGoodsIssue.CustomizableEdges = customizableEdges39;
+            buttonOutGoodsIssue.CustomizableEdges = customizableEdges41;
             buttonOutGoodsIssue.DisabledState.BorderColor = Color.DarkGray;
             buttonOutGoodsIssue.DisabledState.CustomBorderColor = Color.DarkGray;
             buttonOutGoodsIssue.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -909,7 +948,7 @@ namespace SAPLink.Forms
             buttonOutGoodsIssue.Location = new Point(961, 38);
             buttonOutGoodsIssue.Name = "buttonOutGoodsIssue";
             buttonOutGoodsIssue.PressedColor = Color.SeaGreen;
-            buttonOutGoodsIssue.ShadowDecoration.CustomizableEdges = customizableEdges40;
+            buttonOutGoodsIssue.ShadowDecoration.CustomizableEdges = customizableEdges42;
             buttonOutGoodsIssue.Size = new Size(149, 137);
             buttonOutGoodsIssue.TabIndex = 47;
             buttonOutGoodsIssue.Tag = "";
@@ -928,7 +967,7 @@ namespace SAPLink.Forms
             buttonInvoice.BorderThickness = 1;
             buttonInvoice.CustomBorderColor = Color.FromArgb(245, 246, 247);
             buttonInvoice.CustomBorderThickness = new Padding(1);
-            buttonInvoice.CustomizableEdges = customizableEdges41;
+            buttonInvoice.CustomizableEdges = customizableEdges43;
             buttonInvoice.DisabledState.BorderColor = Color.DarkGray;
             buttonInvoice.DisabledState.CustomBorderColor = Color.DarkGray;
             buttonInvoice.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -944,7 +983,7 @@ namespace SAPLink.Forms
             buttonInvoice.Location = new Point(11, 38);
             buttonInvoice.Name = "buttonInvoice";
             buttonInvoice.PressedColor = Color.SeaGreen;
-            buttonInvoice.ShadowDecoration.CustomizableEdges = customizableEdges42;
+            buttonInvoice.ShadowDecoration.CustomizableEdges = customizableEdges44;
             buttonInvoice.Size = new Size(149, 137);
             buttonInvoice.TabIndex = 50;
             buttonInvoice.Tag = "";
@@ -969,13 +1008,13 @@ namespace SAPLink.Forms
             guna2GradientPanel1.Controls.Add(label1);
             guna2GradientPanel1.Controls.Add(label2);
             guna2GradientPanel1.Controls.Add(label3);
-            guna2GradientPanel1.CustomizableEdges = customizableEdges51;
+            guna2GradientPanel1.CustomizableEdges = customizableEdges53;
             guna2GradientPanel1.FillColor = Color.OrangeRed;
             guna2GradientPanel1.FillColor2 = Color.Gold;
             guna2GradientPanel1.ForeColor = Color.FromArgb(245, 246, 247);
             guna2GradientPanel1.Location = new Point(59, 79);
             guna2GradientPanel1.Name = "guna2GradientPanel1";
-            guna2GradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges52;
+            guna2GradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges54;
             guna2GradientPanel1.Size = new Size(1110, 171);
             guna2GradientPanel1.TabIndex = 58;
             // 
@@ -1007,12 +1046,12 @@ namespace SAPLink.Forms
             // 
             guna2PictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             guna2PictureBox2.BackColor = Color.Transparent;
-            guna2PictureBox2.CustomizableEdges = customizableEdges45;
+            guna2PictureBox2.CustomizableEdges = customizableEdges47;
             guna2PictureBox2.Image = (Image)resources.GetObject("guna2PictureBox2.Image");
             guna2PictureBox2.ImageRotate = 0F;
             guna2PictureBox2.Location = new Point(921, -1);
             guna2PictureBox2.Name = "guna2PictureBox2";
-            guna2PictureBox2.ShadowDecoration.CustomizableEdges = customizableEdges46;
+            guna2PictureBox2.ShadowDecoration.CustomizableEdges = customizableEdges48;
             guna2PictureBox2.Size = new Size(186, 186);
             guna2PictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             guna2PictureBox2.TabIndex = 46;
@@ -1022,13 +1061,13 @@ namespace SAPLink.Forms
             // guna2PictureBox1
             // 
             guna2PictureBox1.BackColor = Color.Transparent;
-            guna2PictureBox1.CustomizableEdges = customizableEdges47;
+            guna2PictureBox1.CustomizableEdges = customizableEdges49;
             guna2PictureBox1.Image = (Image)resources.GetObject("guna2PictureBox1.Image");
             guna2PictureBox1.ImageRotate = 0F;
             guna2PictureBox1.InitialImage = null;
             guna2PictureBox1.Location = new Point(19, 9);
             guna2PictureBox1.Name = "guna2PictureBox1";
-            guna2PictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges48;
+            guna2PictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges50;
             guna2PictureBox1.Size = new Size(33, 32);
             guna2PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             guna2PictureBox1.TabIndex = 53;
@@ -1041,12 +1080,12 @@ namespace SAPLink.Forms
             guna2GradientPanel2.BorderRadius = 15;
             guna2GradientPanel2.Controls.Add(label7);
             guna2GradientPanel2.Controls.Add(label6);
-            guna2GradientPanel2.CustomizableEdges = customizableEdges49;
+            guna2GradientPanel2.CustomizableEdges = customizableEdges51;
             guna2GradientPanel2.FillColor = Color.DarkRed;
             guna2GradientPanel2.FillColor2 = Color.Gold;
             guna2GradientPanel2.Location = new Point(20, 123);
             guna2GradientPanel2.Name = "guna2GradientPanel2";
-            guna2GradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges50;
+            guna2GradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges52;
             guna2GradientPanel2.Size = new Size(1009, 29);
             guna2GradientPanel2.TabIndex = 60;
             // 
@@ -1118,7 +1157,7 @@ namespace SAPLink.Forms
             guna2Button4.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             guna2Button4.BackColor = Color.FromArgb(245, 246, 247);
             guna2Button4.BorderRadius = 10;
-            guna2Button4.CustomizableEdges = customizableEdges53;
+            guna2Button4.CustomizableEdges = customizableEdges55;
             guna2Button4.DisabledState.BorderColor = Color.DarkGray;
             guna2Button4.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button4.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -1131,7 +1170,7 @@ namespace SAPLink.Forms
             guna2Button4.ImageSize = new Size(30, 30);
             guna2Button4.Location = new Point(14, 910);
             guna2Button4.Name = "guna2Button4";
-            guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges54;
+            guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges56;
             guna2Button4.Size = new Size(40, 40);
             guna2Button4.TabIndex = 18;
             guna2Button4.Click += buttonSettings_Click;
@@ -1142,13 +1181,13 @@ namespace SAPLink.Forms
             guna2ControlBox3.BackColor = Color.FromArgb(245, 246, 247);
             guna2ControlBox3.BorderRadius = 8;
             guna2ControlBox3.ControlBoxType = Guna.UI2.WinForms.Enums.ControlBoxType.MaximizeBox;
-            guna2ControlBox3.CustomizableEdges = customizableEdges55;
+            guna2ControlBox3.CustomizableEdges = customizableEdges57;
             guna2ControlBox3.FillColor = Color.Transparent;
             guna2ControlBox3.IconColor = Color.Black;
             guna2ControlBox3.Location = new Point(1117, 9);
             guna2ControlBox3.Margin = new Padding(4);
             guna2ControlBox3.Name = "guna2ControlBox3";
-            guna2ControlBox3.ShadowDecoration.CustomizableEdges = customizableEdges56;
+            guna2ControlBox3.ShadowDecoration.CustomizableEdges = customizableEdges58;
             guna2ControlBox3.Size = new Size(32, 28);
             guna2ControlBox3.TabIndex = 2;
             guna2ControlBox3.Click += guna2ControlBox3_Click;
@@ -1159,13 +1198,13 @@ namespace SAPLink.Forms
             guna2ControlBox2.BackColor = Color.FromArgb(245, 246, 247);
             guna2ControlBox2.BorderRadius = 8;
             guna2ControlBox2.ControlBoxType = Guna.UI2.WinForms.Enums.ControlBoxType.MinimizeBox;
-            guna2ControlBox2.CustomizableEdges = customizableEdges57;
+            guna2ControlBox2.CustomizableEdges = customizableEdges59;
             guna2ControlBox2.FillColor = Color.Transparent;
             guna2ControlBox2.IconColor = Color.Black;
             guna2ControlBox2.Location = new Point(1077, 9);
             guna2ControlBox2.Margin = new Padding(4);
             guna2ControlBox2.Name = "guna2ControlBox2";
-            guna2ControlBox2.ShadowDecoration.CustomizableEdges = customizableEdges58;
+            guna2ControlBox2.ShadowDecoration.CustomizableEdges = customizableEdges60;
             guna2ControlBox2.Size = new Size(32, 28);
             guna2ControlBox2.TabIndex = 0;
             guna2ControlBox2.Click += controlBoxMinimized_Click;
@@ -1175,13 +1214,13 @@ namespace SAPLink.Forms
             guna2ControlBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             guna2ControlBox1.BackColor = Color.FromArgb(245, 246, 247);
             guna2ControlBox1.BorderRadius = 8;
-            guna2ControlBox1.CustomizableEdges = customizableEdges59;
+            guna2ControlBox1.CustomizableEdges = customizableEdges61;
             guna2ControlBox1.FillColor = Color.Transparent;
             guna2ControlBox1.IconColor = Color.Black;
             guna2ControlBox1.Location = new Point(1157, 9);
             guna2ControlBox1.Margin = new Padding(4);
             guna2ControlBox1.Name = "guna2ControlBox1";
-            guna2ControlBox1.ShadowDecoration.CustomizableEdges = customizableEdges60;
+            guna2ControlBox1.ShadowDecoration.CustomizableEdges = customizableEdges62;
             guna2ControlBox1.Size = new Size(32, 28);
             guna2ControlBox1.TabIndex = 1;
             guna2ControlBox1.Click += controlBoxExit_Click;
@@ -1191,16 +1230,16 @@ namespace SAPLink.Forms
             MainPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             MainPanel.BorderRadius = 30;
             MainPanel.ContextMenuStrip = contextMenu;
-            customizableEdges61.BottomRight = false;
-            customizableEdges61.TopRight = false;
-            MainPanel.CustomizableEdges = customizableEdges61;
+            customizableEdges63.BottomRight = false;
+            customizableEdges63.TopRight = false;
+            MainPanel.CustomizableEdges = customizableEdges63;
             MainPanel.FillColor = Color.FromArgb(245, 246, 247);
             MainPanel.ImageRotate = 0F;
             MainPanel.InitialImage = null;
             MainPanel.Location = new Point(0, 0);
             MainPanel.Margin = new Padding(4);
             MainPanel.Name = "MainPanel";
-            MainPanel.ShadowDecoration.CustomizableEdges = customizableEdges62;
+            MainPanel.ShadowDecoration.CustomizableEdges = customizableEdges64;
             MainPanel.Size = new Size(1204, 978);
             MainPanel.SizeMode = PictureBoxSizeMode.StretchImage;
             MainPanel.TabIndex = 0;

@@ -88,11 +88,11 @@
             guna2Panel5 = new Guna2Panel();
             toggleGoodsIssue = new Guna2ToggleSwitch();
             togglePrismActiveItems = new Guna2ToggleSwitch();
-            toggleGoodsRecepitPO = new Guna2ToggleSwitch();
+            toggleGoodsReceiptPO = new Guna2ToggleSwitch();
             label2 = new Label();
             label20 = new Label();
             label18 = new Label();
-            toggleGoodsRecepit = new Guna2ToggleSwitch();
+            toggleGoodsReceipt = new Guna2ToggleSwitch();
             toggleNotSyncedItems = new Guna2ToggleSwitch();
             label19 = new Label();
             label12 = new Label();
@@ -269,7 +269,7 @@
             dataGridView.AllowUserToResizeColumns = false;
             dataGridView.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = Color.FromArgb(247, 248, 249);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
             dataGridViewCellStyle1.ForeColor = SystemColors.ControlText;
             dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(231, 229, 255);
             dataGridViewCellStyle1.SelectionForeColor = Color.FromArgb(71, 69, 94);
@@ -279,7 +279,7 @@
             dataGridView.BackgroundColor = Color.WhiteSmoke;
             dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = Color.FromArgb(232, 234, 237);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             dataGridViewCellStyle2.ForeColor = Color.Black;
             dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
@@ -289,7 +289,7 @@
             dataGridView.ContextMenuStrip = contextMenuInitial;
             dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
             dataGridViewCellStyle3.ForeColor = Color.Black;
             dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(239, 241, 243);
             dataGridViewCellStyle3.SelectionForeColor = Color.Black;
@@ -385,11 +385,11 @@
             guna2Panel5.BorderThickness = 1;
             guna2Panel5.Controls.Add(toggleGoodsIssue);
             guna2Panel5.Controls.Add(togglePrismActiveItems);
-            guna2Panel5.Controls.Add(toggleGoodsRecepitPO);
+            guna2Panel5.Controls.Add(toggleGoodsReceiptPO);
             guna2Panel5.Controls.Add(label2);
             guna2Panel5.Controls.Add(label20);
             guna2Panel5.Controls.Add(label18);
-            guna2Panel5.Controls.Add(toggleGoodsRecepit);
+            guna2Panel5.Controls.Add(toggleGoodsReceipt);
             guna2Panel5.Controls.Add(toggleNotSyncedItems);
             guna2Panel5.Controls.Add(label19);
             guna2Panel5.Controls.Add(label12);
@@ -426,7 +426,7 @@
             toggleGoodsIssue.UncheckedState.InnerColor = Color.White;
             toggleGoodsIssue.Visible = false;
             toggleGoodsIssue.CheckedChanged += toggleGoodsIssue_CheckedChanged;
-            toggleGoodsIssue.KeyDown += toggleGoodsRecepitPO_KeyDown;
+            toggleGoodsIssue.KeyDown += toggleGoodsReceiptPO_KeyDown;
             // 
             // togglePrismActiveItems
             // 
@@ -445,27 +445,27 @@
             togglePrismActiveItems.UncheckedState.InnerBorderColor = Color.White;
             togglePrismActiveItems.UncheckedState.InnerColor = Color.White;
             togglePrismActiveItems.CheckedChanged += toggleDepartments_CheckedChanged;
-            togglePrismActiveItems.KeyDown += toggleGoodsRecepitPO_KeyDown;
+            togglePrismActiveItems.KeyDown += toggleGoodsReceiptPO_KeyDown;
             // 
-            // toggleGoodsRecepitPO
+            // toggleGoodsReceiptPO
             // 
-            toggleGoodsRecepitPO.CheckedState.BorderColor = Color.FromArgb(94, 148, 255);
-            toggleGoodsRecepitPO.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
-            toggleGoodsRecepitPO.CheckedState.InnerBorderColor = Color.White;
-            toggleGoodsRecepitPO.CheckedState.InnerColor = Color.White;
-            toggleGoodsRecepitPO.CustomizableEdges = customizableEdges5;
-            toggleGoodsRecepitPO.Location = new Point(362, 34);
-            toggleGoodsRecepitPO.Name = "toggleGoodsRecepitPO";
-            toggleGoodsRecepitPO.ShadowDecoration.CustomizableEdges = customizableEdges6;
-            toggleGoodsRecepitPO.Size = new Size(45, 21);
-            toggleGoodsRecepitPO.TabIndex = 59;
-            toggleGoodsRecepitPO.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
-            toggleGoodsRecepitPO.UncheckedState.FillColor = Color.FromArgb(125, 137, 149);
-            toggleGoodsRecepitPO.UncheckedState.InnerBorderColor = Color.White;
-            toggleGoodsRecepitPO.UncheckedState.InnerColor = Color.White;
-            toggleGoodsRecepitPO.Visible = false;
-            toggleGoodsRecepitPO.CheckedChanged += toggleGoodsRecepitPO_CheckedChanged;
-            toggleGoodsRecepitPO.KeyDown += toggleGoodsRecepitPO_KeyDown;
+            toggleGoodsReceiptPO.CheckedState.BorderColor = Color.FromArgb(94, 148, 255);
+            toggleGoodsReceiptPO.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
+            toggleGoodsReceiptPO.CheckedState.InnerBorderColor = Color.White;
+            toggleGoodsReceiptPO.CheckedState.InnerColor = Color.White;
+            toggleGoodsReceiptPO.CustomizableEdges = customizableEdges5;
+            toggleGoodsReceiptPO.Location = new Point(362, 34);
+            toggleGoodsReceiptPO.Name = "toggleGoodsReceiptPO";
+            toggleGoodsReceiptPO.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            toggleGoodsReceiptPO.Size = new Size(45, 21);
+            toggleGoodsReceiptPO.TabIndex = 59;
+            toggleGoodsReceiptPO.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
+            toggleGoodsReceiptPO.UncheckedState.FillColor = Color.FromArgb(125, 137, 149);
+            toggleGoodsReceiptPO.UncheckedState.InnerBorderColor = Color.White;
+            toggleGoodsReceiptPO.UncheckedState.InnerColor = Color.White;
+            toggleGoodsReceiptPO.Visible = false;
+            toggleGoodsReceiptPO.CheckedChanged += toggleGoodsReceiptPO_CheckedChanged;
+            toggleGoodsReceiptPO.KeyDown += toggleGoodsReceiptPO_KeyDown;
             // 
             // label2
             // 
@@ -505,25 +505,25 @@
             label18.Text = "Goods Receipt PO (GRPO)";
             label18.Visible = false;
             // 
-            // toggleGoodsRecepit
+            // toggleGoodsReceipt
             // 
-            toggleGoodsRecepit.CheckedState.BorderColor = Color.FromArgb(94, 148, 255);
-            toggleGoodsRecepit.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
-            toggleGoodsRecepit.CheckedState.InnerBorderColor = Color.White;
-            toggleGoodsRecepit.CheckedState.InnerColor = Color.White;
-            toggleGoodsRecepit.CustomizableEdges = customizableEdges7;
-            toggleGoodsRecepit.Location = new Point(362, 61);
-            toggleGoodsRecepit.Name = "toggleGoodsRecepit";
-            toggleGoodsRecepit.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            toggleGoodsRecepit.Size = new Size(45, 21);
-            toggleGoodsRecepit.TabIndex = 57;
-            toggleGoodsRecepit.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
-            toggleGoodsRecepit.UncheckedState.FillColor = Color.FromArgb(125, 137, 149);
-            toggleGoodsRecepit.UncheckedState.InnerBorderColor = Color.White;
-            toggleGoodsRecepit.UncheckedState.InnerColor = Color.White;
-            toggleGoodsRecepit.Visible = false;
-            toggleGoodsRecepit.CheckedChanged += toggleGoodsRecepit_CheckedChanged;
-            toggleGoodsRecepit.KeyDown += toggleGoodsRecepitPO_KeyDown;
+            toggleGoodsReceipt.CheckedState.BorderColor = Color.FromArgb(94, 148, 255);
+            toggleGoodsReceipt.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
+            toggleGoodsReceipt.CheckedState.InnerBorderColor = Color.White;
+            toggleGoodsReceipt.CheckedState.InnerColor = Color.White;
+            toggleGoodsReceipt.CustomizableEdges = customizableEdges7;
+            toggleGoodsReceipt.Location = new Point(362, 61);
+            toggleGoodsReceipt.Name = "toggleGoodsReceipt";
+            toggleGoodsReceipt.ShadowDecoration.CustomizableEdges = customizableEdges8;
+            toggleGoodsReceipt.Size = new Size(45, 21);
+            toggleGoodsReceipt.TabIndex = 57;
+            toggleGoodsReceipt.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
+            toggleGoodsReceipt.UncheckedState.FillColor = Color.FromArgb(125, 137, 149);
+            toggleGoodsReceipt.UncheckedState.InnerBorderColor = Color.White;
+            toggleGoodsReceipt.UncheckedState.InnerColor = Color.White;
+            toggleGoodsReceipt.Visible = false;
+            toggleGoodsReceipt.CheckedChanged += toggleGoodsReceipt_CheckedChanged;
+            toggleGoodsReceipt.KeyDown += toggleGoodsReceiptPO_KeyDown;
             // 
             // toggleNotSyncedItems
             // 
@@ -542,7 +542,7 @@
             toggleNotSyncedItems.UncheckedState.InnerBorderColor = Color.White;
             toggleNotSyncedItems.UncheckedState.InnerColor = Color.White;
             toggleNotSyncedItems.CheckedChanged += ToggleItemsCheckedChanged;
-            toggleNotSyncedItems.KeyDown += toggleGoodsRecepitPO_KeyDown;
+            toggleNotSyncedItems.KeyDown += toggleGoodsReceiptPO_KeyDown;
             // 
             // label19
             // 
@@ -597,7 +597,7 @@
             toggleSyncedItems.UncheckedState.InnerBorderColor = Color.White;
             toggleSyncedItems.UncheckedState.InnerColor = Color.White;
             toggleSyncedItems.CheckedChanged += toggleVendors_CheckedChanged;
-            toggleSyncedItems.KeyDown += toggleGoodsRecepitPO_KeyDown;
+            toggleSyncedItems.KeyDown += toggleGoodsReceiptPO_KeyDown;
             // 
             // buttonInitialzeNow
             // 
@@ -662,11 +662,11 @@
             // 
             label8.AutoSize = true;
             label8.BackColor = Color.Transparent;
-            label8.Font = new Font("Agency FB", 18F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label8.Font = new Font("Agency FB", 22F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             label8.ForeColor = Color.FromArgb(31, 57, 69);
             label8.Location = new Point(52, 40);
             label8.Name = "label8";
-            label8.Size = new Size(81, 31);
+            label8.Size = new Size(94, 36);
             label8.TabIndex = 24;
             label8.Text = "SAP Link";
             // 
@@ -1000,10 +1000,10 @@
         private Guna2DataGridView dataGridView;
         private Guna2Panel guna2Panel5;
         private Guna2ToggleSwitch toggleGoodsIssue;
-        private Guna2ToggleSwitch toggleGoodsRecepitPO;
+        private Guna2ToggleSwitch toggleGoodsReceiptPO;
         private Label label20;
         private Label label18;
-        private Guna2ToggleSwitch toggleGoodsRecepit;
+        private Guna2ToggleSwitch toggleGoodsReceipt;
         private Guna2ToggleSwitch toggleNotSyncedItems;
         private Label label19;
         private Label label12;

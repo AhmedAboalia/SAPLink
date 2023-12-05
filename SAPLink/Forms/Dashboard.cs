@@ -16,7 +16,7 @@ namespace SAPLink.Forms
         private readonly ItemsService _itemsService;
         private readonly DepartmentService _departmentService;
         private readonly Credentials _credentials;
-
+        private Guna2Button buttonGoodsReturn;
 
 
         public Dashboard(UnitOfWork unitOfWork, ServiceLayerHandler serviceLayer, DepartmentService departmentService,
@@ -326,7 +326,9 @@ namespace SAPLink.Forms
             Hide();
         }
 
-        private void buttonGoodsReturn_Click(object sender, EventArgs e) 
+        private void buttonGoodsReturn_Click(object sender, EventArgs e)
             => OpenInboundData(Documents.GoodsReturn);
+
+       
     }
 }
