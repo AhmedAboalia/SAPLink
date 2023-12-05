@@ -76,7 +76,7 @@ namespace SAPLink.EF.Data
             modelBuilder.ApplyConfiguration(new SubsidiariesConfiguration());
 
             //modelBuilder.ApplyConfiguration(new RecurrencesConfiguration());
-            //modelBuilder.ApplyConfiguration(new SyncConfiguration());
+            modelBuilder.ApplyConfiguration(new SyncConfiguration());
 
             //modelBuilder.ApplyConfiguration(new ItemsLogConfiguration());
 
