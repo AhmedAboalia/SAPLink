@@ -658,7 +658,7 @@ public partial class OutboundData : Form
 
     public void OpenFormWithSettings(int tabControlInventoryIndex, int comboBoxDocTypeSyncIndex)
     {
-        tabControlInventory.SelectedIndex = tabControlInventoryIndex;
+        tabControl.SelectedIndex = tabControlInventoryIndex;
         comboBoxDocTypeSync.SelectedIndex = comboBoxDocTypeSyncIndex;
         //comboBoxDocTypeSchedule.SelectedIndex = comboBoxDocTypeSyncIndex;
 
@@ -680,7 +680,20 @@ public partial class OutboundData : Form
         //else if (comboBoxDocTypeSyncIndex == (int)Documents.GoodsIssue)
         //    toggleGoodsIssue.Checked = true;
     }
+    public void OpenReportsWithSettings(int tabControlInventoryIndex, int report)
+    {
+        tabControl.SelectedIndex = tabControlInventoryIndex;
 
+        if (report == (int)Enums.Reports.PrismActiveItems)
+            togglePrismActiveItems.Checked = true;
+
+        else if (report == (int)Enums.Reports.SyncedItems)
+            toggleSyncedItems.Checked = true;
+
+        else if (report == (int)Enums.Reports.NotSynced)
+            toggleNotSyncedItems.Checked = true;
+
+    }
     private async void OutboundData_Load(object sender, EventArgs e)
     {
         comboBoxDocTypeSync.SelectedIndex = (int)OutboundDocuments.SalesInvoice;
@@ -732,6 +745,8 @@ public partial class OutboundData : Form
         //    webViewSchedule.Visible = false;
 
         textBoxDocCode.Focus();
+
+        tabControl.Controls[2].Enabled = false;
     }
 
 
@@ -778,7 +793,7 @@ public partial class OutboundData : Form
         filter = "";
         return false;
     }
-
+   
     private void LogMessages(string message, string status)
     {
         textBoxLogsSync.Log(new[] { message + "\r\n" }, Logger.MessageTime.Long);

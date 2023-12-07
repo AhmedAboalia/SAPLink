@@ -6,6 +6,9 @@ using SAPLink.Utilities.Forms;
 using SAPLink.Handler.Prism.Handlers.InboundData.Receiving.GoodsIssue;
 using SAPLink.Handler.Prism.Handlers.InboundData.Receiving.GoodsReceiptPo;
 using SAPLink.Handler.Prism.Handlers.InboundData.Receiving.GoodsReceipt;
+using static SAPLink.Core.Enums;
+using SAPLink.Handler.SAP.Application;
+using System.ComponentModel.DataAnnotations;
 
 namespace SAPLink.Forms;
 
@@ -15,7 +18,7 @@ public partial class InboundData : Form
 
     private readonly UnitOfWork _unitOfWork;
     private readonly ServiceLayerHandler _serviceLayer;
-    private readonly Clients _client;
+    private static Clients _client;
     private readonly ItemsService _itemsService;
     private readonly ItemsHandler _itemsHandler;
     private readonly DepartmentService _departmentServices;
@@ -63,7 +66,7 @@ public partial class InboundData : Form
 
     #endregion
 
-    private async void buttonInitial_Click(object sender, EventArgs e)
+    private async void ButtonRunInitialClick(object sender, EventArgs e)
     {
         textBoxLogsInitialize.Clear();
 
@@ -121,7 +124,7 @@ public partial class InboundData : Form
         //}
     }
 
-    private async void buttonSyncNow_Click(object sender, EventArgs e)
+    private async void ButtonRunSyncClick(object sender, EventArgs e)
     {
         var documentType = (Documents)comboBoxDocTypeSync.SelectedIndex;
 
@@ -592,6 +595,7 @@ public partial class InboundData : Form
             toggleItems.Checked = true;
 
     }
+
     private void Log(UpdateType updateType, string message, string status)
     {
         if (updateType == UpdateType.SyncVendors ||
@@ -773,7 +777,7 @@ public partial class InboundData : Form
                 toggleGoodsReturn.InvokeUnCheck();
         }
     }
-    private void ToggleItemsCheckedChanged(object sender, EventArgs e)
+    private void ToggleItems_CheckedChanged(object sender, EventArgs e)
     {
         if (toggleItems.Checked)
         {
@@ -959,7 +963,7 @@ public partial class InboundData : Form
             labelStatus.Log("Status: Selected Text Copied", Logger.MessageTypes.Warning, Logger.MessageTime.Short);
         }
     }
-    private void MenuInitialClearMoniteringLogs_Click(object sender, EventArgs e)
+    private void MenuInitialClearMonitoringLogs_Click(object sender, EventArgs e)
         => ClearInitialDataGridView();
     private void MenuInitialRefreshAuth_Click(object sender, EventArgs e)
         => RefreshAuthSession();
@@ -991,12 +995,189 @@ public partial class InboundData : Form
     private void textBoxDocCode_KeyDown(object sender, KeyEventArgs e)
     {
         if (e.KeyCode == Keys.Enter)
-            buttonSyncNow.PerformClick();
+            buttonRunSync.PerformClick();
     }
 
     private void toggleGoodsReceiptPO_KeyDown(object sender, KeyEventArgs e)
     {
         if (e.KeyCode == Keys.Enter)
-            buttonInitialzeNow.PerformClick();
+            buttonRunInitialze.PerformClick();
+    }
+
+    public void OpenReportsWithSettings(int tabControlInventoryIndex, int report)
+    {
+        tabControlInventory.SelectedIndex = tabControlInventoryIndex;
+
+        if (report == (int)Enums.Reports.PrismActiveItems)
+            togglePrismActiveItems.Checked = true;
+
+        else if (report == (int)Enums.Reports.SyncedItems)
+            toggleSyncedItems.Checked = true;
+
+        else if (report == (int)Enums.Reports.NotSynced)
+            toggleNotSyncedItems.Checked = true;
+
+    }
+
+    private void togglePrismActiveItems_CheckedChanged(object sender, EventArgs e)
+    {
+        if (togglePrismActiveItems.Checked)
+        {
+            PlaySound.Click();
+            if (toggleSyncedItems.Checked)
+                toggleSyncedItems.InvokeUnCheck();
+
+            if (toggleNotSyncedItems.Checked)
+                toggleNotSyncedItems.InvokeUnCheck();
+
+            if (toggleGoodsReceiptPO.Checked)
+                toggleGoodsReceiptPO.InvokeUnCheck();
+
+            if (toggleGoodsReceipt.Checked)
+                toggleGoodsReceipt.InvokeUnCheck();
+
+            if (toggleGoodsIssue.Checked)
+                toggleGoodsIssue.InvokeUnCheck();
+        }
+    }
+
+    private void toggleSyncedItems_CheckedChanged(object sender, EventArgs e)
+    {
+        if (toggleSyncedItems.Checked)
+        {
+            PlaySound.Click();
+            if (togglePrismActiveItems.Checked)
+                togglePrismActiveItems.InvokeUnCheck();
+
+            //if (toggleVendors.Checked)
+            //    toggleVendors.InvokeUnCheck();
+
+            if (toggleNotSyncedItems.Checked)
+                toggleNotSyncedItems.InvokeUnCheck();
+
+            if (toggleGoodsReceiptPO.Checked)
+                toggleGoodsReceiptPO.InvokeUnCheck();
+
+            if (toggleGoodsReceipt.Checked)
+                toggleGoodsReceipt.InvokeUnCheck();
+
+            if (toggleGoodsIssue.Checked)
+                toggleGoodsIssue.InvokeUnCheck();
+        }
+    }
+
+    private void toggleNotSyncedItems_CheckedChanged(object sender, EventArgs e)
+    {
+        if (toggleNotSyncedItems.Checked)
+        {
+            PlaySound.Click();
+            if (togglePrismActiveItems.Checked)
+                togglePrismActiveItems.InvokeUnCheck();
+
+            if (toggleSyncedItems.Checked)
+                toggleSyncedItems.InvokeUnCheck();
+
+            //if (toggleItems.Checked)
+            //    toggleItems.InvokeUnCheck();
+
+            if (toggleGoodsReceiptPO.Checked)
+                toggleGoodsReceiptPO.InvokeUnCheck();
+
+            if (toggleGoodsReceipt.Checked)
+                toggleGoodsReceipt.InvokeUnCheck();
+
+            if (toggleGoodsIssue.Checked)
+                toggleGoodsIssue.InvokeUnCheck();
+        }
+    }
+
+    private void buttonRunReport_Click(object sender, EventArgs e)
+    {
+        if (togglePrismActiveItems.Checked)
+        {
+            PlaySound.Click();
+            var items = GetItems("");
+            dataGridView.DataSource = items;
+            SetDataGridViewHeaders(dataGridView, typeof(ItemMasterDataReport));
+        }
+
+        if (toggleSyncedItems.Checked)
+        {
+            PlaySound.Click();
+            var items = GetItems("AND T0.[U_SyncToPrism] = 'Y'");
+            dataGridView.DataSource = items;
+            SetDataGridViewHeaders(dataGridView, typeof(ItemMasterDataReport));
+        }
+
+        if (toggleNotSyncedItems.Checked)
+        {
+            PlaySound.Click();
+            var items = GetItems("AND (T0.[U_SyncToPrism] IS NULL OR  T0.[U_SyncToPrism] = '' OR  T0.[U_SyncToPrism] = 'N')");
+            dataGridView.DataSource = items;
+            SetDataGridViewHeaders(dataGridView, typeof(ItemMasterDataReport));
+        }
+    }
+    private static List<ItemMasterDataReport> GetItems(string filter)
+    {
+
+        var query = Query() + filter;
+
+        if (!ClientHandler.Company.Connected)
+        {
+            ClientHandler.InitializeClientObjects(_client, out _, out _);
+        }
+
+        var oRecordSet = (Recordset)ClientHandler.Company.GetBusinessObject(BoObjectTypes.BoRecordset);
+        var items = new List<ItemMasterDataReport>();
+
+        oRecordSet.DoQuery(query);
+
+        for (var i = 0; i < oRecordSet.RecordCount; i++)
+        {
+            var item = CreateItemMasterData(oRecordSet);
+            item.RowNumber = i + 1;
+            items.Add(item);
+            oRecordSet.MoveNext();
+        }
+
+        return items;
+    }
+    private static string Query()
+    {
+        var query = "SELECT DISTINCT" +
+                    " T0.ItemCode 'Item Code'" +
+                    ",T0.ItemName 'Item Name'" +
+                    ",T0.FrgnName 'Foreign Name'" +
+                    "FROM " +
+                    "   OITM T0 " +
+                    "           WHERE " +
+                    "               T0.[U_Active] = 'Y' ";
+        return query;
+    }
+    private static ItemMasterDataReport CreateItemMasterData(Recordset recordSet)
+    {
+        var item = new ItemMasterDataReport();
+        var field = recordSet.Fields;
+
+        item.ItemCode = field.GetValue("Item Code");
+        item.ItemName = field.GetValue("Item Name");
+        item.ForeignName = field.GetValue("Foreign Name");
+
+        return item;
+    }
+    private void SetDataGridViewHeaders(DataGridView dgv, Type type)
+    {
+        foreach (DataGridViewColumn column in dgv.Columns)
+        {
+            var prop = type.GetProperty(column.Name);
+            if (prop != null)
+            {
+                var displayNameAttribute = prop.GetCustomAttributes(typeof(DisplayAttribute), false).FirstOrDefault() as DisplayAttribute;
+                if (displayNameAttribute != null)
+                {
+                    column.HeaderText = displayNameAttribute.Name;
+                }
+            }
+        }
     }
 }

@@ -85,7 +85,6 @@ namespace SAPLink.Forms
                                 && (password.IsHasValue() && password != "Password"))
             {
                 Dashboard mainScreen = new Dashboard(_unitOfWork, _serviceLayer, _departmentService, _itemsService, _client);
-
                 GetNewPrismAuthSession(userName, password);
 
 

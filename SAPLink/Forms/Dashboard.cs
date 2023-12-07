@@ -303,32 +303,23 @@ namespace SAPLink.Forms
             => Helper.TryKillProcess();
 
         private void buttonPrismActiveItems_Click(object sender, EventArgs e)
-        {
-            var reports = new Reports(_unitOfWork, _serviceLayer, _departmentService, _itemsService, _client);
-            reports.Show();
-            reports.OpenFormWithSettings(0, (int)Enums.Reports.PrismActiveItems);
-            Hide();
-        }
+            => OpenReportsWithSettings(Enums.Reports.PrismActiveItems);
 
         private void buttonSyncedItems_Click(object sender, EventArgs e)
-        {
-            var reports = new Reports(_unitOfWork, _serviceLayer, _departmentService, _itemsService, _client);
-            reports.Show();
-            reports.OpenFormWithSettings(0, (int)Enums.Reports.SyncedItems);
-            Hide();
-        }
-
+        => OpenReportsWithSettings(Enums.Reports.SyncedItems);    
+        
         private void buttonNotSyncedItems_Click(object sender, EventArgs e)
+        => OpenReportsWithSettings(Enums.Reports.NotSynced);
+
+        private void OpenReportsWithSettings(Enums.Reports report)
         {
-            var reports = new Reports(_unitOfWork, _serviceLayer, _departmentService, _itemsService, _client);
-            reports.Show();
-            reports.OpenFormWithSettings(0, (int)Enums.Reports.NotSynced);
+            var inboundData = new InboundData(_unitOfWork, _serviceLayer, _departmentService, _itemsService, _client);
+            inboundData.Show();
+            inboundData.OpenReportsWithSettings(2, (int)report);
             Hide();
         }
 
         private void buttonGoodsReturn_Click(object sender, EventArgs e)
             => OpenInboundData(Documents.GoodsReturn);
-
-       
     }
 }
