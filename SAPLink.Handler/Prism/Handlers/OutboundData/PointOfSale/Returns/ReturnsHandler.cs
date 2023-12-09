@@ -47,7 +47,7 @@ public partial class ReturnsHandler
                     var resultIncoming = new RequestResult<Payment>();
                     if (invoice.Tenders != null && SAPInvoice != null)
                     {
-                        resultIncoming = OutgoingPayment.AddMultiplePaymentsInvoice(invoice, SAPInvoice.DocEntry, customerCode);
+                        resultIncoming = OutgoingPayment.AddMultiplePaymentsInvoice(invoice, SAPInvoice.DocNum, customerCode);
                         result.Message += $"\r\n {resultIncoming.Message}";
                         result.Status = resultIncoming.Status;
 
