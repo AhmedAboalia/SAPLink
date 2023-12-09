@@ -231,9 +231,9 @@ public static class Enums
         dst_MSSQL2012 = 7,
         dst_MSSQL2014 = 8,
         dst_HANADB = 9,
-        dst_MSSQL2016 = 10, // 0x0000000A
-        dst_MSSQL2017 = 11, // 0x0000000B
-        dst_MSSQL2019 = 15, // 0x0000000F
+        dst_MSSQL2016 = 10,
+        dst_MSSQL2017 = 11,
+        dst_MSSQL2019 = 15,
     }
     public enum Environments
     {
