@@ -81,7 +81,7 @@ public class GoodsIssueHandler
 
                                 if (item.Any())
                                 {
-                                    logMessage += $"Goods Issue (GI) No.: {goodsIssue.DocEntry} >> Line item ({line.ItemCode} : {line.ItemName}) is Added.\r\n";
+                                    logMessage += $"\r\n\r\nGoods Issue (GI) No.: {goodsIssue.DocEntry} >> Line item ({line.ItemCode} : {line.ItemName}) is Added.\r\n";
                                     _loger.Information($"Goods Issue (GI) No.: {goodsIssue.DocEntry} >> Line item ({line.ItemCode} : {line.ItemName}) is Added.");
                                 }
                             }
@@ -97,7 +97,7 @@ public class GoodsIssueHandler
                         {
                             logStatus = $"Cannot Add or Sync Goods Issue (GI). SID: ({receiving.Sid}).";
                             logMessage = $"Cannot Add or Sync Goods Issue (GI). SID: ({receiving.Sid}).\r\n" +
-                                         $"Response Content:\r\n" +
+                                         $"\r\n\r\nResponse Content:\r\n\r\n" +
                                          $"{itemRespose.Content}";
 
                             _loger.Information(logMessage);
