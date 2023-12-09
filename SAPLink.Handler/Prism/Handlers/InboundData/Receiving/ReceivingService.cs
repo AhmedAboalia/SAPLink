@@ -110,15 +110,9 @@ public class ReceivingService : IReceivingService
         string query = _credentials.BackOfficeUri;
         var resource = $"/receiving/{receivingSid}";
 
-        string body = @"{
-                          ""data"": [
-                              {
-                                  ""rowversion"": """ + rowVersion + @""",
-                                  ""voutype"": ""1""
-                              }
-                          }";
+        string body = @"{""data"":[{""rowversion"":" + rowVersion + @",""voutype"":1}]}";
 
-        var response = await HttpClientFactory.InitializeAsync(query, resource, Method.POST, body);
+        var response = await HttpClientFactory.InitializeAsync(query, resource, Method.PUT, body);
 
         return response.StatusCode == HttpStatusCode.OK;
     }

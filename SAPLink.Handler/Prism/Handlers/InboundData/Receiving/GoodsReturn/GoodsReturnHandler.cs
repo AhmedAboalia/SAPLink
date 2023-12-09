@@ -234,7 +234,10 @@ public class GoodsReturnHandler
                             FROM ORPD T0 ";
 
 
-
+            if (filter.IsHasValue())
+            {
+                query += filter;
+            }
             if (!ClientHandler.Company.Connected)
             {
                 ClientHandler.InitializeClientObjects(_client, out _, out _);
@@ -279,7 +282,7 @@ public class GoodsReturnHandler
                         T0.[U_QTY], 
                         T0.[Quantity], 
                         T0.[Price],
-                        T0.[WhsCode],
+                        T0.[WhsCode]
                             FROM RPD1 T0  
                                 WHERE T0.[DocEntry] = '{docEntry}'";
 

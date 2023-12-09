@@ -201,6 +201,9 @@ public partial class InboundData : Form
                 case Documents.GoodsIssue:
                     await HandleGoodsIssue(dataGridViewSync, filter);
                     break;
+                case Documents.GoodsReturn:
+                    await HandleGoodsReturn(dataGridViewSync, filter);
+                    break;
             }
         }
         else if (radioButtonDocId.Checked)
@@ -234,6 +237,11 @@ public partial class InboundData : Form
                     case Documents.GoodsIssue:
                         filter = $" WHERE T0.DocNum = '{docCode}' AND (T0.[U_SyncToPrism] IS NULL OR  T0.[U_SyncToPrism] = '' OR  T0.[U_SyncToPrism] = 'N')";
                         await HandleGoodsIssue(dataGridViewSync, filter);
+                        break;
+
+                    case Documents.GoodsReturn:
+                        filter = $" WHERE T0.DocNum = '{docCode}' AND (T0.[U_SyncToPrism] IS NULL OR  T0.[U_SyncToPrism] = '' OR  T0.[U_SyncToPrism] = 'N')";
+                        await HandleGoodsReturn(dataGridViewSync, filter);
                         break;
                 }
             }
