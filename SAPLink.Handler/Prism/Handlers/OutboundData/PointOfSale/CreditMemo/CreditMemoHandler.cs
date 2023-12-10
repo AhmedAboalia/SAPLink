@@ -7,6 +7,7 @@ using SAPLink.Core.Models.System;
 using SAPLink.Handler.SAP.Application;
 using SAPLink.Handler.SAP.Handlers;
 using Serilog;
+using System.Security.Cryptography;
 using PrismInvoice = SAPLink.Core.Models.Prism.Sales.Invoice;
 using SAPInvoice = SAPLink.Core.Models.SAP.Sales.Invoice;
 
@@ -32,76 +33,84 @@ public partial class CreditMemoHandler
         {
             foreach (var invoice in invoicesList)
             {
-                var docEntry = GetCreditMemoDocEntry(invoice.RefSaleDocSid, out var message);
-                var arDownPayment = (Documents)ClientHandler.Company.GetBusinessObject(BoObjectTypes.oDownPayments);
+                var downPaymentDocEntry = GetDownPaymentDocEntry(invoice.RefSaleDocSid, out var message);
+                var downPaymentDocNum = ActionHandler.GetStringValueByQuery($"SELECT T0.[DocNum] FROM ODPI T0 WHERE T0.[DocEntry] = {downPaymentDocEntry}");
+                //var creditMemoDocNum = ActionHandler.GetStringValueByQuery($"SELECT TOP 1 T0.[DocNum] FROM ORIN T0 WHERE T0.[Comments] Like '%%Based on A/R Down Payment {downPaymentDocNum}.%%'");
+                //var arDownPayment = (Documents)ClientHandler.Company.GetBusinessObject(BoObjectTypes.oDownPayments);
+                //
+                //if (arDownPayment.GetByKey(int.Parse(docEntry)))
+                //{
+                //    if (arDownPayment.DocumentStatus == BoStatus.bost_Open)
+                //    {
 
-                if (arDownPayment.GetByKey(int.Parse(docEntry)))
+                var series = GetSeriesCode(invoice.StoreCode, out string message3);
+
+                var oCreditMemo =
+                    (Documents)ClientHandler.Company.GetBusinessObject(BoObjectTypes.oCreditNotes);
+
+                var customerCode = Handler.GetCustomerCodeByStoreCode(invoice.StoreCode, out string message2);
+
+                oCreditMemo.CardCode = customerCode;
+                oCreditMemo.DocType = BoDocumentTypes.dDocument_Items;
+                oCreditMemo.Series = int.Parse(series);
+                oCreditMemo.DocDate = DateTime.Today;
+                oCreditMemo.TaxDate = DateTime.Today;
+                oCreditMemo.UserFields.Fields.Item("U_SyncToPrism").Value = "Y";
+                oCreditMemo.UserFields.Fields.Item("U_PrismSid").Value = invoice.Sid;
+                oCreditMemo.Comments = $"Based on A/R Down Payment {downPaymentDocNum}.\r\nPrism Return No. {invoice.DocumentNumber}\r\nPrism Return Sid. {invoice.Sid}\r\n";
+
+                //oCreditMemo.Lines.BaseType = (int)BoObjectTypes.oDownPayments;  // 203 for A/R Down Payment
+                //oCreditMemo.Lines.BaseEntry = int.Parse(docEntry);  // This should be the DocEntry of the A/R Down Payment
+                //oCreditMemo.Lines.BaseLine = arDownPayment.Lines.BaseLine;  // Set BaseLine to line 0 of the A/R Down Payment
+                //oCreditMemo.Lines.Add();
+
+                foreach (var item in invoice.Items)
                 {
-                    if (arDownPayment.DocumentStatus == BoStatus.bost_Open)
-                    {
+                    //oCreditMemo.Lines.SetCurrentLine(it);
+                    //oCreditMemo.Lines.BaseLine = invoice.Items.LineNum; // Note: Using LineNum instead of BaseLine
+                    //oCreditMemo.Lines.BaseEntry = int.Parse(docEntry);
+                    //oCreditMemo.Lines.BaseType = (int)BoObjectTypes.oDownPayments;
 
-                        var series = GetSeriesCode(invoice.StoreCode, out string message3);
+                    oCreditMemo.Lines.ItemCode = item.Alu;
+                    oCreditMemo.Lines.Quantity = item.Quantity;
+                    oCreditMemo.Lines.Price = item.Price;
 
-                        var oCreditMemo =
-                            (Documents)ClientHandler.Company.GetBusinessObject(BoObjectTypes.oCreditNotes);
+                    oCreditMemo.Lines.Add();
+                }
 
-                        //var customerCode = Handler.GetCustomerCodeByStoreCode(invoice.StoreCode, out string message2);
+                if (oCreditMemo.Add() == 0)
+                {
+                    //SetCreditMemoAsSynced(invoice.Sid, creditMemoDocNum);
+                    if (downPaymentDocNum != "0")
+                        result.Message +=
+                               $"\r\nSuccessfully created A/R Credit Memo, Prism Return No. {invoice.DocumentNumber} - Sid. {invoice.Sid} based on A/R Down Payment {downPaymentDocNum}.\r\n";
+                    else
+                        result.Message +=
+                               $"\r\nSuccessfully created A/R Credit Memo, Prism Return No. {invoice.DocumentNumber} - Sid. {invoice.Sid} based on A/R Down Payment.\r\n";
 
-                        oCreditMemo.CardCode = arDownPayment.CardCode;
-                        oCreditMemo.DocType = BoDocumentTypes.dDocument_Items;
-                        oCreditMemo.Series = int.Parse(series);
-                        oCreditMemo.DocDate = DateTime.Today;
-                        oCreditMemo.TaxDate = DateTime.Today;
-                        oCreditMemo.Comments = $"Based on A/R Down Payment {docEntry}.";
 
-                        //oCreditMemo.Lines.BaseType = (int)BoObjectTypes.oDownPayments;  // 203 for A/R Down Payment
-                        //oCreditMemo.Lines.BaseEntry = int.Parse(docEntry);  // This should be the DocEntry of the A/R Down Payment
-                        //oCreditMemo.Lines.BaseLine = arDownPayment.Lines.BaseLine;  // Set BaseLine to line 0 of the A/R Down Payment
-                        //oCreditMemo.Lines.Add();
-
-                        for (int i = 0; i < arDownPayment.Lines.Count; i++)
-                        {
-                            arDownPayment.Lines.SetCurrentLine(i);
-                            oCreditMemo.Lines.BaseLine = arDownPayment.Lines.LineNum; // Note: Using LineNum instead of BaseLine
-                            oCreditMemo.Lines.BaseEntry = int.Parse(docEntry);
-                            oCreditMemo.Lines.BaseType = (int)BoObjectTypes.oDownPayments;
-
-                            oCreditMemo.Lines.ItemCode = arDownPayment.Lines.ItemCode;
-                            oCreditMemo.Lines.Quantity = arDownPayment.Lines.Quantity;
-                            oCreditMemo.Lines.Price = arDownPayment.Lines.Price;
-
-                            if (i != arDownPayment.Lines.Count - 1)
-                            {
-                                oCreditMemo.Lines.Add();
-                            }
-                        }
-
-                        if (oCreditMemo.Add() == 0)
-                        {
-                            result.Message +=
-                                $"\r\nSuccessfully created A/R Credit Memo based on A/R Down Payment {arDownPayment.DocNum}.\r\n";
-                            _loger.Information(result.Message);
-                        }
-                        else
-                        {
-                            ClientHandler.Company.GetLastError(out var errorCode, out var errorMsg);
-                            result.Message += $"Failed to add A/R Credit Memo. Error: {errorMsg}";
-                            _loger.Error(result.Message);
-                        }
-                    }
-                    else if (arDownPayment.DocumentStatus == BoStatus.bost_Close)
-                    {
-                        result.Message += $"[Error]\r\nCant Add A/R Credit Memo\r\nA/R Down Payment No.: {arDownPayment.DocNum} is already closed.";
-                        _loger.Warning(result.Message);
-                        // Handle or exit, since the A/R Down Payment is closed and cannot be referenced further.
-                    }
+                    _loger.Information(result.Message);
                 }
                 else
                 {
                     ClientHandler.Company.GetLastError(out var errorCode, out var errorMsg);
-                    result.Message += $"\r\nRelated A/R Down Payment not found, Please Sync it Before you try to Sync Return No. ({invoice.DocumentNumber}), (Error: {errorMsg})";
-                    _loger.Warning(result.Message);
+                    result.Message += $"Failed to add A/R Credit Memo. Prism Return {invoice.DocumentNumber} Error: {errorMsg}";
+                    _loger.Error(result.Message);
                 }
+                ///}
+                //else if (arDownPayment.DocumentStatus == BoStatus.bost_Close)
+                //{
+                //    result.Message += $"[Error]\r\nCant Add A/R Credit Memo\r\nA/R Down Payment No.: {arDownPayment.DocNum} is already closed.";
+                //    _loger.Warning(result.Message);
+                //    // Handle or exit, since the A/R Down Payment is closed and cannot be referenced further.
+                //}
+                //}
+                //else
+                //{
+                //    ClientHandler.Company.GetLastError(out var errorCode, out var errorMsg);
+                //    result.Message += $"\r\nRelated A/R Down Payment not found, Please Sync it Before you try to Sync Return No. ({invoice.DocumentNumber}), (Error: {errorMsg})";
+                //    _loger.Warning(result.Message);
+                //}
 
                 yield return result;
             }
@@ -117,8 +126,14 @@ public partial class CreditMemoHandler
             yield return result;
         }
     }
+    private static void SetCreditMemoAsSynced(string invoiceSid, string docEntry)
+    {
+        var query = $"UPDATE ORIN SET U_SyncToPrism = 'Y', U_PrismSid = '{invoiceSid}' WHERE DocNum = '{docEntry}'";
+        var oRecordSet = (Recordset)ClientHandler.Company.GetBusinessObject(BoObjectTypes.BoRecordset);
 
-    public static string GetCreditMemoDocEntry(string prismInvoiceNo, out string message)
+        oRecordSet.DoQuery(query);
+    }
+    public static string GetDownPaymentDocEntry(string prismInvoiceNo, out string message)
     {
         var docEntry = "";
         message = "";

@@ -144,6 +144,17 @@ namespace SAPLink.Handler.SAP.Application
             }
             return false;
         }
+        public static string GetStringValueByQuery(string query)
+        {
+            var oRecordset = (Recordset)ClientHandler.Company.GetBusinessObject(BoObjectTypes.BoRecordset);
+            oRecordset.DoQuery(query);
+            var value = oRecordset.Fields.Item(0).Value.ToString();
+            //if (string.IsNullOrEmpty(value))
+            //{
+            //    value = "0";
+            //}
+            return value;
+        }
         public static string GetValue(this Fields fields, string fieldName)
             => fields.Item(fieldName).Value.ToString();
     }
