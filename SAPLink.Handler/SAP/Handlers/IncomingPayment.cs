@@ -10,7 +10,7 @@ namespace SAPLink.Handler.SAP.Handlers;
 
 public static class IncomingPayment 
 {
-    private static RequestResult<Payment> SyncSinglePayment(PrismInvoice invoice, string account, double amount, string docEntry, string customerCode)
+    private static RequestResult<Payment> SyncSinglePayment(PrismInvoice invoice, string account, double amount, string docEntry, string customerCode, BoRcptInvTypes invoiceType)
     {
         var result = new RequestResult<Payment>();
 
@@ -19,7 +19,7 @@ public static class IncomingPayment
         oPayment.CardCode = customerCode;
 
         oPayment.Invoices.DocEntry = int.Parse(docEntry);
-        oPayment.Invoices.InvoiceType = BoRcptInvTypes.it_Invoice;
+        oPayment.Invoices.InvoiceType = invoiceType;
         oPayment.Invoices.SumApplied = amount;
         oPayment.CashAccount = account;
         oPayment.CashSum = amount;
@@ -45,7 +45,7 @@ public static class IncomingPayment
 
         return result;
     }
-    public static RequestResult<Payment>AddMultiplePaymentsInvoice(PrismInvoice invoice, string docEntry, string CustomerID)
+    public static RequestResult<Payment>AddMultiplePaymentsInvoice(PrismInvoice invoice, string docEntry, string CustomerID, BoRcptInvTypes invoiceType)
     {
         var results = new List<RequestResult<Payment>>();
         var combinedResult = new RequestResult<Payment>();
@@ -100,7 +100,7 @@ public static class IncomingPayment
             string account = entry.Key;
             double amount = entry.Value;
 
-            results.Add(SyncSinglePayment(invoice,  account, amount , docEntry, CustomerID));
+            results.Add(SyncSinglePayment(invoice,  account, amount , docEntry, CustomerID, invoiceType));
         }
 
         bool allSuccess = true;

@@ -77,7 +77,7 @@ internal static class CredentialsList
                 Active = false,
 
                 PrismUserName = "sysadmin",
-                PrismPassword = "sysadmin",
+                PrismPassword = "kaf@admin",
                 BaseUri = TestBaseUrl,
 
                 BackOfficeUri = $"{TestBaseUrl}/api/backoffice",
@@ -98,7 +98,7 @@ internal static class CredentialsList
 
                 AuthUserName = @"{{""UserName"" : ""manager"",""CompanyDB"" : ""TESTDB""}}",
                 AuthPassword = "Ag123456*",//Qw123654*
-                Authorization = "Basic eyJVc2VyTmFtZSI6ICJtYW5hZ2VyIiwgIkNvbXBhbnlEQiI6ICJURVNUREIifTpSczEyMzQ1Nio=",
+                Authorization = "Basic eyJVc2VyTmFtZSI6ICJtYW5hZ2VyIiwgIkNvbXBhbnlEQiI6ICJURVNUREIifTpBZzEyMzQ1Nio=",
                 Cookie = "",
 
                 IntegrationUrl = integrationUrl,

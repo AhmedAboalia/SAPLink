@@ -91,7 +91,7 @@ public partial class CreditMemoHandler
                     }
                     else if (arDownPayment.DocumentStatus == BoStatus.bost_Close)
                     {
-                        result.Message += $"A/R Down Payment with Doc Entry: {docEntry} is already closed.";
+                        result.Message += $"[Error]\r\nCant Add A/R Credit Memo\r\nA/R Down Payment No.: {arDownPayment.DocNum} is already closed.";
                         _loger.Warning(result.Message);
                         // Handle or exit, since the A/R Down Payment is closed and cannot be referenced further.
                     }
@@ -99,7 +99,7 @@ public partial class CreditMemoHandler
                 else
                 {
                     ClientHandler.Company.GetLastError(out var errorCode, out var errorMsg);
-                    result.Message += $"A/R Down Payment with Doc Entry: {docEntry} not found. Error: {errorMsg}";
+                    result.Message += $"\r\nRelated A/R Down Payment not found, Please Sync it Before you try to Sync Return No. ({invoice.DocumentNumber}), (Error: {errorMsg})";
                     _loger.Warning(result.Message);
                 }
 

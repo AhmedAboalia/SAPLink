@@ -52,7 +52,7 @@ public partial class InvoiceHandler
 
                         if (updateType != Enums.UpdateType.SyncWholesale)
                         {
-                            resultIncoming = IncomingPayment.AddMultiplePaymentsInvoice(invoice, SAPInvoice.DocEntry, customerCode);
+                            resultIncoming = IncomingPayment.AddMultiplePaymentsInvoice(invoice, SAPInvoice.DocEntry, customerCode,BoRcptInvTypes.it_Invoice);
                             result.Message += $"\r\n{resultIncoming.Message}";
                             result.Status = resultIncoming.Status;
                         }
