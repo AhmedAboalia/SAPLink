@@ -30,7 +30,7 @@ namespace SAPLink.EF
             //Recurrences = new BaseRepository<Recurrence>(context);
             Sync = new BaseRepository<Sync>(context);
 
-            ItemsLog = new BaseRepository<Logger<ItemMasterData>>(context);
+            //ItemsLog = new BaseRepository<Logger<ItemMasterData>>(context);
             //ItemGroupsLog = new BaseRepository<Logger<ItemGroups>>(context);
             //VendorsLog = new BaseRepository<Logger<Vendor>>(context);
 

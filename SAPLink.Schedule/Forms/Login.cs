@@ -1,6 +1,5 @@
 ﻿using SAPLink.Handler.Prism.Connection.Auth;
 using SAPLink.Handler.SAP.Application;
-using SAPLink.Schedule.Utilities;
 using Serilog;
 using Helper = SAPLink.Schedule.Utilities.Helper;
 
@@ -72,7 +71,7 @@ namespace SAPLink.Schedule.Forms
             //}
             //else
             //{
-                SignIn();
+            SignIn();
             //}
         }
 
@@ -84,12 +83,12 @@ namespace SAPLink.Schedule.Forms
             if ((userName.IsHasValue() && userName != "User Name")
                                 && (password.IsHasValue() && password != "Password"))
             {
-                ScheduledSyncs scheduledSyncs = new ScheduledSyncs(_unitOfWork, _serviceLayer, _departmentService, _itemsService, _client);
+                Dashboard scheduledSyncs = new Dashboard(_unitOfWork, _serviceLayer, _departmentService, _itemsService, _client);
 
                 //GetNewPrismAuthSession(userName, password);
 
 
-               // var allDepartments = await _departmentService.GetAll();
+                // var allDepartments = await _departmentService.GetAll();
 
                 //var isPrismConnected = allDepartments.Response.StatusCode == HttpStatusCode.OK;
 
@@ -98,8 +97,8 @@ namespace SAPLink.Schedule.Forms
                 //    Program.IsPrismConnected = true;
                 //    //mainScreen.CheckConnectivity(true);
                 //}
-               // else
-                    //mainScreen.CheckConnectivity(false);
+                // else
+                //mainScreen.CheckConnectivity(false);
 
                 Hide();
                 scheduledSyncs.Show();
@@ -230,7 +229,7 @@ namespace SAPLink.Schedule.Forms
             textBoxUserName.Focus();
         }
 
-        
+
 
         private void comboBoxClients_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -272,6 +271,11 @@ namespace SAPLink.Schedule.Forms
         }
 
         private void guna2Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void textBoxPassword_TextChanged(object sender, EventArgs e)
         {
 
         }

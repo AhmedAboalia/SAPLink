@@ -42,6 +42,19 @@ namespace SAPLink.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Sync",
+                columns: table => new
+                {
+                    UpdateType = table.Column<int>(type: "INTEGER", nullable: false),
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Date = table.Column<DateTime>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sync", x => x.UpdateType);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Credentials",
                 columns: table => new
                 {
@@ -86,7 +99,7 @@ namespace SAPLink.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Recurrings",
+                name: "Times",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -98,9 +111,9 @@ namespace SAPLink.EF.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Recurrings", x => x.Id);
+                    table.PrimaryKey("PK_Times", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Recurrings_Schedules_ScheduleId",
+                        name: "FK_Times_Schedules_ScheduleId",
                         column: x => x.ScheduleId,
                         principalTable: "Schedules",
                         principalColumn: "Id",
@@ -149,19 +162,44 @@ namespace SAPLink.EF.Migrations
                 columns: new[] { "Id", "Document", "DocumentName" },
                 values: new object[,]
                 {
-                    { 1, 1, "Departments" },
-                    { 2, 2, "Vendors" },
-                    { 3, 3, "Items" },
-                    { 4, 4, "GoodsReceiptPos" },
-                    { 5, 5, "GoodsReceipts_Inbound" },
-                    { 6, 6, "GoodsIssues_Inbound" },
-                    { 7, 7, "SalesInvoices" },
-                    { 8, 8, "ReturnInvoices" },
-                    { 9, 9, "CustomerOrders" },
-                    { 10, 10, "StockTransfers" },
-                    { 11, 11, "InventoryPosting" },
-                    { 12, 12, "GoodsReceipts_Outbound" },
-                    { 13, 13, "GoodsIssues_Outbound" }
+                    { 1, 1, "Items" },
+                    { 7, 3, "SalesInvoices" },
+                    { 8, 4, "ReturnInvoices" },
+                    { 10, 5, "StockTransfers" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Sync",
+                columns: new[] { "UpdateType", "Date", "Name" },
+                values: new object[,]
+                {
+                    { 0, new DateTime(2023, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "InitialDepartment" },
+                    { 1, new DateTime(2023, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "SyncDepartment" },
+                    { 2, new DateTime(2023, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "InitialVendors" },
+                    { 3, new DateTime(2023, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "SyncVendors" },
+                    { 4, new DateTime(2023, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "InitialItems" },
+                    { 5, new DateTime(2023, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "SyncItems" },
+                    { 6, new DateTime(2023, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "InitialGoodsReceiptPO" },
+                    { 7, new DateTime(2023, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "SyncGoodsReceiptPO" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Times",
+                columns: new[] { "Id", "Active", "ScheduleId", "Time", "TimeId" },
+                values: new object[,]
+                {
+                    { 4, true, 2, new TimeOnly(7, 0, 0), 1 },
+                    { 5, true, 2, new TimeOnly(12, 0, 0), 2 },
+                    { 6, true, 2, new TimeOnly(17, 0, 0), 3 },
+                    { 7, true, 3, new TimeOnly(13, 0, 0), 1 },
+                    { 8, true, 3, new TimeOnly(18, 0, 0), 2 },
+                    { 9, true, 3, new TimeOnly(0, 0, 0), 3 },
+                    { 10, true, 4, new TimeOnly(13, 0, 0), 1 },
+                    { 11, true, 4, new TimeOnly(18, 0, 0), 2 },
+                    { 12, true, 4, new TimeOnly(0, 0, 0), 3 },
+                    { 13, true, 5, new TimeOnly(13, 0, 0), 1 },
+                    { 14, true, 5, new TimeOnly(18, 0, 0), 2 },
+                    { 15, true, 5, new TimeOnly(0, 0, 0), 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -170,30 +208,18 @@ namespace SAPLink.EF.Migrations
                 values: new object[,]
                 {
                     { 1, false, "", "", "{{\"UserName\" : \"manager\",\"CompanyDB\" : \"\"}}", "", "http://kaffaryretail.alkaffary.com:8080/api/backoffice", "http://kaffaryretail.alkaffary.com:8080", 1, "http://kaffaryretail.alkaffary.com:8080/v1/rest", "", "", "sap123456*", "sa", 1, "Production Environment", "https://localhost:44326", "http://kaffaryretail.alkaffary.com:8080", "", "RetailTec@123", "SAPLINK", "http://kaffaryretail.alkaffary.com:8080/prism.shtml", "http://kaffaryretail.alkaffary.com:8080/api/common", "SAP-TEST", 10, "https://sap-test:50000/b1s/v1/", "manager" },
-                    { 2, false, "Ag123456*", "369B7B1BF58F469896B06B804BFBE272", "{{\"UserName\" : \"manager\",\"CompanyDB\" : \"TESTDB\"}}", "Basic eyJVc2VyTmFtZSI6ICJtYW5hZ2VyIiwgIkNvbXBhbnlEQiI6ICJURVNUREIifTpSczEyMzQ1Nio=", "http://postest.alkaffary.com:8080/api/backoffice", "http://postest.alkaffary.com:8080", 2, "http://postest.alkaffary.com:8080/v1/rest", "TESTDB", "", "sap123456*", "sa", 2, "Test Environment", "https://localhost:44326", "http://postest.alkaffary.com:8080", "Ag123456*", "sysadmin", "sysadmin", "http://postest.alkaffary.com:8080/prism.shtml", "http://postest.alkaffary.com:8080/api/common", "SAP-TEST", 10, "https://sap-test:50000/b1s/v1/", "manager" },
+                    { 2, false, "Ag123456*", "369B7B1BF58F469896B06B804BFBE272", "{{\"UserName\" : \"manager\",\"CompanyDB\" : \"TESTDB\"}}", "Basic eyJVc2VyTmFtZSI6ICJtYW5hZ2VyIiwgIkNvbXBhbnlEQiI6ICJURVNUREIifTpBZzEyMzQ1Nio=", "http://postest.alkaffary.com:8080/api/backoffice", "http://postest.alkaffary.com:8080", 2, "http://postest.alkaffary.com:8080/v1/rest", "TESTDB", "", "sap123456*", "sa", 2, "Test Environment", "https://localhost:44326", "http://postest.alkaffary.com:8080", "Ag123456*", "kaf@admin", "sysadmin", "http://postest.alkaffary.com:8080/prism.shtml", "http://postest.alkaffary.com:8080/api/common", "SAP-TEST", 10, "https://sap-test:50000/b1s/v1/", "manager" },
                     { 3, true, "manager", "F1726B4EC6304D969ED816D844617C02", "{{\"UserName\" : \"manager\",\"CompanyDB\" : \"SBODemoGB\"}}", "Basic eyJVc2VyTmFtZSI6ICJtYW5hZ2VyIiwgIkNvbXBhbnlEQiI6ICJTQk9EZW1vR0IifTptYW5hZ2Vy", "http://194.163.155.105/api/backoffice", "http://194.163.155.105", 3, "http://194.163.155.105/v1/rest", "SBODemoGB", "", "P@ssw0rd", "sa", 3, "Local Environment", "https://localhost:44326", "http://194.163.155.105", "manager", "sysadmin", "sysadmin", "http://194.163.155.105/prism.shtml", "http://194.163.155.105/api/common", "ABOALIA", 15, "https://Localhost:50000/b1s/v1/", "manager" }
                 });
 
             migrationBuilder.InsertData(
-                table: "Recurrings",
+                table: "Times",
                 columns: new[] { "Id", "Active", "ScheduleId", "Time", "TimeId" },
                 values: new object[,]
                 {
-                    { 1, true, 3, new TimeOnly(7, 0, 0), 1 },
-                    { 2, true, 3, new TimeOnly(12, 0, 0), 2 },
-                    { 3, true, 3, new TimeOnly(17, 0, 0), 3 },
-                    { 4, true, 4, new TimeOnly(7, 0, 0), 1 },
-                    { 5, true, 4, new TimeOnly(12, 0, 0), 2 },
-                    { 6, true, 4, new TimeOnly(17, 0, 0), 3 },
-                    { 7, true, 7, new TimeOnly(13, 0, 0), 1 },
-                    { 8, true, 7, new TimeOnly(18, 0, 0), 2 },
-                    { 9, true, 7, new TimeOnly(0, 0, 0), 3 },
-                    { 10, true, 8, new TimeOnly(13, 0, 0), 1 },
-                    { 11, true, 8, new TimeOnly(18, 0, 0), 2 },
-                    { 12, true, 8, new TimeOnly(0, 0, 0), 3 },
-                    { 13, true, 10, new TimeOnly(13, 0, 0), 1 },
-                    { 14, true, 10, new TimeOnly(18, 0, 0), 2 },
-                    { 15, true, 10, new TimeOnly(0, 0, 0), 3 }
+                    { 1, true, 1, new TimeOnly(7, 0, 0), 1 },
+                    { 2, true, 1, new TimeOnly(12, 0, 0), 2 },
+                    { 3, true, 1, new TimeOnly(17, 0, 0), 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -212,30 +238,33 @@ namespace SAPLink.EF.Migrations
                 column: "ClientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Recurrings_ScheduleId",
-                table: "Recurrings",
-                column: "ScheduleId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Subsidiaries_CredentialId",
                 table: "Subsidiaries",
                 column: "CredentialId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Times_ScheduleId",
+                table: "Times",
+                column: "ScheduleId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Recurrings");
-
-            migrationBuilder.DropTable(
                 name: "Subsidiaries");
 
             migrationBuilder.DropTable(
-                name: "Schedules");
+                name: "Sync");
+
+            migrationBuilder.DropTable(
+                name: "Times");
 
             migrationBuilder.DropTable(
                 name: "Credentials");
+
+            migrationBuilder.DropTable(
+                name: "Schedules");
 
             migrationBuilder.DropTable(
                 name: "Clients");

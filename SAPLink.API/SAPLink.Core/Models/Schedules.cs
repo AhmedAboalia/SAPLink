@@ -19,30 +19,30 @@ namespace SAPLink.Core.Models
         }
         public string DocumentName { get; private set; }
 
-        public List<Recurring> Times { get; set; } = new List<Recurring>();
+        public List<Times> Times { get; set; } = new List<Times>();
 
         public enum SyncDocuments
         {
-            // Inbound
-            Departments = 1,
-            Vendors,
-            Items,
+            //// Inbound
+            //Departments = 1,
+            //Vendors,
+            Items = 1,
             GoodsReceiptPos,
-            GoodsReceipts_Inbound, // renamed to avoid conflict with Outbound
-            GoodsIssues_Inbound,  // renamed to avoid conflict with Outbound
+            //GoodsReceipts_Inbound, // renamed to avoid conflict with Outbound
+            //GoodsIssues_Inbound,  // renamed to avoid conflict with Outbound
 
             // Outbound
             SalesInvoices,
             ReturnInvoices,
-            CustomerOrders,
+            //CustomerOrders,
             StockTransfers,
-            InventoryPosting,
-            GoodsReceipts_Outbound, // renamed to clarify this is different from Inbound
-            GoodsIssues_Outbound,   // renamed to clarify this is different from Inbound
+            //InventoryPosting,
+            //GoodsReceipts_Outbound, // renamed to clarify this is different from Inbound
+            //GoodsIssues_Outbound,   // renamed to clarify this is different from Inbound
         }
     }
 
-    public class Recurring
+    public class Times
     {
         [Key]
         public int Id { get; set; }

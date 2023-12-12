@@ -1,5 +1,6 @@
 ﻿using SAPLink.Core.Connection;
 using SAPLink.EF.Data.Configurations;
+using SAPLink.EF.Data.Configurations.HangFire;
 using static SAPLink.EF.Data.Configurations.ScheduleConfiguration;
 
 namespace SAPLink.EF.Data
@@ -81,7 +82,7 @@ namespace SAPLink.EF.Data
             //modelBuilder.ApplyConfiguration(new ItemsLogConfiguration());
 
             modelBuilder.ApplyConfiguration(new ScheduleConfiguration());
-            modelBuilder.ApplyConfiguration(new RecurringConfiguration());
+            modelBuilder.ApplyConfiguration(new RecurringTimesConfiguration());
 
             //modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
 
