@@ -54,9 +54,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Forms\Settings.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Update="Forms\Settings.cs" />
     <Compile Update="Forms\InboundData.cs">
       <SubType>Form</SubType>
     </Compile>

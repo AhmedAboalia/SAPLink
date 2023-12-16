@@ -48,12 +48,12 @@ namespace SAPLink.EF.Data
 
                 #region SQL Lite
 
-                var connectionString = ConnectionStringFactory.SqlLite();
-                optionsBuilder.UseSqlite(connectionString, sqliteOptions =>
-                {
-                    sqliteOptions.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
-                    //sqliteOptions.UseSqlCipher("<encryption_key>");
-                });
+                //var connectionString = ConnectionStringFactory.SqlLite();
+                //optionsBuilder.UseSqlite(connectionString, sqliteOptions =>
+                //{
+                //    sqliteOptions.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
+                //    //sqliteOptions.UseSqlCipher("<encryption_key>");
+                //});
 
                 #endregion
 

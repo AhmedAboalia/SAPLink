@@ -7,7 +7,7 @@ namespace SAPLink.EF
         private readonly ApplicationDbContext _context;
         public IBaseRepository<Clients> Clients { get; }
         public IBaseRepository<Credentials> Credentials { get; }
-        //public IBaseRepository<Recurrence> Recurrences { get; }
+        public IBaseRepository<Recurrence> Recurrences { get; }
         public IBaseRepository<Subsidiary> Subsidiary { get; }
         public IBaseRepository<Schedules> Schedule { get; }
         public IBaseRepository<Logger<ItemMasterData>> ItemsLog { get; }
