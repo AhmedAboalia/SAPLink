@@ -1,8 +1,7 @@
 ﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
 using SAP.LINK.API.Models;
 
-namespace SAP.LINK.API.Controllers
+namespace SAPLink.API.Controllers
 {
     public class HomeController : Controller
     {

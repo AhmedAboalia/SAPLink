@@ -12,8 +12,8 @@ using SAPLink.EF.Data;
 namespace SAPLink.EF.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231212202922_InitialCreateDatabase")]
-    partial class InitialCreateDatabase
+    [Migration("20231216202143_initialCreateDatabase")]
+    partial class initialCreateDatabase
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,19 +51,25 @@ namespace SAPLink.EF.Migrations
                         },
                         new
                         {
-                            Id = 7,
+                            Id = 2,
+                            Document = 2,
+                            DocumentName = "GoodsReceiptPos"
+                        },
+                        new
+                        {
+                            Id = 3,
                             Document = 3,
                             DocumentName = "SalesInvoices"
                         },
                         new
                         {
-                            Id = 8,
+                            Id = 4,
                             Document = 4,
                             DocumentName = "ReturnInvoices"
                         },
                         new
                         {
-                            Id = 10,
+                            Id = 5,
                             Document = 5,
                             DocumentName = "StockTransfers"
                         });
@@ -309,6 +315,66 @@ namespace SAPLink.EF.Migrations
                             ServerTypes = 15,
                             ServiceLayerUri = "https://Localhost:50000/b1s/v1/",
                             UserName = "manager"
+                        });
+                });
+
+            modelBuilder.Entity("SAPLink.Core.Models.System.Recurrence", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1L)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DayOfWeek")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Document")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Interval")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Recurring")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Recurrences", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DayOfWeek = 0,
+                            Document = 0,
+                            Interval = 2,
+                            Recurring = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DayOfWeek = 0,
+                            Document = 1,
+                            Interval = 2,
+                            Recurring = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DayOfWeek = 0,
+                            Document = 2,
+                            Interval = 2,
+                            Recurring = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DayOfWeek = 0,
+                            Document = 3,
+                            Interval = 2,
+                            Recurring = 1
                         });
                 });
 

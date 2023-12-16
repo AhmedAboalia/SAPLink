@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SAPLink.EF.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreateDatabase : Migration
+    public partial class initialCreateDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -25,6 +25,22 @@ namespace SAPLink.EF.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Clients", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Recurrences",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Document = table.Column<int>(type: "INTEGER", nullable: false),
+                    Recurring = table.Column<int>(type: "INTEGER", nullable: false),
+                    Interval = table.Column<int>(type: "INTEGER", nullable: false),
+                    DayOfWeek = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Recurrences", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -158,14 +174,26 @@ namespace SAPLink.EF.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Recurrences",
+                columns: new[] { "Id", "DayOfWeek", "Document", "Interval", "Recurring" },
+                values: new object[,]
+                {
+                    { 1, 0, 0, 2, 1 },
+                    { 2, 0, 1, 2, 1 },
+                    { 3, 0, 2, 2, 1 },
+                    { 4, 0, 3, 2, 1 }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Schedules",
                 columns: new[] { "Id", "Document", "DocumentName" },
                 values: new object[,]
                 {
                     { 1, 1, "Items" },
-                    { 7, 3, "SalesInvoices" },
-                    { 8, 4, "ReturnInvoices" },
-                    { 10, 5, "StockTransfers" }
+                    { 2, 2, "GoodsReceiptPos" },
+                    { 3, 3, "SalesInvoices" },
+                    { 4, 4, "ReturnInvoices" },
+                    { 5, 5, "StockTransfers" }
                 });
 
             migrationBuilder.InsertData(
@@ -181,25 +209,6 @@ namespace SAPLink.EF.Migrations
                     { 5, new DateTime(2023, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "SyncItems" },
                     { 6, new DateTime(2023, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "InitialGoodsReceiptPO" },
                     { 7, new DateTime(2023, 6, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "SyncGoodsReceiptPO" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Times",
-                columns: new[] { "Id", "Active", "ScheduleId", "Time", "TimeId" },
-                values: new object[,]
-                {
-                    { 4, true, 2, new TimeOnly(7, 0, 0), 1 },
-                    { 5, true, 2, new TimeOnly(12, 0, 0), 2 },
-                    { 6, true, 2, new TimeOnly(17, 0, 0), 3 },
-                    { 7, true, 3, new TimeOnly(13, 0, 0), 1 },
-                    { 8, true, 3, new TimeOnly(18, 0, 0), 2 },
-                    { 9, true, 3, new TimeOnly(0, 0, 0), 3 },
-                    { 10, true, 4, new TimeOnly(13, 0, 0), 1 },
-                    { 11, true, 4, new TimeOnly(18, 0, 0), 2 },
-                    { 12, true, 4, new TimeOnly(0, 0, 0), 3 },
-                    { 13, true, 5, new TimeOnly(13, 0, 0), 1 },
-                    { 14, true, 5, new TimeOnly(18, 0, 0), 2 },
-                    { 15, true, 5, new TimeOnly(0, 0, 0), 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -219,7 +228,19 @@ namespace SAPLink.EF.Migrations
                 {
                     { 1, true, 1, new TimeOnly(7, 0, 0), 1 },
                     { 2, true, 1, new TimeOnly(12, 0, 0), 2 },
-                    { 3, true, 1, new TimeOnly(17, 0, 0), 3 }
+                    { 3, true, 1, new TimeOnly(17, 0, 0), 3 },
+                    { 4, true, 2, new TimeOnly(7, 0, 0), 1 },
+                    { 5, true, 2, new TimeOnly(12, 0, 0), 2 },
+                    { 6, true, 2, new TimeOnly(17, 0, 0), 3 },
+                    { 7, true, 3, new TimeOnly(13, 0, 0), 1 },
+                    { 8, true, 3, new TimeOnly(18, 0, 0), 2 },
+                    { 9, true, 3, new TimeOnly(0, 0, 0), 3 },
+                    { 10, true, 4, new TimeOnly(13, 0, 0), 1 },
+                    { 11, true, 4, new TimeOnly(18, 0, 0), 2 },
+                    { 12, true, 4, new TimeOnly(0, 0, 0), 3 },
+                    { 13, true, 5, new TimeOnly(13, 0, 0), 1 },
+                    { 14, true, 5, new TimeOnly(18, 0, 0), 2 },
+                    { 15, true, 5, new TimeOnly(0, 0, 0), 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -251,6 +272,9 @@ namespace SAPLink.EF.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Recurrences");
+
             migrationBuilder.DropTable(
                 name: "Subsidiaries");
 

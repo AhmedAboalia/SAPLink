@@ -8,7 +8,7 @@ using SAPLink.EF.Data;
 
 #nullable disable
 
-namespace SAPLink.EF.Migrations
+namespace SAPLink.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot

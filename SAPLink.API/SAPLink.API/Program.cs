@@ -1,11 +1,9 @@
-var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddAuthentication();
@@ -20,23 +18,16 @@ builder.Services.AddSwaggerGen(c =>
 
 #region Old Manual Connection Strings
 
-//var PrismLiveConnection = builder.Configuration.GetConnectionString("PrismLiveConnection");
-//var PrismTestConnection = builder.Configuration.GetConnectionString("PrismTestConnection");
-//var LocalConnection = builder.Configuration.GetConnectionString("LocalConnection");
+//var connectionString = builder.Configuration.GetConnectionString("PrismLiveConnection");
+//var connectionString = builder.Configuration.GetConnectionString("PrismTestConnection");
+//var connectionString = builder.Configuration.GetConnectionString("LocalConnection");
 
-//var SAPLiveConnection = builder.Configuration.GetConnectionString("SAPLiveConnection");
-
-//var connectionString = PrismLiveConnection;
-//var connectionString = PrismTestConnection;
-
-//var connectionString = LocalConnection;
-
-//var connectionString = SAPLiveConnection;
+//var connectionString = builder.Configuration.GetConnectionString("SAPLiveConnection");
 
 #endregion
 
-
 #region SQL Lite
+//var connectionString = "Data Source=Database\\HangFire.db;";
 
 var connectionString = ConnectionStringFactory.SqlLite();
 
@@ -44,14 +35,16 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(connectionString, sqliteOptions =>
     {
         sqliteOptions.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
+        //sqliteOptions.MigrationsAssembly("SAPLink.API");
+
         //sqliteOptions.UseSqlCipher("<encryption_key>");
     }));
+
 
 builder.Services.AddHangfire(x => x.UseSQLiteStorage(connectionString));
 builder.Services.AddHangfireServer();
 
 #endregion
-
 
 #region SQL Server
 
@@ -63,7 +56,6 @@ builder.Services.AddHangfireServer();
 //builder.Services.AddHangfire(x => x.UseSqlServerStorage(connectionString));
 
 #endregion
-
 
 
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
@@ -87,7 +79,6 @@ if (!app.Environment.IsDevelopment())
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-    // other code
 }
 
 app.UseSwagger();

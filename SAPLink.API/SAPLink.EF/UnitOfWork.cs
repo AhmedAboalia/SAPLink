@@ -27,7 +27,7 @@ namespace SAPLink.EF
             Subsidiary = new BaseRepository<Subsidiary>(context);
             Schedule = new BaseRepository<Schedules>(context);
 
-            //Recurrences = new BaseRepository<Recurrence>(context);
+            Recurrences = new BaseRepository<Recurrence>(context);
             Sync = new BaseRepository<Sync>(context);
 
             //ItemsLog = new BaseRepository<Logger<ItemMasterData>>(context);

@@ -1,16 +1,18 @@
-﻿namespace SAPLink.API.Controllers
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
+namespace SAPLink.API.Controllers
 {
     [Route("api/v1/System/[controller]")]
     [ApiController]
     public partial class RecurringController : ControllerBase
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private static UnitOfWork _unitOfWork;
 
-        public RecurringController(IUnitOfWork unitOfWork)
+        public RecurringController(UnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
-
+      
         // POST: api/v1/System/Recurring/AddAsync
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("AddAsync")]
@@ -23,6 +25,7 @@
                 Document = dto.Document,
                 DayOfWeek = dto.DayOfWeek
             };
+
             await _unitOfWork.Recurrences.AddAsync(recurrence);
             _unitOfWork.SaveChanges();
 
@@ -65,7 +68,6 @@
                 return Ok(req);
             }
             return BadRequest();
-
         }
         // Delete: api/v1/System/Recurring/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

@@ -23,8 +23,6 @@ public class ScheduleSyncs : ControllerBase
     private static readonly ItemsService ItemsService = new(Client, DepartmentService, VendorsService);
     private static readonly ItemsHandler ItemsHandler = new(UnitOfWork, ItemsService, Client);
 
-
-
     /// <summary>
     /// Returns Recurrence that will fires every hour at the specified minute.
     /// </summary>
@@ -38,7 +36,7 @@ public class ScheduleSyncs : ControllerBase
             return BadRequest(
                 "Invalid 'interval' with current request, update to 'Interval' to be between (0-59).");
         }
-
+        
         switch (recurrence.Document)
         {
             case Documents.Departments:

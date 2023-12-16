@@ -8,7 +8,7 @@ namespace SAPLink.EF.Data
     public class ApplicationDbContext : DbContext
     {
         public DbSet<Clients> Clients { get; set; }
-        //public DbSet<Recurrence> Recurrences { get; set; }
+        public DbSet<Recurrence> Recurrences { get; set; }
         public DbSet<Credentials> Credentials { get; set; }
 
         //public DbSet<Logger<ItemMasterData>> ItemsLog { get; set; }
@@ -48,12 +48,12 @@ namespace SAPLink.EF.Data
 
                 #region SQL Lite
 
-                //var connectionString = ConnectionStringFactory.SqlLite();
-                //optionsBuilder.UseSqlite(connectionString, sqliteOptions =>
-                //{
-                //    sqliteOptions.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
-                //    //sqliteOptions.UseSqlCipher("<encryption_key>");
-                //});
+                var connectionString = ConnectionStringFactory.SqlLite();
+                optionsBuilder.UseSqlite(connectionString, sqliteOptions =>
+                {
+                    sqliteOptions.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
+                    //sqliteOptions.UseSqlCipher("<encryption_key>");
+                });
 
                 #endregion
 
@@ -76,7 +76,7 @@ namespace SAPLink.EF.Data
             modelBuilder.ApplyConfiguration(new CredentialsConfiguration());
             modelBuilder.ApplyConfiguration(new SubsidiariesConfiguration());
 
-            //modelBuilder.ApplyConfiguration(new RecurrencesConfiguration());
+            modelBuilder.ApplyConfiguration(new RecurrencesConfiguration());
             modelBuilder.ApplyConfiguration(new SyncConfiguration());
 
             //modelBuilder.ApplyConfiguration(new ItemsLogConfiguration());
