@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <None Remove="Forms\Dashboard.resx~RF25ed3a8.TMP" />
+    <None Remove="Forms\Login.resx~RF32921b.TMP" />
     <None Remove="Images\Price-Checker.ico" />
   </ItemGroup>
 
