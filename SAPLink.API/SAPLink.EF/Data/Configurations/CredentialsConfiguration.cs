@@ -17,7 +17,6 @@ internal class CredentialsConfiguration : IEntityTypeConfiguration<Credentials>
             .WithOne(s => s.Credential)
             .HasForeignKey(s => s.CredentialId)
             .IsRequired();
-        const string ProductionBaseUrl = "http://kaffaryretail.alkaffary.com:8080";
 
         builder.HasData(CredentialsList.GetCredentials());
     }
@@ -76,8 +75,8 @@ internal static class CredentialsList
                 EnvironmentName = "Test Environment",
                 Active = false,
 
-                PrismUserName = "sysadmin",
-                PrismPassword = "kaf@admin",
+                PrismUserName = "SAPLINK",//;"sysadmin",
+                PrismPassword = "RetailTec@123",//"kaf@admin",
                 BaseUri = TestBaseUrl,
 
                 BackOfficeUri = $"{TestBaseUrl}/api/backoffice",

@@ -61,7 +61,7 @@ public class ScheduleSyncs : ControllerBase
                     Minutes = Minutes.Length != 2 ? "0" + recurrence.Interval : recurrence.Interval.ToString();
 
                     RecurringJob.AddOrUpdate($"Sync {recurrence.Document} in an hour at {DateTime.Now.Hour + 1}:{Minutes} minutes.",
-                        () => SyncItems(), Cron.Hourly(recurrence.Interval));
+                        () => HandleItems(), Cron.Hourly(recurrence.Interval));
 
                     return Ok($"Task Name: [Sync {recurrence.Document}]\r\n" +
                               "Status: [Started]\r\n" +
@@ -212,5 +212,30 @@ public class ScheduleSyncs : ControllerBase
 
             }
         }
+    }
+
+    [ApiExplorerSettings(IgnoreApi = true)]
+    public async Task HandleItems()
+    {
+        var filter = GetSyncQueryByRangOfDate();
+
+        var LogMessage = "";
+        await foreach (var syncResult in ItemsHandler.SyncAsync(filter))
+        {
+            if (syncResult.EntityList != null && syncResult.EntityList.Count > 0)
+            {
+                foreach (var itemMaster in syncResult.EntityList)
+                {
+                    LogMessage += syncResult.Message;
+                }
+            }
+        }
+    }
+    private string GetSyncQueryByRangOfDate()
+    {
+        var dateFrom = DateTime.Now.AddYears(-5).ToSAPDateFormat();
+        var dateTo = DateTime.Now.ToSAPDateFormat();
+
+        return $" WHERE T0.[DocDate] Between '{dateFrom}' AND '{dateTo}' AND (T0.[U_SyncToPrism] IS NULL OR  T0.[U_SyncToPrism] = '' OR  T0.[U_SyncToPrism] = 'N')";
     }
 }

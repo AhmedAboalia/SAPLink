@@ -1,88 +1,89 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using SAPLink.API.Services;
 
 namespace SAPLink.API.Controllers
 {
-    [Route("api/v1/System/[controller]")]
-    [ApiController]
-    public partial class RecurringController : ControllerBase
+    public partial class RecurringController : Controller
     {
-        private static UnitOfWork _unitOfWork;
+        private readonly RecurrenceService _recurrenceService;
 
-        public RecurringController(UnitOfWork unitOfWork)
+        public RecurringController(RecurrenceService recurrenceService)
         {
-            _unitOfWork = unitOfWork;
+            _recurrenceService = recurrenceService;
         }
-      
-        // POST: api/v1/System/Recurring/AddAsync
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost("AddAsync")]
-        public async Task<ActionResult<List<Recurrence>>> AddAsync([FromBody] RecurrenceDto dto)
+
+        public IActionResult AddAsync()
         {
-            var recurrence = new Recurrence
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddAsync(RecurrenceDto dto)
+        {
+            if (ModelState.IsValid)
             {
-                Interval = dto.Interval,
-                Recurring = dto.Recurring,
-                Document = dto.Document,
-                DayOfWeek = dto.DayOfWeek
-            };
+                await _recurrenceService.AddAsync(dto);
+                return RedirectToAction("GetAll");
+            }
 
-            await _unitOfWork.Recurrences.AddAsync(recurrence);
-            _unitOfWork.SaveChanges();
-
-            return Ok(recurrence);
-        }
-        // GET: api/v1/System/Recurring/GetAllAsync
-        [HttpGet("GetAllAsync")]
-        public async Task<ActionResult<Recurrence>> GetAllAsync()
-        {
-            var recurrence = await _unitOfWork.Recurrences.GetAllAsync();
-
-            return Ok(recurrence);
+            return View(dto);
         }
 
-        // GET: api/v1/System/Recurring/GetByIdAsync/5
-        [HttpGet("GetByIdAsync/{id}")]
-        public async Task<ActionResult<Recurrence>> GetByIdAsync(int? id)
+        public async Task<IActionResult> GetAllAsync()
         {
-            if (id == null)
+            var recurrences = await _recurrenceService.GetAllAsync();
+            return View(recurrences);
+        }
+
+        public async Task<IActionResult> GetByIdAsync(int id)
+        {
+            var recurrence = await _recurrenceService.GetByIdAsync(id);
+
+            if (recurrence == null)
                 return NotFound();
 
-            var recurrence = await _unitOfWork.Recurrences.GetByIdAsync((int)id);
-
-            return Ok(recurrence);
+            return View(recurrence);
         }
 
-
-        // PUT: api/v1/System/Recurring/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("UpdateAsync/{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] Recurrence recurrence)
+        public async Task<IActionResult> UpdateAsync(int id)
         {
-            var req = _unitOfWork.Recurrences.FindAsync(x => x.Id == id);
+            var recurrence = await _recurrenceService.GetByIdAsync(id);
 
-            if (req != null && req.Id == id)
-            {
-                _unitOfWork.Recurrences.Update(recurrence);
-                _unitOfWork.SaveChanges();
+            if (recurrence == null)
+                return NotFound();
 
-                return Ok(req);
-            }
-            return BadRequest();
+            return View(recurrence);
         }
-        // Delete: api/v1/System/Recurring/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpDelete("DeleteAsync/{id}")]
-        public async Task<IActionResult> Delete(int id)
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult UpdateAsync(int id, Recurrence recurrence)
         {
-            var recurrence = _unitOfWork.Recurrences.GetById(id.ToString());
-            if (recurrence != null)
+            if (id != recurrence.Id)
+                return NotFound();
+
+            if (ModelState.IsValid)
             {
-                _unitOfWork.Recurrences.Delete(recurrence);
-                _unitOfWork.SaveChanges();
-                return Ok($"Recurrence {recurrence.Document} is deleted");
+                _recurrenceService.Update(recurrence);
+                return RedirectToAction("GetAll");
             }
 
-            return BadRequest();
+            return View(recurrence);
         }
+
+        public IActionResult DeleteAsync(int id)
+        {
+            return View(id);
+        }
+
+        [HttpPost, ActionName("DeleteAsync")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            _recurrenceService.Delete(id);
+            return RedirectToAction("GetAll");
+        }
+
     }
 }
