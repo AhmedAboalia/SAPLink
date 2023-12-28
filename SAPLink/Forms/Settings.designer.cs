@@ -244,6 +244,7 @@
             guna2DragControl1 = new Guna2DragControl(components);
             guna2ShadowForm1 = new Guna2ShadowForm(components);
             guna2Elipse1 = new Guna2Elipse(components);
+            guna2CheckBox1 = new Guna2CheckBox();
             guna2Panel1.SuspendLayout();
             guna2TabControl1.SuspendLayout();
             ClientDetailsPage.SuspendLayout();
@@ -284,7 +285,7 @@
             guna2Panel1.Margin = new Padding(4);
             guna2Panel1.Name = "guna2Panel1";
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges112;
-            guna2Panel1.Size = new Size(1284, 836);
+            guna2Panel1.Size = new Size(1284, 788);
             guna2Panel1.TabIndex = 0;
             guna2Panel1.DoubleClick += guna2Panel1_DoubleClick;
             // 
@@ -317,7 +318,7 @@
             labelStatus.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             labelStatus.BackColor = Color.White;
             labelStatus.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            labelStatus.Location = new Point(182, 796);
+            labelStatus.Location = new Point(182, 748);
             labelStatus.Name = "labelStatus";
             labelStatus.Size = new Size(1065, 19);
             labelStatus.TabIndex = 55;
@@ -332,7 +333,7 @@
             guna2TabControl1.Location = new Point(167, 119);
             guna2TabControl1.Name = "guna2TabControl1";
             guna2TabControl1.SelectedIndex = 0;
-            guna2TabControl1.Size = new Size(1087, 669);
+            guna2TabControl1.Size = new Size(1087, 621);
             guna2TabControl1.TabButtonHoverState.BorderColor = Color.Empty;
             guna2TabControl1.TabButtonHoverState.FillColor = Color.White;
             guna2TabControl1.TabButtonHoverState.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Regular, GraphicsUnit.Point);
@@ -368,7 +369,7 @@
             ClientDetailsPage.Location = new Point(4, 44);
             ClientDetailsPage.Name = "ClientDetailsPage";
             ClientDetailsPage.Padding = new Padding(3);
-            ClientDetailsPage.Size = new Size(1079, 621);
+            ClientDetailsPage.Size = new Size(1079, 573);
             ClientDetailsPage.TabIndex = 0;
             ClientDetailsPage.Text = "Client Data";
             ClientDetailsPage.UseVisualStyleBackColor = true;
@@ -1029,7 +1030,7 @@
             CredentialsPage.Controls.Add(guna2Panel7);
             CredentialsPage.Location = new Point(4, 44);
             CredentialsPage.Name = "CredentialsPage";
-            CredentialsPage.Size = new Size(1079, 621);
+            CredentialsPage.Size = new Size(1079, 573);
             CredentialsPage.TabIndex = 2;
             CredentialsPage.Text = "Credentials";
             // 
@@ -1052,6 +1053,7 @@
             guna2Panel7.BorderColor = Color.WhiteSmoke;
             guna2Panel7.BorderRadius = 20;
             guna2Panel7.BorderThickness = 1;
+            guna2Panel7.Controls.Add(guna2CheckBox1);
             guna2Panel7.Controls.Add(guna2Panel8);
             guna2Panel7.Controls.Add(label23);
             guna2Panel7.Controls.Add(label3);
@@ -1069,7 +1071,7 @@
             guna2Panel7.Location = new Point(15, 35);
             guna2Panel7.Name = "guna2Panel7";
             guna2Panel7.ShadowDecoration.CustomizableEdges = customizableEdges92;
-            guna2Panel7.Size = new Size(1061, 583);
+            guna2Panel7.Size = new Size(1061, 535);
             guna2Panel7.TabIndex = 41;
             // 
             // guna2Panel8
@@ -1096,7 +1098,7 @@
             guna2Panel8.Location = new Point(46, 318);
             guna2Panel8.Name = "guna2Panel8";
             guna2Panel8.ShadowDecoration.CustomizableEdges = customizableEdges54;
-            guna2Panel8.Size = new Size(808, 250);
+            guna2Panel8.Size = new Size(808, 150);
             guna2Panel8.TabIndex = 42;
             // 
             // textBoxPrismPassword
@@ -1892,7 +1894,7 @@
             guna2Button6.Image = (Image)resources.GetObject("guna2Button6.Image");
             guna2Button6.ImageAlign = HorizontalAlignment.Left;
             guna2Button6.ImageSize = new Size(30, 30);
-            guna2Button6.Location = new Point(10, 768);
+            guna2Button6.Location = new Point(10, 720);
             guna2Button6.Name = "guna2Button6";
             guna2Button6.ShadowDecoration.CustomizableEdges = customizableEdges94;
             guna2Button6.Size = new Size(128, 40);
@@ -2075,7 +2077,7 @@
             MainPanel.Margin = new Padding(4);
             MainPanel.Name = "MainPanel";
             MainPanel.ShadowDecoration.CustomizableEdges = customizableEdges110;
-            MainPanel.Size = new Size(1126, 737);
+            MainPanel.Size = new Size(1126, 689);
             MainPanel.SizeMode = PictureBoxSizeMode.StretchImage;
             MainPanel.TabIndex = 0;
             MainPanel.TabStop = false;
@@ -2093,11 +2095,28 @@
             guna2Elipse1.BorderRadius = 0;
             guna2Elipse1.TargetControl = this;
             // 
+            // guna2CheckBox1
+            // 
+            guna2CheckBox1.AutoSize = true;
+            guna2CheckBox1.CheckedState.BorderColor = Color.FromArgb(94, 148, 255);
+            guna2CheckBox1.CheckedState.BorderRadius = 0;
+            guna2CheckBox1.CheckedState.BorderThickness = 0;
+            guna2CheckBox1.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
+            guna2CheckBox1.Location = new Point(46, 474);
+            guna2CheckBox1.Name = "guna2CheckBox1";
+            guna2CheckBox1.Size = new Size(139, 19);
+            guna2CheckBox1.TabIndex = 51;
+            guna2CheckBox1.Text = "Active Log (APIs Call)";
+            guna2CheckBox1.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
+            guna2CheckBox1.UncheckedState.BorderRadius = 0;
+            guna2CheckBox1.UncheckedState.BorderThickness = 0;
+            guna2CheckBox1.UncheckedState.FillColor = Color.FromArgb(125, 137, 149);
+            // 
             // Settings
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1284, 836);
+            ClientSize = new Size(1284, 788);
             Controls.Add(guna2Panel1);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -2236,5 +2255,6 @@
         private Label labelStatus;
         private Guna2Button guna2Button4;
         private Guna2Button guna2Button8;
+        private Guna2CheckBox guna2CheckBox1;
     }
 }

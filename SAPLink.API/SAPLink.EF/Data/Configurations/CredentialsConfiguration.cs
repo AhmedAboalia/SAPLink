@@ -66,6 +66,7 @@ internal static class CredentialsList
                 Cookie = "",
 
                 IntegrationUrl = integrationUrl,
+                ActiveLog = false,
             },
             new()
             {
@@ -101,6 +102,8 @@ internal static class CredentialsList
                 Cookie = "",
 
                 IntegrationUrl = integrationUrl,
+                ActiveLog = false,
+
             },
             //new()
             //{
@@ -169,6 +172,7 @@ internal static class CredentialsList
                 Cookie = "",
 
                 IntegrationUrl = integrationUrl,
+                ActiveLog = false,
             },
         };
     }

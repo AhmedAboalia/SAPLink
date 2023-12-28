@@ -32,6 +32,7 @@ namespace SAPLink.Forms
 
             LoadSubsidiary();
             LoadCredentials();
+            guna2CheckBox1.Checked = _credentials.ActiveLog;
         }
 
 
@@ -412,6 +413,7 @@ namespace SAPLink.Forms
 
                 credentials.PrismUserName = textBoxPrismUserName.Text;
                 credentials.PrismPassword = textBoxPrismPassword.Text;
+                credentials.ActiveLog = guna2CheckBox1.Checked;
 
                 _unitOfWork.Credentials.Update(credentials);
                 _unitOfWork.SaveChanges();
