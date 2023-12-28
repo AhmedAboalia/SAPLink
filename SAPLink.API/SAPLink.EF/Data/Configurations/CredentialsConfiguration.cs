@@ -27,7 +27,7 @@ internal static class CredentialsList
 
     const string TestBaseUrl = "http://postest.alkaffary.com:8080";
     const string LocalBaseUrl = "http://194.163.155.105";
-    const string integrationUrl = "https://localhost:44326";
+    const string integrationUrl = "http://saplink.alkaffary.com";
 
     public static Credentials[] GetCredentials()
     {

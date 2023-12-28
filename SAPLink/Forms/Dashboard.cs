@@ -72,10 +72,16 @@ namespace SAPLink.Forms
             //var isReachable = await Helper.IsDashboardAvailable();
             //if (isReachable)
             //{
-            //    //hangFireDashBoard.Visible = true;
+            //    hangFireDashBoard.Visible = true;
             //    guna2Button6.Visible = true;
             //    guna2GroupBox3.Visible = true;
+
+            //    string Url = _client.Credentials.FirstOrDefault().IntegrationUrl;
+            //    hangFireDashBoard.Source = new Uri($"{Url}/hangfire/recurring");
+            //    hangFireDashBoard.Source = new Uri($"{Url}/hangfire");
             //}
+            //string Urld = _client.Credentials.FirstOrDefault().IntegrationUrl;
+            //hangFireDashBoard.Source = new Uri($"{Urld}/hangfire");
         }
         private void UpdateWelcomingMessage()
         {
@@ -152,9 +158,9 @@ namespace SAPLink.Forms
 
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
-            string Url = _client.Credentials.FirstOrDefault().IntegrationUrl;
-            //hangFireDashBoard.Source = new Uri($"{Url}/dashboard/recurring");
-            //hangFireDashBoard.Source = new Uri($"{Url}/dashboard");
+            //string Url = _client.Credentials.FirstOrDefault().IntegrationUrl;
+            //hangFireDashBoard.Source = new Uri($"{Url}/hangfire/recurring");
+            //hangFireDashBoard.Source = new Uri($"{Url}/hangfire");
         }
 
         private void buttonDepartments_Click(object sender, EventArgs e)
