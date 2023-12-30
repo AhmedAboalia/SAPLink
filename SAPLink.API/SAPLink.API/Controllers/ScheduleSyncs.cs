@@ -12,7 +12,10 @@ public class ScheduleSyncs : ControllerBase
 {
     private static readonly ApplicationDbContext Context = new();
     private static readonly UnitOfWork UnitOfWork = new(Context);
-    private static readonly Clients Client = UnitOfWork.Clients.GetByIdAsync((int)Enums.Environments.Local).Result;
+
+    static string[] includes = { "Credentials", "Credentials.Subsidiaries" };
+    private static readonly List<Clients> Clients  = UnitOfWork.Clients.GetAll(includes).ToList();
+     private static readonly Clients Client = Clients.Find(x=>x.Id == (int)Enums.Environments.Local);
 
     private static readonly DepartmentService DepartmentService = new(Client);
     private static readonly DepartmentsHandler DepartmentsHandler = new(UnitOfWork, DepartmentService, Client);

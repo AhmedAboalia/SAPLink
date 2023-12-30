@@ -1,6 +1,9 @@
 
 using SAPLink.API.Services;
+using SAPLink.Core.Models.System;
+using SAPLink.Handler.SAP.Application;
 using ServiceLayerHelper.RefranceModels;
+using System.Drawing;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -64,7 +67,6 @@ builder.Services.AddHangfireServer();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<UnitOfWork>();
 builder.Services.AddScoped<RecurrenceService>();
-
 
 //builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 

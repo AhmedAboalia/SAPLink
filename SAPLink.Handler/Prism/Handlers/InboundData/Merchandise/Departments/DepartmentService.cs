@@ -3,6 +3,7 @@ using SAPLink.Core.Models;
 using SAPLink.Core.Models.Prism.Inventory.Departments;
 using SAPLink.Core.Models.SAP.MasterData.Items;
 using SAPLink.Core.Models.System;
+using SAPLink.EF;
 using SAPLink.Handler.Connected_Services;
 using SAPLink.Handler.Connection;
 using SAPLink.Handler.Prism.Interfaces;

@@ -13,6 +13,7 @@ using SAPLink.Handler.SAP.Application;
 using Serilog;
 using Serilog.Core;
 using ServiceLayerHelper.RefranceModels;
+using System.Drawing;
 
 namespace SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Departments;
 
@@ -27,6 +28,7 @@ public partial class DepartmentsHandler
         _unitOfWork = unitOfWork;
         _departmentService = departmentService;
         _client = client;
+
         _loger = Helper.CreateLoggerConfiguration("Departments - (Item Groups)", "Handler", LogsTypes.InboundData);
     }
     public async IAsyncEnumerable<RequestResult<ItemGroups>> SyncAsync(string filter)
@@ -179,13 +181,13 @@ public partial class DepartmentsHandler
         if (type == Enums.UpdateType.SyncDepartment)
             query += syncQuery;
 
-        if (!ClientHandler.Company.Connected)
+        if (ClientHandler.Company == null)
         {
             ClientHandler.InitializeClientObjects(_client, out var code, out var errorMessage);
 
-            logMessage = code != 0
-                ? $"Error :{code}  : {errorMessage}"
-                : "Not Connected to Database.";
+            //logMessage = code != 0
+            //    ? $"Error :{code}  : {errorMessage}"
+            //    : "Not Connected to Database.";
         }
 
         var oRecordSet = (Recordset)ClientHandler.Company.GetBusinessObject(BoObjectTypes.BoRecordset);

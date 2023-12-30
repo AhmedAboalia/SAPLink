@@ -28,6 +28,8 @@ namespace SAPLink.EF.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.EnableSensitiveDataLogging();
+
             if (!optionsBuilder.IsConfigured)
             {
                 #region Old Manual Connection Strings

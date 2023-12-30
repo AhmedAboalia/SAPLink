@@ -30,6 +30,7 @@ namespace SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Inventory
             _unitOfWork = unitOfWork;
             _itemsService = itemsService;
             _client = client;
+
             _credentials = _client.Credentials.FirstOrDefault();
             _subsidiary = _credentials.Subsidiaries.FirstOrDefault();
             _loger = Helper.CreateLoggerConfiguration("Inventory (Items Master Data)", "Handler", LogsTypes.InboundData);

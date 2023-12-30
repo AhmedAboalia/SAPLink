@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAPLink", "SAPLink\SAPLink.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAPLink.Handler", "SAPLink.Handler\SAPLink.Handler.csproj", "{E1CEC206-0365-4E56-90F3-9B9539C04B08}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAPLink.Schedule", "SAPLink.Schedule\SAPLink.Schedule.csproj", "{376BD7EC-C764-4339-87C4-BB66A1EAB1EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAPLink.API", "SAPLink.API\SAPLink.API\SAPLink.API.csproj", "{EA9EFB11-B044-46D5-B5CB-8F5B5C5E8255}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,10 +37,10 @@ Global
 		{E1CEC206-0365-4E56-90F3-9B9539C04B08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1CEC206-0365-4E56-90F3-9B9539C04B08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1CEC206-0365-4E56-90F3-9B9539C04B08}.Release|Any CPU.Build.0 = Release|Any CPU
-		{376BD7EC-C764-4339-87C4-BB66A1EAB1EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{376BD7EC-C764-4339-87C4-BB66A1EAB1EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{376BD7EC-C764-4339-87C4-BB66A1EAB1EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{376BD7EC-C764-4339-87C4-BB66A1EAB1EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA9EFB11-B044-46D5-B5CB-8F5B5C5E8255}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA9EFB11-B044-46D5-B5CB-8F5B5C5E8255}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA9EFB11-B044-46D5-B5CB-8F5B5C5E8255}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA9EFB11-B044-46D5-B5CB-8F5B5C5E8255}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +48,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{3A6F16B1-D3C6-4490-A97A-8CBCD1EB9066} = {1701ED11-D251-416E-A0CE-95170DBD3516}
 		{84DFA583-CEAE-457C-974C-F7C2F9B4CA09} = {1701ED11-D251-416E-A0CE-95170DBD3516}
+		{EA9EFB11-B044-46D5-B5CB-8F5B5C5E8255} = {1701ED11-D251-416E-A0CE-95170DBD3516}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EC6B154B-1812-4279-BD23-FE592010838E}
