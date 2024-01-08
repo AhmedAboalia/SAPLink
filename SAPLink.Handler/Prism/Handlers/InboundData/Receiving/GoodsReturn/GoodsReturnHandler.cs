@@ -122,9 +122,9 @@ public class GoodsReturnHandler
                 var goodsReturnsReceiving = await _receivingService.GetReceiving(receiving);
                 var receivingResponse =  await _receivingService.ChangeReceivingToReturn(goodsReturnsReceiving.Sid, goodsReturnsReceiving.RowVersion);
 
-
+                var rowVersion = int.Parse(goodsReturnsReceiving.RowVersion) + 1;
                 //Thread.Sleep(500);
-                var response = await _receivingService.AddReceiving(goodsReturnsReceiving, goodsReturnsReceiving.RowVersion, goodsReturn.DocNum, goodsReturn.Remarks, store.Sid);
+                var response = await _receivingService.AddReceiving(receiving, rowVersion.ToString(), goodsReturn.DocNum, goodsReturn.Remarks, store.Sid);
 
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
@@ -203,7 +203,7 @@ public class GoodsReturnHandler
     }
     public static async Task<bool> UpdateGrpo(string docCode, string Sid)
     {
-        var documents = (Documents)ClientHandler.Company.GetBusinessObject(BoObjectTypes.oPurchaseDeliveryNotes);
+        var documents = (Documents)ClientHandler.Company.GetBusinessObject(BoObjectTypes.oPurchaseReturns);
 
         if (documents.GetByKey(Convert.ToInt32(docCode))) // Retrieve the GRPO by its Doc code
         {
