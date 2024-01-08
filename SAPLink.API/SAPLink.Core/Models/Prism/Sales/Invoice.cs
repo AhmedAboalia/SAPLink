@@ -193,7 +193,7 @@ public partial class Item
     public string Link { get; set; }
 
     [JsonProperty("quantity", NullValueHandling = NullValueHandling.Ignore)]
-    public long Quantity { get; set; }
+    public double Quantity { get; set; }
 
     [JsonProperty("original_price", NullValueHandling = NullValueHandling.Ignore)]
     public long OriginalPrice { get; set; }

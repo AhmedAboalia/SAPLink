@@ -58,7 +58,15 @@ public class GoodsIssueHandler
                 //var storeSid = store.Sid;
                 var store = await GetStore(goodsIssue);
 
-                var IsLocationChanged = _receivingService.ChangeLocation(store.Sid);
+                try
+                {
+                    var IsLocationChanged = _receivingService.ChangeLocation(store.Sid);
+                }
+                catch (Exception)
+                {
+
+                }
+                
 
                 var receiving = await _receivingService.GenerateVoucherSid(store.Sid);
                 foreach (var line in goodsIssue.Lines)

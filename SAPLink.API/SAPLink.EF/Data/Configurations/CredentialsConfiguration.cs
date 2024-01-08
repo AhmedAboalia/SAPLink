@@ -76,8 +76,8 @@ internal static class CredentialsList
                 EnvironmentName = "Test Environment",
                 Active = false,
 
-                PrismUserName = "sysadmin",
-                PrismPassword = "kaf@admin",
+                PrismUserName = "SAPLINK3",//sysadmin
+                PrismPassword = "RetailTec@123",//kaf@admin
                 BaseUri = TestBaseUrl,
 
                 BackOfficeUri = $"{TestBaseUrl}/api/backoffice",

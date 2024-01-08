@@ -30,7 +30,7 @@ internal static class SubsidiariesList
 
                 Number = 1,
                 SID = 664651285000113257,
-                Clerksid = "674955099100039866",
+                Clerksid = "674955099100039866",// SAP Link KAFF SBS
                 ActivePriceLevelid = "664651377000135721",
                 ActiveSeasonSid = "664651377000169734",
                 ActiveStoreSid = "664651285000116261",
@@ -44,7 +44,7 @@ internal static class SubsidiariesList
 
                 Number = 1,
                 SID = 663852103000153257,
-                Clerksid = "674654182000171601",
+                Clerksid = "694703502045666230",//SAPLink3 Kaff SBS
                 ActivePriceLevelid = "663852140000113721",
                 ActiveSeasonSid = "663852140000143734",
                 ActiveStoreSid = "674650601000132347",

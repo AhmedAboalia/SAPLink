@@ -47,7 +47,7 @@ public partial class ReturnsHandler
                     var resultIncoming = new RequestResult<Payment>();
                     if (invoice.Tenders != null && SAPInvoice != null)
                     {
-                        resultIncoming = OutgoingPayment.AddMultiplePaymentsInvoice(invoice, SAPInvoice.DocNum, customerCode);
+                        resultIncoming = OutgoingPayment.AddMultiplePaymentsInvoice(invoice, SAPInvoice.DocEntry, customerCode);
                         result.Message += $"\r\n {resultIncoming.Message}";
                         result.Status = resultIncoming.Status;
 
@@ -56,7 +56,7 @@ public partial class ReturnsHandler
 
                             if (result.Status == Enums.StatusType.Success)
                             {
-                                SetReturnInvoiceAsSynced(invoice.Sid, SAPInvoice.DocNum);
+                                SetReturnInvoiceAsSynced(invoice.Sid, SAPInvoice.DocEntry);
                                 result.Message += $"\r\nSuccessfully Update Sync Flag for the Prism invoice No. {invoice.DocumentNumber} - SAP invoice No. {SAPInvoice.DocNum}.\r\n";
                             }
 
