@@ -344,6 +344,15 @@ partial class ServiceLayerHandler
 
                 branch = "101003";
             }
+            else if (updateType == UpdateType.SyncWholesaleRetail)
+            {
+                var WholesaleRetailCustomerCode = ActionHandler.GetStringValueByQuery($"SELECT T0.[AddID] FROM OCRD T0 WHERE T0.[CardCode] = '{customerCode}'");//invoice.WholesaleCustomerCode;
+
+
+                region = WholesaleRetailCustomerCode.Substring(0, 1);
+                city = WholesaleRetailCustomerCode.Substring(0, 3);
+                branch = WholesaleRetailCustomerCode;
+            }
             else
             {
                 region = customerCode.Substring(0, 1);

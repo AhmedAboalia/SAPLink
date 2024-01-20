@@ -187,14 +187,16 @@ public partial class OutboundData : Form
                             var isWholesale = returnInvoice.IsWholesale == "B2P";
                             var wholesaleCustomerCode = returnInvoice.WholesaleCustomerCode;
 
-                            var isCreditMemo = returnInvoice.Items.Any(p => p.Alu == "SP0012");
+                            var isHasReturnItem = returnInvoice.Items.Any(p => p.Alu == "SP0012");
 
-                            if (isCreditMemo && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
-                                await HandleCreditMemo(invoiceResult.EntityList, UpdateType.SyncInvoice);
+                            if (isHasReturnItem && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
+                                await HandleCreditMemoWithoutPayment(invoiceResult.EntityList, UpdateType.SyncInvoice);
 
+                            else if (!isHasReturnItem && isWholesale && wholesaleCustomerCode.IsNullOrEmpty() && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
+                                await HandleCreditMemoWithPayment(invoiceResult.EntityList, UpdateType.SyncWholesaleRetail, null);
 
-                            else if (!isCreditMemo && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
-                                await HandleInvoiceReturn(invoiceResult.EntityList, UpdateType.SyncWholesale, wholesaleCustomerCode);
+                            else if (!isHasReturnItem && isWholesale && wholesaleCustomerCode.IsHasValue() && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
+                                await HandleCreditMemoWithPayment(invoiceResult.EntityList, UpdateType.SyncWholesale, wholesaleCustomerCode);
 
                         }
                     }
@@ -427,7 +429,7 @@ public partial class OutboundData : Form
             ? oRecordSet.Fields.Item(0).Value.ToString()
             : "";
     }
-    private async Task HandleInvoiceReturn(List<PrismInvoice> invoicesList, UpdateType updateType, string wholesaleCustomerCode)
+    private async Task HandleCreditMemoWithPayment(List<PrismInvoice> invoicesList, UpdateType updateType, string wholesaleCustomerCode)
     {
         PlaySound.Click();
         var bindingList = dataGridView.DataSource as BindingList<SAPInvoice>;
@@ -647,7 +649,7 @@ public partial class OutboundData : Form
             //syncResult.UpdateResponse;
         }
     }
-    private async Task HandleCreditMemo(List<PrismInvoice> invoicesList, UpdateType UpdateType)
+    private async Task HandleCreditMemoWithoutPayment(List<PrismInvoice> invoicesList, UpdateType UpdateType)
     {
         PlaySound.Click();
         //var BpList = new List<BusinessPartner>();
