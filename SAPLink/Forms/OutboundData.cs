@@ -102,10 +102,10 @@ public partial class OutboundData : Form
 
                             if (invoice == null) continue;
 
-                            var isARDownPayment = invoice.Items.Any(p => p.Alu == "SP0012");
+                            bool isInvoiceHasReturnItem = invoice.Items.Any(p => p.Alu == "SP0012");
 
 
-                            if (isARDownPayment && CheckInvoiceExist(sInvoice.Sid, "ODPI"))
+                            if (isInvoiceHasReturnItem && CheckInvoiceExist(sInvoice.Sid, "ODPI"))
                             {
                                 var docNum = GetInvoiceDocNum(sInvoice.Sid, "ODPI");
 
@@ -114,7 +114,7 @@ public partial class OutboundData : Form
                                      "");
                             }
 
-                            else if (!isARDownPayment && CheckInvoiceExist(sInvoice.Sid, "OINV"))
+                            else if (!isInvoiceHasReturnItem && CheckInvoiceExist(sInvoice.Sid, "OINV"))
                             {
                                 var docNum = GetInvoiceDocNum(sInvoice.Sid, "OINV");
 
@@ -122,18 +122,21 @@ public partial class OutboundData : Form
                                     $"\r\nPrism Invoice No. ({sInvoice.DocumentNumber}) is Already Exist with SAP Invoice No. ({docNum}).",
                                      "");
                             }
-                            
+
                             var isWholesale = invoice.IsWholesale == "B2P";
                             var wholesaleCustomerCode = invoice.WholesaleCustomerCode;
 
 
-                            if (isARDownPayment && !CheckInvoiceExist(sInvoice.Sid, "ODPI"))
+                            if (IsDownPayment(sInvoice, isInvoiceHasReturnItem))
                                 await HandleDownPayment(invoiceResult.EntityList, UpdateType.SyncInvoice);
 
-                            else if (!isARDownPayment && !isWholesale && !CheckInvoiceExist(sInvoice.Sid, "OINV"))
+                            else if (IsRetailSale(sInvoice, isInvoiceHasReturnItem, isWholesale, wholesaleCustomerCode))
                                 await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncInvoice);
 
-                            else if (isWholesale && !CheckInvoiceExist(sInvoice.Sid, "OINV"))
+                            else if (IsWholesaleRetail(sInvoice, isInvoiceHasReturnItem, isWholesale, wholesaleCustomerCode))
+                                await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncWholesaleRetail);
+
+                            else if (IsWholesale(sInvoice, isWholesale))
                                 await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncWholesale, wholesaleCustomerCode);
                         }
 
@@ -180,6 +183,10 @@ public partial class OutboundData : Form
                                 Log(UpdateType.SyncCreditMemo, $"\r\nPrism Invoice No. ({returnInvoice.DocumentNumber}) is Already Exist with SAP A/R Credit Payment No. ({docNum}).",
                                      "");
                             }
+
+                            var isWholesale = returnInvoice.IsWholesale == "B2P";
+                            var wholesaleCustomerCode = returnInvoice.WholesaleCustomerCode;
+
                             var isCreditMemo = returnInvoice.Items.Any(p => p.Alu == "SP0012");
 
                             if (isCreditMemo && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
@@ -187,7 +194,7 @@ public partial class OutboundData : Form
 
 
                             else if (!isCreditMemo && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
-                                await HandleInvoiceReturn(invoiceResult.EntityList, UpdateType.SyncCreditMemo);
+                                await HandleInvoiceReturn(invoiceResult.EntityList, UpdateType.SyncWholesale, wholesaleCustomerCode);
 
                         }
                     }
@@ -297,6 +304,26 @@ public partial class OutboundData : Form
         }
     }
 
+    private static bool IsWholesale(PrismInvoice sInvoice, bool isWholesale)
+    {
+        return isWholesale && !CheckInvoiceExist(sInvoice.Sid, "OINV");
+    }
+
+    private static bool IsWholesaleRetail(PrismInvoice sInvoice, bool isInvoiceHasReturnItem, bool isWholesale, string wholesaleCustomerCode)
+    {
+        return !isInvoiceHasReturnItem && isWholesale && wholesaleCustomerCode.IsNullOrEmpty() && !CheckInvoiceExist(sInvoice.Sid, "OINV");
+    }
+
+    private static bool IsRetailSale(PrismInvoice sInvoice, bool isInvoiceHasReturnItem, bool isWholesale, string wholesaleCustomerCode)
+    {
+        return !isInvoiceHasReturnItem && !isWholesale && wholesaleCustomerCode.IsNullOrEmpty() && !CheckInvoiceExist(sInvoice.Sid, "OINV");
+    }
+
+    private static bool IsDownPayment(PrismInvoice sInvoice, bool isARDownPayment)
+    {
+        return isARDownPayment && !CheckInvoiceExist(sInvoice.Sid, "ODPI");
+    }
+    
     private async Task HandleInvoices(List<PrismInvoice> invoicesList, UpdateType updateType, string wholesaleCustomerCode = "")
     {
         PlaySound.Click();
@@ -400,12 +427,12 @@ public partial class OutboundData : Form
             ? oRecordSet.Fields.Item(0).Value.ToString()
             : "";
     }
-    private async Task HandleInvoiceReturn(List<PrismInvoice> invoicesList, UpdateType updateType)
+    private async Task HandleInvoiceReturn(List<PrismInvoice> invoicesList, UpdateType updateType, string wholesaleCustomerCode)
     {
         PlaySound.Click();
         var bindingList = dataGridView.DataSource as BindingList<SAPInvoice>;
 
-        await foreach (var syncResult in _returnsHandler.AddReturnInvoiceAsync(invoicesList))
+        await foreach (var syncResult in _returnsHandler.AddReturnInvoiceAsync(invoicesList, updateType, wholesaleCustomerCode))
         {
             if (syncResult.EntityList != null && syncResult.EntityList.Count > 0)
             {

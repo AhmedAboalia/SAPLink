@@ -21,6 +21,7 @@ using SAPLink.Handler.Prism.Handlers.InboundData.Receiving.GoodsReceiptPo;
 using SAPLink.Utilities;
 using SAPLink.Handler.Prism.Handlers.InboundData.Receiving.GoodsIssue;
 using SAPLink.Handler.Prism.Handlers.InboundData.Receiving.GoodsReceipt;
+using static SAPLink.Core.Enums;
 
 namespace SAPLink.Schedule.Forms;
 
@@ -297,13 +298,15 @@ public partial class ScheduledSyncs : Form
                     Log($"\r\nPrism Invoice No. ({returnInvoice.DocumentNumber}) is Already Exist with SAP A/R Credit Payment No. ({docNum}).");
                 }
                 var isCreditMemo = returnInvoice.Items.Any(p => p.Alu == "SP0012");
+                var isWholesale = returnInvoice.IsWholesale == "B2P";
+                var wholesaleCustomerCode = returnInvoice.WholesaleCustomerCode;
 
                 if (isCreditMemo && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
                     await HandleCreditMemo(invoiceResult.EntityList);
 
 
                 else if (!isCreditMemo && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
-                    await HandleInvoiceReturn(invoiceResult.EntityList);
+                    await HandleInvoiceReturn(invoiceResult.EntityList,UpdateType.SyncWholesale, wholesaleCustomerCode);
 
             }
         }
@@ -336,11 +339,11 @@ public partial class ScheduledSyncs : Form
             //syncResult.UpdateResponse;
         }
     }
-    private async Task HandleInvoiceReturn(List<PrismInvoice> invoicesList)
+    private async Task HandleInvoiceReturn(List<PrismInvoice> invoicesList,UpdateType updateType, string wholesaleCustomerCode)
     {
         //var bindingList = dt.DataSource as BindingList<SAPInvoice>;
 
-        await foreach (var syncResult in _returnsHandler.AddReturnInvoiceAsync(invoicesList))
+        await foreach (var syncResult in _returnsHandler.AddReturnInvoiceAsync(invoicesList, updateType, wholesaleCustomerCode))
         {
             if (syncResult.EntityList != null && syncResult.EntityList.Count > 0)
             {
