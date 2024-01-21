@@ -332,26 +332,15 @@ partial class ServiceLayerHandler
 
             string region, city, branch;
 
-            if (updateType == UpdateType.SyncWholesale)
+            if (updateType == UpdateType.SyncWholesale ||
+                updateType == UpdateType.SyncWholesaleRetail
+                )
             {
-                region = GetRegion(customerCode);
-                //if (region.IsHasValue())
-                //    region = region.Substring(1, 1);
+                var WholesaleCustomerCode = ActionHandler.GetStringValueByQuery($"SELECT T0.[AddID] FROM OCRD T0 WHERE T0.[CardCode] = '{customerCode}'");//invoice.WholesaleCustomerCode;
 
-                city = GetCity(customerCode);
-                //if (city.IsHasValue())
-                //    city = city.Substring(1, 3);
-
-                branch = "101003";
-            }
-            else if (updateType == UpdateType.SyncWholesaleRetail)
-            {
-                var WholesaleRetailCustomerCode = ActionHandler.GetStringValueByQuery($"SELECT T0.[AddID] FROM OCRD T0 WHERE T0.[CardCode] = '{customerCode}'");//invoice.WholesaleCustomerCode;
-
-
-                region = WholesaleRetailCustomerCode.Substring(0, 1);
-                city = WholesaleRetailCustomerCode.Substring(0, 3);
-                branch = WholesaleRetailCustomerCode;
+                region = WholesaleCustomerCode.Substring(0, 1);
+                city = WholesaleCustomerCode.Substring(0, 3);
+                branch = WholesaleCustomerCode;
             }
             else
             {
