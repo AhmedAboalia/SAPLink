@@ -24,14 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Forms\Dashboard.resx~RF25ed3a8.TMP" />
-    <None Remove="Forms\Login.resx~RF32921b.TMP" />
-    <None Remove="Forms\qww22vc0.zbm~" />
-    <None Remove="Forms\ybgzkifc.wyf~" />
-    <None Remove="Images\Price-Checker.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="Images\SAPLink.ico" />
   </ItemGroup>
 

@@ -7,7 +7,6 @@ using SAPLink.Core.Models.System;
 using SAPLink.Handler.SAP.Application;
 using SAPLink.Handler.SAP.Handlers;
 using Serilog;
-using System.Security.Cryptography;
 using PrismInvoice = SAPLink.Core.Models.Prism.Sales.Invoice;
 using SAPInvoice = SAPLink.Core.Models.SAP.Sales.Invoice;
 
