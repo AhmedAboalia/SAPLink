@@ -44,7 +44,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SAPLink.Handler\SAPLink.Handler.csproj" />
-    <ProjectReference Include="..\SAPLink.Schedule\SAPLink.Schedule.csproj" />
   </ItemGroup>
 
   <ItemGroup>

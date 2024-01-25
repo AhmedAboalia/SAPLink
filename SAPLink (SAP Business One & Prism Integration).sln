@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAPLink", "SAPLink\SAPLink.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAPLink.Handler", "SAPLink.Handler\SAPLink.Handler.csproj", "{E1CEC206-0365-4E56-90F3-9B9539C04B08}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAPLink.Schedule", "SAPLink.Schedule\SAPLink.Schedule.csproj", "{376BD7EC-C764-4339-87C4-BB66A1EAB1EF}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,10 +35,6 @@ Global
 		{E1CEC206-0365-4E56-90F3-9B9539C04B08}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1CEC206-0365-4E56-90F3-9B9539C04B08}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1CEC206-0365-4E56-90F3-9B9539C04B08}.Release|Any CPU.Build.0 = Release|Any CPU
-		{376BD7EC-C764-4339-87C4-BB66A1EAB1EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{376BD7EC-C764-4339-87C4-BB66A1EAB1EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{376BD7EC-C764-4339-87C4-BB66A1EAB1EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{376BD7EC-C764-4339-87C4-BB66A1EAB1EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
