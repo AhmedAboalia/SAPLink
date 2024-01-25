@@ -18,12 +18,26 @@ public static class IncomingPayment
 
         oPayment.CardCode = customerCode;
 
-        //if (invoiceType != BoRcptInvTypes.it_DownPayment)
-        oPayment.Invoices.DocEntry = int.Parse(docEntry);
-        oPayment.Invoices.InvoiceType = invoiceType;
-        oPayment.Invoices.SumApplied = amount;
-        oPayment.CashAccount = account;
-        oPayment.CashSum = amount;
+        if (invoiceType == BoRcptInvTypes.it_Invoice)
+        {
+            oPayment.Invoices.DocEntry = int.Parse(docEntry);
+            oPayment.Invoices.InvoiceType = invoiceType;
+            oPayment.Invoices.SumApplied = amount;
+            oPayment.CashAccount = account;
+            oPayment.CashSum = amount;
+        }
+        else
+        {
+
+            oPayment.DocTypte = SAPbobsCOM.BoRcptTypes.rCustomer;
+            oPayment.CashAccount = account;
+            oPayment.CashSum = amount;
+
+            //oPayment.AccountPayments.SumPaid = amount;
+            //oPayment.CashSum = amount;
+            //oPayment.AccountPayments.AccountCode = ClientHandler.GetFieldValueByQuery($"SELECT DPmClear FROM OCRD WHERE CardCode = '{customerCode}'");
+        }
+        
         oPayment.TaxDate = invoice.CreatedDatetime;
         oPayment.DocDate = invoice.CreatedDatetime;
         oPayment.DocDate = invoice.CreatedDatetime;

@@ -149,5 +149,13 @@ namespace SAPLink.Handler.SAP.Application
             oRecordSet.DoQuery(query);
             return oRecordSet.Fields.Item("AcctCode").Value.ToString();
         }
+
+        public static string GetFieldValueByQuery(string query)
+        {
+            var oRecordSet = (Recordset)Company.GetBusinessObject(BoObjectTypes.BoRecordset);
+
+            oRecordSet.DoQuery(query);
+            return oRecordSet.Fields.Item(0).Value.ToString();
+        }
     }
 }
