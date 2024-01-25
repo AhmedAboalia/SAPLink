@@ -40,7 +40,7 @@ internal static class CredentialsList
                 ClientId = (int)Environments.Production,
                 EnvironmentCode = (int)Environments.Production,
                 EnvironmentName = "Production Environment",
-                Active = false,
+                //Active = false,
 
                 PrismUserName = "SAPLINK",
                 PrismPassword = "RetailTec@123",
@@ -74,7 +74,7 @@ internal static class CredentialsList
                 ClientId = (int)Environments.Test, // Foreign key referencing the client
                 EnvironmentCode = (int)Environments.Test,
                 EnvironmentName = "Test Environment",
-                Active = false,
+                //Active = false,
 
                 PrismUserName = "SAPLINK3",//sysadmin
                 PrismPassword = "RetailTec@123",//kaf@admin
@@ -109,7 +109,7 @@ internal static class CredentialsList
             //    ClientId = (int)Environments.Test, // Foreign key referencing the client
             //    EnvironmentCode = (int)Environments.Test,
             //    EnvironmentName = "Test Environment",
-            //    Active = false,
+            ////    Active = false,
 
             //    PrismUserName = "sysadmin",
             //    PrismPassword = "sysadmin",
@@ -144,7 +144,7 @@ internal static class CredentialsList
                 ClientId = (int)Environments.Local, // Foreign key referencing the client
                 EnvironmentCode = (int)Environments.Local,
                 EnvironmentName = "Local Environment",
-                Active = true,
+                //Active = true,
 
                 PrismUserName = "sysadmin",
                 PrismPassword = "sysadmin",

@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SAP Link Integration</title>
+    <link rel="icon" type="image/x-icon" href="~/images/SAPLink.ico">
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+            <a class="navbar-brand mr-auto" asp-area="" asp-controller="Home" asp-action="Index">
+                <img src="~/images/logo.png" alt="Logo" height="30" class="d-inline-block align-top">
+                    SAP LINK
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-md-inline-flex justify-content-end">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                            <a class="nav-link text-dark" href="http://localhost:5005/hangfire"> @*  saplink.alkaffary.com *@
+                            <img src="~/images/sync.png" alt="Synchronization Dashboard" height="20" class="d-inline-block align-middle"> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="nav-link text-dark" href="http://localhost:5005/swagger/index.html">
+                            <img src="~/images/doc.png" alt="API" height="20" class="d-inline-block align-middle"> API
+                        </a>
+                    </li>
+              @*       <li class="nav-item">
+                        <!-- Add link to the Recurring page -->
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Recurring" asp-action="GetAll">
+                            <img src="~/images/doc.png" alt="Recurring" height="20" class="d-inline-block align-middle"> Recurring
+                        </a>
+                    </li> *@
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container">
+    <main role="main" class="pb-3">
+        @RenderBody()
+    </main>
+        
+  @*   <div id="scrollButtons" class="fixed-bottom text-center mb-3">
+        <button id="scrollUpBtn" class="btn btn-dark me-2" onclick="scrollToTop()">
+            <i class="fas fa-arrow-up"></i> Scroll Up
+        </button>
+        <button id="scrollDownBtn" class="btn btn-dark ml-2" onclick="scrollToBottom()">
+            <i class="fas fa-arrow-down"></i> Scroll Down
+        </button>
+    </div> *@
+</div>
+
+
+
+<footer class="footer text-secondary text-center">
+    <div class="container">
+        &copy; 2023 - SAP Link Integration - <a href="https://www.linkedin.com/in/engabo3lia/">Eng: Ahmed Aboalia</a>.
+    </div>
+</footer>
+
+ <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js" crossorigin="anonymous"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+    
+    <script>
+        document.addEventListener("scroll", function() {
+            var scrollUpBtn = document.getElementById("scrollUpBtn");
+            var scrollDownBtn = document.getElementById("scrollDownBtn");
+
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollUpBtn.style.display = "block";
+            } else {
+                scrollUpBtn.style.display = "none";
+            }
+
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 20) {
+                scrollDownBtn.style.display = "none";
+            } else {
+                scrollDownBtn.style.display = "block";
+            }
+        });
+
+        function scrollToTop() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+
+        function scrollToBottom() {
+            document.body.scrollTop = document.body.scrollHeight;
+            document.documentElement.scrollTop = document.documentElement.scrollHeight;
+        }
+    </script>
+</body>
+</html>

@@ -6,12 +6,15 @@ using SAPLink.Utilities.Forms;
 using InventoryPosting = SAPLink.Core.Models.Prism.StockManagement.InventoryPosting;
 using SAPLink.Handler.SAP.Application;
 using SAPLink.Handler.Prism.Connection.Auth;
-using System.Security.Cryptography.X509Certificates;
+using SAPLink.Core.Connection;
+using SAPLink.EF.Data;
 
 namespace SAPLink.Forms;
 
 public partial class OutboundData : Form
 {
+    #region Initial Variables
+
     private readonly UnitOfWork _unitOfWork;
     private readonly ServiceLayerHandler _serviceLayer;
     private readonly Clients _client;
@@ -58,7 +61,10 @@ public partial class OutboundData : Form
         _itemsService = itemsService;
         _departmentService = departmentService;
     }
+    
 
+    #endregion
+    
     private async void buttonSyncNow_Click(object sender, EventArgs e)
     {
         var documentType = (OutboundDocuments)comboBoxDocTypeSync.SelectedIndex;
@@ -353,7 +359,8 @@ public partial class OutboundData : Form
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
 
-            Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
+            if (_credentials.ActiveLog)
+                Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
         }
@@ -454,7 +461,9 @@ public partial class OutboundData : Form
 
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
-            Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
+
+            if (_credentials.ActiveLog)
+                Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
         }
@@ -484,7 +493,9 @@ public partial class OutboundData : Form
 
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
-            Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+
+            if (_credentials.ActiveLog)
+                Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
         }
@@ -508,7 +519,9 @@ public partial class OutboundData : Form
 
                 if (textBoxLogsSync.Text.Contains(syncResult.Message))
                     return;
-                Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
+
+                if (_credentials.ActiveLog)
+                    Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
             }
             else
             {
@@ -518,7 +531,9 @@ public partial class OutboundData : Form
 
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
-            Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
+
+            if (_credentials.ActiveLog)
+                Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
         }
@@ -579,7 +594,9 @@ public partial class OutboundData : Form
 
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
-            Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
+
+            if (_credentials.ActiveLog)
+                Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
         }
@@ -590,7 +607,8 @@ public partial class OutboundData : Form
 
         if (result.EntityList.Any())
         {
-            LogMessages($"Inventory Posting/s.\r\n\r\nRequest Message: {result.Message}", "");
+            if (_credentials.ActiveLog)
+                LogMessages($"Inventory Posting/s.\r\n\r\nRequest Message: {result.Message}", "");
 
             foreach (var inventoryPosting in result.EntityList)
             {
@@ -604,7 +622,9 @@ public partial class OutboundData : Form
                 {
                     var docNum = GetInventoryPostingDocNum(inventoryPosting.Sid);
                     var message = $"Prism Adjustment No. ({inventoryPosting.Adjno}) is Already Exist with SAP Inventory Posting No. ({docNum}).";
-                    LogMessages(message, message);
+
+                    if (_credentials.ActiveLog)
+                        LogMessages(message, message);
                 }
             }
         }
@@ -644,7 +664,9 @@ public partial class OutboundData : Form
 
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
-            Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
+
+            if (_credentials.ActiveLog)
+                Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
         }
@@ -679,7 +701,9 @@ public partial class OutboundData : Form
 
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
-            Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+
+            if (_credentials.ActiveLog)
+                Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
         }
@@ -709,20 +733,7 @@ public partial class OutboundData : Form
         //else if (comboBoxDocTypeSyncIndex == (int)Documents.GoodsIssue)
         //    toggleGoodsIssue.Checked = true;
     }
-    public void OpenReportsWithSettings(int tabControlInventoryIndex, int report)
-    {
-        tabControl.SelectedIndex = tabControlInventoryIndex;
-
-        if (report == (int)Enums.Reports.PrismActiveItems)
-            togglePrismActiveItems.Checked = true;
-
-        else if (report == (int)Enums.Reports.SyncedItems)
-            toggleSyncedItems.Checked = true;
-
-        else if (report == (int)Enums.Reports.NotSynced)
-            toggleNotSyncedItems.Checked = true;
-
-    }
+    
     private async void OutboundData_Load(object sender, EventArgs e)
     {
         comboBoxDocTypeSync.SelectedIndex = (int)OutboundDocuments.SalesInvoice;
@@ -775,7 +786,7 @@ public partial class OutboundData : Form
 
         textBoxDocCode.Focus();
 
-        tabControl.Controls[2].Enabled = false;
+        //tabControl.Controls[2].Enabled = false;
     }
 
 
@@ -822,7 +833,7 @@ public partial class OutboundData : Form
         filter = "";
         return false;
     }
-   
+
     private void LogMessages(string message, string status)
     {
         textBoxLogsSync.Log(new[] { message + "\r\n" }, Logger.MessageTime.Long);
@@ -993,7 +1004,7 @@ public partial class OutboundData : Form
         var newAuth = await LoginManager.GetAuthSessionAsync(_credentials.BaseUri, _credentials.PrismUserName, _credentials.PrismPassword);
         if (newAuth.IsHasValue())
             labelStatus.Log("Status: Auth Session refreshed.", Logger.MessageTypes.Warning, Logger.MessageTime.Long);
-        else
+            else
             labelStatus.Log("Status: Cant refresh Auth-Session, Wait a few seconds before you try again.", Logger.MessageTypes.Error, Logger.MessageTime.Long);
     }
 }

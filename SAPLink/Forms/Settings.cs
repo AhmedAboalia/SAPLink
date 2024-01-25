@@ -1,4 +1,8 @@
 ﻿using SAPLink.Handler.Prism.Connection.Auth;
+using SAPLink.Handler.Prism.Settings;
+using System.Windows.Forms;
+using static SAPLink.Core.Utilities.Extensions;
+using static SAPLink.Utilities.Controls;
 
 namespace SAPLink.Forms
 {
@@ -12,6 +16,7 @@ namespace SAPLink.Forms
         private readonly ServiceLayerHandler _serviceLayer;
         private readonly ItemsService _itemsService;
         private readonly DepartmentService _departmentService;
+        private readonly AdministrationService administrationService;
 
         //private PriceLevel _priceLevel;
         // private Season _season;
@@ -30,8 +35,10 @@ namespace SAPLink.Forms
             //_priceLevel = new PriceLevel();
             //_season = new Season();
 
+            administrationService= new AdministrationService(_client);
             LoadSubsidiary();
             LoadCredentials();
+            toggleActiveUILog.Checked = _credentials.ActiveLog;
         }
 
 
@@ -56,7 +63,7 @@ namespace SAPLink.Forms
                 foreach (var cred in allCredentials)
                 {
                     var name = cred.EnvironmentName.Replace(" Environment", "");
-                    comboBoxEnvironment.AddItem(cred.EnvironmentCode, cred.EnvironmentCode + " - " + name );
+                    comboBoxEnvironment.AddItem(cred.EnvironmentCode, cred.EnvironmentCode + " - " + name);
                 }
             }
 
@@ -69,8 +76,6 @@ namespace SAPLink.Forms
             comboBoxEnvironment.SelectedIndex = _credentials.EnvironmentCode;
 
             textBoxEnviromentName.Text = _credentials.EnvironmentName;
-
-            toggleActiveEnv.Checked = _credentials.Active;
 
             textBoxServiceLayerUri.Text = _credentials.ServiceLayerUri;
             textBoxServer.Text = _credentials.Server;
@@ -102,7 +107,6 @@ namespace SAPLink.Forms
             if (comboBoxEnvironment.SelectedIndex == (int)Environments.None)
             {
                 comboBoxEnvironment.SelectedIndex = (int)Environments.None;
-                toggleActiveEnv.Checked = false;
 
                 textBoxEnviromentName.Text = "";
                 textBoxServiceLayerUri.Text = "";
@@ -130,17 +134,17 @@ namespace SAPLink.Forms
 
         private void LoadSubsidiary()
         {
-            ComboBoxSubNum.Items.Clear();
-            ComboBoxSubNum.AddItem(_subsidiary.Number, $"{_subsidiary.Number} - {_subsidiary.Name}");
+            ComboBoxSubCode.Items.Clear();
+            ComboBoxSubCode.AddItem(_subsidiary.Number, $"{_subsidiary.Number} - {_subsidiary.Name}");
 
-            guna2TextBox1.Text = _subsidiary.Name;
-            TextBoxSubSID.Text = _subsidiary.SID.ToString();
-            guna2TextBox3.Text = _subsidiary.Clerksid;
+            textBoxSubName.Text = _subsidiary.Name;
+            textBoxSubSid.Text = _subsidiary.SID.ToString();
+            textBoxClerkSid.Text = _subsidiary.Clerksid;
             TextBoxActivePrLvSID.Text = _subsidiary.ActivePriceLevelid;
-            TextBoxActivePrLvName.Text = _subsidiary.ActivePriceLevelid;
+            TextBoxActiveStoreSid.Text = _subsidiary.ActivePriceLevelid;
             TextBoxAciveSeasonSID.Text = _subsidiary.ActiveSeasonSid;
-            guna2TextBox4.Text = _subsidiary.ActiveTaxCode;
-            ComboBoxSubNum.SelectedIndex = 0;
+            TextBoxActiveTaxSid.Text = _subsidiary.ActiveTaxCode;
+            ComboBoxSubCode.SelectedIndex = 0;
 
             //_priceLevel = _unitOfWork.PriceLevel.Find(x => x.Sid == _subsidiary.ActivePriceLevelid);
             //if (_priceLevel != null)
@@ -157,14 +161,14 @@ namespace SAPLink.Forms
             //}
         }
 
-        private void guna2ControlBox1_Click(object sender, EventArgs e) 
+        private void guna2ControlBox1_Click(object sender, EventArgs e)
             => Helper.TryKillProcess();
 
 
-        private void guna2ControlBox2_Click(object sender, EventArgs e) 
+        private void guna2ControlBox2_Click(object sender, EventArgs e)
             => WindowState = FormWindowState.Minimized;
 
-        private void guna2PictureBox1_DoubleClick(object sender, EventArgs e) 
+        private void guna2PictureBox1_DoubleClick(object sender, EventArgs e)
             => ResizeForm();
 
         void ResizeForm()
@@ -209,7 +213,7 @@ namespace SAPLink.Forms
 
 
         }
-        private void guna2Button2_Click(object sender, EventArgs e)
+        private void ButtonOpenInboundData_Click(object sender, EventArgs e)
         {
             Close();
             InboundData inboundData = new InboundData(_unitOfWork, _serviceLayer, _departmentService, _itemsService, _client);
@@ -235,62 +239,6 @@ namespace SAPLink.Forms
             }
         }
 
-        private void ButtonEdit_Click(object sender, EventArgs e)
-        {
-
-            toggleActiveEnv.Enabled = true;
-
-            if (!textBoxServiceLayerUri.Enabled)
-            {
-                guna2Button5.Text = "Disable";
-                textBoxClient.Enabled = true;
-                textBoxEnviromentName.Enabled = true;
-                textBoxServiceLayerUri.Enabled = true;
-                textBoxServer.Enabled = true;
-                toggleSQL2016.Enabled = true;
-                toggleSQL2019.Enabled = true;
-                toggleHANA.Enabled = true;
-                textBoxCompany.Enabled = true;
-
-                textBoxUserName.Enabled = true;
-                textBoxPassword.Enabled = true;
-                textBoxAuthorization.Enabled = true;
-
-                textBoxServerBaseUri.Enabled = true;
-                textBoxAuthSession.Enabled = true;
-
-                textBoxPrismUserName.Enabled = true;
-                textBoxPrismPassword.Enabled = true;
-                buttonRefreshAuthSession.Enabled = true;
-                guna2Button5.Enabled = false;
-            }
-            else
-            {
-                guna2Button5.Text = "Edit";
-                textBoxClient.Enabled = false;
-                textBoxEnviromentName.Enabled = false;
-                textBoxServiceLayerUri.Enabled = false;
-                textBoxServer.Enabled = false;
-                toggleSQL2016.Enabled = false;
-                toggleSQL2019.Enabled = false;
-                toggleHANA.Enabled = false;
-                textBoxCompany.Enabled = false;
-
-                textBoxUserName.Enabled = false;
-                textBoxPassword.Enabled = false;
-                textBoxAuthorization.Enabled = false;
-
-                textBoxServerBaseUri.Enabled = false;
-                textBoxAuthSession.Enabled = false;
-
-                textBoxPrismUserName.Enabled = false;
-                textBoxPrismPassword.Enabled = false;
-                buttonRefreshAuthSession.Enabled = false;
-                guna2Button5.Enabled = true;
-            }
-        }
-
-
 
         private async void comboBoxEnvironment_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -299,8 +247,6 @@ namespace SAPLink.Forms
             if (selectedIndex == (int)Environments.None)
             {
                 comboBoxEnvironment.SelectedIndex = (int)Environments.None;
-                toggleActiveEnv.Checked = false;
-
                 textBoxEnviromentName.Text = "";
                 textBoxServiceLayerUri.Text = "";
                 textBoxServer.Text = "";
@@ -317,6 +263,7 @@ namespace SAPLink.Forms
 
                 textBoxPrismUserName.Text = "";
                 textBoxPrismPassword.Text = "";
+                toggleActiveUILog.Checked = false;
             }
             else
             {
@@ -329,7 +276,6 @@ namespace SAPLink.Forms
 
                 comboBoxEnvironment.SelectedIndex = credentials.EnvironmentCode;
                 textBoxEnviromentName.Text = credentials.EnvironmentName;
-                toggleActiveEnv.Checked = credentials.Active;
 
                 textBoxServiceLayerUri.Text = credentials.ServiceLayerUri;
                 textBoxServer.Text = credentials.Server;
@@ -353,6 +299,7 @@ namespace SAPLink.Forms
 
                 textBoxPrismUserName.Text = credentials.PrismUserName;
                 textBoxPrismPassword.Text = credentials.PrismPassword;
+                toggleActiveUILog.Checked = credentials.ActiveLog;
             }
         }
 
@@ -363,7 +310,7 @@ namespace SAPLink.Forms
             administration.Show();
         }
 
-        private async void buttonSaveChanages_Click(object sender, EventArgs e)
+        private void SaveChanges()
         {
             if (comboBoxEnvironment.SelectedIndex != 0)
             {
@@ -380,7 +327,8 @@ namespace SAPLink.Forms
                     .FirstOrDefault(x => x.EnvironmentCode == selectedIndex);
 
                 credentials.EnvironmentCode = comboBoxEnvironment.SelectedIndex;
-                credentials.Active = toggleActiveEnv.Checked;
+                credentials.EnvironmentName = textBoxEnviromentName.Text;
+                credentials.ActiveLog = toggleActiveUILog.Checked;
                 credentials.ServiceLayerUri = textBoxServiceLayerUri.Text;
                 credentials.Server = textBoxServer.Text;
                 credentials.CompanyDb = textBoxCompany.Text;
@@ -396,7 +344,8 @@ namespace SAPLink.Forms
 
                 credentials.UserName = textBoxUserName.Text;
                 credentials.Password = textBoxPassword.Text;
-                credentials.AuthUserName = $@"{{""UserName"" : ""{credentials.UserName}"",""CompanyDB"" : ""{credentials.CompanyDb}""}}";
+                credentials.AuthUserName =
+                    $@"{{""UserName"" : ""{credentials.UserName}"",""CompanyDB"" : ""{credentials.CompanyDb}""}}";
                 credentials.AuthPassword = textBoxPassword.Text;
                 credentials.Authorization = textBoxAuthorization.Text;
 
@@ -412,14 +361,12 @@ namespace SAPLink.Forms
 
                 credentials.PrismUserName = textBoxPrismUserName.Text;
                 credentials.PrismPassword = textBoxPrismPassword.Text;
+                credentials.ActiveLog = toggleActiveUILog.Checked;
 
                 _unitOfWork.Credentials.Update(credentials);
                 _unitOfWork.SaveChanges();
 
-                labelStatus.Log("Selected Credential is updated.",Logger.MessageTypes.Warning,Logger.MessageTime.Short);
-
-                guna2Button5.Enabled = true;
-                guna2Button5.PerformClick();
+                labelStatus.Log("Selected Credential is updated.", Logger.MessageTypes.Warning, Logger.MessageTime.Short);
             }
         }
 
@@ -466,6 +413,118 @@ namespace SAPLink.Forms
                 toggleActiveClient.Checked = client.Active;
 
                 comboBoxEnvironment.SelectedIndex = client.Credentials.FirstOrDefault().EnvironmentCode;
+            }
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!textBoxServiceLayerUri.Enabled)
+            {
+                editToolStripMenuItem.Text = "Save Changes";
+                EnableControls();
+            }
+            else
+            {
+                editToolStripMenuItem.Text = "Change Settings";
+                DisableControls();
+                SaveChanges();
+            }
+        }
+
+
+
+        private void DisableControls()
+        {
+            textBoxClient.Enabled = false;
+            textBoxEnviromentName.Enabled = false;
+            textBoxServiceLayerUri.Enabled = false;
+            textBoxServer.Enabled = false;
+            toggleSQL2016.Enabled = false;
+            toggleSQL2019.Enabled = false;
+            toggleHANA.Enabled = false;
+            textBoxCompany.Enabled = false;
+
+            textBoxUserName.Enabled = false;
+            textBoxPassword.Enabled = false;
+            textBoxAuthorization.Enabled = false;
+
+            textBoxServerBaseUri.Enabled = false;
+            textBoxAuthSession.Enabled = false;
+
+            textBoxPrismUserName.Enabled = false;
+            textBoxPrismPassword.Enabled = false;
+            buttonRefreshAuthSession.Enabled = false;
+            toggleActiveUILog.Enabled = false;
+        }
+
+        private void EnableControls()
+        {
+            textBoxClient.Enabled = true;
+            textBoxEnviromentName.Enabled = true;
+            textBoxServiceLayerUri.Enabled = true;
+            textBoxServer.Enabled = true;
+            toggleSQL2016.Enabled = true;
+            toggleSQL2019.Enabled = true;
+            toggleHANA.Enabled = true;
+            textBoxCompany.Enabled = true;
+
+            textBoxUserName.Enabled = true;
+            textBoxPassword.Enabled = true;
+            textBoxAuthorization.Enabled = true;
+
+            textBoxServerBaseUri.Enabled = true;
+            textBoxAuthSession.Enabled = true;
+
+            textBoxPrismUserName.Enabled = true;
+            textBoxPrismPassword.Enabled = true;
+            buttonRefreshAuthSession.Enabled = true;
+            toggleActiveUILog.Enabled = true;
+        }
+
+
+        private void restartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show("Do you want to restart Application?", "Restart Application!!",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.OK)
+                Application.Restart();
+        }
+
+        private async void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            ComboBoxSubCode.Items.Clear();
+
+            var sbss = await administrationService.GetSubsidiaries();
+
+            foreach (var sub in sbss)
+            {
+                var code = Convert.ToInt32(sub.SubsidiaryNumber);
+                var name = sub.SubsidiaryName.ToTitleFormat();
+                ComboBoxSubCode.AddItem(code, $"{code} - {name}");
+            }
+
+        }
+
+        private async void ComboBoxSubCode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ComboBoxItem Sub = (ComboBoxItem)ComboBoxSubCode.SelectedItem;
+
+                var subsidiary = await administrationService.GetSubsidiaryByNumber(Sub.Value.ToString());
+
+                if (subsidiary != null)
+                {
+                    textBoxSubName.Text = subsidiary.SubsidiaryName;
+                    textBoxSubSid.Text = subsidiary.Sid.ToString();
+                    TextBoxActivePrLvSID.Text = subsidiary.ActivePriceLevelSid;
+                    TextBoxAciveSeasonSID.Text = subsidiary.ActiveSeasonSid;
+
+                }
+            }
+            catch (Exception exception)
+            {
             }
         }
     }

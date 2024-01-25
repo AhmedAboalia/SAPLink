@@ -1,0 +1,28 @@
+﻿@model List<Recurrence>
+
+<h2>All Recurrences</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Document</th>
+        <th>Interval</th>
+        <th>Day of Week</th>
+        <th>Recurring</th>
+    </tr>
+    @foreach (var recurrence in Model)
+    {
+        <tr>
+            <td>@recurrence.Id</td>
+            <td>@recurrence.Document</td>
+            <td>@recurrence.Interval</td>
+            <td>@recurrence.DayOfWeek</td>
+            <td>@recurrence.Recurring</td>
+        <td>
+        <a href="@Url.Action("Update", "Recurring", new { id = recurrence.Id })" class="btn btn-primary btn-sm">Edit</a>
+                <a href="@Url.Action("DeleteAsync", "Recurring", new { id = recurrence.Id })" class="btn btn-danger btn-sm">Delete</a>
+        <a href="@Url.Action("Add", "Recurring")" class="btn btn-primary btn-sm">Add New</a>
+                <a href="@Url.Action("GetById", "Recurring",new { id = recurrence.Id })" class="btn btn-info btn-sm">Details</a>
+        </tr>
+    }
+</table>

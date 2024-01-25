@@ -11,14 +11,17 @@ namespace SAPLink.Utilities
         /// <param name="message">The message to display.</param>
         /// <param name="messageType">The type of the message (affects the label's color).</param>
         /// <param name="messageDuration">The duration for which the message should be displayed.</param>
-        public static async void Log(this Label label, string message, MessageTypes messageType, MessageTime messageDuration)
+        public static async void Log(this Label label, string message, MessageTypes messageType, MessageTime messageDuration,bool resetText = true)
         {
+            var backColor = label.BackColor;
+            var foreColor = label.ForeColor;
             if (string.IsNullOrEmpty(message))
                 return;
 
             SetLabelMessage(label, message, messageType);
             await DisplayMessageForDuration(messageDuration);
-            ResetLabel(label);
+            if (resetText)
+                ResetLabel(label);
         }
 
         private static void SetLabelMessage(Label label, string message, MessageTypes messageType)
@@ -28,7 +31,7 @@ namespace SAPLink.Utilities
 
             label.BackColor = messageType switch
             {
-                MessageTypes.Info => Color.Green,
+                MessageTypes.Info => Color.LightGreen,
                 MessageTypes.Error => Color.DarkRed,
                 MessageTypes.Warning => Color.Goldenrod,
                 _ => label.BackColor
@@ -37,14 +40,14 @@ namespace SAPLink.Utilities
 
         private static async Task DisplayMessageForDuration(MessageTime messageDuration)
         {
-            var delayDuration = messageDuration == MessageTime.Short ? 3000 : 5000;
+            var delayDuration = messageDuration == MessageTime.Short ? 5000 : 2015000;
             await Task.Delay(delayDuration);
         }
 
         private static void ResetLabel(Label label)
         {
             label.Text = "Status:";
-            label.BackColor = Color.White;
+            label.BackColor = Color.Wheat;
         }
     }
 

@@ -128,7 +128,7 @@ public partial class ReturnsHandler
 
         return cardCode;
     }
- 
+
     private static void CheckCompanyConnection(ref string message)
     {
         if (!ClientHandler.Company.Connected)

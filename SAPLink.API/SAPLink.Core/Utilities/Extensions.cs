@@ -107,4 +107,25 @@ public static class Extensions
             Directory.CreateDirectory(directoryName);
         }
     }
+
+    /// <summary>
+    /// Convert a string to a title-friendly format (e.g., "Title Case String").
+    /// </summary>
+    /// <param name="input">String to convert</param>
+    /// <returns>Title-friendly string</returns>
+    public static string ToTitleFormat(this string input)
+    {
+        return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(input.ToLower());
+    }
+
+    public class ComboBoxItem
+    {
+        public string Text { get; set; }
+        public int Value { get; set; }
+
+        public override string ToString()
+        {
+            return Value + " - " + Text;
+        }
+    }
 }

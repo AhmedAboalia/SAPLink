@@ -1,6 +1,4 @@
-﻿
-
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using SAPLink.Core.Models.System;
 using SAPLink.EF;
@@ -14,14 +12,14 @@ namespace SAPLink.Handler.Connection
         public static string LastErrorMessage { get; private set; }
         private static RestRequest Request { get; set; }
 
-        private static readonly ApplicationDbContext Context = new();
-        private static readonly UnitOfWork UnitOfWork = new(Context);
+        //private static readonly ApplicationDbContext Context = new();
+        //private static readonly UnitOfWork UnitOfWork = new(Context);
 
-        static readonly string[] includes = { "Credentials", "Credentials.Subsidiaries" };
-        static readonly Clients Client = UnitOfWork.Clients.FindAsync(c => c.Active == true, includes).Result;
+        //static readonly string[] includes = { "Credentials", "Credentials.Subsidiaries" };
+        //static readonly Clients Client = UnitOfWork.Clients.FindAsync(c => c.Active == true, includes).Result;
 
-        private static readonly Credentials Credential = Client.Credentials.FirstOrDefault();
-        private static Subsidiaries subsidiary = Credential.Subsidiaries.FirstOrDefault();
+        //private static readonly Credentials Credential = Client.Credentials.FirstOrDefault();
+        //private static Subsidiaries subsidiary = Credential.Subsidiaries.FirstOrDefault();
 
 
         public static void MakeCert()

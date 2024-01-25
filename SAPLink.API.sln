@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32126.317
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SAPLink.API", "SAPLink.API", "{1701ED11-D251-416E-A0CE-95170DBD3516}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAPLink.API", "SAPLink.API\SAPLink.API\SAPLink.API.csproj", "{7783519F-7845-4BB8-97B1-12C428D1D2EE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAPLink.Core", "SAPLink.API\SAPLink.Core\SAPLink.Core.csproj", "{325E6A14-A188-40A6-BF71-B23963B2D910}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAPLink.EF", "SAPLink.API\SAPLink.EF\SAPLink.EF.csproj", "{2EC4D85E-7A08-4357-9B5E-7EDF6FDD27DC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAPLink.Handler", "SAPLink.Handler\SAPLink.Handler.csproj", "{5D75F34D-46F0-4BDB-A70A-6033AEDB6B5A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAPLink.Schedule", "SAPLink.Schedule\SAPLink.Schedule.csproj", "{351D1790-043F-443E-9492-3C3121EA639A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7783519F-7845-4BB8-97B1-12C428D1D2EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7783519F-7845-4BB8-97B1-12C428D1D2EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7783519F-7845-4BB8-97B1-12C428D1D2EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7783519F-7845-4BB8-97B1-12C428D1D2EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{325E6A14-A188-40A6-BF71-B23963B2D910}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{325E6A14-A188-40A6-BF71-B23963B2D910}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{325E6A14-A188-40A6-BF71-B23963B2D910}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{325E6A14-A188-40A6-BF71-B23963B2D910}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EC4D85E-7A08-4357-9B5E-7EDF6FDD27DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EC4D85E-7A08-4357-9B5E-7EDF6FDD27DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EC4D85E-7A08-4357-9B5E-7EDF6FDD27DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EC4D85E-7A08-4357-9B5E-7EDF6FDD27DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D75F34D-46F0-4BDB-A70A-6033AEDB6B5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D75F34D-46F0-4BDB-A70A-6033AEDB6B5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D75F34D-46F0-4BDB-A70A-6033AEDB6B5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D75F34D-46F0-4BDB-A70A-6033AEDB6B5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{351D1790-043F-443E-9492-3C3121EA639A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{351D1790-043F-443E-9492-3C3121EA639A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{351D1790-043F-443E-9492-3C3121EA639A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{351D1790-043F-443E-9492-3C3121EA639A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7783519F-7845-4BB8-97B1-12C428D1D2EE} = {1701ED11-D251-416E-A0CE-95170DBD3516}
+		{325E6A14-A188-40A6-BF71-B23963B2D910} = {1701ED11-D251-416E-A0CE-95170DBD3516}
+		{2EC4D85E-7A08-4357-9B5E-7EDF6FDD27DC} = {1701ED11-D251-416E-A0CE-95170DBD3516}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EC6B154B-1812-4279-BD23-FE592010838E}
+	EndGlobalSection
+EndGlobal
