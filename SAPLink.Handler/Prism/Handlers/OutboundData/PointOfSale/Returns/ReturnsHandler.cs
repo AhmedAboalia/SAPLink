@@ -24,7 +24,7 @@ public partial class ReturnsHandler
         _loger = Helper.CreateLoggerConfiguration("Return - (AR Credit Memo)", "Handler", LogsTypes.OutboundData);
     }
 
-    public async IAsyncEnumerable<RequestResult<SAPInvoice>> AddReturnInvoiceAsync(List<PrismInvoice> invoicesList, Enums.UpdateType updateType, string wholesaleCustomerCode)
+    public async IAsyncEnumerable<RequestResult<SAPInvoice>> AddReturnInvoiceAsync(List<PrismInvoice> invoicesList)
     {
         var result = new RequestResult<SAPInvoice>();
         if (!_serviceLayer.Connected())
@@ -34,14 +34,10 @@ public partial class ReturnsHandler
         {
             foreach (var invoice in invoicesList)
             {
-
-                var customerCode = updateType == Enums.UpdateType.SyncWholesale
-                   ? wholesaleCustomerCode
-                   : Handler.GetCustomerCodeByStoreCode(invoice.StoreCode, out string message);
-
+                var customerCode = Handler.GetCustomerCodeByStoreCode(invoice.StoreCode, out string message);
                 var series = GetSeriesCode(invoice.StoreCode, out string message2);
 
-                result = _serviceLayer.AddReturnInvoice(invoice, customerCode, series, updateType);
+                result = _serviceLayer.AddReturnInvoice(invoice, customerCode, series);
 
                 var SAPInvoice = result.EntityList.FirstOrDefault();
 
@@ -128,7 +124,7 @@ public partial class ReturnsHandler
 
         return cardCode;
     }
- 
+
     private static void CheckCompanyConnection(ref string message)
     {
         if (!ClientHandler.Company.Connected)

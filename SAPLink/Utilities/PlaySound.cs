@@ -25,12 +25,13 @@ namespace SAPLink.Utilities
         /// <param name="soundName">The name of the sound file without the extension.</param>
         private static void PlaySoundByName(string soundName)
         {
-            string filePath = GetSoundFilePath(soundName);
-
-            if (File.Exists(filePath))
+            try
             {
-                using (var player = new SoundPlayer(filePath))
+                string filePath = GetSoundFilePath(soundName);
+
+                if (File.Exists(filePath))
                 {
+                    using var player = new SoundPlayer(filePath);
                     try
                     {
                         player.Play();
@@ -40,6 +41,9 @@ namespace SAPLink.Utilities
                         // Optionally, handle the exception or log it for diagnostics.
                     }
                 }
+            }
+            catch (Exception e)
+            {
             }
         }
 

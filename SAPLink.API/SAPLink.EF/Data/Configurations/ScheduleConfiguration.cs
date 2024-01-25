@@ -33,27 +33,27 @@ internal class ScheduleConfiguration : IEntityTypeConfiguration<Schedules>
 
         builder.HasData(new Schedules[]
         {
-            new() { Id = 1, Document = SyncDocuments.Departments },
-            new() { Id = 2, Document = SyncDocuments.Vendors },
-            new() { Id = 3, Document = SyncDocuments.Items },
-            new() { Id = 4, Document = SyncDocuments.GoodsReceiptPos },
-            new() { Id = 5, Document = SyncDocuments.GoodsReceipts_Inbound},
-            new() { Id = 6, Document = SyncDocuments.GoodsIssues_Inbound},
-            new() { Id = 7, Document = SyncDocuments.SalesInvoices},
-            new() { Id = 8, Document = SyncDocuments.ReturnInvoices},
-            new() { Id = 9, Document = SyncDocuments.CustomerOrders},
-            new() { Id = 10, Document = SyncDocuments.StockTransfers},
-            new() { Id = 11, Document = SyncDocuments.InventoryPosting},
-            new() { Id = 12, Document = SyncDocuments.GoodsReceipts_Outbound},
-            new() { Id = 13, Document = SyncDocuments.GoodsIssues_Outbound},
+            //new() { Id = 1, Document = SyncDocuments.Departments },
+            //new() { Id = 2, Document = SyncDocuments.Vendors },
+            new() { Id = 1, Document = SyncDocuments.Items },
+            new() { Id = 2, Document = SyncDocuments.GoodsReceiptPos },
+            //new() { Id = 5, Document = SyncDocuments.GoodsReceipts_Inbound},
+            //new() { Id = 6, Document = SyncDocuments.GoodsIssues_Inbound},
+            new() { Id = 3, Document = SyncDocuments.SalesInvoices},
+            new() { Id = 4, Document = SyncDocuments.ReturnInvoices},
+            //new() { Id = 9, Document = SyncDocuments.CustomerOrders},
+            new() { Id = 5, Document = SyncDocuments.StockTransfers},
+            //new() { Id = 11, Document = SyncDocuments.InventoryPosting},
+            //new() { Id = 12, Document = SyncDocuments.GoodsReceipts_Outbound},
+            //new() { Id = 13, Document = SyncDocuments.GoodsIssues_Outbound},
         });
     }
 
-    internal class RecurringConfiguration : IEntityTypeConfiguration<Recurring>
+    internal class RecurringTimesConfiguration : IEntityTypeConfiguration<Times>
     {
-        public void Configure(EntityTypeBuilder<Recurring> builder)
+        public void Configure(EntityTypeBuilder<Times> builder)
         {
-            builder.ToTable("Recurrings");
+            builder.ToTable("Times");
 
             builder.HasKey(r => r.Id);
             builder.Property(r => r.Id)
@@ -61,27 +61,27 @@ internal class ScheduleConfiguration : IEntityTypeConfiguration<Schedules>
                 .UseIdentityColumn(1, 1);
 
             builder.HasData(
-                new Recurring { Id = 1, Active = true, Time = new TimeOnly(7, 0), ScheduleId = (int)SyncDocuments.Items, TimeId = 1 },   // 7 AM
-                new Recurring { Id = 2, Active = true, Time = new TimeOnly(12, 0), ScheduleId = (int)SyncDocuments.Items, TimeId = 2 },  // 12 PM
-                new Recurring { Id = 3, Active = true, Time = new TimeOnly(17, 0), ScheduleId = (int)SyncDocuments.Items, TimeId = 3 },  // 5 PM
+                new Times { Id = 1, Active = true, Time = new TimeOnly(7, 0), ScheduleId = (int)SyncDocuments.Items, TimeId = 1 },   // 7 AM
+                new Times { Id = 2, Active = true, Time = new TimeOnly(12, 0), ScheduleId = (int)SyncDocuments.Items, TimeId = 2 },  // 12 PM
+                new Times { Id = 3, Active = true, Time = new TimeOnly(17, 0), ScheduleId = (int)SyncDocuments.Items, TimeId = 3 },  // 5 PM
 
-                new Recurring { Id = 4, Active = true, Time = new TimeOnly(7, 0), ScheduleId = (int)SyncDocuments.GoodsReceiptPos, TimeId = 1 },    // 7 AM
-                new Recurring { Id = 5, Active = true, Time = new TimeOnly(12, 0), ScheduleId = (int)SyncDocuments.GoodsReceiptPos, TimeId = 2 },   // 12 PM
-                new Recurring { Id = 6, Active = true, Time = new TimeOnly(17, 0), ScheduleId = (int)SyncDocuments.GoodsReceiptPos, TimeId = 3 },   // 5 PM
+                new Times { Id = 4, Active = true, Time = new TimeOnly(7, 0), ScheduleId = (int)SyncDocuments.GoodsReceiptPos, TimeId = 1 },    // 7 AM
+                new Times { Id = 5, Active = true, Time = new TimeOnly(12, 0), ScheduleId = (int)SyncDocuments.GoodsReceiptPos, TimeId = 2 },   // 12 PM
+                new Times { Id = 6, Active = true, Time = new TimeOnly(17, 0), ScheduleId = (int)SyncDocuments.GoodsReceiptPos, TimeId = 3 },   // 5 PM
 
 
 
-                new Recurring { Id = 7, Active = true, Time = new TimeOnly(13, 0), ScheduleId = (int)SyncDocuments.SalesInvoices, TimeId = 1 }, // 1 PM
-                new Recurring { Id = 8, Active = true, Time = new TimeOnly(18, 0), ScheduleId = (int)SyncDocuments.SalesInvoices, TimeId = 2 }, // 6 PM
-                new Recurring { Id = 9, Active = true, Time = new TimeOnly(0, 0), ScheduleId = (int)SyncDocuments.SalesInvoices, TimeId = 3 },   // 12 AM 
+                new Times { Id = 7, Active = true, Time = new TimeOnly(13, 0), ScheduleId = (int)SyncDocuments.SalesInvoices, TimeId = 1 }, // 1 PM
+                new Times { Id = 8, Active = true, Time = new TimeOnly(18, 0), ScheduleId = (int)SyncDocuments.SalesInvoices, TimeId = 2 }, // 6 PM
+                new Times { Id = 9, Active = true, Time = new TimeOnly(0, 0), ScheduleId = (int)SyncDocuments.SalesInvoices, TimeId = 3 },   // 12 AM 
 
-                new Recurring { Id = 10, Active = true, Time = new TimeOnly(13, 0), ScheduleId = (int)SyncDocuments.ReturnInvoices, TimeId = 1 }, // 1 PM
-                new Recurring { Id = 11, Active = true, Time = new TimeOnly(18, 0), ScheduleId = (int)SyncDocuments.ReturnInvoices, TimeId = 2 }, // 6 PM
-                new Recurring { Id = 12, Active = true, Time = new TimeOnly(0, 0), ScheduleId = (int)SyncDocuments.ReturnInvoices, TimeId = 3 },  // 12 AM 
+                new Times { Id = 10, Active = true, Time = new TimeOnly(13, 0), ScheduleId = (int)SyncDocuments.ReturnInvoices, TimeId = 1 }, // 1 PM
+                new Times { Id = 11, Active = true, Time = new TimeOnly(18, 0), ScheduleId = (int)SyncDocuments.ReturnInvoices, TimeId = 2 }, // 6 PM
+                new Times { Id = 12, Active = true, Time = new TimeOnly(0, 0), ScheduleId = (int)SyncDocuments.ReturnInvoices, TimeId = 3 },  // 12 AM 
 
-                new Recurring { Id = 13, Active = true, Time = new TimeOnly(13, 0), ScheduleId = (int)SyncDocuments.StockTransfers, TimeId = 1 }, // 1 PM
-                new Recurring { Id = 14, Active = true, Time = new TimeOnly(18, 0), ScheduleId = (int)SyncDocuments.StockTransfers, TimeId = 2 }, // 6 PM
-                new Recurring { Id = 15, Active = true, Time = new TimeOnly(0, 0), ScheduleId = (int)SyncDocuments.StockTransfers, TimeId = 3 }  // 12 AM 
+                new Times { Id = 13, Active = true, Time = new TimeOnly(13, 0), ScheduleId = (int)SyncDocuments.StockTransfers, TimeId = 1 }, // 1 PM
+                new Times { Id = 14, Active = true, Time = new TimeOnly(18, 0), ScheduleId = (int)SyncDocuments.StockTransfers, TimeId = 2 }, // 6 PM
+                new Times { Id = 15, Active = true, Time = new TimeOnly(0, 0), ScheduleId = (int)SyncDocuments.StockTransfers, TimeId = 3 }  // 12 AM 
             );
         }
     }

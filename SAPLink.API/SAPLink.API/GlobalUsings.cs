@@ -1,0 +1,17 @@
+global using System.Reflection;
+global using System.Text.Json.Serialization;
+global using Hangfire;
+global using Hangfire.SQLite;
+global using SAPLink.Core;
+global using SAPLink.Core.Models.SAP.MasterData.Items;
+global using SAPLink.Core.Models.System;
+global using SAPLink.EF.Data;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Options;
+global using Newtonsoft.Json;
+global using SAPLink.Core.Connection;
+global using SAPLink.EF;
+global using SAPLink.EF.Interfaces;
+global using BusinessPartner = SAPLink.Core.Models.SAP.MasterData.BusinessPartners.BusinessPartner;
+global using static SAPLink.Core.InboundEnums;

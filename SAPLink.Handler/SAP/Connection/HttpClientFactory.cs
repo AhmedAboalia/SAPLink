@@ -1,16 +1,20 @@
 ﻿using Microsoft.Identity.Client.Platforms.Features.DesktopOs.Kerberos;
+using SAPLink.Core.Models.System;
 using SAPLink.Core.Utilities;
 using SAPLink.Handler.SAP.Connection;
 
 namespace SAPLink.Handler.Connection;
 
-public static partial class HttpClientFactory
+public partial class HttpClientFactory
 {
-    public static IRestResponse Initialize(string resource, Method method, LoginModel.LoginTypes LoginTypes = LoginModel.LoginTypes.Basic, LoginModel LoginData = null, string body = "",
+
+    private static Credentials Credential = null;
+    public static IRestResponse Initialize(string resource, Method method, Clients client, LoginModel.LoginTypes LoginTypes = LoginModel.LoginTypes.Basic, LoginModel LoginData = null, string body = "",
         bool applyPaging = false, int maxPerPage = 250, string contentType = "")
     {
         try
         {
+            Credential = client.Credentials.FirstOrDefault();
             ApiClient = new RestClient(Credential.ServiceLayerUri);
 
             Request = new RestRequest

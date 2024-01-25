@@ -28,6 +28,7 @@ public partial class VendorsHandler
         _client = client;
         _unitOfWork = unitOfWork;
         _vendorsService = new VendorsService(client);
+
         _loger = Helper.CreateLoggerConfiguration("Vendors - (Business Partners)", "Handler", LogsTypes.InboundData);
     }
     public async IAsyncEnumerable<RequestResult<BusinessPartner>> SyncAsync(string filter)

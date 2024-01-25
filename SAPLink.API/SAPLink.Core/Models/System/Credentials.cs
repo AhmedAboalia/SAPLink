@@ -44,4 +44,6 @@ public class Credentials
     public ICollection<Subsidiaries?> Subsidiaries { get; set; }
 
     public string IntegrationUrl { get; set; }
+    public bool ActiveLog { get; set; }
+
 }

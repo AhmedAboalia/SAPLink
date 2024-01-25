@@ -66,7 +66,7 @@ public class GoodsReturnHandler
                 var store = await GetStore(goodsReturn);
                 var IsLocationChanged = _receivingService.ChangeLocation(store.Sid);
                 var receiving = await _receivingService.GenerateVoucherSid(store.Sid);
-                        
+
                 foreach (var line in goodsReturn.Lines)
                 {
                     var itemResult = await _itemsService.GetByCodeAsync(line.ItemCode);
@@ -120,7 +120,7 @@ public class GoodsReturnHandler
                 }
                 //var AddGrpoTrackingNumAndNote = _receivingService.AddGrpoTrackingNumAndNote(GoodsReceiptPO.DocNum,receiving.Sid,receiving.RowVersion, GoodsReceiptPO.Remarks);
                 var goodsReturnsReceiving = await _receivingService.GetReceiving(receiving);
-                var receivingResponse =  await _receivingService.ChangeReceivingToReturn(goodsReturnsReceiving.Sid, goodsReturnsReceiving.RowVersion);
+                var receivingResponse = await _receivingService.ChangeReceivingToReturn(goodsReturnsReceiving.Sid, goodsReturnsReceiving.RowVersion);
 
                 var rowVersion = int.Parse(goodsReturnsReceiving.RowVersion) + 1;
                 //Thread.Sleep(500);

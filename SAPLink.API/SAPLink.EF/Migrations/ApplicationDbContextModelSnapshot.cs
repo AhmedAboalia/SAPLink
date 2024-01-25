@@ -18,156 +18,6 @@ namespace SAPLink.EF.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.9");
 
-            modelBuilder.Entity("SAPLink.Core.Models.Recurring", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1L)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("ScheduleId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<TimeOnly>("Time")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("TimeId")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ScheduleId");
-
-                    b.ToTable("Recurrings", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Active = true,
-                            ScheduleId = 3,
-                            Time = new TimeOnly(7, 0, 0),
-                            TimeId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Active = true,
-                            ScheduleId = 3,
-                            Time = new TimeOnly(12, 0, 0),
-                            TimeId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Active = true,
-                            ScheduleId = 3,
-                            Time = new TimeOnly(17, 0, 0),
-                            TimeId = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Active = true,
-                            ScheduleId = 4,
-                            Time = new TimeOnly(7, 0, 0),
-                            TimeId = 1
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Active = true,
-                            ScheduleId = 4,
-                            Time = new TimeOnly(12, 0, 0),
-                            TimeId = 2
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Active = true,
-                            ScheduleId = 4,
-                            Time = new TimeOnly(17, 0, 0),
-                            TimeId = 3
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Active = true,
-                            ScheduleId = 7,
-                            Time = new TimeOnly(13, 0, 0),
-                            TimeId = 1
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Active = true,
-                            ScheduleId = 7,
-                            Time = new TimeOnly(18, 0, 0),
-                            TimeId = 2
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Active = true,
-                            ScheduleId = 7,
-                            Time = new TimeOnly(0, 0, 0),
-                            TimeId = 3
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Active = true,
-                            ScheduleId = 8,
-                            Time = new TimeOnly(13, 0, 0),
-                            TimeId = 1
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Active = true,
-                            ScheduleId = 8,
-                            Time = new TimeOnly(18, 0, 0),
-                            TimeId = 2
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Active = true,
-                            ScheduleId = 8,
-                            Time = new TimeOnly(0, 0, 0),
-                            TimeId = 3
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Active = true,
-                            ScheduleId = 10,
-                            Time = new TimeOnly(13, 0, 0),
-                            TimeId = 1
-                        },
-                        new
-                        {
-                            Id = 14,
-                            Active = true,
-                            ScheduleId = 10,
-                            Time = new TimeOnly(18, 0, 0),
-                            TimeId = 2
-                        },
-                        new
-                        {
-                            Id = 15,
-                            Active = true,
-                            ScheduleId = 10,
-                            Time = new TimeOnly(0, 0, 0),
-                            TimeId = 3
-                        });
-                });
-
             modelBuilder.Entity("SAPLink.Core.Models.Schedules", b =>
                 {
                     b.Property<int>("Id")
@@ -194,79 +44,31 @@ namespace SAPLink.EF.Migrations
                         {
                             Id = 1,
                             Document = 1,
-                            DocumentName = "Departments"
+                            DocumentName = "Items"
                         },
                         new
                         {
                             Id = 2,
                             Document = 2,
-                            DocumentName = "Vendors"
+                            DocumentName = "GoodsReceiptPos"
                         },
                         new
                         {
                             Id = 3,
                             Document = 3,
-                            DocumentName = "Items"
+                            DocumentName = "SalesInvoices"
                         },
                         new
                         {
                             Id = 4,
                             Document = 4,
-                            DocumentName = "GoodsReceiptPos"
+                            DocumentName = "ReturnInvoices"
                         },
                         new
                         {
                             Id = 5,
                             Document = 5,
-                            DocumentName = "GoodsReceipts_Inbound"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Document = 6,
-                            DocumentName = "GoodsIssues_Inbound"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Document = 7,
-                            DocumentName = "SalesInvoices"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Document = 8,
-                            DocumentName = "ReturnInvoices"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Document = 9,
-                            DocumentName = "CustomerOrders"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Document = 10,
                             DocumentName = "StockTransfers"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Document = 11,
-                            DocumentName = "InventoryPosting"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            Document = 12,
-                            DocumentName = "GoodsReceipts_Outbound"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            Document = 13,
-                            DocumentName = "GoodsIssues_Outbound"
                         });
                 });
 
@@ -315,6 +117,9 @@ namespace SAPLink.EF.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("Active")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("ActiveLog")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("AuthPassword")
@@ -425,6 +230,7 @@ namespace SAPLink.EF.Migrations
                         {
                             Id = 1,
                             Active = false,
+                            ActiveLog = false,
                             AuthPassword = "",
                             AuthSession = "",
                             AuthUserName = "{{\"UserName\" : \"manager\",\"CompanyDB\" : \"\"}}",
@@ -455,6 +261,7 @@ namespace SAPLink.EF.Migrations
                         {
                             Id = 2,
                             Active = false,
+                            ActiveLog = false,
                             AuthPassword = "Ag123456*",
                             AuthSession = "369B7B1BF58F469896B06B804BFBE272",
                             AuthUserName = "{{\"UserName\" : \"manager\",\"CompanyDB\" : \"TESTDB\"}}",
@@ -484,7 +291,8 @@ namespace SAPLink.EF.Migrations
                         new
                         {
                             Id = 3,
-                            Active = true,
+                            Active = false,
+                            ActiveLog = false,
                             AuthPassword = "manager",
                             AuthSession = "F1726B4EC6304D969ED816D844617C02",
                             AuthUserName = "{{\"UserName\" : \"manager\",\"CompanyDB\" : \"SBODemoGB\"}}",
@@ -510,6 +318,66 @@ namespace SAPLink.EF.Migrations
                             ServerTypes = 15,
                             ServiceLayerUri = "https://Localhost:50000/b1s/v1/",
                             UserName = "manager"
+                        });
+                });
+
+            modelBuilder.Entity("SAPLink.Core.Models.System.Recurrence", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1L)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("DayOfWeek")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Document")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Interval")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Recurring")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Recurrences", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DayOfWeek = 0,
+                            Document = 0,
+                            Interval = 2,
+                            Recurring = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DayOfWeek = 0,
+                            Document = 1,
+                            Interval = 2,
+                            Recurring = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            DayOfWeek = 0,
+                            Document = 2,
+                            Interval = 2,
+                            Recurring = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            DayOfWeek = 0,
+                            Document = 3,
+                            Interval = 2,
+                            Recurring = 1
                         });
                 });
 
@@ -667,15 +535,154 @@ namespace SAPLink.EF.Migrations
                         });
                 });
 
-            modelBuilder.Entity("SAPLink.Core.Models.Recurring", b =>
+            modelBuilder.Entity("SAPLink.Core.Models.Times", b =>
                 {
-                    b.HasOne("SAPLink.Core.Models.Schedules", "Schedule")
-                        .WithMany("Times")
-                        .HasForeignKey("ScheduleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER")
+                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
+                        .HasAnnotation("SqlServer:IdentitySeed", 1L)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Navigation("Schedule");
+                    b.Property<bool>("Active")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ScheduleId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<TimeOnly>("Time")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("TimeId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ScheduleId");
+
+                    b.ToTable("Times", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Active = true,
+                            ScheduleId = 1,
+                            Time = new TimeOnly(7, 0, 0),
+                            TimeId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Active = true,
+                            ScheduleId = 1,
+                            Time = new TimeOnly(12, 0, 0),
+                            TimeId = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Active = true,
+                            ScheduleId = 1,
+                            Time = new TimeOnly(17, 0, 0),
+                            TimeId = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Active = true,
+                            ScheduleId = 2,
+                            Time = new TimeOnly(7, 0, 0),
+                            TimeId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Active = true,
+                            ScheduleId = 2,
+                            Time = new TimeOnly(12, 0, 0),
+                            TimeId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Active = true,
+                            ScheduleId = 2,
+                            Time = new TimeOnly(17, 0, 0),
+                            TimeId = 3
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Active = true,
+                            ScheduleId = 3,
+                            Time = new TimeOnly(13, 0, 0),
+                            TimeId = 1
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Active = true,
+                            ScheduleId = 3,
+                            Time = new TimeOnly(18, 0, 0),
+                            TimeId = 2
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Active = true,
+                            ScheduleId = 3,
+                            Time = new TimeOnly(0, 0, 0),
+                            TimeId = 3
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Active = true,
+                            ScheduleId = 4,
+                            Time = new TimeOnly(13, 0, 0),
+                            TimeId = 1
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Active = true,
+                            ScheduleId = 4,
+                            Time = new TimeOnly(18, 0, 0),
+                            TimeId = 2
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Active = true,
+                            ScheduleId = 4,
+                            Time = new TimeOnly(0, 0, 0),
+                            TimeId = 3
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Active = true,
+                            ScheduleId = 5,
+                            Time = new TimeOnly(13, 0, 0),
+                            TimeId = 1
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Active = true,
+                            ScheduleId = 5,
+                            Time = new TimeOnly(18, 0, 0),
+                            TimeId = 2
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Active = true,
+                            ScheduleId = 5,
+                            Time = new TimeOnly(0, 0, 0),
+                            TimeId = 3
+                        });
                 });
 
             modelBuilder.Entity("SAPLink.Core.Models.System.Credentials", b =>
@@ -698,6 +705,17 @@ namespace SAPLink.EF.Migrations
                         .IsRequired();
 
                     b.Navigation("Credential");
+                });
+
+            modelBuilder.Entity("SAPLink.Core.Models.Times", b =>
+                {
+                    b.HasOne("SAPLink.Core.Models.Schedules", "Schedule")
+                        .WithMany("Times")
+                        .HasForeignKey("ScheduleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Schedule");
                 });
 
             modelBuilder.Entity("SAPLink.Core.Models.Schedules", b =>

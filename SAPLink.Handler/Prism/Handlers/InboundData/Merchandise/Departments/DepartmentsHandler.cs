@@ -13,6 +13,7 @@ using SAPLink.Handler.SAP.Application;
 using Serilog;
 using Serilog.Core;
 using ServiceLayerHelper.RefranceModels;
+using System.Drawing;
 
 namespace SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Departments;
 
@@ -27,6 +28,7 @@ public partial class DepartmentsHandler
         _unitOfWork = unitOfWork;
         _departmentService = departmentService;
         _client = client;
+
         _loger = Helper.CreateLoggerConfiguration("Departments - (Item Groups)", "Handler", LogsTypes.InboundData);
     }
     public async IAsyncEnumerable<RequestResult<ItemGroups>> SyncAsync(string filter)
@@ -51,7 +53,7 @@ public partial class DepartmentsHandler
 
                 _loger.Information("-----------------------------------------------------------------");
 
-                if (result.Response.StatusCode == HttpStatusCode.OK)
+                if (result.Response.StatusCode == HttpStatusCode.OK && result.Response.StatusCode == HttpStatusCode.OK)
                 {
                     var categorizes = JsonConvert.DeserializeObject<Response<Department>>(result.Response.Content).Data.ToList();
 
@@ -66,8 +68,8 @@ public partial class DepartmentsHandler
 
                         yield return new RequestResult<ItemGroups>(Enums.StatusType.Success, "", "", outputGroupsList, result.Response);
 
-                        SyncEntityService.UpdateSyncEntityDate(_unitOfWork, Enums.UpdateType.InitialDepartment);
-                        SyncEntityService.UpdateSyncEntityDate(_unitOfWork, Enums.UpdateType.SyncDepartment);
+                        //SyncEntityService.UpdateSyncEntityDate(_unitOfWork, Enums.UpdateType.InitialDepartment);
+                        //SyncEntityService.UpdateSyncEntityDate(_unitOfWork, Enums.UpdateType.SyncDepartment);
                     }
                 }
                 else if (result.Response.Content.Contains("Duplicate DCS found"))
@@ -76,44 +78,61 @@ public partial class DepartmentsHandler
                     //messageLog += $"Item Group is Duplicated ( {itemGroup.ItemGroupCode} : {itemGroup.ItemGroupName} ).\r\n";
 
                     var updateResult = await _departmentService.GetByCodeAsync(itemGroup.ItemGroupCode);
-
                     var department = updateResult.EntityList.FirstOrDefault();
-                    var body = await _departmentService.CreateUpdatePayload(itemGroup, department.RowVersion);
-                    var updateResult2 = await _departmentService.Sync(body, department.Sid, Enums.UpdateType.SyncDepartment);
 
-                    if (updateResult2.Response.StatusCode == HttpStatusCode.OK)
-                    {
-                        var categorizes = JsonConvert
-                            .DeserializeObject<Response<Department>>(updateResult2.Response.Content)
-                            .Data.ToList();
-
-                        if (categorizes.Any())
-                        {
-                            await UpdateItemGroup(itemGroup.ItemGroupCode);
-
-                            logMessage += $"Item Group (Code: {itemGroup.ItemGroupCode}, Name: {itemGroup.ItemGroupName}) is updated and synced.\r\n";
-                            _loger.Information($"Item Group (Code: {itemGroup.ItemGroupCode}, Name: {itemGroup.ItemGroupName}) is updated and synced.");
-                            outputGroupsList.Add(itemGroup);
-
-                            yield return new RequestResult<ItemGroups>(Enums.StatusType.Success, logMessage, 
-                                $"Item Group (Code: {itemGroup.ItemGroupCode}, Name: {itemGroup.ItemGroupName}) is updated and synced.",
-                                outputGroupsList, result.Response);
-
-                            SyncEntityService.UpdateSyncEntityDate(_unitOfWork, Enums.UpdateType.InitialDepartment);
-                            SyncEntityService.UpdateSyncEntityDate(_unitOfWork, Enums.UpdateType.SyncDepartment);
-                        }
-                    }
-                    else
+                    if (updateResult.EntityList.Count == 0&&
+                        updateResult.Status == Enums.StatusType.Failed || department == null)
                     {
                         logMessage = $"Cannot Add or Sync Department.\r\n" +
                                      $"Response Content:\r\n" +
-                                     $"{updateResult2.Response.Content}";
+                                     $"{updateResult.Response.Content}";
 
                         _loger.Error(logMessage, "Error occurred - ");
 
                         yield return new RequestResult<ItemGroups>(Enums.StatusType.Failed, logMessage,
-                            "Cannot Add or Sync Department.", outputGroupsList, updateResult2.Response);
+                            "Cannot Add or Sync Department.", outputGroupsList, updateResult.Response);
                     }
+                    else
+                    {
+                        var body = await _departmentService.CreateUpdatePayload(itemGroup, department.RowVersion);
+                        var updateResult2 = await _departmentService.Sync(body, department.Sid, Enums.UpdateType.SyncDepartment);
+
+                        if (updateResult2.Response.StatusCode == HttpStatusCode.OK)
+                        {
+                            var categorizes = JsonConvert
+                                .DeserializeObject<Response<Department>>(updateResult2.Response.Content)
+                                .Data.ToList();
+
+                            if (categorizes.Any())
+                            {
+                                await UpdateItemGroup(itemGroup.ItemGroupCode);
+
+                                logMessage += $"Item Group (Code: {itemGroup.ItemGroupCode}, Name: {itemGroup.ItemGroupName}) is updated and synced.\r\n";
+                                _loger.Information($"Item Group (Code: {itemGroup.ItemGroupCode}, Name: {itemGroup.ItemGroupName}) is updated and synced.");
+                                outputGroupsList.Add(itemGroup);
+
+                                yield return new RequestResult<ItemGroups>(Enums.StatusType.Success, logMessage,
+                                    $"Item Group (Code: {itemGroup.ItemGroupCode}, Name: {itemGroup.ItemGroupName}) is updated and synced.",
+                                    outputGroupsList, result.Response);
+
+                                //SyncEntityService.UpdateSyncEntityDate(_unitOfWork, Enums.UpdateType.InitialDepartment);
+                                //SyncEntityService.UpdateSyncEntityDate(_unitOfWork, Enums.UpdateType.SyncDepartment);
+                            }
+                        }
+                        else
+                        {
+                            logMessage = $"Cannot Add or Sync Department.\r\n" +
+                                         $"Response Content:\r\n" +
+                                         $"{updateResult2.Response.Content}";
+
+                            _loger.Error(logMessage, "Error occurred - ");
+
+                            yield return new RequestResult<ItemGroups>(Enums.StatusType.Failed, logMessage,
+                                "Cannot Add or Sync Department.", outputGroupsList, updateResult2.Response);
+                        }
+
+                    }
+
                 }
                 else
                 {
@@ -179,13 +198,13 @@ public partial class DepartmentsHandler
         if (type == Enums.UpdateType.SyncDepartment)
             query += syncQuery;
 
-        if (!ClientHandler.Company.Connected)
+        if (ClientHandler.Company == null)
         {
             ClientHandler.InitializeClientObjects(_client, out var code, out var errorMessage);
 
-            logMessage = code != 0
-                ? $"Error :{code}  : {errorMessage}"
-                : "Not Connected to Database.";
+            //logMessage = code != 0
+            //    ? $"Error :{code}  : {errorMessage}"
+            //    : "Not Connected to Database.";
         }
 
         var oRecordSet = (Recordset)ClientHandler.Company.GetBusinessObject(BoObjectTypes.BoRecordset);

@@ -1,19 +1,19 @@
-﻿using SAPLink.Core.Connection;
+﻿using Microsoft.Data.Sqlite;
+using SAPLink.Core.Connection;
 using SAPLink.EF.Data;
 using SAPLink.Forms;
-using SAPLink.Handler.Prism.Handlers;
+using SAPLink.Forms.AutoUpdate;
 using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Vendors;
 using Serilog;
-using Serilog.Core;
-using System.Diagnostics;
+using System.Data;
 
 namespace SAPLink;
 
 internal static class Program
 {
-    private static Clients Client { get; set; }
-    private static readonly ApplicationDbContext Context = new();
-    private static readonly UnitOfWork UnitOfWork = new(Context);
+    public static Clients Client { get; set; }
+    public static ApplicationDbContext Context = new();
+    public static UnitOfWork UnitOfWork = new(Context);
     private static ServiceLayerHandler _serviceLayer;
     private static DepartmentService _departmentService;
     private static VendorsService _vendorsHandler;
@@ -26,7 +26,7 @@ internal static class Program
 
 
     [STAThread]
-    static void Main()
+    static async Task Main()
     {
         ApplicationConfiguration.Initialize();
 
@@ -53,7 +53,10 @@ internal static class Program
         Application.ThreadException += Application_ThreadException;
         AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
+        AutoUpdater.Start("https://pastebin.com/raw/S53jgRFB");
+
         Application.Run(new Login(UnitOfWork, _serviceLayer, _departmentService, _itemsService, Client));
+
         Log.CloseAndFlush();
 
     }
@@ -92,4 +95,4 @@ internal static class Program
     {
         _loger.Fatal(e.Exception, "An unhandled thread exception occurred.");
     }
-}
+  }

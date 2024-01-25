@@ -32,13 +32,15 @@ namespace SAPLink.Schedule.Forms
         private void InitializeComponent()
         {
             components = new Container();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges24 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges25 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            ComponentResourceManager resources = new ComponentResourceManager(typeof(Login));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges4 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            ComponentResourceManager resources = new ComponentResourceManager(typeof(Login));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges5 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges6 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges7 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -48,166 +50,140 @@ namespace SAPLink.Schedule.Forms
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges11 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges12 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges13 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges14 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges15 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges16 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges17 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges18 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges19 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges20 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges21 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges22 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges23 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2Panel1 = new Guna2Panel();
-            label1 = new Label();
-            guna2PictureBox2 = new Guna2PictureBox();
-            label3 = new Label();
+            guna2Panel2 = new Guna2Panel();
+            guna2ControlBox3 = new Guna2ControlBox();
+            guna2ControlBox4 = new Guna2ControlBox();
             guna2CirclePictureBox1 = new Guna2CirclePictureBox();
+            guna2ControlBox5 = new Guna2ControlBox();
+            guna2ControlBox2 = new Guna2ControlBox();
+            guna2ControlBox6 = new Guna2ControlBox();
+            guna2ControlBox1 = new Guna2ControlBox();
+            label3 = new Label();
             comboBoxClients = new Guna2ComboBox();
             textBoxUserName = new Guna2TextBox();
-            guna2ControlBox2 = new Guna2ControlBox();
             textBoxPassword = new Guna2TextBox();
-            guna2ControlBox1 = new Guna2ControlBox();
             buttonLogin = new Guna2GradientButton();
             guna2DragControl1 = new Guna2DragControl(components);
             guna2ShadowForm1 = new Guna2ShadowForm(components);
             guna2Elipse1 = new Guna2Elipse(components);
             guna2Panel1.SuspendLayout();
-            ((ISupportInitialize)guna2PictureBox2).BeginInit();
+            guna2Panel2.SuspendLayout();
             ((ISupportInitialize)guna2CirclePictureBox1).BeginInit();
             SuspendLayout();
             // 
             // guna2Panel1
             // 
-            guna2Panel1.BackColor = Color.WhiteSmoke;
+            guna2Panel1.BackColor = Color.White;
             guna2Panel1.BorderColor = Color.White;
             guna2Panel1.BorderRadius = 25;
-            guna2Panel1.Controls.Add(label1);
-            guna2Panel1.Controls.Add(guna2PictureBox2);
+            guna2Panel1.Controls.Add(guna2Panel2);
             guna2Panel1.Controls.Add(label3);
-            guna2Panel1.Controls.Add(guna2CirclePictureBox1);
             guna2Panel1.Controls.Add(comboBoxClients);
             guna2Panel1.Controls.Add(textBoxUserName);
-            guna2Panel1.Controls.Add(guna2ControlBox2);
             guna2Panel1.Controls.Add(textBoxPassword);
-            guna2Panel1.Controls.Add(guna2ControlBox1);
             guna2Panel1.Controls.Add(buttonLogin);
             guna2Panel1.CustomBorderColor = Color.Transparent;
-            guna2Panel1.CustomizableEdges = customizableEdges16;
+            guna2Panel1.CustomizableEdges = customizableEdges24;
             guna2Panel1.Dock = DockStyle.Fill;
             guna2Panel1.Location = new Point(0, 0);
             guna2Panel1.Margin = new Padding(4);
             guna2Panel1.Name = "guna2Panel1";
-            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges17;
+            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges25;
             guna2Panel1.Size = new Size(836, 420);
             guna2Panel1.TabIndex = 0;
             guna2Panel1.Click += guna2Panel1_Click;
             guna2Panel1.Paint += guna2Panel1_Paint;
             // 
-            // label1
+            // guna2Panel2
             // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.WhiteSmoke;
-            label1.Font = new Font("Agency FB", 16.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label1.Location = new Point(732, 110);
-            label1.Margin = new Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(47, 26);
-            label1.TabIndex = 1;
-            label1.Text = "Login";
+            guna2Panel2.BackColor = Color.Transparent;
+            guna2Panel2.BorderColor = Color.OldLace;
+            guna2Panel2.BorderRadius = 110;
+            guna2Panel2.BorderThickness = 12;
+            guna2Panel2.Controls.Add(guna2ControlBox3);
+            guna2Panel2.Controls.Add(guna2ControlBox4);
+            guna2Panel2.Controls.Add(guna2CirclePictureBox1);
+            guna2Panel2.Controls.Add(guna2ControlBox5);
+            guna2Panel2.Controls.Add(guna2ControlBox2);
+            guna2Panel2.Controls.Add(guna2ControlBox6);
+            guna2Panel2.Controls.Add(guna2ControlBox1);
+            guna2Panel2.CustomBorderColor = Color.Transparent;
+            customizableEdges14.BottomRight = false;
+            customizableEdges14.TopRight = false;
+            guna2Panel2.CustomizableEdges = customizableEdges14;
+            guna2Panel2.Dock = DockStyle.Right;
+            guna2Panel2.FillColor = Color.OldLace;
+            guna2Panel2.Location = new Point(470, 0);
+            guna2Panel2.Margin = new Padding(4);
+            guna2Panel2.Name = "guna2Panel2";
+            guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges15;
+            guna2Panel2.Size = new Size(366, 420);
+            guna2Panel2.TabIndex = 16;
             // 
-            // guna2PictureBox2
+            // guna2ControlBox3
             // 
-            guna2PictureBox2.BackColor = Color.WhiteSmoke;
-            guna2PictureBox2.CustomizableEdges = customizableEdges1;
-            guna2PictureBox2.Image = (Image)resources.GetObject("guna2PictureBox2.Image");
-            guna2PictureBox2.ImageRotate = 0F;
-            guna2PictureBox2.InitialImage = null;
-            guna2PictureBox2.Location = new Point(383, 69);
-            guna2PictureBox2.Name = "guna2PictureBox2";
-            guna2PictureBox2.ShadowDecoration.CustomizableEdges = customizableEdges2;
-            guna2PictureBox2.Size = new Size(39, 41);
-            guna2PictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
-            guna2PictureBox2.TabIndex = 16;
-            guna2PictureBox2.TabStop = false;
+            guna2ControlBox3.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            guna2ControlBox3.BorderRadius = 8;
+            guna2ControlBox3.ControlBoxType = Guna.UI2.WinForms.Enums.ControlBoxType.MinimizeBox;
+            guna2ControlBox3.CustomizableEdges = customizableEdges1;
+            guna2ControlBox3.FillColor = Color.Transparent;
+            guna2ControlBox3.IconColor = Color.Black;
+            guna2ControlBox3.Location = new Point(1237, 14);
+            guna2ControlBox3.Margin = new Padding(4);
+            guna2ControlBox3.Name = "guna2ControlBox3";
+            guna2ControlBox3.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            guna2ControlBox3.Size = new Size(32, 28);
+            guna2ControlBox3.TabIndex = 5;
             // 
-            // label3
+            // guna2ControlBox4
             // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.WhiteSmoke;
-            label3.Font = new Font("Agency FB", 30F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label3.Location = new Point(422, 69);
-            label3.Margin = new Padding(4, 0, 4, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(361, 50);
-            label3.TabIndex = 1;
-            label3.Text = "SAP Link Synchronization";
+            guna2ControlBox4.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            guna2ControlBox4.BorderRadius = 8;
+            guna2ControlBox4.CustomizableEdges = customizableEdges3;
+            guna2ControlBox4.FillColor = Color.Transparent;
+            guna2ControlBox4.IconColor = Color.Black;
+            guna2ControlBox4.Location = new Point(1275, 14);
+            guna2ControlBox4.Margin = new Padding(4);
+            guna2ControlBox4.Name = "guna2ControlBox4";
+            guna2ControlBox4.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            guna2ControlBox4.Size = new Size(32, 28);
+            guna2ControlBox4.TabIndex = 6;
             // 
             // guna2CirclePictureBox1
             // 
             guna2CirclePictureBox1.Image = (Image)resources.GetObject("guna2CirclePictureBox1.Image");
             guna2CirclePictureBox1.ImageRotate = 0F;
-            guna2CirclePictureBox1.Location = new Point(27, 47);
+            guna2CirclePictureBox1.Location = new Point(47, 54);
             guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
-            guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges3;
+            guna2CirclePictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges5;
             guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
             guna2CirclePictureBox1.Size = new Size(288, 306);
             guna2CirclePictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             guna2CirclePictureBox1.TabIndex = 13;
             guna2CirclePictureBox1.TabStop = false;
             // 
-            // comboBoxClients
+            // guna2ControlBox5
             // 
-            comboBoxClients.BackColor = Color.Transparent;
-            comboBoxClients.BorderColor = Color.Goldenrod;
-            comboBoxClients.BorderRadius = 12;
-            comboBoxClients.BorderThickness = 2;
-            comboBoxClients.CustomizableEdges = customizableEdges4;
-            comboBoxClients.DrawMode = DrawMode.OwnerDrawFixed;
-            comboBoxClients.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxClients.FocusedColor = Color.FromArgb(94, 148, 255);
-            comboBoxClients.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            comboBoxClients.Font = new Font("Bahnschrift SemiLight SemiConde", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBoxClients.ForeColor = Color.Black;
-            comboBoxClients.ItemHeight = 30;
-            comboBoxClients.Location = new Point(370, 153);
-            comboBoxClients.Margin = new Padding(3, 2, 3, 2);
-            comboBoxClients.Name = "comboBoxClients";
-            comboBoxClients.ShadowDecoration.CustomizableEdges = customizableEdges5;
-            comboBoxClients.Size = new Size(402, 36);
-            comboBoxClients.TabIndex = 4;
-            comboBoxClients.SelectedIndexChanged += comboBoxClients_SelectedIndexChanged;
-            // 
-            // textBoxUserName
-            // 
-            textBoxUserName.Animated = true;
-            textBoxUserName.AutoRoundedCorners = true;
-            textBoxUserName.BackColor = SystemColors.Control;
-            textBoxUserName.BorderColor = Color.Goldenrod;
-            textBoxUserName.BorderRadius = 15;
-            textBoxUserName.BorderThickness = 3;
-            textBoxUserName.Cursor = Cursors.IBeam;
-            textBoxUserName.CustomizableEdges = customizableEdges6;
-            textBoxUserName.DefaultText = "User Name";
-            textBoxUserName.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            textBoxUserName.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            textBoxUserName.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            textBoxUserName.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            textBoxUserName.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            textBoxUserName.Font = new Font("Bahnschrift SemiLight SemiConde", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxUserName.ForeColor = Color.Black;
-            textBoxUserName.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            textBoxUserName.IconLeft = (Image)resources.GetObject("textBoxUserName.IconLeft");
-            textBoxUserName.IconLeftSize = new Size(28, 28);
-            textBoxUserName.IconRightOffset = new Point(5, 0);
-            textBoxUserName.IconRightSize = new Size(28, 28);
-            textBoxUserName.Location = new Point(370, 200);
-            textBoxUserName.Margin = new Padding(2, 7, 2, 7);
-            textBoxUserName.Name = "textBoxUserName";
-            textBoxUserName.PasswordChar = '\0';
-            textBoxUserName.PlaceholderForeColor = Color.Black;
-            textBoxUserName.PlaceholderText = "";
-            textBoxUserName.SelectedText = "";
-            textBoxUserName.ShadowDecoration.CustomizableEdges = customizableEdges7;
-            textBoxUserName.Size = new Size(402, 33);
-            textBoxUserName.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
-            textBoxUserName.TabIndex = 2;
-            textBoxUserName.TextOffset = new Point(7, 0);
-            textBoxUserName.Enter += guna2TextBox1_Enter;
-            textBoxUserName.KeyDown += textBoxUserName_KeyDown;
-            textBoxUserName.Leave += guna2TextBox1_Leave;
+            guna2ControlBox5.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            guna2ControlBox5.BorderRadius = 8;
+            guna2ControlBox5.CustomizableEdges = customizableEdges6;
+            guna2ControlBox5.FillColor = Color.Transparent;
+            guna2ControlBox5.IconColor = Color.Black;
+            guna2ControlBox5.Location = new Point(653, 13);
+            guna2ControlBox5.Margin = new Padding(4);
+            guna2ControlBox5.Name = "guna2ControlBox5";
+            guna2ControlBox5.ShadowDecoration.CustomizableEdges = customizableEdges7;
+            guna2ControlBox5.Size = new Size(32, 28);
+            guna2ControlBox5.TabIndex = 6;
             // 
             // guna2ControlBox2
             // 
@@ -217,51 +193,27 @@ namespace SAPLink.Schedule.Forms
             guna2ControlBox2.CustomizableEdges = customizableEdges8;
             guna2ControlBox2.FillColor = Color.Transparent;
             guna2ControlBox2.IconColor = Color.Black;
-            guna2ControlBox2.Location = new Point(739, 14);
+            guna2ControlBox2.Location = new Point(283, 13);
             guna2ControlBox2.Margin = new Padding(4);
             guna2ControlBox2.Name = "guna2ControlBox2";
             guna2ControlBox2.ShadowDecoration.CustomizableEdges = customizableEdges9;
             guna2ControlBox2.Size = new Size(32, 28);
             guna2ControlBox2.TabIndex = 5;
             // 
-            // textBoxPassword
+            // guna2ControlBox6
             // 
-            textBoxPassword.Animated = true;
-            textBoxPassword.AutoRoundedCorners = true;
-            textBoxPassword.BackColor = SystemColors.Control;
-            textBoxPassword.BorderColor = Color.Goldenrod;
-            textBoxPassword.BorderRadius = 15;
-            textBoxPassword.BorderThickness = 3;
-            textBoxPassword.Cursor = Cursors.IBeam;
-            textBoxPassword.CustomizableEdges = customizableEdges10;
-            textBoxPassword.DefaultText = "Password";
-            textBoxPassword.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            textBoxPassword.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            textBoxPassword.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            textBoxPassword.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            textBoxPassword.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            textBoxPassword.Font = new Font("Bahnschrift SemiLight SemiConde", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxPassword.ForeColor = Color.Black;
-            textBoxPassword.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            textBoxPassword.IconLeft = (Image)resources.GetObject("textBoxPassword.IconLeft");
-            textBoxPassword.IconLeftSize = new Size(28, 28);
-            textBoxPassword.IconRightOffset = new Point(5, 0);
-            textBoxPassword.IconRightSize = new Size(28, 28);
-            textBoxPassword.Location = new Point(370, 246);
-            textBoxPassword.Margin = new Padding(2, 7, 2, 7);
-            textBoxPassword.Name = "textBoxPassword";
-            textBoxPassword.PasswordChar = '*';
-            textBoxPassword.PlaceholderForeColor = Color.Black;
-            textBoxPassword.PlaceholderText = "";
-            textBoxPassword.SelectedText = "";
-            textBoxPassword.ShadowDecoration.CustomizableEdges = customizableEdges11;
-            textBoxPassword.Size = new Size(402, 33);
-            textBoxPassword.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
-            textBoxPassword.TabIndex = 3;
-            textBoxPassword.TextOffset = new Point(7, 0);
-            textBoxPassword.Enter += guna2TextBox2_Enter;
-            textBoxPassword.KeyDown += textBoxPassword_KeyDown;
-            textBoxPassword.Leave += guna2TextBox2_Leave;
+            guna2ControlBox6.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            guna2ControlBox6.BorderRadius = 8;
+            guna2ControlBox6.ControlBoxType = Guna.UI2.WinForms.Enums.ControlBoxType.MinimizeBox;
+            guna2ControlBox6.CustomizableEdges = customizableEdges10;
+            guna2ControlBox6.FillColor = Color.Transparent;
+            guna2ControlBox6.IconColor = Color.Black;
+            guna2ControlBox6.Location = new Point(615, 13);
+            guna2ControlBox6.Margin = new Padding(4);
+            guna2ControlBox6.Name = "guna2ControlBox6";
+            guna2ControlBox6.ShadowDecoration.CustomizableEdges = customizableEdges11;
+            guna2ControlBox6.Size = new Size(32, 28);
+            guna2ControlBox6.TabIndex = 5;
             // 
             // guna2ControlBox1
             // 
@@ -270,7 +222,7 @@ namespace SAPLink.Schedule.Forms
             guna2ControlBox1.CustomizableEdges = customizableEdges12;
             guna2ControlBox1.FillColor = Color.Transparent;
             guna2ControlBox1.IconColor = Color.Black;
-            guna2ControlBox1.Location = new Point(777, 14);
+            guna2ControlBox1.Location = new Point(321, 13);
             guna2ControlBox1.Margin = new Padding(4);
             guna2ControlBox1.Name = "guna2ControlBox1";
             guna2ControlBox1.ShadowDecoration.CustomizableEdges = customizableEdges13;
@@ -278,25 +230,140 @@ namespace SAPLink.Schedule.Forms
             guna2ControlBox1.TabIndex = 6;
             guna2ControlBox1.Click += guna2ControlBox1_Click;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.White;
+            label3.Font = new Font("Bahnschrift", 30F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(162, 73);
+            label3.Margin = new Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new Size(143, 48);
+            label3.TabIndex = 1;
+            label3.Text = "Sign In";
+            // 
+            // comboBoxClients
+            // 
+            comboBoxClients.BackColor = Color.Transparent;
+            comboBoxClients.BorderColor = SystemColors.ButtonHighlight;
+            comboBoxClients.BorderRadius = 12;
+            comboBoxClients.BorderThickness = 2;
+            comboBoxClients.CustomizableEdges = customizableEdges16;
+            comboBoxClients.DrawMode = DrawMode.OwnerDrawFixed;
+            comboBoxClients.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxClients.FillColor = Color.FromArgb(237, 236, 239);
+            comboBoxClients.FocusedColor = Color.FromArgb(94, 148, 255);
+            comboBoxClients.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            comboBoxClients.Font = new Font("Bahnschrift SemiLight SemiConde", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxClients.ForeColor = Color.DimGray;
+            comboBoxClients.ItemHeight = 30;
+            comboBoxClients.Location = new Point(32, 153);
+            comboBoxClients.Margin = new Padding(3, 2, 3, 2);
+            comboBoxClients.Name = "comboBoxClients";
+            comboBoxClients.ShadowDecoration.CustomizableEdges = customizableEdges17;
+            comboBoxClients.Size = new Size(402, 36);
+            comboBoxClients.TabIndex = 4;
+            comboBoxClients.SelectedIndexChanged += comboBoxClients_SelectedIndexChanged;
+            // 
+            // textBoxUserName
+            // 
+            textBoxUserName.Animated = true;
+            textBoxUserName.AutoRoundedCorners = true;
+            textBoxUserName.BackColor = SystemColors.Control;
+            textBoxUserName.BorderColor = Color.Gold;
+            textBoxUserName.BorderRadius = 15;
+            textBoxUserName.BorderThickness = 3;
+            textBoxUserName.Cursor = Cursors.IBeam;
+            textBoxUserName.CustomizableEdges = customizableEdges18;
+            textBoxUserName.DefaultText = "User Name";
+            textBoxUserName.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            textBoxUserName.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            textBoxUserName.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            textBoxUserName.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            textBoxUserName.FillColor = Color.FromArgb(237, 236, 239);
+            textBoxUserName.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            textBoxUserName.Font = new Font("Bahnschrift SemiLight SemiConde", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxUserName.ForeColor = Color.DimGray;
+            textBoxUserName.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            textBoxUserName.IconLeft = (Image)resources.GetObject("textBoxUserName.IconLeft");
+            textBoxUserName.IconLeftSize = new Size(28, 28);
+            textBoxUserName.IconRightOffset = new Point(5, 0);
+            textBoxUserName.IconRightSize = new Size(28, 28);
+            textBoxUserName.Location = new Point(32, 200);
+            textBoxUserName.Margin = new Padding(2, 7, 2, 7);
+            textBoxUserName.Name = "textBoxUserName";
+            textBoxUserName.PasswordChar = '\0';
+            textBoxUserName.PlaceholderForeColor = Color.Black;
+            textBoxUserName.PlaceholderText = "";
+            textBoxUserName.SelectedText = "";
+            textBoxUserName.ShadowDecoration.CustomizableEdges = customizableEdges19;
+            textBoxUserName.Size = new Size(402, 33);
+            textBoxUserName.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
+            textBoxUserName.TabIndex = 2;
+            textBoxUserName.TextOffset = new Point(7, 0);
+            textBoxUserName.Enter += guna2TextBox1_Enter;
+            textBoxUserName.KeyDown += textBoxUserName_KeyDown;
+            textBoxUserName.Leave += guna2TextBox1_Leave;
+            // 
+            // textBoxPassword
+            // 
+            textBoxPassword.Animated = true;
+            textBoxPassword.AutoRoundedCorners = true;
+            textBoxPassword.BackColor = SystemColors.Control;
+            textBoxPassword.BorderColor = Color.Gold;
+            textBoxPassword.BorderRadius = 15;
+            textBoxPassword.BorderThickness = 3;
+            textBoxPassword.Cursor = Cursors.IBeam;
+            textBoxPassword.CustomizableEdges = customizableEdges20;
+            textBoxPassword.DefaultText = "Password";
+            textBoxPassword.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            textBoxPassword.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            textBoxPassword.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            textBoxPassword.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            textBoxPassword.FillColor = Color.FromArgb(237, 236, 239);
+            textBoxPassword.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            textBoxPassword.Font = new Font("Bahnschrift SemiLight SemiConde", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxPassword.ForeColor = Color.DimGray;
+            textBoxPassword.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            textBoxPassword.IconLeft = (Image)resources.GetObject("textBoxPassword.IconLeft");
+            textBoxPassword.IconLeftSize = new Size(28, 28);
+            textBoxPassword.IconRightOffset = new Point(5, 0);
+            textBoxPassword.IconRightSize = new Size(28, 28);
+            textBoxPassword.Location = new Point(32, 246);
+            textBoxPassword.Margin = new Padding(2, 7, 2, 7);
+            textBoxPassword.Name = "textBoxPassword";
+            textBoxPassword.PasswordChar = '*';
+            textBoxPassword.PlaceholderForeColor = Color.Black;
+            textBoxPassword.PlaceholderText = "";
+            textBoxPassword.SelectedText = "";
+            textBoxPassword.ShadowDecoration.CustomizableEdges = customizableEdges21;
+            textBoxPassword.Size = new Size(402, 33);
+            textBoxPassword.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
+            textBoxPassword.TabIndex = 3;
+            textBoxPassword.TextOffset = new Point(7, 0);
+            textBoxPassword.TextChanged += textBoxPassword_TextChanged;
+            textBoxPassword.Enter += guna2TextBox2_Enter;
+            textBoxPassword.KeyDown += textBoxPassword_KeyDown;
+            textBoxPassword.Leave += guna2TextBox2_Leave;
+            // 
             // buttonLogin
             // 
             buttonLogin.AutoRoundedCorners = true;
-            buttonLogin.BorderRadius = 25;
-            buttonLogin.CustomizableEdges = customizableEdges14;
+            buttonLogin.BorderRadius = 17;
+            buttonLogin.CustomizableEdges = customizableEdges22;
             buttonLogin.FillColor = Color.Goldenrod;
             buttonLogin.FillColor2 = Color.DarkOrange;
-            buttonLogin.Font = new Font("Segoe Print", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonLogin.Font = new Font("Bahnschrift", 12F, FontStyle.Bold, GraphicsUnit.Point);
             buttonLogin.ForeColor = Color.White;
             buttonLogin.HoverState.FillColor = Color.OliveDrab;
             buttonLogin.HoverState.FillColor2 = Color.YellowGreen;
-            buttonLogin.Image = (Image)resources.GetObject("buttonLogin.Image");
             buttonLogin.ImageAlign = HorizontalAlignment.Left;
             buttonLogin.ImageSize = new Size(40, 40);
-            buttonLogin.Location = new Point(370, 301);
+            buttonLogin.Location = new Point(168, 308);
             buttonLogin.Margin = new Padding(4);
             buttonLogin.Name = "buttonLogin";
-            buttonLogin.ShadowDecoration.CustomizableEdges = customizableEdges15;
-            buttonLogin.Size = new Size(402, 52);
+            buttonLogin.ShadowDecoration.CustomizableEdges = customizableEdges23;
+            buttonLogin.Size = new Size(131, 37);
             buttonLogin.TabIndex = 1;
             buttonLogin.Text = "Login";
             buttonLogin.Click += guna2GradientButton1_Click;
@@ -330,7 +397,7 @@ namespace SAPLink.Schedule.Forms
             Load += LoginScreen_Load;
             guna2Panel1.ResumeLayout(false);
             guna2Panel1.PerformLayout();
-            ((ISupportInitialize)guna2PictureBox2).EndInit();
+            guna2Panel2.ResumeLayout(false);
             ((ISupportInitialize)guna2CirclePictureBox1).EndInit();
             ResumeLayout(false);
         }
@@ -348,8 +415,11 @@ namespace SAPLink.Schedule.Forms
         private Label label3;
         private Guna2TextBox textBoxUserName;
         private Guna2ComboBox comboBoxClients;
+        private Guna2Panel guna2Panel2;
+        private Guna2ControlBox guna2ControlBox3;
+        private Guna2ControlBox guna2ControlBox4;
         private Guna2CirclePictureBox guna2CirclePictureBox1;
-        private Label label1;
-        private Guna2PictureBox guna2PictureBox2;
+        private Guna2ControlBox guna2ControlBox5;
+        private Guna2ControlBox guna2ControlBox6;
     }
 }

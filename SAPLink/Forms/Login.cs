@@ -1,8 +1,12 @@
-﻿using Guna.UI2.WinForms;
-using Humanizer;
-using SAPLink.Handler.Prism.Connection.Auth;
+﻿using SAPLink.Handler.Prism.Connection.Auth;
 using SAPLink.Handler.SAP.Application;
 using Serilog;
+using System.Diagnostics;
+using System.Net.Cache;
+using System.Net;
+using System.Text;
+using Guna.UI2.WinForms;
+using SAPLink.Forms.AutoUpdate;
 
 namespace SAPLink.Forms
 {
@@ -17,9 +21,14 @@ namespace SAPLink.Forms
         private readonly DepartmentService _departmentService;
         private static readonly ILogger Log = Serilog.Log.ForContext<Login>();
 
+        private string _tempPath;
+        private WebClient _webClient;
+
+
         public Login(UnitOfWork unitOfWork, ServiceLayerHandler serviceLayer, DepartmentService departmentService,
             ItemsService itemsService, Clients client)
         {
+          
             InitializeComponent();
             _unitOfWork = unitOfWork;
             _serviceLayer = serviceLayer;
@@ -30,7 +39,6 @@ namespace SAPLink.Forms
 
             string[] includes = { "Credentials", "Credentials.Subsidiaries" };
             _clients = _unitOfWork.Clients.GetAll(includes).OrderBy(x => x.Id);
-
 
             if (_clients.Any())
             {
@@ -47,7 +55,19 @@ namespace SAPLink.Forms
 
             ClientHandler.InitializeClientObjects(_client, out var code, out var message);
 
+            if (AutoUpdater.IsUpdateAvailable)
+            {
+                panel2.Show();
+                guna2CirclePictureBox2.Show();
+            }
+
+            Text = AutoUpdater.DialogTitle;
+            labelUpdate.Text = $"A New Version ({AutoUpdater.CurrentVersion}) is Available. {AutoUpdater.InstalledVersion} installed.";
+
+
+            //label1.Text = $"Version {AutoUpdater.InstalledVersion}";
             Log.Information($"{code} - {message}");
+
 
             ClientHandler.AddPrismFieldsToSAP();
             if (code != 0)
@@ -55,7 +75,120 @@ namespace SAPLink.Forms
                 MessageBox.Show($"Error While Connecting to SAP B1. Details\r\n{message}", "Error!!");
             }
         }
+        public sealed override string Text
+        {
+            get => base.Text;
+            set => base.Text = value;
+        }
+        private void ButtonUpdateClick(object sender, EventArgs e)
+        {
+            if (AutoUpdater.OpenDownloadPage)
+            {
+                Process.Start(new ProcessStartInfo(AutoUpdater.DownloadURL));
+            }
+            else
+            {
+                labelInformation.Visible = true;
+                progressBar.Visible = true;
 
+                _webClient = new WebClient();
+                _tempPath = Path.Combine(Path.GetTempPath(), GetFileName(AutoUpdater.DownloadURL));
+
+                _webClient.DownloadProgressChanged += OnDownloadProgressChanged;
+                _webClient.DownloadFileCompleted += OnDownloadComplete;
+
+                _webClient.DownloadFileAsync(new Uri(AutoUpdater.DownloadURL), _tempPath);
+            }
+        }
+        private void OnDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            progressBar.Value = e.ProgressPercentage;
+
+            StringBuilder stringBuilder = new StringBuilder(labelInformation.Text);
+
+            if (stringBuilder.Length != 28)
+                stringBuilder.Append(".");
+            else
+            {
+                stringBuilder.Clear();
+                stringBuilder.Append("Downloading Update...");
+            }
+
+            labelInformation.Text = stringBuilder.ToString();
+
+        }
+
+        private void OnDownloadComplete(object sender, AsyncCompletedEventArgs e)
+        {
+            if (!e.Cancelled)
+            {
+                var processStartInfo = new ProcessStartInfo { FileName = _tempPath, UseShellExecute = true };
+
+                try
+                {
+                    labelInformation.Visible = false;
+                    progressBar.Visible = false;
+
+                    Process.Start(processStartInfo);
+
+                    if (AutoUpdater.IsWinFormsApplication)
+                        Application.Exit();
+                    else
+                    {
+                        Environment.Exit(0);
+                        Application.Exit();
+                    }
+                }
+                catch (Exception)
+                {
+                    // Handle the exception if needed
+                }
+            }
+        }
+
+        private static string GetFileName(string url)
+        {
+            var fileName = string.Empty;
+            var uri = new Uri(url);
+
+            if (uri.Scheme.Equals(Uri.UriSchemeHttp) || uri.Scheme.Equals(Uri.UriSchemeHttps))
+            {
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create(uri);
+                httpWebRequest.CachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.NoCacheNoStore);
+                httpWebRequest.Method = "HEAD";
+                httpWebRequest.AllowAutoRedirect = false;
+
+                using (var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse())
+                {
+                    if (httpWebResponse.StatusCode.Equals(HttpStatusCode.Redirect) ||
+                        httpWebResponse.StatusCode.Equals(HttpStatusCode.Moved) ||
+                        httpWebResponse.StatusCode.Equals(HttpStatusCode.MovedPermanently))
+                    {
+                        var location = httpWebResponse.Headers["Location"];
+                        fileName = GetFileName(location);
+                        return fileName;
+                    }
+
+                    var contentDisposition = httpWebResponse.Headers["content-disposition"];
+                    if (!string.IsNullOrEmpty(contentDisposition))
+                    {
+                        const string lookForFileName = "filename=";
+                        var index = contentDisposition.IndexOf(lookForFileName, StringComparison.CurrentCultureIgnoreCase);
+                        if (index >= 0)
+                            fileName = contentDisposition.Substring(index + lookForFileName.Length);
+                        if (fileName.StartsWith("\"") && fileName.EndsWith("\""))
+                            fileName = fileName[1..^1];
+                    }
+                }
+            }
+
+            return string.IsNullOrEmpty(fileName) ? Path.GetFileName(uri.LocalPath) : fileName;
+        }
+
+        private void DownloadUpdateDialog_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _webClient?.CancelAsync();
+        }
 
         private void guna2GradientButton1_Click(object sender, EventArgs e)
         {

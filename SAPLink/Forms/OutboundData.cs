@@ -6,12 +6,15 @@ using SAPLink.Utilities.Forms;
 using InventoryPosting = SAPLink.Core.Models.Prism.StockManagement.InventoryPosting;
 using SAPLink.Handler.SAP.Application;
 using SAPLink.Handler.Prism.Connection.Auth;
-using System.Security.Cryptography.X509Certificates;
+using SAPLink.Core.Connection;
+using SAPLink.EF.Data;
 
 namespace SAPLink.Forms;
 
 public partial class OutboundData : Form
 {
+    #region Initial Variables
+
     private readonly UnitOfWork _unitOfWork;
     private readonly ServiceLayerHandler _serviceLayer;
     private readonly Clients _client;
@@ -58,7 +61,10 @@ public partial class OutboundData : Form
         _itemsService = itemsService;
         _departmentService = departmentService;
     }
+    
 
+    #endregion
+    
     private async void buttonSyncNow_Click(object sender, EventArgs e)
     {
         var documentType = (OutboundDocuments)comboBoxDocTypeSync.SelectedIndex;
@@ -102,10 +108,10 @@ public partial class OutboundData : Form
 
                             if (invoice == null) continue;
 
-                            bool isInvoiceHasReturnItem = invoice.Items.Any(p => p.Alu == "SP0012");
+                            var isARDownPayment = invoice.Items.Any(p => p.Alu == "SP0012");
 
 
-                            if (isInvoiceHasReturnItem && CheckInvoiceExist(sInvoice.Sid, "ODPI"))
+                            if (isARDownPayment && CheckInvoiceExist(sInvoice.Sid, "ODPI"))
                             {
                                 var docNum = GetInvoiceDocNum(sInvoice.Sid, "ODPI");
 
@@ -114,7 +120,7 @@ public partial class OutboundData : Form
                                      "");
                             }
 
-                            else if (!isInvoiceHasReturnItem && CheckInvoiceExist(sInvoice.Sid, "OINV"))
+                            else if (!isARDownPayment && CheckInvoiceExist(sInvoice.Sid, "OINV"))
                             {
                                 var docNum = GetInvoiceDocNum(sInvoice.Sid, "OINV");
 
@@ -127,16 +133,13 @@ public partial class OutboundData : Form
                             var wholesaleCustomerCode = invoice.WholesaleCustomerCode;
 
 
-                            if (IsDownPayment(sInvoice, isInvoiceHasReturnItem))
+                            if (isARDownPayment && !CheckInvoiceExist(sInvoice.Sid, "ODPI"))
                                 await HandleDownPayment(invoiceResult.EntityList, UpdateType.SyncInvoice);
 
-                            else if (IsRetailSale(sInvoice, isInvoiceHasReturnItem, isWholesale, wholesaleCustomerCode))
+                            else if (!isARDownPayment && !isWholesale && !CheckInvoiceExist(sInvoice.Sid, "OINV"))
                                 await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncInvoice);
 
-                            else if (IsWholesaleRetail(sInvoice, isInvoiceHasReturnItem, isWholesale, wholesaleCustomerCode))
-                                await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncWholesaleRetail);
-
-                            else if (IsWholesale(sInvoice, isWholesale))
+                            else if (isWholesale && !CheckInvoiceExist(sInvoice.Sid, "OINV"))
                                 await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncWholesale, wholesaleCustomerCode);
                         }
 
@@ -183,20 +186,14 @@ public partial class OutboundData : Form
                                 Log(UpdateType.SyncCreditMemo, $"\r\nPrism Invoice No. ({returnInvoice.DocumentNumber}) is Already Exist with SAP A/R Credit Payment No. ({docNum}).",
                                      "");
                             }
+                            var isCreditMemo = returnInvoice.Items.Any(p => p.Alu == "SP0012");
 
-                            var isWholesale = returnInvoice.IsWholesale == "B2P";
-                            var wholesaleCustomerCode = returnInvoice.WholesaleCustomerCode;
+                            if (isCreditMemo && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
+                                await HandleCreditMemo(invoiceResult.EntityList, UpdateType.SyncInvoice);
 
-                            var isHasReturnItem = returnInvoice.Items.Any(p => p.Alu == "SP0012");
 
-                            if (isHasReturnItem && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
-                                await HandleCreditMemoWithoutPayment(invoiceResult.EntityList, UpdateType.SyncInvoice);
-
-                            else if (!isHasReturnItem && isWholesale && wholesaleCustomerCode.IsNullOrEmpty() && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
-                                await HandleCreditMemoWithPayment(invoiceResult.EntityList, UpdateType.SyncWholesaleRetail, null);
-
-                            else if (!isHasReturnItem && isWholesale && wholesaleCustomerCode.IsHasValue() && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
-                                await HandleCreditMemoWithPayment(invoiceResult.EntityList, UpdateType.SyncWholesale, wholesaleCustomerCode);
+                            else if (!isCreditMemo && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
+                                await HandleInvoiceReturn(invoiceResult.EntityList, UpdateType.SyncCreditMemo);
 
                         }
                     }
@@ -306,26 +303,6 @@ public partial class OutboundData : Form
         }
     }
 
-    private static bool IsWholesale(PrismInvoice sInvoice, bool isWholesale)
-    {
-        return isWholesale && !CheckInvoiceExist(sInvoice.Sid, "OINV");
-    }
-
-    private static bool IsWholesaleRetail(PrismInvoice sInvoice, bool isInvoiceHasReturnItem, bool isWholesale, string wholesaleCustomerCode)
-    {
-        return !isInvoiceHasReturnItem && isWholesale && wholesaleCustomerCode.IsNullOrEmpty() && !CheckInvoiceExist(sInvoice.Sid, "OINV");
-    }
-
-    private static bool IsRetailSale(PrismInvoice sInvoice, bool isInvoiceHasReturnItem, bool isWholesale, string wholesaleCustomerCode)
-    {
-        return !isInvoiceHasReturnItem && !isWholesale && wholesaleCustomerCode.IsNullOrEmpty() && !CheckInvoiceExist(sInvoice.Sid, "OINV");
-    }
-
-    private static bool IsDownPayment(PrismInvoice sInvoice, bool isARDownPayment)
-    {
-        return isARDownPayment && !CheckInvoiceExist(sInvoice.Sid, "ODPI");
-    }
-    
     private async Task HandleInvoices(List<PrismInvoice> invoicesList, UpdateType updateType, string wholesaleCustomerCode = "")
     {
         PlaySound.Click();
@@ -338,7 +315,7 @@ public partial class OutboundData : Form
                 foreach (var invoice in syncResult.EntityList)
                 {
                     dataGridView.BindInvoices(ref bindingList, invoice);
-                    treeView1.BindInvoices(ref bindingList, invoice);
+                    treeViewSync.BindInvoices(ref bindingList, invoice);
 
                     //Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
                 }
@@ -346,14 +323,15 @@ public partial class OutboundData : Form
             else
             {
                 dataGridView.DataSource = null;
-                treeView1.Nodes.Clear();
+                treeViewSync.Nodes.Clear();
             }
 
 
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
 
-            Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
+            if (_credentials.ActiveLog)
+                Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
         }
@@ -429,19 +407,19 @@ public partial class OutboundData : Form
             ? oRecordSet.Fields.Item(0).Value.ToString()
             : "";
     }
-    private async Task HandleCreditMemoWithPayment(List<PrismInvoice> invoicesList, UpdateType updateType, string wholesaleCustomerCode)
+    private async Task HandleInvoiceReturn(List<PrismInvoice> invoicesList, UpdateType updateType)
     {
         PlaySound.Click();
         var bindingList = dataGridView.DataSource as BindingList<SAPInvoice>;
 
-        await foreach (var syncResult in _returnsHandler.AddReturnInvoiceAsync(invoicesList, updateType, wholesaleCustomerCode))
+        await foreach (var syncResult in _returnsHandler.AddReturnInvoiceAsync(invoicesList))
         {
             if (syncResult.EntityList != null && syncResult.EntityList.Count > 0)
             {
                 foreach (var invoice in syncResult.EntityList)
                 {
                     dataGridView.BindInvoices(ref bindingList, invoice);
-                    treeView1.BindInvoices(ref bindingList, invoice);
+                    treeViewSync.BindInvoices(ref bindingList, invoice);
 
                     //Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
                 }
@@ -449,12 +427,14 @@ public partial class OutboundData : Form
             else
             {
                 dataGridView.DataSource = null;
-                treeView1.Nodes.Clear();
+                treeViewSync.Nodes.Clear();
             }
 
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
-            Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
+
+            if (_credentials.ActiveLog)
+                Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
         }
@@ -471,7 +451,7 @@ public partial class OutboundData : Form
                 foreach (var invoice in syncResult.EntityList)
                 {
                     dataGridView.BindInvoices(ref bindingList, invoice);
-                    treeView1.BindInvoices(ref bindingList, invoice);
+                    treeViewSync.BindInvoices(ref bindingList, invoice);
 
                     //Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
                 }
@@ -479,12 +459,14 @@ public partial class OutboundData : Form
             else
             {
                 dataGridView.DataSource = null;
-                treeView1.Nodes.Clear();
+                treeViewSync.Nodes.Clear();
             }
 
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
-            Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+
+            if (_credentials.ActiveLog)
+                Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
         }
@@ -508,17 +490,21 @@ public partial class OutboundData : Form
 
                 if (textBoxLogsSync.Text.Contains(syncResult.Message))
                     return;
-                Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
+
+                if (_credentials.ActiveLog)
+                    Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
             }
             else
             {
                 dataGridView.DataSource = null;
-                treeView1.Nodes.Clear();
+                treeViewSync.Nodes.Clear();
             }
 
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
-            Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
+
+            if (_credentials.ActiveLog)
+                Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
         }
@@ -564,9 +550,9 @@ public partial class OutboundData : Form
                     //dt.SelectLastRow();
 
 
-                    treeView1.BringToFront();
-                    treeView1.Visible = true;
-                    treeView1.BindInventoryCounting(ref bindingList, count);
+                    treeViewSync.BringToFront();
+                    treeViewSync.Visible = true;
+                    treeViewSync.BindInventoryCounting(ref bindingList, count);
 
                     //Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
                 }
@@ -574,12 +560,14 @@ public partial class OutboundData : Form
             else
             {
                 dataGridView.DataSource = null;
-                treeView1.Nodes.Clear();
+                treeViewSync.Nodes.Clear();
             }
 
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
-            Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
+
+            if (_credentials.ActiveLog)
+                Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
         }
@@ -590,7 +578,8 @@ public partial class OutboundData : Form
 
         if (result.EntityList.Any())
         {
-            LogMessages($"Inventory Posting/s.\r\n\r\nRequest Message: {result.Message}", "");
+            if (_credentials.ActiveLog)
+                LogMessages($"Inventory Posting/s.\r\n\r\nRequest Message: {result.Message}", "");
 
             foreach (var inventoryPosting in result.EntityList)
             {
@@ -604,7 +593,9 @@ public partial class OutboundData : Form
                 {
                     var docNum = GetInventoryPostingDocNum(inventoryPosting.Sid);
                     var message = $"Prism Adjustment No. ({inventoryPosting.Adjno}) is Already Exist with SAP Inventory Posting No. ({docNum}).";
-                    LogMessages(message, message);
+
+                    if (_credentials.ActiveLog)
+                        LogMessages(message, message);
                 }
             }
         }
@@ -639,17 +630,19 @@ public partial class OutboundData : Form
             else
             {
                 dataGridView.DataSource = null;
-                treeView1.Nodes.Clear();
+                treeViewSync.Nodes.Clear();
             }
 
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
-            Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
+
+            if (_credentials.ActiveLog)
+                Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
         }
     }
-    private async Task HandleCreditMemoWithoutPayment(List<PrismInvoice> invoicesList, UpdateType UpdateType)
+    private async Task HandleCreditMemo(List<PrismInvoice> invoicesList, UpdateType UpdateType)
     {
         PlaySound.Click();
         //var BpList = new List<BusinessPartner>();
@@ -674,12 +667,14 @@ public partial class OutboundData : Form
             else
             {
                 dataGridView.DataSource = null;
-                treeView1.Nodes.Clear();
+                treeViewSync.Nodes.Clear();
             }
 
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
-            Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
+
+            if (_credentials.ActiveLog)
+                Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
         }
@@ -709,20 +704,7 @@ public partial class OutboundData : Form
         //else if (comboBoxDocTypeSyncIndex == (int)Documents.GoodsIssue)
         //    toggleGoodsIssue.Checked = true;
     }
-    public void OpenReportsWithSettings(int tabControlInventoryIndex, int report)
-    {
-        tabControl.SelectedIndex = tabControlInventoryIndex;
 
-        if (report == (int)Enums.Reports.PrismActiveItems)
-            togglePrismActiveItems.Checked = true;
-
-        else if (report == (int)Enums.Reports.SyncedItems)
-            toggleSyncedItems.Checked = true;
-
-        else if (report == (int)Enums.Reports.NotSynced)
-            toggleNotSyncedItems.Checked = true;
-
-    }
     private async void OutboundData_Load(object sender, EventArgs e)
     {
         comboBoxDocTypeSync.SelectedIndex = (int)OutboundDocuments.SalesInvoice;
@@ -775,7 +757,7 @@ public partial class OutboundData : Form
 
         textBoxDocCode.Focus();
 
-        tabControl.Controls[2].Enabled = false;
+        //tabControl.Controls[2].Enabled = false;
     }
 
 
@@ -822,7 +804,7 @@ public partial class OutboundData : Form
         filter = "";
         return false;
     }
-   
+
     private void LogMessages(string message, string status)
     {
         textBoxLogsSync.Log(new[] { message + "\r\n" }, Logger.MessageTime.Long);
@@ -962,7 +944,7 @@ public partial class OutboundData : Form
         dataGridView.DataSource = null;
         dataGridView.Rows.Clear();
 
-        treeView1.Nodes.Clear();
+        treeViewSync.Nodes.Clear();
     }
 
     private void SyncClearLogs_Click(object sender, EventArgs e)
@@ -992,9 +974,38 @@ public partial class OutboundData : Form
     {
         var newAuth = await LoginManager.GetAuthSessionAsync(_credentials.BaseUri, _credentials.PrismUserName, _credentials.PrismPassword);
         if (newAuth.IsHasValue())
-            labelStatus.Log("Status: Auth Session refreshed.", Logger.MessageTypes.Warning, Logger.MessageTime.Long);
-        else
-            labelStatus.Log("Status: Cant refresh Auth-Session, Wait a few seconds before you try again.", Logger.MessageTypes.Error, Logger.MessageTime.Long);
+            if (newAuth.IsHasValue())
+            {
+                _credentials.AuthSession = newAuth;
+
+                _unitOfWork.Credentials.Update(_credentials);
+                _unitOfWork.SaveChanges();
+
+                Program.Context = new ApplicationDbContext();
+                Program.UnitOfWork = new(Program.Context);
+
+                var activeConnection = ConnectionStringFactory.GetActiveConnection();
+
+                string[] includes = { "Credentials", "Credentials.Subsidiaries" };
+                Program.Client = Program.UnitOfWork.Clients.FindAsync(c => c.Id == activeConnection.Id, includes).Result;
+
+                labelStatus.Log("Status: Auth Session was updated and refreshed successfully.", Logger.MessageTypes.Warning, Logger.MessageTime.Long);
+            }
+            else
+                labelStatus.Log("Status: cant refresh 'Auth Session', Wait a few seconds before you try again.", Logger.MessageTypes.Error, Logger.MessageTime.Long);
+    }
+
+    private void restartToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        RestartApp();
+    }
+    private void RestartApp()
+    {
+        var result = MessageBox.Show("Do you want to restart Application?", "Restart Application!!",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+        if (result == DialogResult.OK)
+            Application.Restart();
     }
 }
 

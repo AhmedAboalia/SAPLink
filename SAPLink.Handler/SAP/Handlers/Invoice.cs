@@ -32,7 +32,7 @@ partial class ServiceLayerHandler
                 var body = CreateBody(PrismInvoice, taxCodes, customerCode, series, updateType);
 
 
-                result.Response = HttpClientFactory.Initialize("Invoices", Method.POST, LoginModel.LoginTypes.Basic, null, body);
+                result.Response = HttpClientFactory.Initialize("Invoices", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
 
                 if (result.Response.StatusCode == HttpStatusCode.OK || result.Response.StatusCode == HttpStatusCode.Created)
                 {
@@ -84,7 +84,7 @@ partial class ServiceLayerHandler
 
         return result;
     }
-    public RequestResult<SAPInvoice> AddReturnInvoice(PrismInvoice PrismInvoice, string code, string series, Enums.UpdateType updateType)
+    public RequestResult<SAPInvoice> AddReturnInvoice(PrismInvoice PrismInvoice, string code, string series)
     {
         RequestResult<SAPInvoice> result = new RequestResult<SAPInvoice>();
 
@@ -95,10 +95,10 @@ partial class ServiceLayerHandler
                 var taxCodes = GetTaxCodes();
 
 
-                var body = CreateReturnBody(PrismInvoice, taxCodes, code, series, updateType);
+                var body = CreateReturnBody(PrismInvoice, taxCodes, code, series);
 
 
-                result.Response = HttpClientFactory.Initialize("CreditNotes", Method.POST, LoginModel.LoginTypes.Basic, null, body);
+                result.Response = HttpClientFactory.Initialize("CreditNotes", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
 
                 if (result.Response.StatusCode == HttpStatusCode.OK || result.Response.StatusCode == HttpStatusCode.Created)
                 {
@@ -159,7 +159,7 @@ partial class ServiceLayerHandler
                 var body = CreateDownPaymentBody(PrismInvoice, taxCodes, customerCode, series);
 
 
-                result.Response = HttpClientFactory.Initialize("DownPayments", Method.POST, LoginModel.LoginTypes.Basic, null, body);
+                result.Response = HttpClientFactory.Initialize("DownPayments", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
 
                 if (result.Response.StatusCode == HttpStatusCode.OK || result.Response.StatusCode == HttpStatusCode.Created)
                 {
@@ -230,15 +230,6 @@ partial class ServiceLayerHandler
                 //    city = city.Substring(1, 3);
 
                 branch = "101003";
-            }
-            else if (updateType == UpdateType.SyncWholesaleRetail)
-            {
-                var WholesaleRetailCustomerCode = ActionHandler.GetStringValueByQuery($"SELECT T0.[AddID] FROM OCRD T0 WHERE T0.[CardCode] = '{customerCode}'");//invoice.WholesaleCustomerCode;
-
-
-                region = WholesaleRetailCustomerCode.Substring(0, 1);
-                city = WholesaleRetailCustomerCode.Substring(0, 3);
-                branch = WholesaleRetailCustomerCode;
             }
             else
             {
@@ -313,7 +304,7 @@ partial class ServiceLayerHandler
         return arInvoice.ToJson();
     }
 
-    public static string CreateReturnBody(Core.Models.Prism.Sales.Invoice invoice, List<TaxCodes> taxCodes, string customerCode, string series, UpdateType updateType)
+    public static string CreateReturnBody(Core.Models.Prism.Sales.Invoice invoice, List<TaxCodes> taxCodes, string customerCode, string series)
     {
 
         var lines = new List<DocumentLine>();
@@ -329,44 +320,16 @@ partial class ServiceLayerHandler
             {
                 //
             }
-
-            string region, city, branch;
-
-            if (updateType == UpdateType.SyncWholesale ||
-                updateType == UpdateType.SyncWholesaleRetail
-                )
-            {
-                var WholesaleCustomerCode = ActionHandler.GetStringValueByQuery($"SELECT T0.[AddID] FROM OCRD T0 WHERE T0.[CardCode] = '{customerCode}'");//invoice.WholesaleCustomerCode;
-
-                region = WholesaleCustomerCode.Substring(0, 1);
-                city = WholesaleCustomerCode.Substring(0, 3);
-                branch = WholesaleCustomerCode;
-            }
-            else
-            {
-                region = customerCode.Substring(0, 1);
-                city = customerCode.Substring(0, 3);
-                branch = customerCode;
-            }
-
             var line = new DocumentLine
             {
                 ItemCode = item.Alu,
                 Quantity = item.Quantity,
                 VatGroup = vatGroup,
                 UnitPrice = item.Price,
-
                 CostCenter = GetCostCenter(item.Alu),
-
-                Region = region,
-                City = city,
-                Branch = branch,
-
-                //CostCenter = GetCostCenter(item.Alu),
-                //Region = customerCode.Substring(0, 1),
-                //City = customerCode.Substring(0, 3),
-                //Branch = customerCode,
-
+                Region = customerCode.Substring(0, 1),
+                City = customerCode.Substring(0, 3),
+                Branch = customerCode,
                 //line.DiscountPercent = ((item.OriginalPrice - item.Price) / item.OriginalPrice) * 100;
                 //line.DiscountPercent = item.TotalDiscountPercent;
                 WarehouseCode = invoice.StoreCode
@@ -531,7 +494,7 @@ partial class ServiceLayerHandler
                 var body = SAPInvoice.CreateOrderBody(PrismInvoice, taxCodes, customerCode);
 
 
-                result.Response = HttpClientFactory.Initialize("Orders", Method.POST, LoginModel.LoginTypes.Basic, null, body);
+                result.Response = HttpClientFactory.Initialize("Orders", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
 
                 if (result.Response.StatusCode == HttpStatusCode.OK || result.Response.StatusCode == HttpStatusCode.Created)
                 {

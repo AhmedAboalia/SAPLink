@@ -217,9 +217,6 @@ public static class Enums
         InitialWholesale,
         SyncWholesale,
 
-        InitialWholesaleRetail,
-        SyncWholesaleRetail,
-
         InitialInGoodsReturn,
         SyncInGoodsReturn,
     }

@@ -66,7 +66,7 @@ public class GoodsIssueHandler
                 {
 
                 }
-                
+
 
                 var receiving = await _receivingService.GenerateVoucherSid(store.Sid);
                 foreach (var line in goodsIssue.Lines)

@@ -18,9 +18,7 @@ public static class IncomingPayment
 
         oPayment.CardCode = customerCode;
 
-        if (invoiceType != BoRcptInvTypes.it_DownPayment)
-            oPayment.Invoices.DocEntry = int.Parse(docEntry);
-
+        oPayment.Invoices.DocEntry = int.Parse(docEntry);
         oPayment.Invoices.InvoiceType = invoiceType;
         oPayment.Invoices.SumApplied = amount;
         oPayment.CashAccount = account;
