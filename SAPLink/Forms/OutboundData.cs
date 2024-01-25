@@ -198,11 +198,14 @@ public partial class OutboundData : Form
                             if (isHasReturnItem && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
                                 await HandleCreditMemoWithoutPayment(invoiceResult.EntityList, UpdateType.SyncInvoice);
 
-                            else if (!isHasReturnItem && isWholesale && wholesaleCustomerCode.IsNullOrEmpty() && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
-                                await HandleCreditMemoWithPayment(invoiceResult.EntityList, UpdateType.SyncWholesaleRetail, null);
-
                             else if (!isHasReturnItem && isWholesale && wholesaleCustomerCode.IsHasValue() && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
                                 await HandleCreditMemoWithPayment(invoiceResult.EntityList, UpdateType.SyncWholesale, wholesaleCustomerCode);
+
+                            else if (!isHasReturnItem && isWholesale && wholesaleCustomerCode.IsNullOrEmpty() && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
+                                await HandleCreditMemoWithPayment(invoiceResult.EntityList, UpdateType.SyncWholesaleRetail);
+
+                            else if (!isHasReturnItem && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
+                                await HandleCreditMemoWithPayment(invoiceResult.EntityList, UpdateType.SyncCreditMemo);
 
                         }
                     }
@@ -436,7 +439,7 @@ public partial class OutboundData : Form
             ? oRecordSet.Fields.Item(0).Value.ToString()
             : "";
     }
-    private async Task HandleCreditMemoWithPayment(List<PrismInvoice> invoicesList, UpdateType updateType, string wholesaleCustomerCode)
+    private async Task HandleCreditMemoWithPayment(List<PrismInvoice> invoicesList, UpdateType updateType, string wholesaleCustomerCode = null)
     {
         PlaySound.Click();
         var bindingList = dataGridView.DataSource as BindingList<SAPInvoice>;

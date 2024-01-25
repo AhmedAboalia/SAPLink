@@ -13,7 +13,7 @@
     "Server": "POSTEST",
     "Database": "SAPLinkDB",
     "Password": "RetailTec@123",
-    "Active": false
+    "Active": true
   },
   {
     "Id": 3,
@@ -21,6 +21,6 @@
     "Server": "ABOALIA",
     "Database": "SAPLinkDB",
     "Password": "P@ssw0rd",
-    "Active": true
+    "Active": false
   }
 ]
