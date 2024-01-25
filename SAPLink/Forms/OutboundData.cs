@@ -186,7 +186,7 @@ public partial class OutboundData : Form
                             {
                                 var docNum = GetReturnInvoiceDocNum(returnInvoice.Sid);
 
-                                Log(UpdateType.SyncCreditMemo, $"\r\nPrism Invoice No. ({returnInvoice.DocumentNumber}) is Already Exist with SAP A/R Credit Payment No. ({docNum}).",
+                                Log(UpdateType.SyncCreditMemo, $"\r\nPrism Invoice No. ({returnInvoice.DocumentNumber}) is Already Exist with SAP A/R Credit Memo No. ({docNum}).",
                                      "");
                             }
 
