@@ -756,17 +756,17 @@ public partial class InboundData : Form
             if (toggleItems.Checked)
                 toggleItems.InvokeUnCheck();
 
-            if (toggleGoodsReceiptPO.Checked)
-                toggleGoodsReceiptPO.InvokeUnCheck();
+            //if (toggleGoodsReceiptPO.Checked)
+            //    toggleGoodsReceiptPO.InvokeUnCheck();
 
-            if (toggleGoodsReceipt.Checked)
-                toggleGoodsReceipt.InvokeUnCheck();
+            //if (toggleGoodsReceipt.Checked)
+            //    toggleGoodsReceipt.InvokeUnCheck();
 
-            if (toggleGoodsIssue.Checked)
-                toggleGoodsIssue.InvokeUnCheck();
+            //if (toggleGoodsIssue.Checked)
+            //    toggleGoodsIssue.InvokeUnCheck();
 
-            if (toggleGoodsReturn.Checked)
-                toggleGoodsReturn.InvokeUnCheck();
+            //if (toggleGoodsReturn.Checked)
+            //    toggleGoodsReturn.InvokeUnCheck();
         }
     }
 
@@ -784,17 +784,17 @@ public partial class InboundData : Form
             if (toggleItems.Checked)
                 toggleItems.InvokeUnCheck();
 
-            if (toggleGoodsReceiptPO.Checked)
-                toggleGoodsReceiptPO.InvokeUnCheck();
+            //if (toggleGoodsReceiptPO.Checked)
+            //    toggleGoodsReceiptPO.InvokeUnCheck();
 
-            if (toggleGoodsReceipt.Checked)
-                toggleGoodsReceipt.InvokeUnCheck();
+            //if (toggleGoodsReceipt.Checked)
+            //    toggleGoodsReceipt.InvokeUnCheck();
 
-            if (toggleGoodsIssue.Checked)
-                toggleGoodsIssue.InvokeUnCheck();
+            //if (toggleGoodsIssue.Checked)
+            //    toggleGoodsIssue.InvokeUnCheck();
 
-            if (toggleGoodsReturn.Checked)
-                toggleGoodsReturn.InvokeUnCheck();
+            //if (toggleGoodsReturn.Checked)
+            //    toggleGoodsReturn.InvokeUnCheck();
         }
     }
     private void ToggleItems_CheckedChanged(object sender, EventArgs e)
@@ -807,134 +807,9 @@ public partial class InboundData : Form
 
             if (toggleVendors.Checked)
                 toggleVendors.InvokeUnCheck();
-
-            //if (toggleItems.Checked)
-            //    toggleItems.InvokeUnCheck();
-
-            if (toggleGoodsReceiptPO.Checked)
-                toggleGoodsReceiptPO.InvokeUnCheck();
-
-            if (toggleGoodsReceipt.Checked)
-                toggleGoodsReceipt.InvokeUnCheck();
-
-            if (toggleGoodsIssue.Checked)
-                toggleGoodsIssue.InvokeUnCheck();
-
-            if (toggleGoodsReturn.Checked)
-                toggleGoodsReturn.InvokeUnCheck();
         }
     }
 
-    private void toggleGoodsReceiptPO_CheckedChanged(object sender, EventArgs e)
-    {
-        if (toggleGoodsReceiptPO.Checked)
-        {
-            PlaySound.Click();
-            if (toggleDepartments.Checked)
-                toggleDepartments.InvokeUnCheck();
-
-            if (toggleVendors.Checked)
-                toggleVendors.InvokeUnCheck();
-
-            if (toggleItems.Checked)
-                toggleItems.InvokeUnCheck();
-
-            //if (toggleGoodsReceiptPO.Checked)
-            //    toggleGoodsReceiptPO.InvokeUnCheck();
-
-            if (toggleGoodsReceipt.Checked)
-                toggleGoodsReceipt.InvokeUnCheck();
-
-            if (toggleGoodsIssue.Checked)
-                toggleGoodsIssue.InvokeUnCheck();
-
-            if (toggleGoodsReturn.Checked)
-                toggleGoodsReturn.InvokeUnCheck();
-        }
-    }
-
-    private void toggleGoodsReceipt_CheckedChanged(object sender, EventArgs e)
-    {
-        if (toggleGoodsReceipt.Checked)
-        {
-            PlaySound.Click();
-            if (toggleDepartments.Checked)
-                toggleDepartments.InvokeUnCheck();
-
-            if (toggleVendors.Checked)
-                toggleVendors.InvokeUnCheck();
-
-            if (toggleItems.Checked)
-                toggleItems.InvokeUnCheck();
-
-            if (toggleGoodsReceiptPO.Checked)
-                toggleGoodsReceiptPO.InvokeUnCheck();
-
-            //if (toggleGoodsReceipt.Checked)
-            //    toggleGoodsReceipt.InvokeUnCheck();
-
-            if (toggleGoodsIssue.Checked)
-                toggleGoodsIssue.InvokeUnCheck();
-
-            if (toggleGoodsReturn.Checked)
-                toggleGoodsReturn.InvokeUnCheck();
-        }
-    }
-
-    private void toggleGoodsIssue_CheckedChanged(object sender, EventArgs e)
-    {
-        if (toggleGoodsIssue.Checked)
-        {
-            PlaySound.Click();
-            if (toggleDepartments.Checked)
-                toggleDepartments.InvokeUnCheck();
-
-            if (toggleVendors.Checked)
-                toggleVendors.InvokeUnCheck();
-
-            if (toggleItems.Checked)
-                toggleItems.InvokeUnCheck();
-
-            if (toggleGoodsReceiptPO.Checked)
-                toggleGoodsReceiptPO.InvokeUnCheck();
-
-            if (toggleGoodsReceipt.Checked)
-                toggleGoodsReceipt.InvokeUnCheck();
-
-            //if (toggleGoodsIssue.Checked)
-            //    toggleGoodsIssue.InvokeUnCheck();
-
-            if (toggleGoodsReturn.Checked)
-                toggleGoodsReturn.InvokeUnCheck();
-        }
-    }
-    private void toggleGoodsReturn_CheckedChanged(object sender, EventArgs e)
-    {
-        if (toggleGoodsReturn.Checked)
-        {
-            PlaySound.Click();
-            if (toggleDepartments.Checked)
-                toggleDepartments.InvokeUnCheck();
-
-            if (toggleVendors.Checked)
-                toggleVendors.InvokeUnCheck();
-
-            if (toggleItems.Checked)
-                toggleItems.InvokeUnCheck();
-
-            if (toggleGoodsReceiptPO.Checked)
-                toggleGoodsReceiptPO.InvokeUnCheck();
-
-            if (toggleGoodsReceipt.Checked)
-                toggleGoodsReceipt.InvokeUnCheck();
-
-            if (toggleGoodsIssue.Checked)
-                toggleGoodsIssue.InvokeUnCheck();
-
-            //if (toggleGoodsReturn.Checked)
-            //    toggleGoodsReturn.InvokeUnCheck();
-        }
-    }
     private void PlayClickSound(object sender, EventArgs e)
         => PlaySound.KeyPress();
 
@@ -1067,15 +942,6 @@ public partial class InboundData : Form
             if (toggleNotSyncedItems.Checked)
                 toggleNotSyncedItems.InvokeUnCheck();
 
-            if (toggleGoodsReceiptPO.Checked)
-                toggleGoodsReceiptPO.InvokeUnCheck();
-
-            if (toggleGoodsReceipt.Checked)
-                toggleGoodsReceipt.InvokeUnCheck();
-
-            if (toggleGoodsIssue.Checked)
-                toggleGoodsIssue.InvokeUnCheck();
-
             RunReport();
         }
     }
@@ -1094,15 +960,6 @@ public partial class InboundData : Form
             if (toggleNotSyncedItems.Checked)
                 toggleNotSyncedItems.InvokeUnCheck();
 
-            if (toggleGoodsReceiptPO.Checked)
-                toggleGoodsReceiptPO.InvokeUnCheck();
-
-            if (toggleGoodsReceipt.Checked)
-                toggleGoodsReceipt.InvokeUnCheck();
-
-            if (toggleGoodsIssue.Checked)
-                toggleGoodsIssue.InvokeUnCheck();
-
             RunReport();
         }
     }
@@ -1117,18 +974,6 @@ public partial class InboundData : Form
 
             if (toggleSyncedItems.Checked)
                 toggleSyncedItems.InvokeUnCheck();
-
-            //if (toggleItems.Checked)
-            //    toggleItems.InvokeUnCheck();
-
-            if (toggleGoodsReceiptPO.Checked)
-                toggleGoodsReceiptPO.InvokeUnCheck();
-
-            if (toggleGoodsReceipt.Checked)
-                toggleGoodsReceipt.InvokeUnCheck();
-
-            if (toggleGoodsIssue.Checked)
-                toggleGoodsIssue.InvokeUnCheck();
 
             RunReport();
         }
