@@ -24,6 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Forms\o0gp1cv4.3gf~" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="Images\SAPLink.ico" />
   </ItemGroup>
 

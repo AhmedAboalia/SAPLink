@@ -100,7 +100,7 @@
             guna2Panel1.CustomizableEdges = customizableEdges25;
             guna2Panel1.Dock = DockStyle.Fill;
             guna2Panel1.Location = new Point(0, 0);
-            guna2Panel1.Margin = new Padding(4, 4, 4, 4);
+            guna2Panel1.Margin = new Padding(4);
             guna2Panel1.Name = "guna2Panel1";
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges26;
             guna2Panel1.Size = new Size(836, 420);
@@ -156,7 +156,7 @@
             btnUpdate.CustomizableEdges = customizableEdges1;
             btnUpdate.FillColor = Color.MediumSeaGreen;
             btnUpdate.FillColor2 = Color.MediumTurquoise;
-            btnUpdate.Font = new Font("Bahnschrift", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnUpdate.Font = new Font("Bahnschrift", 15F, FontStyle.Bold, GraphicsUnit.Point);
             btnUpdate.ForeColor = Color.White;
             btnUpdate.HoverState.FillColor = Color.OliveDrab;
             btnUpdate.HoverState.FillColor2 = Color.YellowGreen;
@@ -164,8 +164,8 @@
             btnUpdate.ImageAlign = HorizontalAlignment.Left;
             btnUpdate.ImageOffset = new Point(90, 1);
             btnUpdate.ImageSize = new Size(30, 30);
-            btnUpdate.Location = new Point(74, 265);
-            btnUpdate.Margin = new Padding(4, 4, 4, 4);
+            btnUpdate.Location = new Point(46, 265);
+            btnUpdate.Margin = new Padding(4);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.ShadowDecoration.BorderRadius = 30;
             btnUpdate.ShadowDecoration.Color = Color.Silver;
@@ -173,7 +173,7 @@
             btnUpdate.ShadowDecoration.Depth = 5;
             btnUpdate.ShadowDecoration.Enabled = true;
             btnUpdate.ShadowDecoration.Shadow = new Padding(8);
-            btnUpdate.Size = new Size(317, 37);
+            btnUpdate.Size = new Size(345, 37);
             btnUpdate.TabIndex = 16;
             btnUpdate.Text = "Update";
             btnUpdate.Click += ButtonUpdateClick;
@@ -230,11 +230,11 @@
             // 
             label3.AutoSize = true;
             label3.BackColor = Color.White;
-            label3.Font = new Font("Bahnschrift", 30F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(168, 68);
+            label3.Font = new Font("Bahnschrift", 35F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(136, 52);
             label3.Margin = new Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new Size(143, 48);
+            label3.Size = new Size(169, 57);
             label3.TabIndex = 5;
             label3.Text = "Sign In";
             // 
@@ -250,7 +250,7 @@
             comboBoxClients.FillColor = Color.WhiteSmoke;
             comboBoxClients.FocusedColor = Color.FromArgb(94, 148, 255);
             comboBoxClients.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            comboBoxClients.Font = new Font("Bahnschrift SemiLight SemiConde", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxClients.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             comboBoxClients.ForeColor = Color.DimGray;
             comboBoxClients.ItemHeight = 30;
             comboBoxClients.Location = new Point(38, 148);
@@ -266,7 +266,7 @@
             textBoxUserName.AutoRoundedCorners = true;
             textBoxUserName.BackColor = SystemColors.Control;
             textBoxUserName.BorderColor = Color.FromArgb(255, 199, 39);
-            textBoxUserName.BorderRadius = 15;
+            textBoxUserName.BorderRadius = 24;
             textBoxUserName.BorderThickness = 3;
             textBoxUserName.Cursor = Cursors.IBeam;
             textBoxUserName.CustomizableEdges = customizableEdges7;
@@ -277,14 +277,14 @@
             textBoxUserName.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
             textBoxUserName.FillColor = Color.WhiteSmoke;
             textBoxUserName.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            textBoxUserName.Font = new Font("Bahnschrift SemiLight SemiConde", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxUserName.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxUserName.ForeColor = Color.DimGray;
             textBoxUserName.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             textBoxUserName.IconLeft = (Image)resources.GetObject("textBoxUserName.IconLeft");
             textBoxUserName.IconLeftSize = new Size(28, 28);
             textBoxUserName.IconRightOffset = new Point(5, 0);
             textBoxUserName.IconRightSize = new Size(28, 28);
-            textBoxUserName.Location = new Point(38, 195);
+            textBoxUserName.Location = new Point(38, 193);
             textBoxUserName.Margin = new Padding(2, 7, 2, 7);
             textBoxUserName.Name = "textBoxUserName";
             textBoxUserName.PasswordChar = '\0';
@@ -292,7 +292,7 @@
             textBoxUserName.PlaceholderText = "";
             textBoxUserName.SelectedText = "";
             textBoxUserName.ShadowDecoration.CustomizableEdges = customizableEdges8;
-            textBoxUserName.Size = new Size(402, 33);
+            textBoxUserName.Size = new Size(402, 50);
             textBoxUserName.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             textBoxUserName.TabIndex = 7;
             textBoxUserName.TextOffset = new Point(7, 0);
@@ -303,7 +303,7 @@
             textBoxPassword.AutoRoundedCorners = true;
             textBoxPassword.BackColor = SystemColors.Control;
             textBoxPassword.BorderColor = Color.FromArgb(255, 199, 39);
-            textBoxPassword.BorderRadius = 15;
+            textBoxPassword.BorderRadius = 21;
             textBoxPassword.BorderThickness = 3;
             textBoxPassword.Cursor = Cursors.IBeam;
             textBoxPassword.CustomizableEdges = customizableEdges9;
@@ -314,14 +314,14 @@
             textBoxPassword.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
             textBoxPassword.FillColor = Color.WhiteSmoke;
             textBoxPassword.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            textBoxPassword.Font = new Font("Bahnschrift SemiLight SemiConde", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxPassword.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxPassword.ForeColor = Color.DimGray;
             textBoxPassword.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
             textBoxPassword.IconLeft = (Image)resources.GetObject("textBoxPassword.IconLeft");
             textBoxPassword.IconLeftSize = new Size(28, 28);
             textBoxPassword.IconRightOffset = new Point(5, 0);
             textBoxPassword.IconRightSize = new Size(28, 28);
-            textBoxPassword.Location = new Point(38, 241);
+            textBoxPassword.Location = new Point(38, 257);
             textBoxPassword.Margin = new Padding(2, 7, 2, 7);
             textBoxPassword.Name = "textBoxPassword";
             textBoxPassword.PasswordChar = '*';
@@ -329,7 +329,7 @@
             textBoxPassword.PlaceholderText = "";
             textBoxPassword.SelectedText = "";
             textBoxPassword.ShadowDecoration.CustomizableEdges = customizableEdges10;
-            textBoxPassword.Size = new Size(402, 33);
+            textBoxPassword.Size = new Size(402, 44);
             textBoxPassword.Style = Guna.UI2.WinForms.Enums.TextBoxStyle.Material;
             textBoxPassword.TabIndex = 8;
             textBoxPassword.TextOffset = new Point(7, 0);
@@ -342,15 +342,15 @@
             buttonLogin.CustomizableEdges = customizableEdges11;
             buttonLogin.FillColor = Color.FromArgb(255, 199, 39);
             buttonLogin.FillColor2 = Color.DarkOrange;
-            buttonLogin.Font = new Font("Bahnschrift", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonLogin.Font = new Font("Bahnschrift", 15F, FontStyle.Regular, GraphicsUnit.Point);
             buttonLogin.ForeColor = Color.White;
             buttonLogin.HoverState.FillColor = Color.OliveDrab;
             buttonLogin.HoverState.FillColor2 = Color.YellowGreen;
             buttonLogin.Image = (Image)resources.GetObject("buttonLogin.Image");
             buttonLogin.ImageAlign = HorizontalAlignment.Left;
             buttonLogin.ImageOffset = new Point(20, 1);
-            buttonLogin.Location = new Point(174, 312);
-            buttonLogin.Margin = new Padding(4, 4, 4, 4);
+            buttonLogin.Location = new Point(136, 316);
+            buttonLogin.Margin = new Padding(4);
             buttonLogin.Name = "buttonLogin";
             buttonLogin.ShadowDecoration.BorderRadius = 30;
             buttonLogin.ShadowDecoration.Color = Color.Silver;
@@ -358,7 +358,7 @@
             buttonLogin.ShadowDecoration.Depth = 5;
             buttonLogin.ShadowDecoration.Enabled = true;
             buttonLogin.ShadowDecoration.Shadow = new Padding(8);
-            buttonLogin.Size = new Size(131, 37);
+            buttonLogin.Size = new Size(156, 37);
             buttonLogin.TabIndex = 6;
             buttonLogin.Text = "Login";
             buttonLogin.TextOffset = new Point(10, 0);
@@ -383,7 +383,7 @@
             guna2Panel2.Dock = DockStyle.Right;
             guna2Panel2.FillColor = Color.WhiteSmoke;
             guna2Panel2.Location = new Point(470, 0);
-            guna2Panel2.Margin = new Padding(4, 4, 4, 4);
+            guna2Panel2.Margin = new Padding(4);
             guna2Panel2.Name = "guna2Panel2";
             guna2Panel2.ShadowDecoration.CustomizableEdges = customizableEdges24;
             guna2Panel2.Size = new Size(366, 420);
@@ -393,7 +393,7 @@
             // 
             guna2CirclePictureBox2.Image = (Image)resources.GetObject("guna2CirclePictureBox2.Image");
             guna2CirclePictureBox2.ImageRotate = 0F;
-            guna2CirclePictureBox2.Location = new Point(15, 66);
+            guna2CirclePictureBox2.Location = new Point(15, 63);
             guna2CirclePictureBox2.Name = "guna2CirclePictureBox2";
             guna2CirclePictureBox2.ShadowDecoration.CustomizableEdges = customizableEdges13;
             guna2CirclePictureBox2.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
@@ -410,7 +410,7 @@
             label1.BackColor = Color.WhiteSmoke;
             label1.Font = new Font("Bahnschrift", 8F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = SystemColors.ControlDarkDark;
-            label1.Location = new Point(226, 402);
+            label1.Location = new Point(226, 401);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(130, 13);
@@ -426,7 +426,7 @@
             guna2ControlBox3.FillColor = Color.Transparent;
             guna2ControlBox3.IconColor = Color.Black;
             guna2ControlBox3.Location = new Point(905, 14);
-            guna2ControlBox3.Margin = new Padding(4, 4, 4, 4);
+            guna2ControlBox3.Margin = new Padding(4);
             guna2ControlBox3.Name = "guna2ControlBox3";
             guna2ControlBox3.ShadowDecoration.CustomizableEdges = customizableEdges15;
             guna2ControlBox3.Size = new Size(32, 28);
@@ -440,7 +440,7 @@
             guna2ControlBox4.FillColor = Color.Transparent;
             guna2ControlBox4.IconColor = Color.Black;
             guna2ControlBox4.Location = new Point(943, 14);
-            guna2ControlBox4.Margin = new Padding(4, 4, 4, 4);
+            guna2ControlBox4.Margin = new Padding(4);
             guna2ControlBox4.Name = "guna2ControlBox4";
             guna2ControlBox4.ShadowDecoration.CustomizableEdges = customizableEdges17;
             guna2ControlBox4.Size = new Size(32, 28);
@@ -467,7 +467,7 @@
             guna2ControlBox1.FillColor = Color.Transparent;
             guna2ControlBox1.IconColor = Color.Black;
             guna2ControlBox1.Location = new Point(321, 13);
-            guna2ControlBox1.Margin = new Padding(4, 4, 4, 4);
+            guna2ControlBox1.Margin = new Padding(4);
             guna2ControlBox1.Name = "guna2ControlBox1";
             guna2ControlBox1.ShadowDecoration.CustomizableEdges = customizableEdges20;
             guna2ControlBox1.Size = new Size(32, 28);
@@ -483,7 +483,7 @@
             guna2ControlBox2.FillColor = Color.Transparent;
             guna2ControlBox2.IconColor = Color.Black;
             guna2ControlBox2.Location = new Point(283, 13);
-            guna2ControlBox2.Margin = new Padding(4, 4, 4, 4);
+            guna2ControlBox2.Margin = new Padding(4);
             guna2ControlBox2.Name = "guna2ControlBox2";
             guna2ControlBox2.ShadowDecoration.CustomizableEdges = customizableEdges22;
             guna2ControlBox2.Size = new Size(32, 28);
@@ -509,7 +509,7 @@
             Controls.Add(guna2Panel1);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
-            Margin = new Padding(4, 4, 4, 4);
+            Margin = new Padding(4);
             Name = "Login";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login Screen";

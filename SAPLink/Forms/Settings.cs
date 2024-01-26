@@ -35,7 +35,7 @@ namespace SAPLink.Forms
             //_priceLevel = new PriceLevel();
             //_season = new Season();
 
-            administrationService= new AdministrationService(_client);
+            administrationService = new AdministrationService(_client);
             LoadSubsidiary();
             LoadCredentials();
             toggleActiveUILog.Checked = _credentials.ActiveLog;
@@ -44,8 +44,6 @@ namespace SAPLink.Forms
 
         private void LoadCredentials()
         {
-            guna2TabControl1.SelectedIndex = 1;
-
             var clients = _unitOfWork.Clients.GetAll().OrderBy(x => x.Id);
             var allCredentials = _unitOfWork.Credentials.GetAll().OrderBy(x => x.EnvironmentCode);
 
@@ -527,5 +525,6 @@ namespace SAPLink.Forms
             {
             }
         }
+
     }
 }
