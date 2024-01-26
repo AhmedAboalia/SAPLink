@@ -61,10 +61,10 @@ public partial class OutboundData : Form
         _itemsService = itemsService;
         _departmentService = departmentService;
     }
-    
+
 
     #endregion
-    
+
     private async void buttonSyncNow_Click(object sender, EventArgs e)
     {
         var documentType = (OutboundDocuments)comboBoxDocTypeSync.SelectedIndex;
@@ -334,7 +334,7 @@ public partial class OutboundData : Form
     {
         return isARDownPayment && !CheckInvoiceExist(sInvoice.Sid, "ODPI");
     }
-    
+
     private async Task HandleInvoices(List<PrismInvoice> invoicesList, UpdateType updateType, string wholesaleCustomerCode = "")
     {
         PlaySound.Click();
@@ -736,7 +736,7 @@ public partial class OutboundData : Form
         //else if (comboBoxDocTypeSyncIndex == (int)Documents.GoodsIssue)
         //    toggleGoodsIssue.Checked = true;
     }
-    
+
     private async void OutboundData_Load(object sender, EventArgs e)
     {
         comboBoxDocTypeSync.SelectedIndex = (int)OutboundDocuments.SalesInvoice;
@@ -968,7 +968,7 @@ public partial class OutboundData : Form
     private void textBoxDocCode_KeyDown(object sender, KeyEventArgs e)
     {
         if (e.KeyCode == Keys.Enter)
-            buttonSyncNow.PerformClick();
+            buttonSync.PerformClick();
     }
 
     private void ClearSyncDataGridView()
@@ -1007,8 +1007,9 @@ public partial class OutboundData : Form
         var newAuth = await LoginManager.GetAuthSessionAsync(_credentials.BaseUri, _credentials.PrismUserName, _credentials.PrismPassword);
         if (newAuth.IsHasValue())
             labelStatus.Log("Status: Auth Session refreshed.", Logger.MessageTypes.Warning, Logger.MessageTime.Long);
-            else
+        else
             labelStatus.Log("Status: Cant refresh Auth-Session, Wait a few seconds before you try again.", Logger.MessageTypes.Error, Logger.MessageTime.Long);
     }
+
 }
 

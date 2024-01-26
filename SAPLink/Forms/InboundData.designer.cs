@@ -68,6 +68,17 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges28 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges29 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges30 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges37 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges38 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges39 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges40 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges41 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges42 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges43 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges44 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -81,17 +92,6 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges48 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges49 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges50 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges31 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges32 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges33 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges37 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges38 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges39 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges40 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges41 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges51 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges52 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges53 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -144,6 +144,7 @@
             toggleDepartments = new Guna2ToggleSwitch();
             label12 = new Label();
             tabPageSync = new TabPage();
+            label14 = new Label();
             guna2Shapes4 = new Guna2Shapes();
             label26 = new Label();
             tabControlManualSync = new Guna2TabControl();
@@ -164,7 +165,6 @@
             label22 = new Label();
             radioButtonDocId = new Guna2CustomRadioButton();
             label17 = new Label();
-            label14 = new Label();
             textBoxDocCode = new Guna2TextBox();
             label7 = new Label();
             dateTimePickerTo = new Guna2DateTimePicker();
@@ -178,19 +178,6 @@
             radioButtonNewDoc = new Guna2CustomRadioButton();
             radioButtonDate = new Guna2CustomRadioButton();
             label13 = new Label();
-            tabPageReports = new TabPage();
-            togglePrismActiveItems = new Guna2ToggleSwitch();
-            label18 = new Label();
-            guna2Shapes2 = new Guna2Shapes();
-            dataGridView = new Guna2DataGridView();
-            label28 = new Label();
-            guna2Button7 = new Guna2Button();
-            label9 = new Label();
-            label21 = new Label();
-            toggleNotSyncedItems = new Guna2ToggleSwitch();
-            label25 = new Label();
-            label27 = new Label();
-            toggleSyncedItems = new Guna2ToggleSwitch();
             tabPageSchedule = new TabPage();
             label4 = new Label();
             label20 = new Label();
@@ -205,6 +192,19 @@
             labelRepeatEvery = new Label();
             buttonScheduleIt = new Guna2Button();
             label3 = new Label();
+            tabPageReports = new TabPage();
+            togglePrismActiveItems = new Guna2ToggleSwitch();
+            label18 = new Label();
+            guna2Shapes2 = new Guna2Shapes();
+            dataGridView = new Guna2DataGridView();
+            label28 = new Label();
+            guna2Button7 = new Guna2Button();
+            label9 = new Label();
+            label21 = new Label();
+            toggleNotSyncedItems = new Guna2ToggleSwitch();
+            label25 = new Label();
+            label27 = new Label();
+            toggleSyncedItems = new Guna2ToggleSwitch();
             guna2Button4 = new Guna2Button();
             guna2Button3 = new Guna2Button();
             guna2Button2 = new Guna2Button();
@@ -232,9 +232,9 @@
             ((ISupportInitialize)dataGridViewSync).BeginInit();
             contextMenuSync.SuspendLayout();
             tabPage8.SuspendLayout();
+            tabPageSchedule.SuspendLayout();
             tabPageReports.SuspendLayout();
             ((ISupportInitialize)dataGridView).BeginInit();
-            tabPageSchedule.SuspendLayout();
             ((ISupportInitialize)MainPanel).BeginInit();
             SuspendLayout();
             // 
@@ -287,7 +287,7 @@
             label1.AutoSize = true;
             label1.BackColor = Color.White;
             label1.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.DimGray;
+            label1.ForeColor = Color.MediumTurquoise;
             label1.Location = new Point(172, 89);
             label1.Name = "label1";
             label1.Size = new Size(136, 25);
@@ -297,7 +297,7 @@
             // guna2Shapes1
             // 
             guna2Shapes1.BackColor = Color.White;
-            guna2Shapes1.FillColor = Color.DarkOrange;
+            guna2Shapes1.FillColor = Color.Turquoise;
             guna2Shapes1.LineThickness = 3;
             guna2Shapes1.Location = new Point(160, 109);
             guna2Shapes1.Name = "guna2Shapes1";
@@ -341,7 +341,7 @@
             // 
             labelStatus.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             labelStatus.BackColor = Color.White;
-            labelStatus.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            labelStatus.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             labelStatus.Location = new Point(197, 837);
             labelStatus.Name = "labelStatus";
             labelStatus.Size = new Size(1025, 19);
@@ -428,13 +428,13 @@
             guna2Shapes5.BackColor = Color.White;
             guna2Shapes5.FillColor = Color.SteelBlue;
             guna2Shapes5.LineThickness = 3;
-            guna2Shapes5.Location = new Point(-27, 26);
+            guna2Shapes5.Location = new Point(-13, 26);
             guna2Shapes5.Name = "guna2Shapes5";
             guna2Shapes5.PolygonSkip = 1;
             guna2Shapes5.Rotate = 0F;
             guna2Shapes5.RoundedEdges = customizableEdges4;
             guna2Shapes5.Shape = Guna.UI2.WinForms.Enums.ShapeType.Line;
-            guna2Shapes5.Size = new Size(438, 15);
+            guna2Shapes5.Size = new Size(306, 15);
             guna2Shapes5.TabIndex = 63;
             guna2Shapes5.Text = "guna2Shapes5";
             guna2Shapes5.Zoom = 80;
@@ -857,18 +857,30 @@
             tabPageSync.TabIndex = 2;
             tabPageSync.Text = "Sync";
             // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.BackColor = Color.Transparent;
+            label14.Font = new Font("Bahnschrift", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            label14.ForeColor = Color.Black;
+            label14.Location = new Point(14, 6);
+            label14.Name = "label14";
+            label14.Size = new Size(237, 23);
+            label14.TabIndex = 57;
+            label14.Text = "Document Synchronization";
+            // 
             // guna2Shapes4
             // 
             guna2Shapes4.BackColor = Color.White;
             guna2Shapes4.FillColor = Color.ForestGreen;
             guna2Shapes4.LineThickness = 3;
-            guna2Shapes4.Location = new Point(-28, 26);
+            guna2Shapes4.Location = new Point(-16, 26);
             guna2Shapes4.Name = "guna2Shapes4";
             guna2Shapes4.PolygonSkip = 1;
             guna2Shapes4.Rotate = 0F;
             guna2Shapes4.RoundedEdges = customizableEdges15;
             guna2Shapes4.Shape = Guna.UI2.WinForms.Enums.ShapeType.Line;
-            guna2Shapes4.Size = new Size(438, 15);
+            guna2Shapes4.Size = new Size(340, 15);
             guna2Shapes4.TabIndex = 62;
             guna2Shapes4.Text = "guna2Shapes4";
             guna2Shapes4.Zoom = 80;
@@ -1170,18 +1182,6 @@
             label17.TabIndex = 50;
             label17.Text = "Document No. :";
             // 
-            // label14
-            // 
-            label14.AutoSize = true;
-            label14.BackColor = Color.Transparent;
-            label14.Font = new Font("Bahnschrift", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            label14.ForeColor = Color.Black;
-            label14.Location = new Point(14, 6);
-            label14.Name = "label14";
-            label14.Size = new Size(237, 23);
-            label14.TabIndex = 57;
-            label14.Text = "Document Synchronization";
-            // 
             // textBoxDocCode
             // 
             textBoxDocCode.CustomizableEdges = customizableEdges19;
@@ -1193,7 +1193,7 @@
             textBoxDocCode.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             textBoxDocCode.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxDocCode.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            textBoxDocCode.Location = new Point(24, 215);
+            textBoxDocCode.Location = new Point(22, 215);
             textBoxDocCode.Margin = new Padding(3, 5, 3, 5);
             textBoxDocCode.Name = "textBoxDocCode";
             textBoxDocCode.PasswordChar = '\0';
@@ -1214,9 +1214,9 @@
             label7.ForeColor = Color.DimGray;
             label7.Location = new Point(22, 61);
             label7.Name = "label7";
-            label7.Size = new Size(100, 16);
+            label7.Size = new Size(97, 16);
             label7.TabIndex = 40;
-            label7.Text = "Document Type :";
+            label7.Text = "Document Type:";
             // 
             // dateTimePickerTo
             // 
@@ -1226,7 +1226,7 @@
             dateTimePickerTo.FillColor = Color.White;
             dateTimePickerTo.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             dateTimePickerTo.Format = DateTimePickerFormat.Short;
-            dateTimePickerTo.Location = new Point(24, 171);
+            dateTimePickerTo.Location = new Point(22, 171);
             dateTimePickerTo.Margin = new Padding(3, 2, 3, 2);
             dateTimePickerTo.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             dateTimePickerTo.MinDate = new DateTime(2000, 1, 1, 0, 0, 0, 0);
@@ -1285,7 +1285,7 @@
             dateTimePickerFrom.FillColor = Color.White;
             dateTimePickerFrom.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             dateTimePickerFrom.Format = DateTimePickerFormat.Short;
-            dateTimePickerFrom.Location = new Point(24, 124);
+            dateTimePickerFrom.Location = new Point(22, 124);
             dateTimePickerFrom.Margin = new Padding(3, 2, 3, 2);
             dateTimePickerFrom.MaxDate = new DateTime(9998, 12, 31, 0, 0, 0, 0);
             dateTimePickerFrom.MinDate = new DateTime(2000, 1, 1, 0, 0, 0, 0);
@@ -1346,7 +1346,7 @@
             comboBoxDocTypeSync.ForeColor = Color.FromArgb(68, 88, 112);
             comboBoxDocTypeSync.ItemHeight = 15;
             comboBoxDocTypeSync.Items.AddRange(new object[] { "Departments - (Item Groups)", "Vendors - (Business Partners)", "Inventory - (Items Master Data)", "Goods Receipt Po (GRPO)", "Goods Receipt (GR)", "Goods Issue (GI)", "Goods Return" });
-            comboBoxDocTypeSync.Location = new Point(24, 81);
+            comboBoxDocTypeSync.Location = new Point(22, 81);
             comboBoxDocTypeSync.Name = "comboBoxDocTypeSync";
             comboBoxDocTypeSync.ShadowDecoration.CustomizableEdges = customizableEdges28;
             comboBoxDocTypeSync.Size = new Size(548, 21);
@@ -1415,6 +1415,256 @@
             label13.TabIndex = 43;
             label13.Text = "By Date Range";
             // 
+            // tabPageSchedule
+            // 
+            tabPageSchedule.BackColor = Color.White;
+            tabPageSchedule.ContextMenuStrip = contextMenuRefreshAuth;
+            tabPageSchedule.Controls.Add(label4);
+            tabPageSchedule.Controls.Add(label20);
+            tabPageSchedule.Controls.Add(guna2Shapes3);
+            tabPageSchedule.Controls.Add(textBoxLogsSchedule);
+            tabPageSchedule.Controls.Add(label2);
+            tabPageSchedule.Controls.Add(TextBoxIntervalSchedule);
+            tabPageSchedule.Controls.Add(ComboBoxDaysOfWeek);
+            tabPageSchedule.Controls.Add(label19);
+            tabPageSchedule.Controls.Add(comboBoxDocTypeSchedule);
+            tabPageSchedule.Controls.Add(comboBoxRecurrenceSchedule);
+            tabPageSchedule.Controls.Add(labelRepeatEvery);
+            tabPageSchedule.Controls.Add(buttonScheduleIt);
+            tabPageSchedule.Controls.Add(label3);
+            tabPageSchedule.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
+            tabPageSchedule.ForeColor = Color.White;
+            tabPageSchedule.Location = new Point(4, 44);
+            tabPageSchedule.Margin = new Padding(3, 2, 3, 2);
+            tabPageSchedule.Name = "tabPageSchedule";
+            tabPageSchedule.Padding = new Padding(3, 2, 3, 2);
+            tabPageSchedule.Size = new Size(1079, 663);
+            tabPageSchedule.TabIndex = 0;
+            tabPageSchedule.Text = "Schedule";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.BackColor = Color.White;
+            label4.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.ForeColor = Color.DimGray;
+            label4.Location = new Point(22, 61);
+            label4.Name = "label4";
+            label4.Size = new Size(97, 16);
+            label4.TabIndex = 38;
+            label4.Text = "Document Type:";
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.BackColor = Color.Transparent;
+            label20.Font = new Font("Bahnschrift", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            label20.ForeColor = Color.Black;
+            label20.Location = new Point(14, 6);
+            label20.Name = "label20";
+            label20.Size = new Size(410, 23);
+            label20.TabIndex = 62;
+            label20.Text = "Recurring Document Synchronization Schedule";
+            // 
+            // guna2Shapes3
+            // 
+            guna2Shapes3.BackColor = Color.White;
+            guna2Shapes3.FillColor = Color.DeepSkyBlue;
+            guna2Shapes3.LineThickness = 3;
+            guna2Shapes3.Location = new Point(-34, 26);
+            guna2Shapes3.Name = "guna2Shapes3";
+            guna2Shapes3.PolygonSkip = 1;
+            guna2Shapes3.Rotate = 0F;
+            guna2Shapes3.RoundedEdges = customizableEdges31;
+            guna2Shapes3.Shape = Guna.UI2.WinForms.Enums.ShapeType.Line;
+            guna2Shapes3.Size = new Size(529, 15);
+            guna2Shapes3.TabIndex = 66;
+            guna2Shapes3.Text = "guna2Shapes3";
+            guna2Shapes3.Zoom = 80;
+            // 
+            // textBoxLogsSchedule
+            // 
+            textBoxLogsSchedule.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            textBoxLogsSchedule.BackColor = Color.WhiteSmoke;
+            textBoxLogsSchedule.BorderStyle = BorderStyle.None;
+            textBoxLogsSchedule.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxLogsSchedule.Location = new Point(29, 240);
+            textBoxLogsSchedule.Name = "textBoxLogsSchedule";
+            textBoxLogsSchedule.Size = new Size(1028, 395);
+            textBoxLogsSchedule.TabIndex = 65;
+            textBoxLogsSchedule.Text = "";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.BackColor = Color.Transparent;
+            label2.Font = new Font("Bahnschrift", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            label2.ForeColor = Color.Black;
+            label2.Location = new Point(29, 210);
+            label2.Name = "label2";
+            label2.Size = new Size(51, 23);
+            label2.TabIndex = 64;
+            label2.Text = "Logs";
+            // 
+            // TextBoxIntervalSchedule
+            // 
+            TextBoxIntervalSchedule.CustomizableEdges = customizableEdges32;
+            TextBoxIntervalSchedule.DefaultText = "1";
+            TextBoxIntervalSchedule.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            TextBoxIntervalSchedule.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            TextBoxIntervalSchedule.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            TextBoxIntervalSchedule.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            TextBoxIntervalSchedule.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            TextBoxIntervalSchedule.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            TextBoxIntervalSchedule.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            TextBoxIntervalSchedule.Location = new Point(22, 171);
+            TextBoxIntervalSchedule.Margin = new Padding(3, 6, 3, 6);
+            TextBoxIntervalSchedule.Name = "TextBoxIntervalSchedule";
+            TextBoxIntervalSchedule.PasswordChar = '\0';
+            TextBoxIntervalSchedule.PlaceholderForeColor = Color.Black;
+            TextBoxIntervalSchedule.PlaceholderText = "";
+            TextBoxIntervalSchedule.SelectedText = "";
+            TextBoxIntervalSchedule.ShadowDecoration.CustomizableEdges = customizableEdges33;
+            TextBoxIntervalSchedule.Size = new Size(395, 25);
+            TextBoxIntervalSchedule.TabIndex = 45;
+            TextBoxIntervalSchedule.TextChanged += TextBoxIntervalSchedule_TextChanged;
+            TextBoxIntervalSchedule.Enter += PlayClickSound;
+            TextBoxIntervalSchedule.Validated += comboBoxRecurrence_SelectedIndexChanged;
+            // 
+            // ComboBoxDaysOfWeek
+            // 
+            ComboBoxDaysOfWeek.AutoCompleteCustomSource.AddRange(new string[] { "Hourly", "Daily", "None" });
+            ComboBoxDaysOfWeek.BackColor = Color.Transparent;
+            ComboBoxDaysOfWeek.CustomizableEdges = customizableEdges34;
+            ComboBoxDaysOfWeek.DrawMode = DrawMode.OwnerDrawFixed;
+            ComboBoxDaysOfWeek.DropDownStyle = ComboBoxStyle.DropDownList;
+            ComboBoxDaysOfWeek.FocusedColor = Color.FromArgb(94, 148, 255);
+            ComboBoxDaysOfWeek.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            ComboBoxDaysOfWeek.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            ComboBoxDaysOfWeek.ForeColor = Color.FromArgb(68, 88, 112);
+            ComboBoxDaysOfWeek.ItemHeight = 15;
+            ComboBoxDaysOfWeek.Items.AddRange(new object[] { "Sunday", "Monday", "Thursday", "Wednesday", "Friday", "Saturday" });
+            ComboBoxDaysOfWeek.Location = new Point(24, 173);
+            ComboBoxDaysOfWeek.Name = "ComboBoxDaysOfWeek";
+            ComboBoxDaysOfWeek.ShadowDecoration.CustomizableEdges = customizableEdges35;
+            ComboBoxDaysOfWeek.Size = new Size(395, 21);
+            ComboBoxDaysOfWeek.TabIndex = 40;
+            ComboBoxDaysOfWeek.Visible = false;
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.BackColor = Color.Transparent;
+            label19.Font = new Font("Bahnschrift", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            label19.ForeColor = Color.DimGray;
+            label19.Location = new Point(14, 38);
+            label19.Name = "label19";
+            label19.Size = new Size(386, 28);
+            label19.TabIndex = 63;
+            label19.Text = "Please select the document type, repeats for Schedule synchronization.\r\n.\r\n";
+            // 
+            // comboBoxDocTypeSchedule
+            // 
+            comboBoxDocTypeSchedule.AutoCompleteCustomSource.AddRange(new string[] { "Departments", "Vendors", "Items", "Goods Receipt Po (GRPO)", "Goods Receipt (GR)", "Goods Issue (GI)" });
+            comboBoxDocTypeSchedule.BackColor = Color.Transparent;
+            comboBoxDocTypeSchedule.CustomizableEdges = customizableEdges36;
+            comboBoxDocTypeSchedule.DrawMode = DrawMode.OwnerDrawFixed;
+            comboBoxDocTypeSchedule.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxDocTypeSchedule.FocusedColor = Color.FromArgb(94, 148, 255);
+            comboBoxDocTypeSchedule.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            comboBoxDocTypeSchedule.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxDocTypeSchedule.ForeColor = Color.FromArgb(68, 88, 112);
+            comboBoxDocTypeSchedule.ItemHeight = 15;
+            comboBoxDocTypeSchedule.Items.AddRange(new object[] { "Departments", "Vendors", "Items", "Goods Receipt Po (GRPO)", "Goods Receipt (GR)", "Goods Issue (GI)" });
+            comboBoxDocTypeSchedule.Location = new Point(22, 81);
+            comboBoxDocTypeSchedule.Name = "comboBoxDocTypeSchedule";
+            comboBoxDocTypeSchedule.ShadowDecoration.CustomizableEdges = customizableEdges37;
+            comboBoxDocTypeSchedule.Size = new Size(399, 21);
+            comboBoxDocTypeSchedule.TabIndex = 39;
+            comboBoxDocTypeSchedule.SelectedIndexChanged += ComboBoxDocuments_SelectedIndexChanged;
+            // 
+            // comboBoxRecurrenceSchedule
+            // 
+            comboBoxRecurrenceSchedule.AutoCompleteCustomSource.AddRange(new string[] { "Hourly", "Daily", "None" });
+            comboBoxRecurrenceSchedule.BackColor = Color.Transparent;
+            comboBoxRecurrenceSchedule.CustomizableEdges = customizableEdges38;
+            comboBoxRecurrenceSchedule.DrawMode = DrawMode.OwnerDrawFixed;
+            comboBoxRecurrenceSchedule.DropDownStyle = ComboBoxStyle.DropDownList;
+            comboBoxRecurrenceSchedule.FocusedColor = Color.FromArgb(94, 148, 255);
+            comboBoxRecurrenceSchedule.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            comboBoxRecurrenceSchedule.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBoxRecurrenceSchedule.ForeColor = Color.FromArgb(68, 88, 112);
+            comboBoxRecurrenceSchedule.ItemHeight = 15;
+            comboBoxRecurrenceSchedule.Items.AddRange(new object[] { "--None--", "Hourly", "Daily" });
+            comboBoxRecurrenceSchedule.Location = new Point(22, 124);
+            comboBoxRecurrenceSchedule.Name = "comboBoxRecurrenceSchedule";
+            comboBoxRecurrenceSchedule.ShadowDecoration.CustomizableEdges = customizableEdges39;
+            comboBoxRecurrenceSchedule.Size = new Size(399, 21);
+            comboBoxRecurrenceSchedule.TabIndex = 37;
+            comboBoxRecurrenceSchedule.SelectedIndexChanged += comboBoxRecurrence_SelectedIndexChanged;
+            // 
+            // labelRepeatEvery
+            // 
+            labelRepeatEvery.AutoSize = true;
+            labelRepeatEvery.BackColor = Color.White;
+            labelRepeatEvery.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+            labelRepeatEvery.ForeColor = Color.DimGray;
+            labelRepeatEvery.Location = new Point(22, 151);
+            labelRepeatEvery.Name = "labelRepeatEvery";
+            labelRepeatEvery.Size = new Size(62, 16);
+            labelRepeatEvery.TabIndex = 29;
+            labelRepeatEvery.Text = "In Minute:";
+            // 
+            // buttonScheduleIt
+            // 
+            buttonScheduleIt.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonScheduleIt.BackColor = Color.Transparent;
+            buttonScheduleIt.BorderColor = Color.Gainsboro;
+            buttonScheduleIt.BorderRadius = 10;
+            buttonScheduleIt.BorderThickness = 1;
+            buttonScheduleIt.CustomBorderColor = Color.WhiteSmoke;
+            buttonScheduleIt.CustomBorderThickness = new Padding(1);
+            buttonScheduleIt.CustomizableEdges = customizableEdges40;
+            buttonScheduleIt.DisabledState.BorderColor = Color.DarkGray;
+            buttonScheduleIt.DisabledState.CustomBorderColor = Color.DarkGray;
+            buttonScheduleIt.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
+            buttonScheduleIt.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
+            buttonScheduleIt.FillColor = Color.WhiteSmoke;
+            buttonScheduleIt.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            buttonScheduleIt.ForeColor = Color.DarkSlateGray;
+            buttonScheduleIt.HoverState.FillColor = Color.Gold;
+            buttonScheduleIt.ImageAlign = HorizontalAlignment.Left;
+            buttonScheduleIt.ImageOffset = new Point(25, 18);
+            buttonScheduleIt.ImageSize = new Size(35, 35);
+            buttonScheduleIt.Location = new Point(810, 84);
+            buttonScheduleIt.Name = "buttonScheduleIt";
+            buttonScheduleIt.PressedColor = Color.PaleTurquoise;
+            buttonScheduleIt.ShadowDecoration.BorderRadius = 30;
+            buttonScheduleIt.ShadowDecoration.Color = Color.Silver;
+            buttonScheduleIt.ShadowDecoration.CustomizableEdges = customizableEdges41;
+            buttonScheduleIt.ShadowDecoration.Depth = 5;
+            buttonScheduleIt.ShadowDecoration.Enabled = true;
+            buttonScheduleIt.ShadowDecoration.Shadow = new Padding(8);
+            buttonScheduleIt.Size = new Size(125, 53);
+            buttonScheduleIt.TabIndex = 23;
+            buttonScheduleIt.Tag = "";
+            buttonScheduleIt.Text = "Start Schedule";
+            buttonScheduleIt.TextAlign = HorizontalAlignment.Left;
+            buttonScheduleIt.TextOffset = new Point(5, 0);
+            buttonScheduleIt.Tile = true;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.White;
+            label3.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.ForeColor = Color.DimGray;
+            label3.Location = new Point(22, 104);
+            label3.Name = "label3";
+            label3.Size = new Size(57, 16);
+            label3.TabIndex = 27;
+            label3.Text = "Repeats:";
+            // 
             // tabPageReports
             // 
             tabPageReports.BackColor = Color.White;
@@ -1477,7 +1727,7 @@
             guna2Shapes2.Rotate = 0F;
             guna2Shapes2.RoundedEdges = customizableEdges44;
             guna2Shapes2.Shape = Guna.UI2.WinForms.Enums.ShapeType.Line;
-            guna2Shapes2.Size = new Size(438, 15);
+            guna2Shapes2.Size = new Size(412, 15);
             guna2Shapes2.TabIndex = 61;
             guna2Shapes2.Text = "guna2Shapes2";
             guna2Shapes2.Zoom = 80;
@@ -1625,11 +1875,11 @@
             // 
             label21.AutoSize = true;
             label21.BackColor = Color.White;
-            label21.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+            label21.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             label21.ForeColor = Color.DimGray;
             label21.Location = new Point(99, 69);
             label21.Name = "label21";
-            label21.Size = new Size(78, 16);
+            label21.Size = new Size(88, 17);
             label21.TabIndex = 58;
             label21.Text = "Active Items";
             // 
@@ -1655,11 +1905,11 @@
             // 
             label25.AutoSize = true;
             label25.BackColor = Color.White;
-            label25.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+            label25.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             label25.ForeColor = Color.DimGray;
             label25.Location = new Point(99, 121);
             label25.Name = "label25";
-            label25.Size = new Size(107, 16);
+            label25.Size = new Size(122, 17);
             label25.TabIndex = 56;
             label25.Text = "Not Synced Items";
             // 
@@ -1667,11 +1917,11 @@
             // 
             label27.AutoSize = true;
             label27.BackColor = Color.White;
-            label27.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
+            label27.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             label27.ForeColor = Color.DimGray;
             label27.Location = new Point(99, 94);
             label27.Name = "label27";
-            label27.Size = new Size(84, 16);
+            label27.Size = new Size(95, 17);
             label27.TabIndex = 38;
             label27.Text = "Synced Items";
             // 
@@ -1693,256 +1943,6 @@
             toggleSyncedItems.UncheckedState.InnerColor = Color.White;
             toggleSyncedItems.CheckedChanged += toggleSyncedItems_CheckedChanged;
             // 
-            // tabPageSchedule
-            // 
-            tabPageSchedule.BackColor = Color.White;
-            tabPageSchedule.ContextMenuStrip = contextMenuRefreshAuth;
-            tabPageSchedule.Controls.Add(label4);
-            tabPageSchedule.Controls.Add(label20);
-            tabPageSchedule.Controls.Add(guna2Shapes3);
-            tabPageSchedule.Controls.Add(textBoxLogsSchedule);
-            tabPageSchedule.Controls.Add(label2);
-            tabPageSchedule.Controls.Add(TextBoxIntervalSchedule);
-            tabPageSchedule.Controls.Add(ComboBoxDaysOfWeek);
-            tabPageSchedule.Controls.Add(label19);
-            tabPageSchedule.Controls.Add(comboBoxDocTypeSchedule);
-            tabPageSchedule.Controls.Add(comboBoxRecurrenceSchedule);
-            tabPageSchedule.Controls.Add(labelRepeatEvery);
-            tabPageSchedule.Controls.Add(buttonScheduleIt);
-            tabPageSchedule.Controls.Add(label3);
-            tabPageSchedule.Font = new Font("Segoe UI", 7F, FontStyle.Regular, GraphicsUnit.Point);
-            tabPageSchedule.ForeColor = Color.White;
-            tabPageSchedule.Location = new Point(4, 44);
-            tabPageSchedule.Margin = new Padding(3, 2, 3, 2);
-            tabPageSchedule.Name = "tabPageSchedule";
-            tabPageSchedule.Padding = new Padding(3, 2, 3, 2);
-            tabPageSchedule.Size = new Size(1079, 663);
-            tabPageSchedule.TabIndex = 0;
-            tabPageSchedule.Text = "Schedule Syncs";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.BackColor = Color.White;
-            label4.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.ForeColor = Color.DimGray;
-            label4.Location = new Point(22, 61);
-            label4.Name = "label4";
-            label4.Size = new Size(97, 16);
-            label4.TabIndex = 38;
-            label4.Text = "Document Type:";
-            // 
-            // label20
-            // 
-            label20.AutoSize = true;
-            label20.BackColor = Color.Transparent;
-            label20.Font = new Font("Bahnschrift", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            label20.ForeColor = Color.Black;
-            label20.Location = new Point(14, 6);
-            label20.Name = "label20";
-            label20.Size = new Size(410, 23);
-            label20.TabIndex = 62;
-            label20.Text = "Recurring Document Synchronization Schedule";
-            // 
-            // guna2Shapes3
-            // 
-            guna2Shapes3.BackColor = Color.White;
-            guna2Shapes3.FillColor = Color.DeepSkyBlue;
-            guna2Shapes3.LineThickness = 3;
-            guna2Shapes3.Location = new Point(-33, 26);
-            guna2Shapes3.Name = "guna2Shapes3";
-            guna2Shapes3.PolygonSkip = 1;
-            guna2Shapes3.Rotate = 0F;
-            guna2Shapes3.RoundedEdges = customizableEdges31;
-            guna2Shapes3.Shape = Guna.UI2.WinForms.Enums.ShapeType.Line;
-            guna2Shapes3.Size = new Size(508, 15);
-            guna2Shapes3.TabIndex = 66;
-            guna2Shapes3.Text = "guna2Shapes3";
-            guna2Shapes3.Zoom = 80;
-            // 
-            // textBoxLogsSchedule
-            // 
-            textBoxLogsSchedule.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            textBoxLogsSchedule.BackColor = Color.WhiteSmoke;
-            textBoxLogsSchedule.BorderStyle = BorderStyle.None;
-            textBoxLogsSchedule.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            textBoxLogsSchedule.Location = new Point(29, 240);
-            textBoxLogsSchedule.Name = "textBoxLogsSchedule";
-            textBoxLogsSchedule.Size = new Size(1028, 395);
-            textBoxLogsSchedule.TabIndex = 65;
-            textBoxLogsSchedule.Text = "";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Bahnschrift", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            label2.ForeColor = Color.Black;
-            label2.Location = new Point(29, 210);
-            label2.Name = "label2";
-            label2.Size = new Size(51, 23);
-            label2.TabIndex = 64;
-            label2.Text = "Logs";
-            // 
-            // TextBoxIntervalSchedule
-            // 
-            TextBoxIntervalSchedule.CustomizableEdges = customizableEdges32;
-            TextBoxIntervalSchedule.DefaultText = "1";
-            TextBoxIntervalSchedule.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
-            TextBoxIntervalSchedule.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
-            TextBoxIntervalSchedule.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
-            TextBoxIntervalSchedule.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
-            TextBoxIntervalSchedule.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            TextBoxIntervalSchedule.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            TextBoxIntervalSchedule.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            TextBoxIntervalSchedule.Location = new Point(24, 171);
-            TextBoxIntervalSchedule.Margin = new Padding(3, 6, 3, 6);
-            TextBoxIntervalSchedule.Name = "TextBoxIntervalSchedule";
-            TextBoxIntervalSchedule.PasswordChar = '\0';
-            TextBoxIntervalSchedule.PlaceholderForeColor = Color.Black;
-            TextBoxIntervalSchedule.PlaceholderText = "";
-            TextBoxIntervalSchedule.SelectedText = "";
-            TextBoxIntervalSchedule.ShadowDecoration.CustomizableEdges = customizableEdges33;
-            TextBoxIntervalSchedule.Size = new Size(395, 25);
-            TextBoxIntervalSchedule.TabIndex = 45;
-            TextBoxIntervalSchedule.TextChanged += TextBoxIntervalSchedule_TextChanged;
-            TextBoxIntervalSchedule.Enter += PlayClickSound;
-            TextBoxIntervalSchedule.Validated += comboBoxRecurrence_SelectedIndexChanged;
-            // 
-            // ComboBoxDaysOfWeek
-            // 
-            ComboBoxDaysOfWeek.AutoCompleteCustomSource.AddRange(new string[] { "Hourly", "Daily", "None" });
-            ComboBoxDaysOfWeek.BackColor = Color.Transparent;
-            ComboBoxDaysOfWeek.CustomizableEdges = customizableEdges34;
-            ComboBoxDaysOfWeek.DrawMode = DrawMode.OwnerDrawFixed;
-            ComboBoxDaysOfWeek.DropDownStyle = ComboBoxStyle.DropDownList;
-            ComboBoxDaysOfWeek.FocusedColor = Color.FromArgb(94, 148, 255);
-            ComboBoxDaysOfWeek.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            ComboBoxDaysOfWeek.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            ComboBoxDaysOfWeek.ForeColor = Color.FromArgb(68, 88, 112);
-            ComboBoxDaysOfWeek.ItemHeight = 15;
-            ComboBoxDaysOfWeek.Items.AddRange(new object[] { "Sunday", "Monday", "Thursday", "Wednesday", "Friday", "Saturday" });
-            ComboBoxDaysOfWeek.Location = new Point(24, 173);
-            ComboBoxDaysOfWeek.Name = "ComboBoxDaysOfWeek";
-            ComboBoxDaysOfWeek.ShadowDecoration.CustomizableEdges = customizableEdges35;
-            ComboBoxDaysOfWeek.Size = new Size(395, 21);
-            ComboBoxDaysOfWeek.TabIndex = 40;
-            ComboBoxDaysOfWeek.Visible = false;
-            // 
-            // label19
-            // 
-            label19.AutoSize = true;
-            label19.BackColor = Color.Transparent;
-            label19.Font = new Font("Bahnschrift", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            label19.ForeColor = Color.DimGray;
-            label19.Location = new Point(14, 38);
-            label19.Name = "label19";
-            label19.Size = new Size(386, 28);
-            label19.TabIndex = 63;
-            label19.Text = "Please select the document type, repeats for Schedule synchronization.\r\n.\r\n";
-            // 
-            // comboBoxDocTypeSchedule
-            // 
-            comboBoxDocTypeSchedule.AutoCompleteCustomSource.AddRange(new string[] { "Departments", "Vendors", "Items", "Goods Receipt Po (GRPO)", "Goods Receipt (GR)", "Goods Issue (GI)" });
-            comboBoxDocTypeSchedule.BackColor = Color.Transparent;
-            comboBoxDocTypeSchedule.CustomizableEdges = customizableEdges36;
-            comboBoxDocTypeSchedule.DrawMode = DrawMode.OwnerDrawFixed;
-            comboBoxDocTypeSchedule.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxDocTypeSchedule.FocusedColor = Color.FromArgb(94, 148, 255);
-            comboBoxDocTypeSchedule.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            comboBoxDocTypeSchedule.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBoxDocTypeSchedule.ForeColor = Color.FromArgb(68, 88, 112);
-            comboBoxDocTypeSchedule.ItemHeight = 15;
-            comboBoxDocTypeSchedule.Items.AddRange(new object[] { "Departments", "Vendors", "Items", "Goods Receipt Po (GRPO)", "Goods Receipt (GR)", "Goods Issue (GI)" });
-            comboBoxDocTypeSchedule.Location = new Point(24, 81);
-            comboBoxDocTypeSchedule.Name = "comboBoxDocTypeSchedule";
-            comboBoxDocTypeSchedule.ShadowDecoration.CustomizableEdges = customizableEdges37;
-            comboBoxDocTypeSchedule.Size = new Size(399, 21);
-            comboBoxDocTypeSchedule.TabIndex = 39;
-            comboBoxDocTypeSchedule.SelectedIndexChanged += ComboBoxDocuments_SelectedIndexChanged;
-            // 
-            // comboBoxRecurrenceSchedule
-            // 
-            comboBoxRecurrenceSchedule.AutoCompleteCustomSource.AddRange(new string[] { "Hourly", "Daily", "None" });
-            comboBoxRecurrenceSchedule.BackColor = Color.Transparent;
-            comboBoxRecurrenceSchedule.CustomizableEdges = customizableEdges38;
-            comboBoxRecurrenceSchedule.DrawMode = DrawMode.OwnerDrawFixed;
-            comboBoxRecurrenceSchedule.DropDownStyle = ComboBoxStyle.DropDownList;
-            comboBoxRecurrenceSchedule.FocusedColor = Color.FromArgb(94, 148, 255);
-            comboBoxRecurrenceSchedule.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
-            comboBoxRecurrenceSchedule.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBoxRecurrenceSchedule.ForeColor = Color.FromArgb(68, 88, 112);
-            comboBoxRecurrenceSchedule.ItemHeight = 15;
-            comboBoxRecurrenceSchedule.Items.AddRange(new object[] { "--None--", "Hourly", "Daily" });
-            comboBoxRecurrenceSchedule.Location = new Point(24, 124);
-            comboBoxRecurrenceSchedule.Name = "comboBoxRecurrenceSchedule";
-            comboBoxRecurrenceSchedule.ShadowDecoration.CustomizableEdges = customizableEdges39;
-            comboBoxRecurrenceSchedule.Size = new Size(399, 21);
-            comboBoxRecurrenceSchedule.TabIndex = 37;
-            comboBoxRecurrenceSchedule.SelectedIndexChanged += comboBoxRecurrence_SelectedIndexChanged;
-            // 
-            // labelRepeatEvery
-            // 
-            labelRepeatEvery.AutoSize = true;
-            labelRepeatEvery.BackColor = Color.White;
-            labelRepeatEvery.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-            labelRepeatEvery.ForeColor = Color.DimGray;
-            labelRepeatEvery.Location = new Point(22, 151);
-            labelRepeatEvery.Name = "labelRepeatEvery";
-            labelRepeatEvery.Size = new Size(62, 16);
-            labelRepeatEvery.TabIndex = 29;
-            labelRepeatEvery.Text = "In Minute:";
-            // 
-            // buttonScheduleIt
-            // 
-            buttonScheduleIt.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            buttonScheduleIt.BackColor = Color.Transparent;
-            buttonScheduleIt.BorderColor = Color.Gainsboro;
-            buttonScheduleIt.BorderRadius = 10;
-            buttonScheduleIt.BorderThickness = 1;
-            buttonScheduleIt.CustomBorderColor = Color.WhiteSmoke;
-            buttonScheduleIt.CustomBorderThickness = new Padding(1);
-            buttonScheduleIt.CustomizableEdges = customizableEdges40;
-            buttonScheduleIt.DisabledState.BorderColor = Color.DarkGray;
-            buttonScheduleIt.DisabledState.CustomBorderColor = Color.DarkGray;
-            buttonScheduleIt.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
-            buttonScheduleIt.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
-            buttonScheduleIt.FillColor = Color.WhiteSmoke;
-            buttonScheduleIt.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            buttonScheduleIt.ForeColor = Color.DarkSlateGray;
-            buttonScheduleIt.HoverState.FillColor = Color.Gold;
-            buttonScheduleIt.ImageAlign = HorizontalAlignment.Left;
-            buttonScheduleIt.ImageOffset = new Point(25, 18);
-            buttonScheduleIt.ImageSize = new Size(35, 35);
-            buttonScheduleIt.Location = new Point(810, 84);
-            buttonScheduleIt.Name = "buttonScheduleIt";
-            buttonScheduleIt.PressedColor = Color.PaleTurquoise;
-            buttonScheduleIt.ShadowDecoration.BorderRadius = 30;
-            buttonScheduleIt.ShadowDecoration.Color = Color.Silver;
-            buttonScheduleIt.ShadowDecoration.CustomizableEdges = customizableEdges41;
-            buttonScheduleIt.ShadowDecoration.Depth = 5;
-            buttonScheduleIt.ShadowDecoration.Enabled = true;
-            buttonScheduleIt.ShadowDecoration.Shadow = new Padding(8);
-            buttonScheduleIt.Size = new Size(125, 53);
-            buttonScheduleIt.TabIndex = 23;
-            buttonScheduleIt.Tag = "";
-            buttonScheduleIt.Text = "Start Schedule";
-            buttonScheduleIt.TextAlign = HorizontalAlignment.Left;
-            buttonScheduleIt.TextOffset = new Point(5, 0);
-            buttonScheduleIt.Tile = true;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.BackColor = Color.White;
-            label3.Font = new Font("Bahnschrift", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.ForeColor = Color.DimGray;
-            label3.Location = new Point(22, 104);
-            label3.Name = "label3";
-            label3.Size = new Size(57, 16);
-            label3.TabIndex = 27;
-            label3.Text = "Repeats:";
-            // 
             // guna2Button4
             // 
             guna2Button4.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
@@ -1954,7 +1954,7 @@
             guna2Button4.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             guna2Button4.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             guna2Button4.FillColor = Color.White;
-            guna2Button4.Font = new Font("Segoe UI", 7.5F, FontStyle.Bold, GraphicsUnit.Point);
+            guna2Button4.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             guna2Button4.ForeColor = Color.Black;
             guna2Button4.HoverState.FillColor = Color.Gold;
             guna2Button4.Image = (Image)resources.GetObject("guna2Button4.Image");
@@ -1984,7 +1984,7 @@
             guna2Button3.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             guna2Button3.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             guna2Button3.FillColor = Color.White;
-            guna2Button3.Font = new Font("Segoe UI", 7.5F, FontStyle.Bold, GraphicsUnit.Point);
+            guna2Button3.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             guna2Button3.ForeColor = Color.Black;
             guna2Button3.HoverState.FillColor = Color.PaleTurquoise;
             guna2Button3.Image = (Image)resources.GetObject("guna2Button3.Image");
@@ -2000,7 +2000,7 @@
             guna2Button3.ShadowDecoration.Shadow = new Padding(8);
             guna2Button3.Size = new Size(128, 40);
             guna2Button3.TabIndex = 18;
-            guna2Button3.Text = "Outbound Data";
+            guna2Button3.Text = "Outbound";
             guna2Button3.TextAlign = HorizontalAlignment.Left;
             guna2Button3.Click += ButtonOutboundData_Click;
             // 
@@ -2014,7 +2014,7 @@
             guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             guna2Button2.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             guna2Button2.FillColor = Color.Gold;
-            guna2Button2.Font = new Font("Segoe UI", 7.5F, FontStyle.Bold, GraphicsUnit.Point);
+            guna2Button2.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             guna2Button2.ForeColor = Color.Black;
             guna2Button2.Image = (Image)resources.GetObject("guna2Button2.Image");
             guna2Button2.ImageAlign = HorizontalAlignment.Left;
@@ -2030,7 +2030,7 @@
             guna2Button2.Size = new Size(128, 40);
             guna2Button2.TabIndex = 19;
             guna2Button2.Tag = "Inbound Data";
-            guna2Button2.Text = "Inbound Data";
+            guna2Button2.Text = "Inbound";
             guna2Button2.TextAlign = HorizontalAlignment.Left;
             // 
             // guna2Button1
@@ -2043,7 +2043,7 @@
             guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
             guna2Button1.DisabledState.ForeColor = Color.FromArgb(141, 141, 141);
             guna2Button1.FillColor = Color.White;
-            guna2Button1.Font = new Font("Segoe UI", 7.5F, FontStyle.Bold, GraphicsUnit.Point);
+            guna2Button1.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             guna2Button1.ForeColor = Color.Black;
             guna2Button1.HoverState.FillColor = Color.PaleTurquoise;
             guna2Button1.Image = (Image)resources.GetObject("guna2Button1.Image");
@@ -2182,11 +2182,11 @@
             ((ISupportInitialize)dataGridViewSync).EndInit();
             contextMenuSync.ResumeLayout(false);
             tabPage8.ResumeLayout(false);
+            tabPageSchedule.ResumeLayout(false);
+            tabPageSchedule.PerformLayout();
             tabPageReports.ResumeLayout(false);
             tabPageReports.PerformLayout();
             ((ISupportInitialize)dataGridView).EndInit();
-            tabPageSchedule.ResumeLayout(false);
-            tabPageSchedule.PerformLayout();
             ((ISupportInitialize)MainPanel).EndInit();
             ResumeLayout(false);
         }
