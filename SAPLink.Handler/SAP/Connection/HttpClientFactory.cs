@@ -1,12 +1,36 @@
 ﻿using Microsoft.Identity.Client.Platforms.Features.DesktopOs.Kerberos;
 using SAPLink.Core.Models.System;
 using SAPLink.Core.Utilities;
+using SAPLink.EF.Data;
+using SAPLink.EF;
 using SAPLink.Handler.SAP.Connection;
 
 namespace SAPLink.Handler.Connection;
 
-public partial class HttpClientFactory<T> where T : class
+public partial class SAPHttpClientFactory
 {
+    private static RestClient ApiClient { get; set; }
+    public static string LastErrorMessage { get; private set; }
+    private static RestRequest Request { get; set; }
+
+    private ApplicationDbContext Context = new();
+    private UnitOfWork UnitOfWork = null;
+
+    static string[] includes = null;
+    private static Clients Client = null;
+
+    private static Credentials Credential = null;
+    //private static Subsidiaries subsidiary = Credential.Subsidiaries.FirstOrDefault();
+
+    public SAPHttpClientFactory()
+    {
+        Context = new();
+        UnitOfWork = new(Context);
+        includes = new[] { "Credentials", "Credentials.Subsidiaries" };
+
+        Client = UnitOfWork.Clients.FindAsync(c => c.Active == true, includes).Result;
+        Credential = Client.Credentials.FirstOrDefault();
+    }
     public static IRestResponse Initialize(string resource, Method method,Clients clients,
         LoginModel.LoginTypes LoginTypes = LoginModel.LoginTypes.Basic, LoginModel LoginData = null, string body = "",
         bool applyPaging = false, int maxPerPage = 250, string contentType = "")

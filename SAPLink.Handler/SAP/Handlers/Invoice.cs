@@ -32,7 +32,7 @@ partial class ServiceLayerHandler
                 var body = CreateBody(PrismInvoice, taxCodes, customerCode, series, updateType);
 
 
-                result.Response = HttpClientFactory<SAPInvoice>.Initialize("Invoices", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
+                result.Response = SAPHttpClientFactory.Initialize("Invoices", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
 
                 if (result.Response.StatusCode == HttpStatusCode.OK || result.Response.StatusCode == HttpStatusCode.Created)
                 {
@@ -98,7 +98,7 @@ partial class ServiceLayerHandler
                 var body = CreateReturnBody(PrismInvoice, taxCodes, code, series, updateType);
 
 
-                result.Response = HttpClientFactory<SAPInvoice>.Initialize("CreditNotes", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
+                result.Response = SAPHttpClientFactory.Initialize("CreditNotes", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
 
                 if (result.Response.StatusCode == HttpStatusCode.OK || result.Response.StatusCode == HttpStatusCode.Created)
                 {
@@ -159,7 +159,7 @@ partial class ServiceLayerHandler
                 var body = CreateDownPaymentBody(PrismInvoice, taxCodes, customerCode, series);
 
 
-                result.Response = HttpClientFactory<SAPInvoice>.Initialize("DownPayments", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
+                result.Response = SAPHttpClientFactory.Initialize("DownPayments", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
 
                 if (result.Response.StatusCode == HttpStatusCode.OK || result.Response.StatusCode == HttpStatusCode.Created)
                 {
@@ -531,7 +531,7 @@ partial class ServiceLayerHandler
                 var body = SAPInvoice.CreateOrderBody(PrismInvoice, taxCodes, customerCode);
 
 
-                result.Response = HttpClientFactory<SAPInvoice>.Initialize("Orders", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
+                result.Response = SAPHttpClientFactory.Initialize("Orders", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
 
                 if (result.Response.StatusCode == HttpStatusCode.OK || result.Response.StatusCode == HttpStatusCode.Created)
                 {
