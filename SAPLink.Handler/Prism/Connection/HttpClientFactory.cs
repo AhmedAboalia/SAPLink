@@ -13,24 +13,16 @@ namespace SAPLink.Handler.Connection
         public static string LastErrorMessage { get; private set; }
         private static RestRequest Request { get; set; }
 
-        private ApplicationDbContext Context = new();
-        private UnitOfWork UnitOfWork = null;
+        private static ApplicationDbContext Context = new();
+        private static UnitOfWork UnitOfWork = new(Context);
 
-        static string[] includes  = null;
-        private static Clients Client = null;
+        static string[] includes = new[] { "Credentials", "Credentials.Subsidiaries" };
+        private static Clients Client = UnitOfWork.Clients.FindAsync(c => c.Active == true, includes).Result;
 
-        private static Credentials Credential = null;
+        private static Credentials Credential = Client.Credentials.FirstOrDefault();
         //private static Subsidiaries subsidiary = Credential.Subsidiaries.FirstOrDefault();
 
-        public HttpClientFactory()
-        {
-            Context = new();
-            UnitOfWork = new(Context);
-            includes =new [] { "Credentials", "Credentials.Subsidiaries" };
-
-            Client = UnitOfWork.Clients.FindAsync(c => c.Active == true, includes).Result;
-            Credential = Client.Credentials.FirstOrDefault();
-        }
+    
         public static async Task<Responses> InitializeAsync(string Uri, string resource, Method method, string body = "", int pageNo = 1)
         {
             try
