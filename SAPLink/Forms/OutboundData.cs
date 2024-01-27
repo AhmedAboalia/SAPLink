@@ -262,14 +262,14 @@ public partial class OutboundData : Form
                 {
                     var verifiedVouchers = new RequestResult<VerifiedVoucher>();
                     int pageNumber = 1; // Set the initial page number
-                    int pageSize = 10; // Set the page size
+                    int pageSize = 30; // Set the page size
 
                     do
                     {
                         if (docCode.IsHasValue())
-                            verifiedVouchers = await _inventoryTransferService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value, storeNum, docCode);
+                            verifiedVouchers = await _inventoryTransferService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value, storeNum, pageNumber, docCode);
                         else
-                            verifiedVouchers = await _inventoryTransferService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value, storeNum);
+                            verifiedVouchers = await _inventoryTransferService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value, pageNumber, storeNum);
                         if (verifiedVouchers.EntityList.Any())
                         {
 
