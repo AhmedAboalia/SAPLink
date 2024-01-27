@@ -1,16 +1,19 @@
 ﻿using SAPLink.Core.Models.System;
 using SAPLink.Handler.Connected_Services;
 using SAPLink.Handler.Connection;
+using HttpClientFactory = SAPLink.Handler.Connection.HttpClientFactory<SAPLink.Core.Models.Prism.Settings.Store>;
 
 namespace SAPLink.Handler.Prism.Settings
 {
     public class StoresService
     {
+        private readonly Clients _client;
         private readonly Credentials _credentials;
         private readonly Subsidiaries _subsidiary;
 
         public StoresService(Clients client)
         {
+            _client = client;
             _credentials = client.Credentials.FirstOrDefault();
             _subsidiary = _credentials.Subsidiaries.FirstOrDefault();
         }
@@ -24,10 +27,10 @@ namespace SAPLink.Handler.Prism.Settings
 
             var response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET);
 
-            if (response.StatusCode == HttpStatusCode.OK)
+            if (response.Response.StatusCode == HttpStatusCode.OK)
             {
 
-                return Store.FromJson(response.Content).ToList();
+                return Store.FromJson(response.Response.Content).ToList();
             }
             return new List<Store>();
 

@@ -1,8 +1,9 @@
-﻿using SAPLink.Core.Models.System;
+﻿using SAPLink.Core.Models;
+using SAPLink.Core.Models.System;
 using SAPLink.Handler.Connected_Services;
+using SAPLink.Handler.Connection;
 using SAPLink.Handler.SAP.Connection;
 using SAPLink.Handler.SAP.Interfaces;
-using HttpClientFactory = SAPLink.Handler.Connection.HttpClientFactory;
 using PriceList = SAPLink.Core.Models.SAP.MasterData.Items.PriceList;
 
 namespace SAPLink.Handler.SAP.Handlers;
@@ -31,7 +32,7 @@ public partial class ServiceLayerHandler : IServiceLayerHandler
     }
     public void Connect()
     {
-        var response = HttpClientFactory.Initialize("Login", Method.POST, _client);
+        var response = HttpClientFactory<PriceList>.Initialize("Login", Method.POST);
         if (response.StatusCode == HttpStatusCode.OK)
         {
             _session = JsonConvert.DeserializeObject<Session>(response.Content);
@@ -42,7 +43,7 @@ public partial class ServiceLayerHandler : IServiceLayerHandler
     }
     public void Connect(LoginModel.LoginTypes loginTypes, LoginModel loginData)
     {
-        var response = HttpClientFactory.Initialize("Login", Method.POST, _client, loginTypes, loginData);
+        var response = HttpClientFactory<PriceList>.Initialize("Login", Method.POST,  loginTypes, loginData);
         if (response.StatusCode == HttpStatusCode.OK)
         {
             _session = JsonConvert.DeserializeObject<Session>(response.Content);
@@ -53,7 +54,7 @@ public partial class ServiceLayerHandler : IServiceLayerHandler
     }
     public void Disconnect()
     {
-        var response = HttpClientFactory.Initialize("Logout", Method.POST, _client);
+        var response = HttpClientFactory<PriceList>.Initialize("Logout", Method.POST);
 
         if (response.StatusCode == HttpStatusCode.NoContent)
             IsConnected = false;
@@ -67,13 +68,13 @@ public partial class ServiceLayerHandler : IServiceLayerHandler
     {
         var priceLists = new List<PriceList>();
 
-        IRestResponse response = null;
+        IRestResponse response;
         try
         {
             var query = "PriceLists?$select=PriceListNo,PriceListName";
             var body = "";
 
-            response = HttpClientFactory.Initialize(query, Method.GET, _client, LoginModel.LoginTypes.Basic, null, body);
+            response = HttpClientFactory<PriceList>.Initialize(query, Method.GET, LoginModel.LoginTypes.Basic, null, body);
 
             if (response.StatusCode == HttpStatusCode.OK)
             {

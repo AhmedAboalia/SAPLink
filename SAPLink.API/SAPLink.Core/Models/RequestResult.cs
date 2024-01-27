@@ -1,6 +1,6 @@
 ﻿namespace SAPLink.Core.Models;
 
-public class RequestResult<T>
+public class RequestResult<T> 
 {
     public string Message { get; set; }
     public string StatusBarMessage { get; set; }
@@ -8,6 +8,16 @@ public class RequestResult<T>
     public List<T> EntityList { get; set; } = new();
     public IRestResponse Response { get; set; } = new RestResponse();
 
+    public int ContentRange = 0;
+
+    public void GetContentRange(string range, int pageSize)
+    {
+        if (range.Contains("/"))
+        {
+            var pageCount = Convert.ToInt32(range.Split("/")[1]);
+            pageCount = (pageCount % pageSize == 0) ? (pageCount / pageSize) : ((pageCount / pageSize) + 1);
+        }
+    }
 
 
     public RequestResult(StatusType status, string message, string statusBarMessage, List<T> entityList, IRestResponse response)
@@ -23,4 +33,37 @@ public class RequestResult<T>
     {
 
     }
+}
+
+public class Responses : IRestResponse
+{
+    public IRestResponse Response = new RestResponse();
+    public int ContentRange = 0;
+
+    public void GetContentRange(string range, int pageSize)
+    {
+        if (range.Contains("/"))
+        {
+            var pageCount = Convert.ToInt32(range.Split("/")[1]);
+            pageCount = (pageCount % pageSize == 0) ? (pageCount / pageSize) : ((pageCount / pageSize) + 1);
+        }
+    }
+
+    public IRestRequest Request { get; set; }
+    public string ContentType { get; set; }
+    public long ContentLength { get; set; }
+    public string ContentEncoding { get; set; }
+    public string Content { get; set; }
+    public HttpStatusCode StatusCode { get; set; }
+    public bool IsSuccessful { get; }
+    public string StatusDescription { get; set; }
+    public byte[] RawBytes { get; set; }
+    public Uri ResponseUri { get; set; }
+    public string Server { get; set; }
+    public IList<RestResponseCookie> Cookies { get; }
+    public IList<Parameter> Headers { get; }
+    public ResponseStatus ResponseStatus { get; set; }
+    public string ErrorMessage { get; set; }
+    public Exception? ErrorException { get; set; }
+    public Version ProtocolVersion { get; set; }
 }

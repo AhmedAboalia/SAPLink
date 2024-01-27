@@ -3,7 +3,6 @@ using SAPLink.EF;
 using SAPLink.Core;
 using SAPLink.Core.Models.System;
 using SAPLink.Handler.Connection;
-using HttpClientFactory = SAPLink.Handler.Connection.HttpClientFactory;
 using static SAPLink.Core.InboundEnums;
 
 namespace SAPLink.Handler.Integration
@@ -25,7 +24,7 @@ namespace SAPLink.Handler.Integration
                                    }";
 
 
-                var response = HttpClientFactory.InitializeIntegration("https://localhost:7208/api/v1/Inventory/", resource, Method.POST,
+                var response = HttpClientFactory<Recurrence>.InitializeIntegration("https://localhost:7208/api/v1/Inventory/", resource, Method.POST,
                     @"{
                         ""document"": ""Items"",
                         ""recurring"": ""Hourly"",
@@ -55,7 +54,7 @@ namespace SAPLink.Handler.Integration
                 ? PrepareHourlyRequestUri(recurrence)
                 : PrepareDailyRequestUri(recurrence);
 
-            var response = HttpClientFactory.InitializeIntegration(Uri, "", Method.POST, body);
+            var response = HttpClientFactory<Recurrence>.InitializeIntegration(Uri, "", Method.POST, body);
 
             if (response.StatusCode == HttpStatusCode.OK)
             {

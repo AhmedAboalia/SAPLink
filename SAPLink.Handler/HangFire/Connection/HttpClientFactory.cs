@@ -1,83 +1,14 @@
 ﻿using SAPLink.Core.Utilities;
 using SAPLink.EF;
 using SAPLink.Handler.Prism.Connection.Auth;
+using System.Net;
+using SAPLink.Core.Models;
+using SAPLink.Core.Models.System;
 
 namespace SAPLink.Handler.Connection;
 
-public static partial class HttpClientFactory
+public static partial class HttpClientFactory<T> where T : class
 {
-    public static async Task<IRestResponse> InitializeAsync(string Uri, string resource, Method method, string body = "")
-    {
-        try
-        {
-            ApiClient = new RestClient(Uri);
-            RefreshAuthSession();
-
-            Request = new RestRequest
-            {
-                Resource = resource,
-                Method = method,
-                Timeout = -1
-            };
-
-            Request.AddHeader("Accept", "application/json, text/plain, version=2");
-            Request.AddHeader("Accept-Language", "en-US,en;q=0.9");
-            Request.AddHeader("Auth-Session", Credential.AuthSession);
-            Request.AddHeader("Connection", "keep-alive");
-
-            Request.AddHeader("Content-type", "application/json; charset=UTF-8");
-            Request.AddHeader("Origin", Credential.Origin);
-            Request.AddHeader("Referer", Credential.Referer);
-            Request.AddHeader("User-Agent",
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36");
-
-            if (body.IsHasValue())
-                Request.AddParameter("application/json", body, ParameterType.RequestBody);
-
-            ServicePointManager.ServerCertificateValidationCallback +=
-                (sender, certificate, chain, sslPolicyErrors) => true;
-
-            if (Request != null)
-            {
-                var response = await ApiClient.ExecuteAsync(Request);
-
-                if (response.StatusCode == HttpStatusCode.Forbidden)
-                {
-                    
-                    response = await ApiClient.ExecuteAsync(Request);
-                }
-                return response;
-            }
-            
-        }
-        catch (Exception e)
-        {
-            // Handle the exception appropriately
-        }
-
-        //Request = new RestRequest();
-
-        return new RestResponse();
-    }
-    private static async void RefreshAuthSession()
-    {
-        var newAuth = await LoginManager.GetAuthSessionAsync(Credential.BaseUri, Credential.PrismUserName, Credential.PrismPassword);
-        if (newAuth.IsHasValue())
-        {
-            Credential.AuthSession = newAuth;
-
-            //UnitOfWork.Credentials.Update(Credential);
-            //UnitOfWork.SaveChanges();
-
-            //using (var context = new UnitOfWork(Context))
-            //{
-            //    context.Credentials.Update(Credential);
-            //    context.SaveChanges();
-            //}
-        }
-        else
-            RefreshAuthSession();
-    }
     public static IRestResponse Initialize(string uri, string resource, Method method,
         IDictionary<string, string> headers, string body = "")
     {

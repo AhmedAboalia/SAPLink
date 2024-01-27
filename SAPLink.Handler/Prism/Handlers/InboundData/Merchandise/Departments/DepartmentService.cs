@@ -8,7 +8,6 @@ using SAPLink.Handler.Connected_Services;
 using SAPLink.Handler.Connection;
 using SAPLink.Handler.Prism.Interfaces;
 using SAPLink.Handler.SAP.Interfaces;
-using HttpClientFactory = SAPLink.Handler.Connection.HttpClientFactory;
 
 namespace SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Departments;
 
@@ -16,9 +15,11 @@ public class DepartmentService : IEntityService<RequestResult<Department>, ItemG
 {
     private readonly Credentials? _credentials;
     private readonly Subsidiaries? _subsidiary;
+    private readonly Clients? _client;
 
     public DepartmentService(Clients client)
     {
+        _client = client;
         _credentials = client.Credentials.FirstOrDefault();
         _subsidiary = _credentials?.Subsidiaries.FirstOrDefault();
     }
@@ -32,7 +33,7 @@ public class DepartmentService : IEntityService<RequestResult<Department>, ItemG
         //{{BackOffice}}/dcs?filter=(sbssid,eq,665151872000149257)AND(dcscode,eq,110)&cols=sid,dcscode,dname,cname,sname,dlongname,clongname,slongname,d,c,s,sbssid
         var resource = $"/dcs?filter=(sbssid,eq,{_subsidiary.SID})AND(dcscode,eq,{code})&cols=dcscode,dname,rowversion";
 
-        result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET);
+        result.Response = await HttpClientFactory<Department>.InitializeAsync(query, resource, Method.GET);
 
         if (result.Response.StatusCode == HttpStatusCode.OK)
         {
@@ -56,7 +57,7 @@ public class DepartmentService : IEntityService<RequestResult<Department>, ItemG
             var resource =
                 $"/dcs?filter=(sbssid,eq,{_subsidiary.SID})&cols=sid,d,c,s,dcscode,dname,cname,sname&sort=dname,asc;sid,asc";
 
-            result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET, "");
+            result.Response = await HttpClientFactory<Department>.InitializeAsync(query, resource, Method.GET);
             var content = result.Response.Content;
 
             if (result.Response.StatusCode == HttpStatusCode.OK)
@@ -95,7 +96,7 @@ public class DepartmentService : IEntityService<RequestResult<Department>, ItemG
                 resource += $"/{sid}";
                 method = Method.PUT;
             }
-            result.Response = await HttpClientFactory.InitializeAsync(query, resource, method, body);
+            result.Response = await HttpClientFactory<Department>.InitializeAsync(query, resource, method, body);
 
             return result;
         }
@@ -202,11 +203,11 @@ public class DepartmentService : IEntityService<RequestResult<Department>, ItemG
                                   }";
 
 
-            var response = HttpClientFactory.InitializeAsync(query, resource, Method.POST, body).Result;
+            var response = HttpClientFactory<Department>.InitializeAsync(query, resource, Method.POST, body).Result;
 
-            if (response.StatusCode == HttpStatusCode.OK)
+            if (response.Response.StatusCode == HttpStatusCode.OK)
             {
-                JsonConvert.DeserializeObject<OdataPrism<Department>>(response.Content).Data.ToList();
+                JsonConvert.DeserializeObject<OdataPrism<Department>>(response.Response.Content).Data.ToList();
             }
             //else
             //    MessageBox.Show($"Can Not Find Product Prices - Response Status Code: {response.StatusCode}. \n\nResponse Content: {response.Content}");

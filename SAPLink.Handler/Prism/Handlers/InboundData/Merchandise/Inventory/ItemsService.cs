@@ -11,7 +11,6 @@ using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Vendors;
 using SAPLink.Handler.Prism.Interfaces;
 using SAPLink.Handler.Prism.Settings;
 using SAPLink.Handler.SAP.Interfaces;
-using HttpClientFactory = SAPLink.Handler.Connection.HttpClientFactory;
 
 namespace SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Inventory;
 
@@ -54,7 +53,7 @@ public class ItemsService : IProductService<RequestResult<ProductResponseModel>,
                                   }";
 
 
-        result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.POST, body);
+        result.Response = await HttpClientFactory<ProductResponseModel>.InitializeAsync(query, resource, Method.POST, body);
 
         if (result.Response.StatusCode == HttpStatusCode.OK)
         {
@@ -83,7 +82,7 @@ public class ItemsService : IProductService<RequestResult<ProductResponseModel>,
         var query = _credentials.BackOfficeUri;
         const string resource = "/inventory?action=InventorySaveItems";
 
-        result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.POST, body);
+        result.Response = await HttpClientFactory<ProductResponseModel>.InitializeAsync(query, resource, Method.POST, body);
 
         if (result.Response.StatusCode == HttpStatusCode.OK)
         {

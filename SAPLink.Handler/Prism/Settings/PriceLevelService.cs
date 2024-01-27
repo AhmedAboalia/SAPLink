@@ -1,7 +1,7 @@
 ﻿using SAPLink.Core.Models.SAP.MasterData.Items;
 using SAPLink.Core.Models.System;
 using SAPLink.Handler.Connected_Services;
-using HttpClientFactory = SAPLink.Handler.Connection.HttpClientFactory;
+using HttpClientFactory = SAPLink.Handler.Connection.HttpClientFactory<SAPLink.Core.Models.Prism.Settings.PriceLevel>;
 
 namespace SAPLink.Handler.Prism.Settings;
 
@@ -18,20 +18,20 @@ public class PriceLevelService
         _subsidiary = _credentials.Subsidiaries.FirstOrDefault();
     }
 
-    public IEnumerable<PriceLevel>? GetPriceLevel(long subsidiarySid)
+    public async Task<IEnumerable<PriceLevel>?> GetPriceLevel(long subsidiarySid)
     {
         var query = $"/pricelevel?cols=rowversion,pricelvl,pricelvldescription,pricelvlname" +
                     $",active,discperc,secured,usediscperc,discperc,sbsno,sbssid,sid" +
                     $"&filter=(active,eq,1)AND(sbssid,eq,{subsidiarySid})&sort=pricelvlname,asc";
 
-        var response = HttpClientFactory.InitializeAsync(_credentials.CommonUri, query, Method.GET).Result;
-        var content = response.Content;
+        var response = await HttpClientFactory.InitializeAsync(_credentials.CommonUri, query, Method.GET);
+        var content = response.Response.Content;
 
-        return response.StatusCode == HttpStatusCode.OK
-            ? JsonConvert.DeserializeObject<OdataPrism<PriceLevel>>(response.Content)?.Data.ToList()
+        return response.Response.StatusCode == HttpStatusCode.OK
+            ? JsonConvert.DeserializeObject<OdataPrism<PriceLevel>>(response.Response.Content)?.Data.ToList()
             : null;
     }
-    public List<PriceList> VerifyPriceLevelExistence(List<PriceList> input, long subsidiarySid)
+    public async Task<List<PriceList>> VerifyPriceLevelExistence(List<PriceList> input, long subsidiarySid)
     {
         var output = new List<PriceList>();
         List<PriceLevel> priceLevelList;
@@ -41,10 +41,10 @@ public class PriceLevelService
             var resource = $"/pricelevel?cols=pricelvl,pricelvldescription,pricelvlname,active,sbssid,sid" +
                            $"&filter=(sbssid,eq,{subsidiarySid})AND(active,eq,1)&sort=pricelvlname,asc";
 
-            var response = HttpClientFactory.InitializeAsync(query, resource, Method.GET, "").Result;
-            var content = response.Content;
+            var response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET);
+            var content = response.Response.Content;
 
-            if (response.StatusCode == HttpStatusCode.OK)
+            if (response.Response.StatusCode == HttpStatusCode.OK)
             {
                 priceLevelList = JsonConvert.DeserializeObject<OdataPrism<PriceLevel>>(content).Data.ToList();
 
@@ -72,8 +72,8 @@ public class PriceLevelService
 
             var response = HttpClientFactory.InitializeAsync(query, resource, Method.POST, body).Result;
 
-            return response.StatusCode == HttpStatusCode.OK;
-            //JsonConvert.DeserializeObject<OdataPrism<CategoryDto>>(response.Content).Data.ToList();
+            return response.Response.StatusCode == HttpStatusCode.OK;
+            //JsonConvert.DeserializeObject<OdataPrism<CategoryDto>>(response.Response.Content).Data.ToList();
         }
         catch (Exception ex)
         {

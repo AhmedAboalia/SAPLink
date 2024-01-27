@@ -1,11 +1,13 @@
 ﻿using SAPLink.Core.Models.System;
 using SAPLink.Handler.Connected_Services;
 using SAPLink.Handler.Connection;
+using HttpClientFactory = SAPLink.Handler.Connection.HttpClientFactory<SAPLink.Core.Models.Prism.Settings.TaxCodes>;
 
 namespace SAPLink.Handler.Prism.Settings
 {
     public class TaxCodesService
     {
+        private static Clients _client;
         private static Credentials _credentials;
         private static Subsidiaries _subsidiary;
         public TaxCodesService(Clients client)
@@ -24,8 +26,8 @@ namespace SAPLink.Handler.Prism.Settings
             var response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET);
 
 
-            if (response.StatusCode == HttpStatusCode.OK)
-                return TaxCodes.FromJson(response.Content).Data.ToList();
+            if (response.Response.StatusCode == HttpStatusCode.OK)
+                return TaxCodes.FromJson(response.Response.Content).Data.ToList();
 
             return new List<TaxCodes>();
 
@@ -47,9 +49,9 @@ namespace SAPLink.Handler.Prism.Settings
 
             var response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET);
 
-            if (response.StatusCode == HttpStatusCode.OK)
+            if (response.Response.StatusCode == HttpStatusCode.OK)
             {
-                var TaxCodeList = JsonConvert.DeserializeObject<OdataPrism<TaxCodes>>(response.Content).Data.ToList();
+                var TaxCodeList = JsonConvert.DeserializeObject<OdataPrism<TaxCodes>>(response.Response.Content).Data.ToList();
 
 
                 return TaxCodeList.FirstOrDefault(x => x.TaxName.ToUpper() == name.ToUpper());
@@ -57,7 +59,7 @@ namespace SAPLink.Handler.Prism.Settings
             return new TaxCodes();
         }
 
-        public IRestResponse AddTaxCodes()
+        public async Task<IRestResponse> AddTaxCodes()
         {
             List<TaxCodes> taxCodesList = new()
         {
@@ -74,7 +76,7 @@ namespace SAPLink.Handler.Prism.Settings
                 const string resource = "/taxcode";
                 var body = CreateTaxCodesPayload(taxCodesList);
 
-                return HttpClientFactory.InitializeAsync(query, resource, Method.POST, body).Result;
+                return await HttpClientFactory.InitializeAsync(query, resource, Method.POST ,body);
 
                 //responses = "Error Message" + response.ErrorMessage + "\r\r \r\n " + body;
                 //return false;
@@ -106,7 +108,7 @@ namespace SAPLink.Handler.Prism.Settings
         //        {
         //            var response = generalSettings.AddTaxCodes();
 
-        //            if (response.StatusCode == HttpStatusCode.OK)
+        //            if (response.Response.StatusCode == HttpStatusCode.OK)
         //            {
         //                //message = $"Response Content: {response.Content} \r\r \r\n Request Body: \r\n {body}" ;
         //                var taxCodes = JsonConvert.DeserializeObject<OdataPrism<TaxCodes>>(response.Content).Data.ToList();

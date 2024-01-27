@@ -5,12 +5,12 @@ using SAPLink.Core.Models.System;
 using SAPLink.Core.Utilities;
 using SAPLink.Handler.Prism.Settings;
 using Serilog;
-using HttpClientFactory = SAPLink.Handler.Connection.HttpClientFactory;
 using PrismInvoices = SAPLink.Core.Models.Prism.Sales.Invoices;
 using PrismInvoice = SAPLink.Core.Models.Prism.Sales.Invoice;
 using SAPLink.Core.Models.Prism.Receiving;
 using SAPLink.Handler.Connected_Services;
 using SAPLink.Core.Models.SAP.Sales;
+using SAPLink.Handler.Connection;
 using Serilog.Events;
 using TaxCodes = SAPLink.Core.Models.Prism.Settings.TaxCodes;
 
@@ -18,6 +18,7 @@ namespace SAPLink.Handler.Prism.Handlers.OutboundData.PointOfSale;
 
 public partial class InvoiceService
 {
+    private readonly Clients? _client;
     private readonly Credentials? _credentials;
     private readonly Subsidiaries? _subsidiary;
     public readonly TaxCodesService? TaxCodesService;
@@ -34,6 +35,7 @@ public partial class InvoiceService
 
     public InvoiceService(Clients client)
     {
+        _client = client;   
         _credentials = client.Credentials.FirstOrDefault();
         _subsidiary = _credentials?.Subsidiaries.FirstOrDefault();
         TaxCodesService = new TaxCodesService(client);
@@ -83,7 +85,7 @@ public partial class InvoiceService
 
             _loger.Information(result.Message);
 
-            result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET);
+            result.Response = await HttpClientFactory<PrismInvoice>.InitializeAsync(query, resource, Method.GET);
             //_loger.Information(result.Response.Content);
 
             if (result.Response.StatusCode == HttpStatusCode.OK)
@@ -147,7 +149,7 @@ public partial class InvoiceService
 
             _loger.Information(result.Message);
 
-            result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET);
+            result.Response = await HttpClientFactory<PrismInvoice>.InitializeAsync(query, resource, Method.GET);
 
             _loger.Information(result.Response.Content);
 

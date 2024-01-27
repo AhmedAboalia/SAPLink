@@ -4,14 +4,14 @@ using SAPLink.Core.Models.Prism.Receiving;
 using SAPLink.Core.Models.Prism.StockManagement;
 using SAPLink.Core.Models.System;
 using SAPLink.Core.Utilities;
+using SAPLink.Handler.Connection;
 using SAPLink.Handler.Prism.Settings;
 using Serilog;
-using HttpClientFactory = SAPLink.Handler.Connection.HttpClientFactory;
-
 namespace SAPLink.Handler.Prism.Handlers.OutboundData.StockManagement.InventoryTransfer;
 
 public partial class InventoryTransferService
 {
+    private readonly Clients? _client;
     private readonly Credentials? _credentials;
     private readonly Subsidiaries? _subsidiary;
     public readonly TaxCodesService? TaxCodesService;
@@ -28,6 +28,7 @@ public partial class InventoryTransferService
 
     public InventoryTransferService(Clients client)
     {
+        _client = client;
         _credentials = client.Credentials.FirstOrDefault();
         _subsidiary = _credentials?.Subsidiaries.FirstOrDefault();
         TaxCodesService = new TaxCodesService(client);
@@ -67,7 +68,7 @@ public partial class InventoryTransferService
                              $"{query}{resource}\r\n" +
                              $"Auth Session: {_credentials.AuthSession}";
             _loger.Information(result.Message);
-            result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET);
+            result.Response = await HttpClientFactory<VerifiedVoucher>.InitializeAsync(query, resource, Method.GET);
 
 
             if (result.Response.StatusCode == HttpStatusCode.OK)
@@ -118,7 +119,7 @@ public partial class InventoryTransferService
         var storeSid = store.Sid;
 
         var body = ReceivingRequest.CreateBody(_subsidiary.Clerksid, rowVersion, trackingNo, note, storeSid);
-        result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.PUT, body);
+        result.Response = await HttpClientFactory<VerifiedVoucher>.InitializeAsync(query, resource, Method.PUT, body);
 
 
         if (result.Response.StatusCode == HttpStatusCode.OK)
@@ -147,10 +148,10 @@ public partial class InventoryTransferService
     {
         string query = $"/v1/rest/store?filter=(active,eq,true)AND(subsidiary_sid,eq,{_subsidiary.SID})AND(store_code,eq,{storeCode})&cols=sid,store_code,store_name,active&sort=store_code,asc";
 
-        var response = await HttpClientFactory.InitializeAsync(_credentials.BaseUri, query, Method.GET);
-        var content = response.Content;
+        var response = await HttpClientFactory<VerifiedVoucher>.InitializeAsync(_credentials.BaseUri, query, Method.GET);
+        var content = response.Response.Content;
 
-        return response.StatusCode == HttpStatusCode.OK
+        return response.Response.StatusCode == HttpStatusCode.OK
             ? Store.FromJson(content)
                 .FirstOrDefault(x => x.StoreCode == storeCode)
             : null;

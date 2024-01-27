@@ -22,7 +22,14 @@ namespace SAPLink.Handler.Prism.Connection.Auth
             request.AddHeader("Accept", "application/json, version=2");
             request.AddHeader("Accept-Language", "en-US,en-SA;q=0.9");
 
-            var response = await client.ExecuteAsync(request);
+            IRestResponse response = new RestResponse();
+            try
+            {
+                response = await client.ExecuteAsync(request);
+            }
+            catch (Exception e)
+            {
+            }
 
             if (response.IsSuccessful)
             {
@@ -34,7 +41,7 @@ namespace SAPLink.Handler.Prism.Connection.Auth
                 }
             }
 
-            return null;
+            return "";
             //throw new Exception("Authentication failed.");
         }
 

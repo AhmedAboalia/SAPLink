@@ -5,10 +5,10 @@ using SAPLink.Core.Models.Prism.Sales;
 using SAPLink.Core.Models.Prism.StockManagement;
 using SAPLink.Core.Models.System;
 using SAPLink.Core.Utilities;
+using SAPLink.Handler.Connection;
 using SAPLink.Handler.Prism.Settings;
 using Serilog;
 using static System.Runtime.InteropServices.JavaScript.JSType;
-using HttpClientFactory = SAPLink.Handler.Connection.HttpClientFactory;
 using PrismInvoice = SAPLink.Core.Models.Prism.Sales.Invoice;
 using InventoryPostings = SAPLink.Core.Models.Prism.StockManagement.InventoryPosting;
 
@@ -16,6 +16,7 @@ namespace SAPLink.Handler.Prism.Handlers.OutboundData.StockManagement.InventoryP
 
 public partial class InventoryPostingService
 {
+    private readonly Clients? _client;
     private readonly Credentials? _credentials;
     private readonly Subsidiaries? _subsidiary;
     public readonly TaxCodesService? TaxCodesService;
@@ -74,7 +75,7 @@ public partial class InventoryPostingService
                              $"{query}{resource}\r\n" +
                              $"Auth Session: {_credentials.AuthSession}";
 
-            result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET);
+            result.Response = await HttpClientFactory<InventoryPostings>.InitializeAsync(query, resource, Method.GET);
 
 
             if (result.Response.StatusCode == HttpStatusCode.OK)
@@ -127,8 +128,8 @@ public partial class InventoryPostingService
                               }
                           ]";
 
-        var response = await HttpClientFactory.InitializeAsync(query, resource, Method.PUT, body);
+        var response = await HttpClientFactory<InventoryPostings>.InitializeAsync(query, resource, Method.PUT);
 
-        return response.StatusCode == HttpStatusCode.OK;
+        return response.Response.StatusCode == HttpStatusCode.OK;
     }
 }

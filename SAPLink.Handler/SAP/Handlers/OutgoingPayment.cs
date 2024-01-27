@@ -6,7 +6,6 @@ using SAPLink.Core.Models.SAP.Sales;
 using SAPLink.Core.Utilities;
 using SAPLink.Handler.SAP.Application;
 using SAPLink.Handler.SAP.Connection;
-using HttpClientFactory = SAPLink.Handler.Connection.HttpClientFactory;
 using PrismInvoice = SAPLink.Core.Models.Prism.Sales.Invoice;
 
 namespace SAPLink.Handler.SAP.Handlers;

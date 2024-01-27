@@ -4,12 +4,12 @@ using SAPLink.Core.Models;
 using SAPLink.Core.Models.SAP;
 using SAPLink.Core.Models.SAP.Sales;
 using SAPLink.Core.Utilities;
+using SAPLink.Handler.Connection;
 using SAPLink.Handler.SAP.Application;
 using SAPLink.Handler.SAP.Connection;
 using ServiceLayerHelper.RefranceModels;
 using static SAPLink.Core.Enums;
 using DocumentLine = SAPLink.Core.Models.SAP.Sales.DocumentLine;
-using HttpClientFactory = SAPLink.Handler.Connection.HttpClientFactory;
 using PrismInvoice = SAPLink.Core.Models.Prism.Sales.Invoice;
 using SAPInvoice = SAPLink.Core.Models.SAP.Sales.Invoice;
 using TaxCodes = SAPLink.Core.Models.SAP.Sales.TaxCodes;
@@ -32,7 +32,7 @@ partial class ServiceLayerHandler
                 var body = CreateBody(PrismInvoice, taxCodes, customerCode, series, updateType);
 
 
-                result.Response = HttpClientFactory.Initialize("Invoices", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
+                result.Response = HttpClientFactory<SAPInvoice>.Initialize("Invoices", Method.POST, LoginModel.LoginTypes.Basic, null, body);
 
                 if (result.Response.StatusCode == HttpStatusCode.OK || result.Response.StatusCode == HttpStatusCode.Created)
                 {
@@ -98,7 +98,7 @@ partial class ServiceLayerHandler
                 var body = CreateReturnBody(PrismInvoice, taxCodes, code, series, updateType);
 
 
-                result.Response = HttpClientFactory.Initialize("CreditNotes", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
+                result.Response = HttpClientFactory<SAPInvoice>.Initialize("CreditNotes", Method.POST, LoginModel.LoginTypes.Basic, null, body);
 
                 if (result.Response.StatusCode == HttpStatusCode.OK || result.Response.StatusCode == HttpStatusCode.Created)
                 {
@@ -159,7 +159,7 @@ partial class ServiceLayerHandler
                 var body = CreateDownPaymentBody(PrismInvoice, taxCodes, customerCode, series);
 
 
-                result.Response = HttpClientFactory.Initialize("DownPayments", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
+                result.Response = HttpClientFactory<SAPInvoice>.Initialize("DownPayments", Method.POST, LoginModel.LoginTypes.Basic, null, body);
 
                 if (result.Response.StatusCode == HttpStatusCode.OK || result.Response.StatusCode == HttpStatusCode.Created)
                 {
@@ -531,7 +531,7 @@ partial class ServiceLayerHandler
                 var body = SAPInvoice.CreateOrderBody(PrismInvoice, taxCodes, customerCode);
 
 
-                result.Response = HttpClientFactory.Initialize("Orders", Method.POST,_client, LoginModel.LoginTypes.Basic, null, body);
+                result.Response = HttpClientFactory<SAPInvoice>.Initialize("Orders", Method.POST, LoginModel.LoginTypes.Basic, null, body);
 
                 if (result.Response.StatusCode == HttpStatusCode.OK || result.Response.StatusCode == HttpStatusCode.Created)
                 {

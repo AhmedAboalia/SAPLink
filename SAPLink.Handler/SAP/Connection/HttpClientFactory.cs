@@ -5,16 +5,13 @@ using SAPLink.Handler.SAP.Connection;
 
 namespace SAPLink.Handler.Connection;
 
-public partial class HttpClientFactory
+public partial class HttpClientFactory<T> where T : class
 {
-
-    private static Credentials Credential = null;
-    public static IRestResponse Initialize(string resource, Method method, Clients client, LoginModel.LoginTypes LoginTypes = LoginModel.LoginTypes.Basic, LoginModel LoginData = null, string body = "",
+    public static IRestResponse Initialize(string resource, Method method, LoginModel.LoginTypes LoginTypes = LoginModel.LoginTypes.Basic, LoginModel LoginData = null, string body = "",
         bool applyPaging = false, int maxPerPage = 250, string contentType = "")
     {
         try
         {
-            Credential = client.Credentials.FirstOrDefault();
             ApiClient = new RestClient(Credential.ServiceLayerUri);
 
             Request = new RestRequest
