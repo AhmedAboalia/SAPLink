@@ -160,6 +160,7 @@
             textBoxAuthorization = new Guna2TextBox();
             textBoxCompany = new Guna2TextBox();
             tabPage2 = new TabPage();
+            label22 = new Label();
             label17 = new Label();
             guna2Shapes7 = new Guna2Shapes();
             label12 = new Label();
@@ -182,7 +183,6 @@
             label33 = new Label();
             label9 = new Label();
             textBoxClerkSid = new Guna2TextBox();
-            label22 = new Label();
             label13 = new Label();
             label36 = new Label();
             TextBoxAciveSeasonSID = new Guna2TextBox();
@@ -811,6 +811,18 @@
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Prism Credentials";
             // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.BackColor = Color.Transparent;
+            label22.Font = new Font("Bahnschrift", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            label22.ForeColor = Color.OliveDrab;
+            label22.Location = new Point(19, 7);
+            label22.Name = "label22";
+            label22.Size = new Size(227, 23);
+            label22.TabIndex = 117;
+            label22.Text = "Prism Server Credentials";
+            // 
             // label17
             // 
             label17.AutoSize = true;
@@ -838,6 +850,7 @@
             guna2Shapes7.Size = new Size(102, 15);
             guna2Shapes7.TabIndex = 184;
             guna2Shapes7.Text = "guna2Shapes7";
+            guna2Shapes7.Visible = false;
             guna2Shapes7.Zoom = 80;
             // 
             // label12
@@ -867,6 +880,7 @@
             guna2Shapes6.Size = new Size(140, 15);
             guna2Shapes6.TabIndex = 183;
             guna2Shapes6.Text = "guna2Shapes6";
+            guna2Shapes6.Visible = false;
             guna2Shapes6.Zoom = 80;
             // 
             // label44
@@ -1164,18 +1178,6 @@
             textBoxClerkSid.ShadowDecoration.CustomizableEdges = customizableEdges38;
             textBoxClerkSid.Size = new Size(294, 22);
             textBoxClerkSid.TabIndex = 144;
-            // 
-            // label22
-            // 
-            label22.AutoSize = true;
-            label22.BackColor = Color.Transparent;
-            label22.Font = new Font("Bahnschrift", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            label22.ForeColor = Color.OliveDrab;
-            label22.Location = new Point(19, 7);
-            label22.Name = "label22";
-            label22.Size = new Size(227, 23);
-            label22.TabIndex = 117;
-            label22.Text = "Prism Server Credentials";
             // 
             // label13
             // 
@@ -1962,6 +1964,7 @@
             MainPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             MainPanel.BackColor = Color.Transparent;
             MainPanel.BorderRadius = 30;
+            MainPanel.ContextMenuStrip = contextMenuStrip1;
             MainPanel.CustomizableEdges = customizableEdges92;
             MainPanel.ImageRotate = 0F;
             MainPanel.Location = new Point(145, 77);
@@ -1977,7 +1980,6 @@
             MainPanel.SizeMode = PictureBoxSizeMode.StretchImage;
             MainPanel.TabIndex = 0;
             MainPanel.TabStop = false;
-            MainPanel.UseWaitCursor = true;
             MainPanel.DoubleClick += guna2PictureBox1_DoubleClick;
             // 
             // guna2DragControl1
