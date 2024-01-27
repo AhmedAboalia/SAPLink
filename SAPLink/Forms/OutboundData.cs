@@ -291,11 +291,23 @@ public partial class OutboundData : Form
                                         "");
                                 }
                             }
-
+                          
                         }
                         else
+                        {
+                            dataGridView.DataSource = null;
+                            LogMessages($"No Available Verified Voucher/s." +
+                                        $"\r\nResponse:\r\n{verifiedVouchers.Response.Content.PrettyJson()} " +
+                                        $"\r\n\r\nResult Message: {verifiedVouchers.Message}" +
+                                        $"\r\nStatus: {verifiedVouchers.Status}",
+                                $"No Available Verified Voucher/s.");
                             break;
 
+                        }
+
+                        // Increment the page number for the next iteration
+
+                        pageNumber++;
                     }
                     while (verifiedVouchers.EntityList.Count == pageSize); // Continue until there are no more results
 

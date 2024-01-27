@@ -275,7 +275,7 @@
             guna2Panel1.Margin = new Padding(4);
             guna2Panel1.Name = "guna2Panel1";
             guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges95;
-            guna2Panel1.Size = new Size(1284, 893);
+            guna2Panel1.Size = new Size(1284, 884);
             guna2Panel1.TabIndex = 0;
             guna2Panel1.DoubleClick += guna2Panel1_DoubleClick;
             // 
@@ -287,7 +287,7 @@
             label35.ForeColor = Color.SteelBlue;
             label35.Location = new Point(190, 141);
             label35.Name = "label35";
-            label35.Size = new Size(134, 23);
+            label35.Size = new Size(132, 23);
             label35.TabIndex = 165;
             label35.Text = "Environments ";
             // 
@@ -428,7 +428,7 @@
             label40.ForeColor = Color.DarkOrange;
             label40.Location = new Point(19, 7);
             label40.Name = "label40";
-            label40.Size = new Size(212, 23);
+            label40.Size = new Size(208, 23);
             label40.TabIndex = 96;
             label40.Text = "SAP Server Credentials";
             // 
@@ -456,7 +456,7 @@
             labelRepeatEvery.ForeColor = Color.DimGray;
             labelRepeatEvery.Location = new Point(34, 59);
             labelRepeatEvery.Name = "labelRepeatEvery";
-            labelRepeatEvery.Size = new Size(127, 17);
+            labelRepeatEvery.Size = new Size(121, 17);
             labelRepeatEvery.TabIndex = 98;
             labelRepeatEvery.Text = "Service Layer Uri :";
             // 
@@ -544,7 +544,7 @@
             label26.ForeColor = Color.DimGray;
             label26.Location = new Point(34, 110);
             label26.Name = "label26";
-            label26.Size = new Size(93, 17);
+            label26.Size = new Size(89, 17);
             label26.TabIndex = 103;
             label26.Text = "Server Type :";
             // 
@@ -556,7 +556,7 @@
             label5.ForeColor = Color.DimGray;
             label5.Location = new Point(34, 84);
             label5.Name = "label5";
-            label5.Size = new Size(59, 17);
+            label5.Size = new Size(57, 17);
             label5.TabIndex = 105;
             label5.Text = "Server :";
             // 
@@ -568,7 +568,7 @@
             label27.ForeColor = Color.DimGray;
             label27.Location = new Point(169, 110);
             label27.Name = "label27";
-            label27.Size = new Size(72, 17);
+            label27.Size = new Size(68, 17);
             label27.TabIndex = 106;
             label27.Text = "SQL 2016 :";
             // 
@@ -580,7 +580,7 @@
             label28.ForeColor = Color.DimGray;
             label28.Location = new Point(360, 110);
             label28.Name = "label28";
-            label28.Size = new Size(68, 17);
+            label28.Size = new Size(66, 17);
             label28.TabIndex = 107;
             label28.Text = "SQL 2019:";
             // 
@@ -604,7 +604,7 @@
             label7.ForeColor = Color.DimGray;
             label7.Location = new Point(34, 134);
             label7.Name = "label7";
-            label7.Size = new Size(95, 17);
+            label7.Size = new Size(91, 17);
             label7.TabIndex = 109;
             label7.Text = "Company Db :";
             // 
@@ -616,7 +616,7 @@
             label8.ForeColor = Color.DimGray;
             label8.Location = new Point(34, 159);
             label8.Name = "label8";
-            label8.Size = new Size(86, 17);
+            label8.Size = new Size(82, 17);
             label8.TabIndex = 111;
             label8.Text = "User Name :";
             // 
@@ -650,7 +650,7 @@
             label21.ForeColor = Color.DimGray;
             label21.Location = new Point(34, 184);
             label21.Name = "label21";
-            label21.Size = new Size(78, 17);
+            label21.Size = new Size(76, 17);
             label21.TabIndex = 110;
             label21.Text = "Password :";
             // 
@@ -707,7 +707,7 @@
             label24.ForeColor = Color.DimGray;
             label24.Location = new Point(34, 209);
             label24.Name = "label24";
-            label24.Size = new Size(102, 17);
+            label24.Size = new Size(100, 17);
             label24.TabIndex = 104;
             label24.Text = "Authorization :";
             // 
@@ -819,7 +819,7 @@
             label22.ForeColor = Color.OliveDrab;
             label22.Location = new Point(19, 7);
             label22.Name = "label22";
-            label22.Size = new Size(227, 23);
+            label22.Size = new Size(223, 23);
             label22.TabIndex = 117;
             label22.Text = "Prism Server Credentials";
             // 
@@ -861,7 +861,7 @@
             label12.ForeColor = Color.Goldenrod;
             label12.Location = new Point(48, 314);
             label12.Name = "label12";
-            label12.Size = new Size(91, 18);
+            label12.Size = new Size(90, 18);
             label12.TabIndex = 182;
             label12.Text = "Price Levels";
             label12.Visible = false;
@@ -891,7 +891,7 @@
             label44.ForeColor = SystemColors.Highlight;
             label44.Location = new Point(48, 165);
             label44.Name = "label44";
-            label44.Size = new Size(129, 18);
+            label44.Size = new Size(128, 18);
             label44.TabIndex = 165;
             label44.Text = "Subsidiary Details";
             // 
@@ -921,7 +921,7 @@
             label19.ForeColor = Color.DimGray;
             label19.Location = new Point(63, 356);
             label19.Name = "label19";
-            label19.Size = new Size(125, 17);
+            label19.Size = new Size(119, 17);
             label19.TabIndex = 170;
             label19.Text = "Price Level Code :";
             label19.Visible = false;
@@ -957,7 +957,7 @@
             label18.ForeColor = Color.DimGray;
             label18.Location = new Point(63, 404);
             label18.Name = "label18";
-            label18.Size = new Size(114, 17);
+            label18.Size = new Size(108, 17);
             label18.TabIndex = 174;
             label18.Text = "Price Level SID :";
             label18.Visible = false;
@@ -1011,7 +1011,7 @@
             label16.ForeColor = Color.DimGray;
             label16.Location = new Point(530, 356);
             label16.Name = "label16";
-            label16.Size = new Size(106, 17);
+            label16.Size = new Size(102, 17);
             label16.TabIndex = 169;
             label16.Text = "Seasons Code :";
             label16.Visible = false;
@@ -1024,7 +1024,7 @@
             label2.ForeColor = Color.DimGray;
             label2.Location = new Point(530, 380);
             label2.Name = "label2";
-            label2.Size = new Size(110, 17);
+            label2.Size = new Size(106, 17);
             label2.TabIndex = 171;
             label2.Text = "Seasons Name :";
             label2.Visible = false;
@@ -1037,7 +1037,7 @@
             label31.ForeColor = Color.DimGray;
             label31.Location = new Point(63, 380);
             label31.Name = "label31";
-            label31.Size = new Size(129, 17);
+            label31.Size = new Size(123, 17);
             label31.TabIndex = 173;
             label31.Text = "Price Level Name :";
             label31.Visible = false;
@@ -1050,7 +1050,7 @@
             label15.ForeColor = Color.DimGray;
             label15.Location = new Point(530, 404);
             label15.Name = "label15";
-            label15.Size = new Size(95, 17);
+            label15.Size = new Size(91, 17);
             label15.TabIndex = 172;
             label15.Text = "Seasons SID :";
             label15.Visible = false;
@@ -1141,7 +1141,7 @@
             label33.ForeColor = Color.DimGray;
             label33.Location = new Point(530, 275);
             label33.Name = "label33";
-            label33.Size = new Size(138, 17);
+            label33.Size = new Size(132, 17);
             label33.TabIndex = 141;
             label33.Text = "Active Tax Code SID:";
             // 
@@ -1153,7 +1153,7 @@
             label9.ForeColor = Color.DimGray;
             label9.Location = new Point(530, 203);
             label9.Name = "label9";
-            label9.Size = new Size(154, 17);
+            label9.Size = new Size(148, 17);
             label9.TabIndex = 154;
             label9.Text = "Active Price Level SID:";
             // 
@@ -1187,7 +1187,7 @@
             label13.ForeColor = Color.DimGray;
             label13.Location = new Point(530, 227);
             label13.Name = "label13";
-            label13.Size = new Size(128, 17);
+            label13.Size = new Size(124, 17);
             label13.TabIndex = 156;
             label13.Text = "Active Season SID:";
             // 
@@ -1199,7 +1199,7 @@
             label36.ForeColor = Color.DimGray;
             label36.Location = new Point(31, 52);
             label36.Name = "label36";
-            label36.Size = new Size(82, 17);
+            label36.Size = new Size(78, 17);
             label36.TabIndex = 123;
             label36.Text = "Server Uri :";
             // 
@@ -1255,7 +1255,7 @@
             label32.ForeColor = Color.DimGray;
             label32.Location = new Point(63, 275);
             label32.Name = "label32";
-            label32.Size = new Size(75, 17);
+            label32.Size = new Size(71, 17);
             label32.TabIndex = 140;
             label32.Text = "Clerk SID :";
             // 
@@ -1267,7 +1267,7 @@
             label39.ForeColor = Color.DimGray;
             label39.Location = new Point(28, 77);
             label39.Name = "label39";
-            label39.Size = new Size(100, 17);
+            label39.Size = new Size(96, 17);
             label39.TabIndex = 122;
             label39.Text = "Auth Session :";
             // 
@@ -1345,7 +1345,7 @@
             label37.ForeColor = Color.DimGray;
             label37.Location = new Point(28, 102);
             label37.Name = "label37";
-            label37.Size = new Size(82, 17);
+            label37.Size = new Size(80, 17);
             label37.TabIndex = 121;
             label37.Text = "User Name:";
             // 
@@ -1401,7 +1401,7 @@
             label10.ForeColor = Color.DimGray;
             label10.Location = new Point(63, 251);
             label10.Name = "label10";
-            label10.Size = new Size(109, 17);
+            label10.Size = new Size(105, 17);
             label10.TabIndex = 137;
             label10.Text = "Subsidiary SID :";
             // 
@@ -1447,7 +1447,7 @@
             label30.ForeColor = Color.DimGray;
             label30.Location = new Point(63, 227);
             label30.Name = "label30";
-            label30.Size = new Size(124, 17);
+            label30.Size = new Size(120, 17);
             label30.TabIndex = 132;
             label30.Text = "Subsidiary Name :";
             // 
@@ -1554,7 +1554,7 @@
             label11.ForeColor = Color.DimGray;
             label11.Location = new Point(63, 203);
             label11.Name = "label11";
-            label11.Size = new Size(120, 17);
+            label11.Size = new Size(116, 17);
             label11.TabIndex = 131;
             label11.Text = "Subsidiary Code :";
             // 
@@ -1566,7 +1566,7 @@
             label14.ForeColor = Color.DimGray;
             label14.Location = new Point(530, 251);
             label14.Name = "label14";
-            label14.Size = new Size(121, 17);
+            label14.Size = new Size(115, 17);
             label14.TabIndex = 158;
             label14.Text = "Active Store SID :";
             // 
@@ -1578,7 +1578,7 @@
             label6.ForeColor = Color.DimGray;
             label6.Location = new Point(196, 235);
             label6.Name = "label6";
-            label6.Size = new Size(157, 17);
+            label6.Size = new Size(149, 17);
             label6.TabIndex = 174;
             label6.Text = "Loging data in logs tab:";
             // 
@@ -1617,6 +1617,7 @@
             comboBoxClient.ShadowDecoration.CustomizableEdges = customizableEdges66;
             comboBoxClient.Size = new Size(225, 21);
             comboBoxClient.TabIndex = 168;
+            comboBoxClient.SelectedIndexChanged += comboBoxClient_SelectedIndexChanged;
             // 
             // comboBoxEnvironment
             // 
@@ -1636,6 +1637,7 @@
             comboBoxEnvironment.ShadowDecoration.CustomizableEdges = customizableEdges68;
             comboBoxEnvironment.Size = new Size(266, 21);
             comboBoxEnvironment.TabIndex = 169;
+            comboBoxEnvironment.SelectedIndexChanged += comboBoxEnvironment_SelectedIndexChanged;
             // 
             // label23
             // 
@@ -1645,7 +1647,7 @@
             label23.ForeColor = Color.DimGray;
             label23.Location = new Point(196, 186);
             label23.Name = "label23";
-            label23.Size = new Size(53, 17);
+            label23.Size = new Size(51, 17);
             label23.TabIndex = 167;
             label23.Text = "Client :";
             // 
@@ -1657,7 +1659,7 @@
             label3.ForeColor = Color.DimGray;
             label3.Location = new Point(196, 209);
             label3.Name = "label3";
-            label3.Size = new Size(97, 17);
+            label3.Size = new Size(95, 17);
             label3.TabIndex = 166;
             label3.Text = "Environment :";
             // 
@@ -1782,7 +1784,7 @@
             labelStatus.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             labelStatus.BackColor = Color.White;
             labelStatus.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            labelStatus.Location = new Point(182, 839);
+            labelStatus.Location = new Point(182, 830);
             labelStatus.Name = "labelStatus";
             labelStatus.Size = new Size(1065, 19);
             labelStatus.TabIndex = 55;
@@ -1805,7 +1807,7 @@
             guna2Button6.Image = (Image)resources.GetObject("guna2Button6.Image");
             guna2Button6.ImageAlign = HorizontalAlignment.Left;
             guna2Button6.ImageSize = new Size(30, 30);
-            guna2Button6.Location = new Point(10, 825);
+            guna2Button6.Location = new Point(10, 816);
             guna2Button6.Name = "guna2Button6";
             guna2Button6.ShadowDecoration.BorderRadius = 30;
             guna2Button6.ShadowDecoration.Color = Color.Silver;
@@ -1976,7 +1978,7 @@
             MainPanel.ShadowDecoration.Depth = 5;
             MainPanel.ShadowDecoration.Enabled = true;
             MainPanel.ShadowDecoration.Shadow = new Padding(8);
-            MainPanel.Size = new Size(1126, 791);
+            MainPanel.Size = new Size(1126, 782);
             MainPanel.SizeMode = PictureBoxSizeMode.StretchImage;
             MainPanel.TabIndex = 0;
             MainPanel.TabStop = false;
@@ -1998,7 +2000,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1284, 893);
+            ClientSize = new Size(1284, 884);
             Controls.Add(guna2Panel1);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
