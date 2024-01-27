@@ -7,22 +7,30 @@ using SAPLink.Handler.Prism.Connection.Auth;
 
 namespace SAPLink.Handler.Connection
 {
-    public static partial class HttpClientFactory<T> where T : class
+    public partial class HttpClientFactory<T> where T : class
     {
         private static RestClient ApiClient { get; set; }
         public static string LastErrorMessage { get; private set; }
         private static RestRequest Request { get; set; }
 
-        private static readonly ApplicationDbContext Context = new();
-        private static readonly UnitOfWork UnitOfWork = new(Context);
+        private ApplicationDbContext Context = new();
+        private UnitOfWork UnitOfWork = null;
 
-        static string[] includes = { "Credentials", "Credentials.Subsidiaries" };
-        static Clients Client = UnitOfWork.Clients.FindAsync(c => c.Active == true, includes).Result;
+        static string[] includes  = null;
+        private static Clients Client = null;
 
-        private static Credentials Credential = Client.Credentials.FirstOrDefault();
+        private static Credentials Credential = null;
         //private static Subsidiaries subsidiary = Credential.Subsidiaries.FirstOrDefault();
 
+        public HttpClientFactory()
+        {
+            Context = new();
+            UnitOfWork = new(Context);
+            includes =new [] { "Credentials", "Credentials.Subsidiaries" };
 
+            Client = UnitOfWork.Clients.FindAsync(c => c.Active == true, includes).Result;
+            Credential = Client.Credentials.FirstOrDefault();
+        }
         public static async Task<Responses> InitializeAsync(string Uri, string resource, Method method, string body = "", int pageNo = 1)
         {
             try
