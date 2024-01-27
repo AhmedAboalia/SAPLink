@@ -154,7 +154,7 @@ public partial class DepartmentsHandler
 
             _loger.Information(logMessage);
             yield return new RequestResult<ItemGroups>(Enums.StatusType.Failed, logMessage,
-                logStatus, outputGroupsList, new RestResponse());
+                logStatus, outputGroupsList, new Responses());
         }
 
     }

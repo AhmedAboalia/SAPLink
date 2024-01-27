@@ -6,7 +6,7 @@ public class RequestResult<T>
     public string StatusBarMessage { get; set; }
     public StatusType Status { get; set; } = StatusType.Failed;
     public List<T> EntityList { get; set; } = new();
-    public IRestResponse Response { get; set; } = new RestResponse();
+    public Responses Response { get; set; } = new Responses();
 
     public int ContentRange = 0;
 
@@ -20,7 +20,7 @@ public class RequestResult<T>
     }
 
 
-    public RequestResult(StatusType status, string message, string statusBarMessage, List<T> entityList, IRestResponse response)
+    public RequestResult(StatusType status, string message, string statusBarMessage, List<T> entityList, Responses response)
     {
         Status = status;
         Message = message;

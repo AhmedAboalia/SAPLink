@@ -177,7 +177,7 @@ public class GoodsReturnHandler
             logStatus = "Status: there is no Goods Returns available to be synced, or it flagged as synced to prism.";
 
             _loger.Information(logMessage);
-            yield return new RequestResult<Goods>(Enums.StatusType.Success, logMessage, logStatus, outList, new RestResponse());
+            yield return new RequestResult<Goods>(Enums.StatusType.Success, logMessage, logStatus, outList, new Responses());
         }
     }
 

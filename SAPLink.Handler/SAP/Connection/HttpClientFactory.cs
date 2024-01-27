@@ -4,6 +4,7 @@ using SAPLink.Core.Utilities;
 using SAPLink.EF.Data;
 using SAPLink.EF;
 using SAPLink.Handler.SAP.Connection;
+using SAPLink.Core.Models;
 
 namespace SAPLink.Handler.Connection;
 
@@ -31,7 +32,7 @@ public partial class SAPHttpClientFactory
         Client = UnitOfWork.Clients.FindAsync(c => c.Active == true, includes).Result;
         Credential = Client.Credentials.FirstOrDefault();
     }
-    public static IRestResponse Initialize(string resource, Method method,Clients clients,
+    public static Responses Initialize(string resource, Method method,Clients clients,
         LoginModel.LoginTypes LoginTypes = LoginModel.LoginTypes.Basic, LoginModel LoginData = null, string body = "",
         bool applyPaging = false, int maxPerPage = 250, string contentType = "")
     {
@@ -77,7 +78,7 @@ public partial class SAPHttpClientFactory
                 (sender, certificate, chain, sslPolicyErrors) => true;
             //MakeCert();
 
-            return ApiClient.Execute(Request);
+            return (Responses)ApiClient.Execute(Request);
         }
         catch (Exception e)
         {

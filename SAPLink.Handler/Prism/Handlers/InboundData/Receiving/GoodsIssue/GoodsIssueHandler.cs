@@ -173,7 +173,7 @@ public class GoodsIssueHandler
 
             _loger.Information(logMessage);
 
-            yield return new RequestResult<Goods>(StatusType.Success, logMessage, logStatus, outList, new RestResponse());
+            yield return new RequestResult<Goods>(StatusType.Success, logMessage, logStatus, outList, new Responses());
         }
     }
 

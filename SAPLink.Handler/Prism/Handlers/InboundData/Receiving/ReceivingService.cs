@@ -1,4 +1,5 @@
-﻿using SAPLink.Core.Models.Prism.Inventory.Products;
+﻿using SAPLink.Core.Models;
+using SAPLink.Core.Models.Prism.Inventory.Products;
 using SAPLink.Core.Models.Prism.Receiving;
 using SAPLink.Core.Models.SAP.Documents;
 using SAPLink.Core.Models.System;
@@ -50,7 +51,7 @@ public class ReceivingService : IReceivingService
             : new ReceivingResponseDto();
     }
 
-    public async Task<IRestResponse> AddConsolidateItem(string body, string receivingSid)
+    public async Task<Responses> AddConsolidateItem(string body, string receivingSid)
     {
         string query = _credentials.BackOfficeUri;
         var resource = $"/receiving/{receivingSid}?action=AddConsolidateVouItem";
@@ -152,7 +153,7 @@ public class ReceivingService : IReceivingService
         return JsonConvert.DeserializeObject<OdataPrism<ReceivingResponseDto>>(response.Response.Content).Data.ToList().FirstOrDefault();
 
     }
-    public async Task<IRestResponse> AddReceiving(ReceivingResponseDto receiving, string rowVersion, string trackingNo, string note, string storeSid)
+    public async Task<Responses> AddReceiving(ReceivingResponseDto receiving, string rowVersion, string trackingNo, string note, string storeSid)
     {
         var query = _credentials.BackOfficeUri;
         var resource = $"/receiving/{receiving.Sid}";

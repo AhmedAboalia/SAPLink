@@ -148,7 +148,7 @@ public class GoodsReceiptHandler
 
             _loger.Information(logMessage);
 
-            yield return new RequestResult<Goods>(Enums.StatusType.Success, logMessage, logStatus, outList, new RestResponse());
+            yield return new RequestResult<Goods>(Enums.StatusType.Success, logMessage, logStatus, outList, new Responses());
         }
     }
 

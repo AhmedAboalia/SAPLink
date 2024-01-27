@@ -50,7 +50,7 @@ namespace SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Inventory
 
                 _loger.Information(message);
 
-                var requestResult = new RequestResult<ItemMasterData>(Enums.StatusType.Failed, message, status, itemsOut, new RestResponse());
+                var requestResult = new RequestResult<ItemMasterData>(Enums.StatusType.Failed, message, status, itemsOut, new Responses());
                 yield return requestResult;
                 yield break;
             }
@@ -166,7 +166,7 @@ namespace SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Inventory
             _loger.Information(message);
 
             return new RequestResult<ProductResponseModel>(Enums.StatusType.Failed, message,
-                "Validation Failed", new List<ProductResponseModel>(), new RestResponse());
+                "Validation Failed", new List<ProductResponseModel>(), new Responses());
         }
 
         private IEnumerable<RequestResult<ItemMasterData>> HandleSyncSuccess(ItemMasterData item, string remaining, RequestResult<ProductResponseModel> resultSync)
