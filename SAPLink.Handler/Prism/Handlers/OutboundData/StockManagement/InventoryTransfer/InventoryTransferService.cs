@@ -68,7 +68,7 @@ public partial class InventoryTransferService
                              $"{query}{resource}\r\n" +
                              $"Auth Session: {_credentials.AuthSession}";
             _loger.Information(result.Message);
-            result.Response = await HttpClientFactory<VerifiedVoucher>.InitializeAsync(query, resource, Method.GET,"",pageNo);
+            result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET,"",pageNo);
 
 
             if (result.Response.StatusCode == HttpStatusCode.OK)
@@ -119,7 +119,7 @@ public partial class InventoryTransferService
         var storeSid = store.Sid;
 
         var body = ReceivingRequest.CreateBody(_subsidiary.Clerksid, rowVersion, trackingNo, note, storeSid);
-        result.Response = await HttpClientFactory<VerifiedVoucher>.InitializeAsync(query, resource, Method.PUT, body);
+        result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.PUT, body);
 
 
         if (result.Response.StatusCode == HttpStatusCode.OK)
@@ -148,7 +148,7 @@ public partial class InventoryTransferService
     {
         string query = $"/v1/rest/store?filter=(active,eq,true)AND(subsidiary_sid,eq,{_subsidiary.SID})AND(store_code,eq,{storeCode})&cols=sid,store_code,store_name,active&sort=store_code,asc";
 
-        var response = await HttpClientFactory<VerifiedVoucher>.InitializeAsync(_credentials.BaseUri, query, Method.GET);
+        var response = await HttpClientFactory.InitializeAsync(_credentials.BaseUri, query, Method.GET);
         var content = response.Response.Content;
 
         return response.Response.StatusCode == HttpStatusCode.OK

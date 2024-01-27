@@ -1,7 +1,6 @@
 ﻿using SAPLink.Core.Models.System;
 using SAPLink.Handler.Connected_Services;
 using SAPLink.Handler.Connection;
-using HttpClientFactory = SAPLink.Handler.Connection.HttpClientFactory<SAPLink.Core.Models.Prism.Settings.Store>;
 
 namespace SAPLink.Handler.Prism.Settings
 {

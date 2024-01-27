@@ -7,7 +7,7 @@ using SAPLink.Handler.Prism.Connection.Auth;
 
 namespace SAPLink.Handler.Connection
 {
-    public partial class HttpClientFactory<T> where T : class
+    public partial class HttpClientFactory
     {
         private static RestClient ApiClient { get; set; }
         public static string LastErrorMessage { get; private set; }

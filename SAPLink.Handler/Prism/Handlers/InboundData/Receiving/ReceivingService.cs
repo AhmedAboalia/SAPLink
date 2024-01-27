@@ -43,7 +43,7 @@ public class ReceivingService : IReceivingService
             _subsidiary.Clerksid,
             storeSid);
 
-        var response = await HttpClientFactory<ReceivingResponseDto>.InitializeAsync(query, resource, Method.POST, body);
+        var response = await HttpClientFactory.InitializeAsync(query, resource, Method.POST, body);
 
         return response.Response.StatusCode == HttpStatusCode.OK
             ? JsonConvert.DeserializeObject<OdataPrism<ReceivingResponseDto>>(response.Response.Content).Data.ToList().FirstOrDefault()
@@ -55,7 +55,7 @@ public class ReceivingService : IReceivingService
         string query = _credentials.BackOfficeUri;
         var resource = $"/receiving/{receivingSid}?action=AddConsolidateVouItem";
 
-        var response = await HttpClientFactory<ReceivingResponseDto>.InitializeAsync(query, resource, Method.POST, body);
+        var response = await HttpClientFactory.InitializeAsync(query, resource, Method.POST, body);
 
         return response;
         //return response.StatusCode == HttpStatusCode.OK
@@ -78,7 +78,7 @@ public class ReceivingService : IReceivingService
                           ]
                           }";
 
-        var response = HttpClientFactory<ReceivingResponseDto>.InitializeAsync(query, resource, Method.POST, body).Result;
+        var response = HttpClientFactory.InitializeAsync(query, resource, Method.POST, body).Result;
 
         return response.Response.StatusCode == HttpStatusCode.OK
             ? JsonConvert.DeserializeObject<OdataPrism<Comment>>(response.Response.Content).Data.FirstOrDefault()
@@ -100,7 +100,7 @@ public class ReceivingService : IReceivingService
                           }
                             ]";
 
-        var response = await HttpClientFactory<ReceivingResponseDto>.InitializeAsync(query, resource, Method.POST, body);
+        var response = await HttpClientFactory.InitializeAsync(query, resource, Method.POST, body);
 
         return response.Response.StatusCode == HttpStatusCode.OK;
     }
@@ -112,7 +112,7 @@ public class ReceivingService : IReceivingService
 
         string body = @"{""data"":[{""rowversion"":" + rowVersion + @",""voutype"":1}]}";
 
-        var response = await HttpClientFactory<ReceivingResponseDto>.InitializeAsync(query, resource, Method.PUT, body);
+        var response = await HttpClientFactory.InitializeAsync(query, resource, Method.PUT, body);
 
         return response.Response.StatusCode == HttpStatusCode.OK;
     }
@@ -131,7 +131,7 @@ public class ReceivingService : IReceivingService
                           ]
                           }";
 
-        var response = HttpClientFactory<ReceivingResponseDto>.InitializeAsync(query, resource, Method.PUT, body).Result;
+        var response = HttpClientFactory.InitializeAsync(query, resource, Method.PUT, body).Result;
 
         return response.Response.StatusCode == HttpStatusCode.OK
             ? JsonConvert.DeserializeObject<OdataPrism<Comment>>(response.Response.Content).Data.FirstOrDefault()
@@ -148,7 +148,7 @@ public class ReceivingService : IReceivingService
         var query = _credentials.BackOfficeUri;
         var resource = $"/receiving/{receiving.Sid}";
 
-        var response = await HttpClientFactory<ReceivingResponseDto>.InitializeAsync(query, resource, Method.GET, "");
+        var response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET, "");
         return JsonConvert.DeserializeObject<OdataPrism<ReceivingResponseDto>>(response.Response.Content).Data.ToList().FirstOrDefault();
 
     }
@@ -158,7 +158,7 @@ public class ReceivingService : IReceivingService
         var resource = $"/receiving/{receiving.Sid}";
 
         var body = ReceivingRequest.CreateBody(_subsidiary.Clerksid, rowVersion, trackingNo, note, storeSid);
-        var response = await HttpClientFactory<ReceivingResponseDto>.InitializeAsync(query, resource, Method.PUT, body);
+        var response = await HttpClientFactory.InitializeAsync(query, resource, Method.PUT, body);
 
         return response;
     }
@@ -167,7 +167,7 @@ public class ReceivingService : IReceivingService
     {
         string query = $"/v1/rest/store?filter=(active,eq,true)AND(subsidiary_sid,eq,{_subsidiary.SID})AND(store_code,eq,{storeCode})&cols=sid,store_code,store_name,active&sort=store_code,asc";
 
-        var response = await HttpClientFactory<ReceivingResponseDto>.InitializeAsync(_credentials.BaseUri, query, Method.GET);
+        var response = await HttpClientFactory.InitializeAsync(_credentials.BaseUri, query, Method.GET);
         var content = response.Response.Content;
 
         return response.Response.StatusCode == HttpStatusCode.OK

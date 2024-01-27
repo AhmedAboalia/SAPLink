@@ -24,7 +24,7 @@ namespace SAPLink.Handler.Integration
                                    }";
 
 
-                var response = HttpClientFactory<Recurrence>.InitializeIntegration("https://localhost:7208/api/v1/Inventory/", resource, Method.POST,
+                var response = HttpClientFactory.InitializeIntegration("https://localhost:7208/api/v1/Inventory/", resource, Method.POST,
                     @"{
                         ""document"": ""Items"",
                         ""recurring"": ""Hourly"",
@@ -54,7 +54,7 @@ namespace SAPLink.Handler.Integration
                 ? PrepareHourlyRequestUri(recurrence)
                 : PrepareDailyRequestUri(recurrence);
 
-            var response = HttpClientFactory<Recurrence>.InitializeIntegration(Uri, "", Method.POST, body);
+            var response = HttpClientFactory.InitializeIntegration(Uri, "", Method.POST, body);
 
             if (response.StatusCode == HttpStatusCode.OK)
             {

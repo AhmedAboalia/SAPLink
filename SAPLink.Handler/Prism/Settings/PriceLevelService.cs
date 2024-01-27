@@ -1,7 +1,7 @@
 ﻿using SAPLink.Core.Models.SAP.MasterData.Items;
 using SAPLink.Core.Models.System;
 using SAPLink.Handler.Connected_Services;
-using HttpClientFactory = SAPLink.Handler.Connection.HttpClientFactory<SAPLink.Core.Models.Prism.Settings.PriceLevel>;
+using HttpClientFactory = SAPLink.Handler.Connection.HttpClientFactory;
 
 namespace SAPLink.Handler.Prism.Settings;
 

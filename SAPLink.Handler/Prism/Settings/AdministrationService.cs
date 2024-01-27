@@ -20,7 +20,7 @@ public class AdministrationService
     {
         var query = "/v1/rest/subsidiary?cols=sid,subsidiary_number,subsidiary_name,active_price_level_sid,active_season_sid,price_level_name&sort=subsidiary_name,asc";
 
-        var response = await HttpClientFactory<Subsidiary>.InitializeAsync(_credentials.BaseUri, query, Method.GET);
+        var response = await HttpClientFactory.InitializeAsync(_credentials.BaseUri, query, Method.GET);
         var content = response.Response.Content;
 
         return response.Response.StatusCode == HttpStatusCode.OK
@@ -31,7 +31,7 @@ public class AdministrationService
     {
         var query = $"/v1/rest/subsidiary?filter=(subsidiary_number,eq,{text})&sort=subsidiary_name,asc&cols=sid,subsidiary_number,subsidiary_name,active_price_level_sid,active_season_sid,price_level_name";
 
-        var response = await HttpClientFactory<Subsidiary>.InitializeAsync(_credentials.BaseUri, query, Method.GET);
+        var response = await HttpClientFactory.InitializeAsync(_credentials.BaseUri, query, Method.GET);
         var content = response.Response.Content;
 
         return response.Response.StatusCode == HttpStatusCode.OK
@@ -42,7 +42,7 @@ public class AdministrationService
     {
         var query = $"/v1/rest/subsidiary?filter=(sid,eq,{_subsidiary.SID})&sort=subsidiary_name,asc&cols=sid,subsidiary_number,subsidiary_name,active_price_level_sid,active_season_sid,price_level_name";
 
-        var response = await HttpClientFactory<Subsidiary>.InitializeAsync(_credentials.BaseUri, query, Method.GET);
+        var response = await HttpClientFactory.InitializeAsync(_credentials.BaseUri, query, Method.GET);
         var content = response.Response.Content;
 
         return response.Response.StatusCode == HttpStatusCode.OK
@@ -53,7 +53,7 @@ public class AdministrationService
     {
         const string query = "/api/common/season?cols=*&filter=(active,eq,true)&sort=seasonname,asc";
 
-        var response = await HttpClientFactory<Subsidiary>.InitializeAsync(_credentials.BaseUri, query, Method.GET);
+        var response = await HttpClientFactory.InitializeAsync(_credentials.BaseUri, query, Method.GET);
         var content = response.Response.Content;
 
         return response.Response.StatusCode == HttpStatusCode.OK

@@ -30,7 +30,7 @@ public class VendorsService : IEntityService<RequestResult<Vendor>, BusinessPart
         var query = _credentials.BackOfficeUri;
         var resource = $"/vendor?filter=(sbssid,eq,{_subsidiary.SID})AND(vendcode,eq,{cardCode})";
 
-        result.Response = await HttpClientFactory<Vendor>.InitializeAsync(query, resource, Method.GET);
+        result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET);
 
         if (result.Response.StatusCode == HttpStatusCode.OK)
         {
@@ -67,7 +67,7 @@ public class VendorsService : IEntityService<RequestResult<Vendor>, BusinessPart
             method = Method.PUT;
         }
 
-        result.Response = await HttpClientFactory<Vendor>.InitializeAsync(query, resource, method, body);
+        result.Response = await HttpClientFactory.InitializeAsync(query, resource, method, body);
 
         if (result.Response.StatusCode == HttpStatusCode.OK)
         {

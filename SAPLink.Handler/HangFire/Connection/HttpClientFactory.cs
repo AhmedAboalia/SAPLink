@@ -7,7 +7,7 @@ using SAPLink.Core.Models.System;
 
 namespace SAPLink.Handler.Connection;
 
-public partial class HttpClientFactory<T> where T : class
+public partial class HttpClientFactory
 {
     public static IRestResponse Initialize(string uri, string resource, Method method,
         IDictionary<string, string> headers, string body = "")

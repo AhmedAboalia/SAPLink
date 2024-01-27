@@ -53,7 +53,7 @@ public class ItemsService : IProductService<RequestResult<ProductResponseModel>,
                                   }";
 
 
-        result.Response = await HttpClientFactory<ProductResponseModel>.InitializeAsync(query, resource, Method.POST, body);
+        result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.POST, body);
 
         if (result.Response.StatusCode == HttpStatusCode.OK)
         {
@@ -82,7 +82,7 @@ public class ItemsService : IProductService<RequestResult<ProductResponseModel>,
         var query = _credentials.BackOfficeUri;
         const string resource = "/inventory?action=InventorySaveItems";
 
-        result.Response = await HttpClientFactory<ProductResponseModel>.InitializeAsync(query, resource, Method.POST, body);
+        result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.POST, body);
 
         if (result.Response.StatusCode == HttpStatusCode.OK)
         {

@@ -85,7 +85,7 @@ public partial class InvoiceService
 
             _loger.Information(result.Message);
 
-            result.Response = await HttpClientFactory<PrismInvoice>.InitializeAsync(query, resource, Method.GET);
+            result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET);
             //_loger.Information(result.Response.Content);
 
             if (result.Response.StatusCode == HttpStatusCode.OK)
@@ -149,7 +149,7 @@ public partial class InvoiceService
 
             _loger.Information(result.Message);
 
-            result.Response = await HttpClientFactory<PrismInvoice>.InitializeAsync(query, resource, Method.GET);
+            result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET);
 
             _loger.Information(result.Response.Content);
 

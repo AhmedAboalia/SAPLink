@@ -75,7 +75,7 @@ public partial class InventoryPostingService
                              $"{query}{resource}\r\n" +
                              $"Auth Session: {_credentials.AuthSession}";
 
-            result.Response = await HttpClientFactory<InventoryPostings>.InitializeAsync(query, resource, Method.GET);
+            result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET);
 
 
             if (result.Response.StatusCode == HttpStatusCode.OK)
@@ -128,7 +128,7 @@ public partial class InventoryPostingService
                               }
                           ]";
 
-        var response = await HttpClientFactory<InventoryPostings>.InitializeAsync(query, resource, Method.PUT);
+        var response = await HttpClientFactory.InitializeAsync(query, resource, Method.PUT);
 
         return response.Response.StatusCode == HttpStatusCode.OK;
     }
