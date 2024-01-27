@@ -16,10 +16,10 @@ namespace SAPLink.Handler.Connection
         private static readonly ApplicationDbContext Context = new();
         private static readonly UnitOfWork UnitOfWork = new(Context);
 
-        static readonly string[] includes = { "Credentials", "Credentials.Subsidiaries" };
-        static readonly Clients Client = UnitOfWork.Clients.FindAsync(c => c.Active == true, includes).Result;
+        static string[] includes = { "Credentials", "Credentials.Subsidiaries" };
+        static Clients Client = UnitOfWork.Clients.FindAsync(c => c.Active == true, includes).Result;
 
-        private static readonly Credentials Credential = Client.Credentials.FirstOrDefault();
+        private static Credentials Credential = Client.Credentials.FirstOrDefault();
         //private static Subsidiaries subsidiary = Credential.Subsidiaries.FirstOrDefault();
 
 

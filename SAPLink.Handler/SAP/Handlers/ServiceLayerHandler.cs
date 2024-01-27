@@ -32,7 +32,7 @@ public partial class ServiceLayerHandler : IServiceLayerHandler
     }
     public void Connect()
     {
-        var response = HttpClientFactory<PriceList>.Initialize("Login", Method.POST);
+        var response = HttpClientFactory<PriceList>.Initialize("Login", Method.POST, _client);
         if (response.StatusCode == HttpStatusCode.OK)
         {
             _session = JsonConvert.DeserializeObject<Session>(response.Content);
@@ -43,7 +43,7 @@ public partial class ServiceLayerHandler : IServiceLayerHandler
     }
     public void Connect(LoginModel.LoginTypes loginTypes, LoginModel loginData)
     {
-        var response = HttpClientFactory<PriceList>.Initialize("Login", Method.POST,  loginTypes, loginData);
+        var response = HttpClientFactory<PriceList>.Initialize("Login", Method.POST, _client,  loginTypes, loginData);
         if (response.StatusCode == HttpStatusCode.OK)
         {
             _session = JsonConvert.DeserializeObject<Session>(response.Content);
@@ -54,7 +54,7 @@ public partial class ServiceLayerHandler : IServiceLayerHandler
     }
     public void Disconnect()
     {
-        var response = HttpClientFactory<PriceList>.Initialize("Logout", Method.POST);
+        var response = HttpClientFactory<PriceList>.Initialize("Logout", Method.POST, _client);
 
         if (response.StatusCode == HttpStatusCode.NoContent)
             IsConnected = false;
@@ -74,7 +74,7 @@ public partial class ServiceLayerHandler : IServiceLayerHandler
             var query = "PriceLists?$select=PriceListNo,PriceListName";
             var body = "";
 
-            response = HttpClientFactory<PriceList>.Initialize(query, Method.GET, LoginModel.LoginTypes.Basic, null, body);
+            response = HttpClientFactory<PriceList>.Initialize(query, Method.GET, _client, LoginModel.LoginTypes.Basic, null, body);
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
