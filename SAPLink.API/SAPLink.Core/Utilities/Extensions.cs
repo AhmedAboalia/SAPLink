@@ -65,9 +65,14 @@ public static class Extensions
             WriteIndented = true
         };
 
-        var jsonElement = JsonSerializer.Deserialize<JsonElement>(unPrettyJson);
+        if (unPrettyJson != null)
+        {
+            var jsonElement = JsonSerializer.Deserialize<JsonElement>(unPrettyJson);
 
-        return JsonSerializer.Serialize(jsonElement, options);
+            return JsonSerializer.Serialize(jsonElement, options);
+        }
+
+        return unPrettyJson;
     }
 
     /// <summary>

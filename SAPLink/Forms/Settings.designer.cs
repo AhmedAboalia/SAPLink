@@ -1438,6 +1438,7 @@
             buttonRefreshAuthSession.Tag = "";
             buttonRefreshAuthSession.Text = "Refresh Auth";
             buttonRefreshAuthSession.Tile = true;
+            buttonRefreshAuthSession.Click += ButtonRefreshAuthSession_Click;
             // 
             // label30
             // 
@@ -1617,6 +1618,7 @@
             comboBoxClient.ShadowDecoration.CustomizableEdges = customizableEdges66;
             comboBoxClient.Size = new Size(225, 21);
             comboBoxClient.TabIndex = 168;
+            comboBoxClient.SelectedIndexChanged += comboBoxClient_SelectedIndexChanged;
             // 
             // comboBoxEnvironment
             // 
@@ -1636,6 +1638,7 @@
             comboBoxEnvironment.ShadowDecoration.CustomizableEdges = customizableEdges68;
             comboBoxEnvironment.Size = new Size(266, 21);
             comboBoxEnvironment.TabIndex = 169;
+            comboBoxEnvironment.SelectedIndexChanged += comboBoxEnvironment_SelectedIndexChanged;
             // 
             // label23
             // 

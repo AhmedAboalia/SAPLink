@@ -8,8 +8,8 @@ namespace SAPLink.Forms
 {
     public partial class Settings : Form
     {
-        private readonly Clients _client;
-        private readonly Credentials _credentials;
+        private Clients _client;
+        private Credentials _credentials;
         private readonly Subsidiaries _subsidiary;
 
         private readonly UnitOfWork _unitOfWork;
@@ -269,17 +269,19 @@ namespace SAPLink.Forms
                 toggleSQL2019.Checked = false;
                 toggleHANA.Checked = false;
 
-                var credentials = _unitOfWork.Credentials.Find(x => x.EnvironmentCode == (int)selectedIndex);
+                _client = _unitOfWork.Clients.Find(x => x.Id == (int)selectedIndex);
 
+                _credentials = _client.Credentials.FirstOrDefault();
 
-                comboBoxEnvironment.SelectedIndex = credentials.EnvironmentCode;
-                textBoxEnviromentName.Text = credentials.EnvironmentName;
+                comboBoxEnvironment.SelectedIndex = _credentials.EnvironmentCode;
+                textBoxEnviromentName.Text = _credentials.EnvironmentName;
+                toggleActiveClient.Checked = _client.Active;
 
-                textBoxServiceLayerUri.Text = credentials.ServiceLayerUri;
-                textBoxServer.Text = credentials.Server;
+                textBoxServiceLayerUri.Text = _credentials.ServiceLayerUri;
+                textBoxServer.Text = _credentials.Server;
 
-                textBoxCompany.Text = credentials.CompanyDb;
-                var serverType = credentials.ServerTypes;
+                textBoxCompany.Text = _credentials.CompanyDb;
+                var serverType = _credentials.ServerTypes;
 
                 if (serverType == Enums.BoDataServerTypes.dst_MSSQL2016)
                     toggleSQL2016.Checked = true;
@@ -288,16 +290,16 @@ namespace SAPLink.Forms
                 if (serverType == Enums.BoDataServerTypes.dst_HANADB)
                     toggleHANA.Checked = true;
 
-                textBoxUserName.Text = credentials.UserName;
-                textBoxPassword.Text = credentials.Password;
-                textBoxAuthorization.Text = credentials.Authorization;
+                textBoxUserName.Text = _credentials.UserName;
+                textBoxPassword.Text = _credentials.Password;
+                textBoxAuthorization.Text = _credentials.Authorization;
 
-                textBoxServerBaseUri.Text = credentials.BaseUri;
-                textBoxAuthSession.Text = credentials.AuthSession;
+                textBoxServerBaseUri.Text = _credentials.BaseUri;
+                textBoxAuthSession.Text = _credentials.AuthSession;
 
-                textBoxPrismUserName.Text = credentials.PrismUserName;
-                textBoxPrismPassword.Text = credentials.PrismPassword;
-                toggleActiveUILog.Checked = credentials.ActiveLog;
+                textBoxPrismUserName.Text = _credentials.PrismUserName;
+                textBoxPrismPassword.Text = _credentials.PrismPassword;
+                toggleActiveUILog.Checked = _credentials.ActiveLog;
             }
         }
 
