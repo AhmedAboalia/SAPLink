@@ -110,7 +110,9 @@ public class GoodsIssueHandler
 
                             _loger.Information(logMessage);
 
-                            yield return new RequestResult<Goods>(StatusType.Failed, logMessage, logStatus, outList, itemRespose);
+                            Responses responses = new Responses();
+                            responses.Response = itemRespose;
+                            yield return new RequestResult<Goods>(StatusType.Failed, logMessage, logStatus, outList, responses);
 
                         }
                     }

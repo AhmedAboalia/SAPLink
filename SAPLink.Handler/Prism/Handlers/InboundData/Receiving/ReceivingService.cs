@@ -51,14 +51,14 @@ public class ReceivingService : IReceivingService
             : new ReceivingResponseDto();
     }
 
-    public async Task<Responses> AddConsolidateItem(string body, string receivingSid)
+    public async Task<IRestResponse> AddConsolidateItem(string body, string receivingSid)
     {
         string query = _credentials.BackOfficeUri;
         var resource = $"/receiving/{receivingSid}?action=AddConsolidateVouItem";
 
         var response = await HttpClientFactory.InitializeAsync(query, resource, Method.POST, body);
 
-        return response;
+        return response.Response;
         //return response.StatusCode == HttpStatusCode.OK
         //    ? JsonConvert.DeserializeObject<ReceivingItemData>(response.Content)
         //    : new ReceivingItemData();

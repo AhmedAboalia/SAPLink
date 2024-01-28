@@ -68,7 +68,7 @@ public partial class InventoryTransferService
                              $"{query}{resource}\r\n" +
                              $"Auth Session: {_credentials.AuthSession}";
             _loger.Information(result.Message);
-            result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET,"", pageNo);
+            result.Response.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET,"", pageNo);
 
             var response = result.Response.Response;
             if (response.StatusCode == HttpStatusCode.OK)

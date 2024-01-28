@@ -9,7 +9,7 @@ namespace SAPLink.Handler.Connection;
 
 public partial class HttpClientFactory
 {
-    public static Responses Initialize(string uri, string resource, Method method,
+    public static IRestResponse Initialize(string uri, string resource, Method method,
         IDictionary<string, string> headers, string body = "")
     {
         try
@@ -38,7 +38,7 @@ public partial class HttpClientFactory
             ServicePointManager.ServerCertificateValidationCallback +=
                 (sender, certificate, chain, sslPolicyErrors) => true;
 
-            return (Responses)ApiClient.Execute(Request);
+            return ApiClient.Execute(Request);
         }
         catch (Exception e)
         {
@@ -49,7 +49,7 @@ public partial class HttpClientFactory
         return null;
     }
 
-    public static Responses InitializeIntegration(string Uri, string resource, Method method, string body = "")
+    public static IRestResponse InitializeIntegration(string Uri, string resource, Method method, string body = "")
     {
         try
         {
@@ -78,7 +78,7 @@ public partial class HttpClientFactory
             ServicePointManager.ServerCertificateValidationCallback +=
                 (sender, certificate, chain, sslPolicyErrors) => true;
 
-            return (Responses)ApiClient.Execute(Request);
+            return ApiClient.Execute(Request);
         }
         catch (Exception e)
         {
@@ -86,6 +86,6 @@ public partial class HttpClientFactory
         }
 
         //Request = null;
-        return new Responses();
+        return new RestResponse();
     }
 }
