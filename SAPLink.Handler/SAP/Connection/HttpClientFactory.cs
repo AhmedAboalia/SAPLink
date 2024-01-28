@@ -32,7 +32,7 @@ public partial class SAPHttpClientFactory
         Client = UnitOfWork.Clients.FindAsync(c => c.Active == true, includes).Result;
         Credential = Client.Credentials.FirstOrDefault();
     }
-    public static Responses Initialize(string resource, Method method,Clients clients,
+    public static IRestResponse Initialize(string resource, Method method,Clients clients,
         LoginModel.LoginTypes LoginTypes = LoginModel.LoginTypes.Basic, LoginModel LoginData = null, string body = "",
         bool applyPaging = false, int maxPerPage = 250, string contentType = "")
     {
@@ -78,7 +78,7 @@ public partial class SAPHttpClientFactory
                 (sender, certificate, chain, sslPolicyErrors) => true;
             //MakeCert();
 
-            return (Responses)ApiClient.Execute(Request);
+            return ApiClient.Execute(Request);
         }
         catch (Exception e)
         {

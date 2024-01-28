@@ -68,17 +68,17 @@ public partial class InventoryTransferService
                              $"{query}{resource}\r\n" +
                              $"Auth Session: {_credentials.AuthSession}";
             _loger.Information(result.Message);
-            result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET,"",pageNo);
+            result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET,"", pageNo);
 
-
-            if (result.Response.StatusCode == HttpStatusCode.OK)
+            var response = result.Response.Response;
+            if (response.StatusCode == HttpStatusCode.OK)
             {
-                var invoices = VerifiedVoucher.FromJson(result.Response.Content).Data;
+                var invoices = VerifiedVoucher.FromJson(response.Content).Data;
                 result.EntityList.AddRange(invoices);
                 _loger.Information("Successfully fetched the Verified Voucher/s.");
             }
             else
-                _loger.Fatal($"Failed to fetch Verified Voucher/s. Status Code: {result.Response.StatusCode}. Content: {result.Response.Content}");
+                _loger.Fatal($"Failed to fetch Verified Voucher/s. Status Code: {response.StatusCode}. Content: {response.Content}");
 
             return result;
 

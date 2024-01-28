@@ -32,11 +32,11 @@ partial class ServiceLayerHandler
                 var body = CreateBody(PrismInvoice, taxCodes, customerCode, series, updateType);
 
 
-                result.Response = SAPHttpClientFactory.Initialize("Invoices", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
+                result.Response.Response = SAPHttpClientFactory.Initialize("Invoices", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
 
-                if (result.Response.StatusCode == HttpStatusCode.OK || result.Response.StatusCode == HttpStatusCode.Created)
+                if (result.Response.Response.StatusCode == HttpStatusCode.OK || result.Response.Response.StatusCode == HttpStatusCode.Created)
                 {
-                    var invoice = JsonConvert.DeserializeObject<SAPInvoice>(result.Response.Content);
+                    var invoice = JsonConvert.DeserializeObject<SAPInvoice>(result.Response.Response.Content);
 
                     if (invoice != null && invoice != null)
                     {
@@ -98,11 +98,11 @@ partial class ServiceLayerHandler
                 var body = CreateReturnBody(PrismInvoice, taxCodes, code, series, updateType);
 
 
-                result.Response = SAPHttpClientFactory.Initialize("CreditNotes", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
+                result.Response.Response = SAPHttpClientFactory.Initialize("CreditNotes", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
 
-                if (result.Response.StatusCode == HttpStatusCode.OK || result.Response.StatusCode == HttpStatusCode.Created)
+                if (result.Response.Response.StatusCode == HttpStatusCode.OK || result.Response.Response.StatusCode == HttpStatusCode.Created)
                 {
-                    var invoice = JsonConvert.DeserializeObject<SAPInvoice>(result.Response.Content);
+                    var invoice = JsonConvert.DeserializeObject<SAPInvoice>(result.Response.Response.Content);
 
                     if (invoice != null && invoice != null)
                     {
@@ -159,11 +159,11 @@ partial class ServiceLayerHandler
                 var body = CreateDownPaymentBody(PrismInvoice, taxCodes, customerCode, series);
 
 
-                result.Response = SAPHttpClientFactory.Initialize("DownPayments", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
+                result.Response.Response = SAPHttpClientFactory.Initialize("DownPayments", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
 
-                if (result.Response.StatusCode == HttpStatusCode.OK || result.Response.StatusCode == HttpStatusCode.Created)
+                if (result.Response.Response.StatusCode == HttpStatusCode.OK || result.Response.Response.StatusCode == HttpStatusCode.Created)
                 {
-                    var invoice = JsonConvert.DeserializeObject<SAPInvoice>(result.Response.Content);
+                    var invoice = JsonConvert.DeserializeObject<SAPInvoice>(result.Response.Response.Content);
 
                     if (invoice != null && invoice != null)
                     {
@@ -531,11 +531,11 @@ partial class ServiceLayerHandler
                 var body = SAPInvoice.CreateOrderBody(PrismInvoice, taxCodes, customerCode);
 
 
-                result.Response = SAPHttpClientFactory.Initialize("Orders", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
+                result.Response.Response = SAPHttpClientFactory.Initialize("Orders", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
 
-                if (result.Response.StatusCode == HttpStatusCode.OK || result.Response.StatusCode == HttpStatusCode.Created)
+                if (result.Response.Response.StatusCode == HttpStatusCode.OK || result.Response.Response.StatusCode == HttpStatusCode.Created)
                 {
-                    var invoice = JsonConvert.DeserializeObject<SAPInvoice>(result.Response.Content);
+                    var invoice = JsonConvert.DeserializeObject<SAPInvoice>(result.Response.Response.Content);
 
                     if (invoice != null && invoice != null)
                     {
@@ -546,14 +546,14 @@ partial class ServiceLayerHandler
 
                     return result;
                 }
-                if (result.Response.StatusCode == HttpStatusCode.BadRequest)
+                if (result.Response.Response.StatusCode == HttpStatusCode.BadRequest)
                 {
                     var message2 = "";
                     result.Status = Enums.StatusType.NotFound;
-                    if (result.Response.Content.Contains("To generate this document, first define the numbering series in the Administration module"))
+                    if (result.Response.Response.Content.Contains("To generate this document, first define the numbering series in the Administration module"))
                         message2 = "Can`t find document series, Please make sure you define Whs series in Street/PO Box that Linked to document numbring (Series Name)";
                     else
-                        message2 = result.Response.Content;
+                        message2 = result.Response.Response.Content;
 
                     result.Message = $"\r\nCan`t Add Order - Prism Invoice ({PrismInvoice.DocumentNumber})" +
                               $"\r\n\r\nErrors in Response Content:" +

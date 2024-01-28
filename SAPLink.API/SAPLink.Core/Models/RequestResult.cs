@@ -8,18 +8,6 @@ public class RequestResult<T>
     public List<T> EntityList { get; set; } = new();
     public Responses Response { get; set; } = new Responses();
 
-    public int ContentRange = 0;
-
-    public void GetContentRange(string range, int pageSize)
-    {
-        if (range.Contains("/"))
-        {
-            var pageCount = Convert.ToInt32(range.Split("/")[1]);
-            pageCount = (pageCount % pageSize == 0) ? (pageCount / pageSize) : ((pageCount / pageSize) + 1);
-        }
-    }
-
-
     public RequestResult(StatusType status, string message, string statusBarMessage, List<T> entityList, Responses response)
     {
         Status = status;
@@ -38,14 +26,14 @@ public class RequestResult<T>
 public class Responses : IRestResponse
 {
     public IRestResponse Response = new RestResponse();
-    public int ContentRange = 0;
+    public int PagesCount = 0;
 
     public void GetContentRange(string range, int pageSize)
     {
         if (range.Contains("/"))
         {
             var pageCount = Convert.ToInt32(range.Split("/")[1]);
-            pageCount = (pageCount % pageSize == 0) ? (pageCount / pageSize) : ((pageCount / pageSize) + 1);
+            PagesCount = (pageCount % pageSize == 0) ? (pageCount / pageSize) : ((pageCount / pageSize) + 1);
         }
     }
 
