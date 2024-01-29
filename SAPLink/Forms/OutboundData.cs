@@ -34,6 +34,7 @@ public partial class OutboundData : Form
 
     private readonly InventoryPostingService _inventoryPostingService;
     private readonly InventoryPostingHandler _inventoryPostingHandler;
+    private bool IsDownPaymentReturn;
 
     public OutboundData(UnitOfWork unitOfWork, ServiceLayerHandler serviceLayer, DepartmentService departmentService,
         ItemsService itemsService, Clients client)
@@ -132,18 +133,19 @@ public partial class OutboundData : Form
                             var isWholesale = invoice.IsWholesale == "B2P";
                             var wholesaleCustomerCode = invoice.WholesaleCustomerCode;
 
-
-                            if (IsDownPayment(sInvoice, isInvoiceHasReturnItem))
-                                await HandleDownPayment(invoiceResult.EntityList, UpdateType.SyncInvoice);
-
-                            else if (IsRetailSale(sInvoice, isInvoiceHasReturnItem, isWholesale, wholesaleCustomerCode))
+                            if (IsInvoiceNormalSales(sInvoice, isInvoiceHasReturnItem, isWholesale, wholesaleCustomerCode))
                                 await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncInvoice);
 
-                            else if (IsWholesaleRetail(sInvoice, isInvoiceHasReturnItem, isWholesale, wholesaleCustomerCode))
-                                await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncWholesaleRetail);
 
-                            else if (IsWholesale(sInvoice, isWholesale))
+                            else if (IsDownPayment(sInvoice, isInvoiceHasReturnItem))
+                                await HandleDownPayment(invoiceResult.EntityList, UpdateType.SyncInvoice);
+
+                            else if (IsInvoiceAndCreditWholesale(sInvoice, isWholesale))
                                 await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncWholesale, wholesaleCustomerCode);
+
+                            else if (IsInvoiceAndCashWholesale(sInvoice, isInvoiceHasReturnItem, isWholesale, wholesaleCustomerCode))
+                                await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncWholesaleRetail);
+                           
                         }
 
                     }
@@ -195,18 +197,18 @@ public partial class OutboundData : Form
 
                             var isHasReturnItem = returnInvoice.Items.Any(p => p.Alu == "SP0012");
 
-                            if (isHasReturnItem && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
-                                await HandleCreditMemoWithoutPayment(invoiceResult.EntityList, UpdateType.SyncInvoice);
 
-                            else if (!isHasReturnItem && isWholesale && wholesaleCustomerCode.IsHasValue() && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
+                            if (IsReturnAndCreditWholsale(isHasReturnItem, isWholesale, wholesaleCustomerCode, returnInvoice))
                                 await HandleCreditMemoWithPayment(invoiceResult.EntityList, UpdateType.SyncWholesale, wholesaleCustomerCode);
 
-                            else if (!isHasReturnItem && isWholesale && wholesaleCustomerCode.IsNullOrEmpty() && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
+                            else if (IsReturnAndCashWholsale(isHasReturnItem, isWholesale, wholesaleCustomerCode, returnInvoice))
                                 await HandleCreditMemoWithPayment(invoiceResult.EntityList, UpdateType.SyncWholesaleRetail);
 
-                            else if (!isHasReturnItem && !CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
+                            else if (IsNormalReturn(isHasReturnItem, returnInvoice))
                                 await HandleCreditMemoWithPayment(invoiceResult.EntityList, UpdateType.SyncCreditMemo);
 
+                            else if (IsReturnAndDownPayment(isHasReturnItem, returnInvoice))
+                                await HandleCreditMemoWithoutPayment(invoiceResult.EntityList, UpdateType.SyncInvoice);
                         }
                     }
                     else
@@ -315,17 +317,37 @@ public partial class OutboundData : Form
         }
     }
 
-    private static bool IsWholesale(PrismInvoice sInvoice, bool isWholesale)
+    private static bool IsNormalReturn(bool isHasReturnItem, PrismInvoice returnInvoice)
+    {
+        return !isHasReturnItem && !CheckInvoiceExist(returnInvoice.Sid, "ORIN");
+    }
+
+    private static bool IsReturnAndDownPayment(bool isHasReturnItem, PrismInvoice returnInvoice)
+    {
+        return isHasReturnItem && !CheckInvoiceExist(returnInvoice.Sid, "ORIN");
+    }
+
+    private static bool IsReturnAndCashWholsale(bool isHasReturnItem, bool isWholesale, string wholesaleCustomerCode, PrismInvoice returnInvoice)
+    {
+        return !isHasReturnItem && isWholesale && wholesaleCustomerCode.IsNullOrEmpty() && !CheckInvoiceExist(returnInvoice.Sid, "ORIN");
+    }
+
+    private static bool IsReturnAndCreditWholsale(bool isHasReturnItem, bool isWholesale, string wholesaleCustomerCode, PrismInvoice returnInvoice)
+    {
+        return !isHasReturnItem && isWholesale && wholesaleCustomerCode.IsHasValue() && !CheckInvoiceExist(returnInvoice.Sid, "ORIN");
+    }
+
+    private static bool IsInvoiceAndCreditWholesale(PrismInvoice sInvoice, bool isWholesale)
     {
         return isWholesale && !CheckInvoiceExist(sInvoice.Sid, "OINV");
     }
 
-    private static bool IsWholesaleRetail(PrismInvoice sInvoice, bool isInvoiceHasReturnItem, bool isWholesale, string wholesaleCustomerCode)
+    private static bool IsInvoiceAndCashWholesale(PrismInvoice sInvoice, bool isInvoiceHasReturnItem, bool isWholesale, string wholesaleCustomerCode)
     {
         return !isInvoiceHasReturnItem && isWholesale && wholesaleCustomerCode.IsNullOrEmpty() && !CheckInvoiceExist(sInvoice.Sid, "OINV");
     }
 
-    private static bool IsRetailSale(PrismInvoice sInvoice, bool isInvoiceHasReturnItem, bool isWholesale, string wholesaleCustomerCode)
+    private static bool IsInvoiceNormalSales(PrismInvoice sInvoice, bool isInvoiceHasReturnItem, bool isWholesale, string wholesaleCustomerCode)
     {
         return !isInvoiceHasReturnItem && !isWholesale && wholesaleCustomerCode.IsNullOrEmpty() && !CheckInvoiceExist(sInvoice.Sid, "OINV");
     }
