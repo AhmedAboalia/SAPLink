@@ -60,13 +60,9 @@ public static class Extensions
     /// <returns>The beautified JSON string.</returns>
     public static string PrettyJson(this string unPrettyJson)
     {
-        var options = new JsonSerializerOptions()
+        if (unPrettyJson.IsHasValue())
         {
-            WriteIndented = true
-        };
-
-        if (unPrettyJson != null)
-        {
+            var options = new JsonSerializerOptions() { WriteIndented = true };
             var jsonElement = JsonSerializer.Deserialize<JsonElement>(unPrettyJson);
 
             return JsonSerializer.Serialize(jsonElement, options);
