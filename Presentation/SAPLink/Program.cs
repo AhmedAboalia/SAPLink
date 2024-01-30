@@ -55,12 +55,12 @@ internal static class Program
         _itemsService = new ItemsService(Client, _departmentService, _vendorsHandler);
         _loger.Information("Successfully Initiate Items Service.");
 
-        System.Application.ThreadException += Application_ThreadException;
+        System.Windows.Forms.Application.ThreadException += Application_ThreadException;
         AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
         AutoUpdater.Start("https://pastebin.com/raw/S53jgRFB");
 
-        Application.Run(new Login(UnitOfWork, _serviceLayer, _departmentService, _itemsService, Client));
+        System.Windows.Forms.Application.Run(new Login(UnitOfWork, _serviceLayer, _departmentService, _itemsService, Client));
 
         Log.CloseAndFlush();
 

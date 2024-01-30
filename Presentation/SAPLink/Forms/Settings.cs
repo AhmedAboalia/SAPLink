@@ -494,7 +494,7 @@ namespace SAPLink.Forms
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (result == DialogResult.OK)
-                Application.Restart();
+                System.Windows.Forms.Application.Restart();
         }
 
         private async void toolStripMenuItem2_Click(object sender, EventArgs e)

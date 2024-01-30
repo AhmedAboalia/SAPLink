@@ -138,11 +138,11 @@ namespace SAPLink.Forms
                     Process.Start(processStartInfo);
 
                     if (AutoUpdater.IsWinFormsApplication)
-                        Application.Exit();
+                        System.Windows.Forms.Application.Exit();
                     else
                     {
                         Environment.Exit(0);
-                        Application.Exit();
+                        System.Windows.Forms.Application.Exit();
                     }
                 }
                 catch (Exception)

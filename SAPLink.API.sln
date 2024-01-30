@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SAPLink.API", "SAPLink.API", "{1701ED11-D251-416E-A0CE-95170DBD3516}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{1701ED11-D251-416E-A0CE-95170DBD3516}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAPLink.API", "SAPLink.API\SAPLink.API\SAPLink.API.csproj", "{7783519F-7845-4BB8-97B1-12C428D1D2EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAPLink.API", "Presentation\SAPLink.API\SAPLink.API.csproj", "{7783519F-7845-4BB8-97B1-12C428D1D2EE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAPLink.Core", "SAPLink.API\SAPLink.Core\SAPLink.Core.csproj", "{325E6A14-A188-40A6-BF71-B23963B2D910}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAPLink.Domain", "SAPLink.Domain\SAPLink.Domain.csproj", "{325E6A14-A188-40A6-BF71-B23963B2D910}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAPLink.EF", "SAPLink.API\SAPLink.EF\SAPLink.EF.csproj", "{2EC4D85E-7A08-4357-9B5E-7EDF6FDD27DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAPLink.EF", "SAPLink.Infrastructure\SAPLink.Infrastructure.csproj", "{2EC4D85E-7A08-4357-9B5E-7EDF6FDD27DC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAPLink.Handler", "SAPLink.Handler\SAPLink.Handler.csproj", "{5D75F34D-46F0-4BDB-A70A-6033AEDB6B5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SAPLink.Application", "SAPLink.Application\SAPLink.Application.csproj", "{5D75F34D-46F0-4BDB-A70A-6033AEDB6B5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

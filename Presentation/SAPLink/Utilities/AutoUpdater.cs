@@ -109,7 +109,7 @@ namespace SAPLink.Forms.AutoUpdate
         {
             AppCastURL = appCast;
 
-            IsWinFormsApplication = Application.MessageLoop;
+            IsWinFormsApplication = System.Windows.Forms.Application.MessageLoop;
 
             var backgroundWorker = new BackgroundWorker();
 

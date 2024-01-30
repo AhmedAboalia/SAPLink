@@ -1091,7 +1091,7 @@ public partial class InboundData : Form
             MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
         if (result == DialogResult.OK)
-            Application.Restart();
+            System.Windows.Forms.Application.Restart();
     }
 
     private void restartToolStripMenuItem1_Click(object sender, EventArgs e)

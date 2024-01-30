@@ -95,6 +95,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\SAPLink.Application\SAPLink.Application.csproj" />
+    <ProjectReference Include="..\..\SAPLink.Infrastructure\SAPLink.Infrastructure.csproj" />
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
