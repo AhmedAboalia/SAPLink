@@ -1,0 +1,15 @@
+global using Newtonsoft.Json;
+global using System.ComponentModel.DataAnnotations;
+global using System;
+global using System.Collections.Generic;
+global using System.ComponentModel.DataAnnotations.Schema;
+global using System.Globalization;
+global using System.Linq;
+global using System.Net;
+global using System.Text;
+global using System.Threading.Tasks;
+global using Newtonsoft.Json;
+global using Newtonsoft.Json.Converters;
+global using RestSharp;
+global using static SAPLink.Domain.Enums;
+global using static SAPLink.Domain.InboundEnums;

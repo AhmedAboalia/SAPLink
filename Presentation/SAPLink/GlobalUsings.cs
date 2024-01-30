@@ -1,0 +1,20 @@
+global using System.ComponentModel;
+global using System.Net;
+global using SAPLink.EF;
+global using Microsoft.EntityFrameworkCore;
+global using SAPbobsCOM;
+global using static SAPLink.Domain.Enums;
+global using static SAPLink.Domain.InboundEnums;
+global using ItemGroups = SAPLink.Domain.Models.SAP.MasterData.Items.ItemGroups;
+global using ItemsHandler = SAPLink.Application.Prism.Handlers.InboundData.Merchandise.Inventory.ItemsHandler;
+global using Newtonsoft.Json;
+global using RestSharp;
+global using Guna.UI2.WinForms;
+global using SAPLink.Utilities;
+global using BusinessPartner = SAPLink.Domain.Models.SAP.MasterData.BusinessPartners.BusinessPartner;
+global using OutboundDocuments = SAPLink.Domain.OutboundEnums.Documents;
+global using Environment = System.Environment;
+global using Form = System.Windows.Forms.Form;
+global using PrismInvoice = SAPLink.Domain.Models.Prism.Sales.Invoice;
+global using SAPInvoice = SAPLink.Domain.Models.SAP.Sales.Invoice;
+
