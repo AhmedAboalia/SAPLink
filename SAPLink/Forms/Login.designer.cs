@@ -259,6 +259,7 @@
             comboBoxClients.ShadowDecoration.CustomizableEdges = customizableEdges6;
             comboBoxClients.Size = new Size(402, 36);
             comboBoxClients.TabIndex = 9;
+            comboBoxClients.SelectedIndexChanged += comboBoxClients_SelectedIndexChanged;
             // 
             // textBoxUserName
             // 
