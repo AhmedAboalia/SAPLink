@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v7.0": {
-      "SAPLink.Domain/1.0.0": {
+      "SAPLink.Comman/1.0.0": {
         "dependencies": {
           "Microsoft.EntityFrameworkCore": "7.0.9",
           "Microsoft.EntityFrameworkCore.Abstractions": "7.0.9",
@@ -14,7 +14,7 @@
           "RestSharp": "106.15.0"
         },
         "runtime": {
-          "SAPLink.Domain.dll": {}
+          "SAPLink.Comman.dll": {}
         }
       },
       "Microsoft.EntityFrameworkCore/7.0.9": {
@@ -147,7 +147,7 @@
     }
   },
   "libraries": {
-    "SAPLink.Domain/1.0.0": {
+    "SAPLink.Comman/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

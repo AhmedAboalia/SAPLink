@@ -1,8 +1,6 @@
 ﻿// To parse this JSON data:
 // var invoice = Invoice.FromJson(jsonString);
 
-using SAPLink.Domain.Utilities;
-
 namespace SAPLink.Domain.Models.Prism.Sales;
 
 public partial class Invoice

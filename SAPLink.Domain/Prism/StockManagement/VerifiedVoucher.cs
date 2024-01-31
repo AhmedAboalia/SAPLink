@@ -1,5 +1,4 @@
 ﻿using SAPLink.Domain.Common;
-using SAPLink.Domain.Utilities;
 
 namespace SAPLink.Domain.Models.Prism.StockManagement;
 

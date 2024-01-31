@@ -4,14 +4,14 @@
         <name>SAPLink.API</name>
     </assembly>
     <members>
-        <member name="M:SAPLink.API.Controllers.ScheduleSyncs.Hourly(SAPLink.Domain.Models.System.RecurrenceHourlyDto)">
+        <member name="M:SAPLink.API.Controllers.ScheduleSyncs.Hourly(SAPLink.Domain.System.RecurrenceHourlyDto)">
             <summary>
             Returns Recurrence that will fires every hour at the specified minute.
             </summary>
             <param name="recurrence">'Document' Valid value is ('Departments' or 'Items' or 'Vendors') - 'Interval' valid Value between (0-59) Minutes.</param>
             <returns>Recurrence</returns>
         </member>
-        <member name="M:SAPLink.API.Controllers.ScheduleSyncs.Weekly(SAPLink.Domain.Models.System.RecurrenceDailyDto)">
+        <member name="M:SAPLink.API.Controllers.ScheduleSyncs.Weekly(SAPLink.Domain.System.RecurrenceDailyDto)">
             <summary>
             Returns Recurrence that will fires to Sync Departments Every Day Of Week.
             </summary>

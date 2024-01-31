@@ -32,6 +32,7 @@ bld/
 #[Bb]in/
 [Oo]bj/
 [Oo]ut/
+runtimes/
 msbuild.log
 msbuild.err
 msbuild.wrn

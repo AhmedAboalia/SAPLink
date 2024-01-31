@@ -6,7 +6,7 @@ public class Credentials
     public int Id { get; set; }
     public int EnvironmentCode { get; set; }
     public string EnvironmentName { get; set; }
-    public bool Active { get; set; }
+    //public bool Active { get; set; }
     public int ClientId { get; set; }
     public Clients Client { get; set; }
 

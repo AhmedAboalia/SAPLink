@@ -1,6 +1,4 @@
-﻿using SAPLink.Domain.Utilities;
-
-namespace SAPLink.Domain.Models.Prism.Sales;
+﻿namespace SAPLink.Domain.Models.Prism.Sales;
 
 public partial class Invoices
 {

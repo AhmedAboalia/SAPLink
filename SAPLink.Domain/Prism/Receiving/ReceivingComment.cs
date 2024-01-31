@@ -1,6 +1,4 @@
-﻿using SAPLink.Domain.Utilities;
-
-namespace SAPLink.Domain.Models.Prism.Receiving;
+﻿namespace SAPLink.Domain.Models.Prism.Receiving;
 
 public partial class Comment
 {

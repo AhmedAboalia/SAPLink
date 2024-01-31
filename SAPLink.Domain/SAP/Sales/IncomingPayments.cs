@@ -1,6 +1,4 @@
-﻿using SAPLink.Domain.Utilities;
-
-namespace SAPLink.Domain.Models.SAP.Sales
+﻿namespace SAPLink.Domain.Models.SAP.Sales
 {
 
     public partial class Payment

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using SAPLink.Infrastructure.Data;
 using SAPLink.Infrastructure.Interfaces;
 
-namespace SAPLink.Infrastructure.Repositories
+namespace SAPLink.Infrastructure
 {
     public class BaseRepository<T> : IBaseRepository<T> where T : class
     {

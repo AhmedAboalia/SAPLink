@@ -1,6 +1,4 @@
-﻿using SAPLink.Domain.Utilities;
-
-namespace SAPLink.Domain.Models.Prism.Merchandise.Vendor;
+﻿namespace SAPLink.Domain.Models.Prism.Merchandise.Vendor;
 
 public class VendorSyncRequest
 {

@@ -1,5 +1,5 @@
 ﻿using SAPLink.Domain.SAP.Sales;
-using Converter = SAPLink.Domain.Utilities.Converter;
+using Converter = SAPLink.Domain.Converter;
 
 namespace SAPLink.Domain.Models.SAP.Sales
 {

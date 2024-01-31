@@ -5,7 +5,6 @@ using SAPLink.Domain.SAP.MasterData.Items;
 using SAPLink.Domain.System;
 using SAPLink.Infrastructure.Data;
 using SAPLink.Infrastructure.Interfaces;
-using SAPLink.Infrastructure.Repositories;
 
 namespace SAPLink.Infrastructure
 {

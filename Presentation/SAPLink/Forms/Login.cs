@@ -406,7 +406,7 @@ namespace SAPLink.Forms
                     {
                         client.Active = false;
                         var credential = client.Credentials.FirstOrDefault();
-                        credential.Active = false;
+                        //credential.Active = false;
 
                         _unitOfWork.Clients.Update(client);
                         _unitOfWork.Credentials.Update(credential);
@@ -418,7 +418,7 @@ namespace SAPLink.Forms
                         _client = client;
 
                         _credentials = _client.Credentials.FirstOrDefault();
-                        _credentials.Active = true;
+                        //_credentials.Active = true;
 
                         _unitOfWork.Clients.Update(_client);
                         _unitOfWork.Credentials.Update(_credentials);

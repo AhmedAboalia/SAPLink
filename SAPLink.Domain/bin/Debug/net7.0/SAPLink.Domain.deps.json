@@ -11,7 +11,8 @@
           "Microsoft.EntityFrameworkCore": "7.0.9",
           "Microsoft.EntityFrameworkCore.Abstractions": "7.0.9",
           "Newtonsoft.Json": "13.0.3",
-          "RestSharp": "106.15.0"
+          "RestSharp": "106.15.0",
+          "SAPLink.Comman": "1.0.0"
         },
         "runtime": {
           "SAPLink.Domain.dll": {}
@@ -143,6 +144,17 @@
             "fileVersion": "106.15.0.0"
           }
         }
+      },
+      "SAPLink.Comman/1.0.0": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "7.0.9",
+          "Microsoft.EntityFrameworkCore.Abstractions": "7.0.9",
+          "Newtonsoft.Json": "13.0.3",
+          "RestSharp": "106.15.0"
+        },
+        "runtime": {
+          "SAPLink.Comman.dll": {}
+        }
       }
     }
   },
@@ -242,6 +254,11 @@
       "sha512": "sha512-HM7ohR6AscxedNenrrl93DSZG6hvdnA7O+NHyCl/6ZKTfn8psQ9rRmUpcb9eWr+140vmfxoVemql0bUoeGEW3A==",
       "path": "restsharp/106.15.0",
       "hashPath": "restsharp.106.15.0.nupkg.sha512"
+    },
+    "SAPLink.Comman/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

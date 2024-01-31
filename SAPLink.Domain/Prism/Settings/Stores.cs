@@ -1,6 +1,4 @@
-﻿using SAPLink.Domain.Utilities;
-
-namespace SAPLink.Domain.Models.Prism.Settings;
+﻿namespace SAPLink.Domain.Models.Prism.Settings;
 
 public class Store
 {
