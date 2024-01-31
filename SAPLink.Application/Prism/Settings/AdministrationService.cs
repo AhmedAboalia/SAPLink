@@ -1,7 +1,7 @@
 ﻿using SAPLink.Application.Connected_Services;
 using SAPLink.Application.Connection;
 using SAPLink.Domain.Models.Prism.Settings;
-using SAPLink.Domain.Models.System;
+using SAPLink.Domain.System;
 
 namespace SAPLink.Application.Prism.Settings;
 

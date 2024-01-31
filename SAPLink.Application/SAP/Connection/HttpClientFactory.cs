@@ -1,5 +1,5 @@
 ﻿using SAPLink.Application.SAP.Connection;
-using SAPLink.Domain.Models.System;
+using SAPLink.Domain.System;
 using SAPLink.Domain.Utilities;
 
 namespace SAPLink.Application.Connection;

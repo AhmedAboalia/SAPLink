@@ -1,9 +1,9 @@
 ﻿using SAPbobsCOM;
 using SAPLink.Application.SAP.Application;
 using SAPLink.Domain;
-using SAPLink.Domain.Models;
+using SAPLink.Domain.Common;
 using SAPLink.Domain.Models.Prism.StockManagement;
-using SAPLink.Domain.Models.System;
+using SAPLink.Domain.System;
 using SAPLink.Handler.Prism.Handlers;
 using Serilog;
 

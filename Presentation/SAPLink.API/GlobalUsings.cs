@@ -7,5 +7,5 @@ global using Microsoft.EntityFrameworkCore;
 global using Microsoft.Extensions.Options;
 global using Newtonsoft.Json;
 global using SAPLink.EF;
-global using BusinessPartner = SAPLink.Domain.Models.SAP.MasterData.BusinessPartners.BusinessPartner;
+global using BusinessPartner = SAPLink.Domain.SAP.MasterData.BusinessPartners.BusinessPartner;
 global using static SAPLink.Domain.InboundEnums;

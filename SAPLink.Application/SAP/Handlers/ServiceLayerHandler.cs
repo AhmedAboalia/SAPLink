@@ -2,8 +2,8 @@
 using SAPLink.Application.Connection;
 using SAPLink.Application.SAP.Connection;
 using SAPLink.Application.SAP.Interfaces;
-using SAPLink.Domain.Models.System;
-using PriceList = SAPLink.Domain.Models.SAP.MasterData.Items.PriceList;
+using SAPLink.Domain.System;
+using PriceList = SAPLink.Domain.SAP.MasterData.Items.PriceList;
 
 namespace SAPLink.Application.SAP.Handlers;
 

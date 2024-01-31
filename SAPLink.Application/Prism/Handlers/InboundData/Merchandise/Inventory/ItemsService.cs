@@ -4,10 +4,10 @@ using SAPLink.Application.Prism.Handlers.InboundData.Merchandise.Vendors;
 using SAPLink.Application.Prism.Interfaces;
 using SAPLink.Application.Prism.Settings;
 using SAPLink.Domain;
-using SAPLink.Domain.Models;
+using SAPLink.Domain.Common;
 using SAPLink.Domain.Models.Prism.Merchandise.Inventory;
-using SAPLink.Domain.Models.SAP.MasterData.Items;
-using SAPLink.Domain.Models.System;
+using SAPLink.Domain.SAP.MasterData.Items;
+using SAPLink.Domain.System;
 using SAPLink.Domain.Utilities;
 
 namespace SAPLink.Application.Prism.Handlers.InboundData.Merchandise.Inventory;

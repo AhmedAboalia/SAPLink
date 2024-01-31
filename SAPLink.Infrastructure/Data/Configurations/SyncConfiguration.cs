@@ -1,5 +1,5 @@
 ﻿using System;
-using SAPLink.Domain.Models.System;
+using SAPLink.Domain.System;
 
 namespace SAPLink.Infrastructure.Data.Configurations;
 

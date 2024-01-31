@@ -1,6 +1,6 @@
 ﻿using System;
-using SAPLink.Domain.Models;
-using SyncDocuments = SAPLink.Domain.Models.Schedules.SyncDocuments;
+using SAPLink.Domain.Common;
+using SyncDocuments = SAPLink.Domain.Common.Schedules.SyncDocuments;
 namespace SAPLink.Infrastructure.Data.Configurations;
 
 internal class ScheduleConfiguration : IEntityTypeConfiguration<Schedules>

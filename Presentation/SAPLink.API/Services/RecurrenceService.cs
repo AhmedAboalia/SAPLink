@@ -1,4 +1,4 @@
-﻿using SAPLink.Domain.Models.System;
+﻿using SAPLink.Domain.System;
 using SAPLink.Infrastructure;
 
 namespace SAPLink.API.Services

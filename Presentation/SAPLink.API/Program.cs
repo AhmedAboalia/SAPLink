@@ -9,10 +9,10 @@ using SAPLink.Application.Prism.Handlers.InboundData.Merchandise.Vendors;
 using SAPLink.Application.SAP.Handlers;
 using SAPLink.Domain;
 using SAPLink.Domain.Connection;
-using SAPLink.Domain.Models.System;
 using SAPLink.Infrastructure;
 using SAPLink.Infrastructure.Data;
 using SAPLink.Infrastructure.Interfaces;
+using SAPLink.Domain.System;
 
 var builder = WebApplication.CreateBuilder(args);
 

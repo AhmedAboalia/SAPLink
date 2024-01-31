@@ -2,14 +2,14 @@
 using SAPbobsCOM;
 using SAPLink.Application.SAP.Application;
 using SAPLink.Domain;
-using SAPLink.Domain.Models;
-using SAPLink.Domain.Models.System;
+using SAPLink.Domain.Common;
+using SAPLink.Domain.System;
 using SAPLink.Domain.Utilities;
 using SAPLink.Handler.Prism.Handlers;
 using SAPLink.Infrastructure;
 using Serilog;
 using Department = SAPLink.Domain.Models.Prism.Merchandise.Departments.Department;
-using ItemGroups = SAPLink.Domain.Models.SAP.MasterData.Items.ItemGroups;
+using ItemGroups = SAPLink.Domain.SAP.MasterData.Items.ItemGroups;
 
 namespace SAPLink.Application.Prism.Handlers.InboundData.Merchandise.Departments;
 

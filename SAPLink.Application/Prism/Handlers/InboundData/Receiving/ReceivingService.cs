@@ -7,8 +7,8 @@ using SAPLink.Application.Prism.Interfaces;
 using SAPLink.Domain.Models.Prism.Merchandise.Inventory;
 using SAPLink.Domain.Models.Prism.Receiving;
 using SAPLink.Domain.Models.Prism.Settings;
-using SAPLink.Domain.Models.SAP.Documents;
-using SAPLink.Domain.Models.System;
+using SAPLink.Domain.SAP.Documents;
+using SAPLink.Domain.System;
 
 namespace SAPLink.Application.Prism.Handlers.InboundData.Receiving;
 

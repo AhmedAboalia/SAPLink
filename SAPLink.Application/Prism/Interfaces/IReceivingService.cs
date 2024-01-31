@@ -1,6 +1,6 @@
 ﻿using SAPLink.Domain.Models.Prism.Merchandise.Inventory;
 using SAPLink.Domain.Models.Prism.Receiving;
-using SAPLink.Domain.Models.SAP.Documents;
+using SAPLink.Domain.SAP.Documents;
 
 namespace SAPLink.Application.Prism.Interfaces;
 

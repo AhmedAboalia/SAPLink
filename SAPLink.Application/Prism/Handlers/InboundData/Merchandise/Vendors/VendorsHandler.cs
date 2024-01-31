@@ -3,14 +3,14 @@ using SAPbobsCOM;
 using SAPLink.Application.HangFire;
 using SAPLink.Application.SAP.Application;
 using SAPLink.Domain;
-using SAPLink.Domain.Models;
+using SAPLink.Domain.Common;
 using SAPLink.Domain.Models.Prism.Merchandise.Vendor;
-using SAPLink.Domain.Models.System;
+using SAPLink.Domain.System;
 using SAPLink.Domain.Utilities;
 using SAPLink.Handler.Prism.Handlers;
 using SAPLink.Infrastructure;
 using Serilog;
-using BusinessPartner = SAPLink.Domain.Models.SAP.MasterData.BusinessPartners.BusinessPartner;
+using BusinessPartner = SAPLink.Domain.SAP.MasterData.BusinessPartners.BusinessPartner;
 
 namespace SAPLink.Application.Prism.Handlers.InboundData.Merchandise.Vendors;
 

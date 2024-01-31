@@ -1,5 +1,5 @@
-﻿using SAPLink.Domain.Models;
-using SAPLink.Domain.Models.SAP.MasterData.Items;
+﻿using SAPLink.Domain.Common;
+using SAPLink.Domain.SAP.MasterData.Items;
 
 namespace SAPLink.Infrastructure.Data.Configurations;
 

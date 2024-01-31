@@ -1,6 +1,6 @@
 ﻿using SAPLink.Application.Connection;
 using SAPLink.Domain;
-using SAPLink.Domain.Models.System;
+using SAPLink.Domain.System;
 
 namespace SAPLink.Application.HangFire
 {

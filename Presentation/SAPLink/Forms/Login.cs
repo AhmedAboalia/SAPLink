@@ -9,10 +9,10 @@ using SAPLink.Application.Prism.Handlers.InboundData.Merchandise.Departments;
 using SAPLink.Application.Prism.Handlers.InboundData.Merchandise.Inventory;
 using SAPLink.Application.SAP.Application;
 using SAPLink.Application.SAP.Handlers;
-using SAPLink.Domain.Models.System;
 using SAPLink.Domain.Utilities;
 using SAPLink.Forms.AutoUpdate;
 using SAPLink.Infrastructure;
+using SAPLink.Domain.System;
 
 namespace SAPLink.Forms
 {

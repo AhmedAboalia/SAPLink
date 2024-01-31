@@ -4,7 +4,7 @@ using SAPLink.Application.Prism.Handlers.InboundData.Merchandise.Inventory;
 using SAPLink.Application.SAP.Application;
 using SAPLink.Application.SAP.Handlers;
 using SAPLink.Domain;
-using SAPLink.Domain.Models.System;
+using SAPLink.Domain.System;
 using SAPLink.Domain.Utilities;
 using SAPLink.Handler.Prism.Connection.Auth;
 using SAPLink.Infrastructure;

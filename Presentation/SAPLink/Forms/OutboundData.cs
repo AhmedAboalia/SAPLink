@@ -10,10 +10,10 @@ using SAPLink.Application.Prism.Handlers.OutboundData.PointOfSale.Returns;
 using SAPLink.Application.Prism.Handlers.OutboundData.StockManagement.InventoryPosting;
 using SAPLink.Application.SAP.Application;
 using SAPLink.Application.SAP.Handlers;
+using SAPLink.Domain.Common;
 using SAPLink.Domain.Models;
 using SAPLink.Domain.Models.Prism.Settings;
 using SAPLink.Domain.Models.Prism.StockManagement;
-using SAPLink.Domain.Models.System;
 using SAPLink.Domain.Utilities;
 using InventoryTransferService = SAPLink.Application.Prism.Handlers.OutboundData.StockManagement.InventoryTransfer.InventoryTransferService;
 using InventoryTransferHandler = SAPLink.Application.Prism.Handlers.OutboundData.StockManagement.InventoryTransfer.InventoryTransferHandler;
@@ -21,6 +21,7 @@ using SAPLink.Utilities.Forms;
 using InventoryPosting = SAPLink.Domain.Models.Prism.StockManagement.InventoryPosting;
 using SAPLink.Handler.Prism.Connection.Auth;
 using SAPLink.Infrastructure;
+using SAPLink.Domain.System;
 
 namespace SAPLink.Forms;
 

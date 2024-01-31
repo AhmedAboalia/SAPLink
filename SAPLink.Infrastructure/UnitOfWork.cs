@@ -1,7 +1,8 @@
-﻿using SAPLink.Domain.Models;
+﻿using SAPLink.Domain.Common;
+using SAPLink.Domain.Common;
 using SAPLink.Domain.Models.Prism.Settings;
-using SAPLink.Domain.Models.SAP.MasterData.Items;
-using SAPLink.Domain.Models.System;
+using SAPLink.Domain.SAP.MasterData.Items;
+using SAPLink.Domain.System;
 using SAPLink.Infrastructure.Data;
 using SAPLink.Infrastructure.Interfaces;
 using SAPLink.Infrastructure.Repositories;

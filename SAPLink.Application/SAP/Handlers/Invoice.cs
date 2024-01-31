@@ -3,16 +3,16 @@ using SAPLink.Application.Connection;
 using SAPLink.Application.SAP.Application;
 using SAPLink.Application.SAP.Connection;
 using SAPLink.Domain;
-using SAPLink.Domain.Models;
-using SAPLink.Domain.Models.SAP;
+using SAPLink.Domain.Common;
 using SAPLink.Domain.Models.SAP.Sales;
+using SAPLink.Domain.SAP;
 using SAPLink.Domain.Utilities;
 using static SAPLink.Domain.Enums;
 using DocumentAdditionalExpense = SAPLink.Domain.Models.SAP.Sales.DocumentAdditionalExpense;
 using DocumentLine = SAPLink.Domain.Models.SAP.Sales.DocumentLine;
 using PrismInvoice = SAPLink.Domain.Models.Prism.Sales.Invoice;
 using SAPInvoice = SAPLink.Domain.Models.SAP.Sales.Invoice;
-using TaxCodes = SAPLink.Domain.Models.SAP.Sales.TaxCodes;
+using TaxCodes = SAPLink.Domain.SAP.Sales.TaxCodes;
 
 namespace SAPLink.Application.SAP.Handlers;
 

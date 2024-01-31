@@ -5,10 +5,10 @@ using SAPLink.Application.Prism.Handlers.InboundData.Merchandise.Inventory;
 using SAPLink.Application.Prism.Settings;
 using SAPLink.Application.SAP.Handlers;
 using SAPLink.Domain;
-using SAPLink.Domain.Models.System;
 using SAPLink.Infrastructure;
 using static SAPLink.Domain.Utilities.Extensions;
 using static SAPLink.Utilities.Controls;
+using SAPLink.Domain.System;
 
 namespace SAPLink.Forms
 {

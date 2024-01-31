@@ -1,10 +1,10 @@
 ﻿using SAPLink.Application.Connection;
 using SAPLink.Application.Prism.Interfaces;
 using SAPLink.Domain;
-using SAPLink.Domain.Models;
+using SAPLink.Domain.Common;
 using SAPLink.Domain.Models.Prism.Merchandise.Departments;
-using SAPLink.Domain.Models.SAP.MasterData.Items;
-using SAPLink.Domain.Models.System;
+using SAPLink.Domain.SAP.MasterData.Items;
+using SAPLink.Domain.System;
 
 namespace SAPLink.Application.Prism.Handlers.InboundData.Merchandise.Departments;
 

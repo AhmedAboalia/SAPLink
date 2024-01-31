@@ -1,5 +1,5 @@
 ﻿using SAPLink.Domain.Connection;
-using SAPLink.Domain.Models.System;
+using SAPLink.Domain.System;
 using SAPLink.Infrastructure.Data.Configurations;
 using SAPLink.Infrastructure.Data.Configurations.HangFire;
 using static SAPLink.Infrastructure.Data.Configurations.ScheduleConfiguration;

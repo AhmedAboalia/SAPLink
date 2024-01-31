@@ -1,11 +1,11 @@
 ﻿using SAPLink.Application.Connection;
 using SAPLink.Application.Prism.Settings;
 using SAPLink.Domain;
-using SAPLink.Domain.Models;
+using SAPLink.Domain.Common;
 using SAPLink.Domain.Models.Prism.Receiving;
 using SAPLink.Domain.Models.Prism.Settings;
 using SAPLink.Domain.Models.Prism.StockManagement;
-using SAPLink.Domain.Models.System;
+using SAPLink.Domain.System;
 using SAPLink.Domain.Utilities;
 using SAPLink.Handler.Prism.Handlers;
 using Serilog;

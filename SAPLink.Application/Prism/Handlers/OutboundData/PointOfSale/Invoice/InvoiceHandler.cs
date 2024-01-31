@@ -2,7 +2,7 @@
 using SAPLink.Application.SAP.Application;
 using SAPLink.Application.SAP.Handlers;
 using SAPLink.Domain;
-using SAPLink.Domain.Models;
+using SAPLink.Domain.Common;
 using SAPLink.Domain.Models.SAP.Sales;
 using SAPLink.Handler.Prism.Handlers;
 using Serilog;

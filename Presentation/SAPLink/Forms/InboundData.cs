@@ -14,12 +14,12 @@ using SAPLink.Application.SAP.Application;
 using SAPLink.Application.SAP.Handlers;
 using SAPLink.Domain;
 using SAPLink.Domain.Connection;
-using SAPLink.Domain.Models.SAP.Documents;
-using SAPLink.Domain.Models.SAP.MasterData.Items;
-using SAPLink.Domain.Models.System;
 using SAPLink.Domain.Utilities;
 using SAPLink.Infrastructure;
 using SAPLink.Infrastructure.Data;
+using SAPLink.Domain.System;
+using SAPLink.Domain.SAP.Documents;
+using SAPLink.Domain.SAP.MasterData.Items;
 
 namespace SAPLink.Forms;
 

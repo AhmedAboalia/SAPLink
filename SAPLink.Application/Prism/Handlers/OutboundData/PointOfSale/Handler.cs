@@ -1,6 +1,6 @@
 ﻿using SAPbobsCOM;
 using SAPLink.Application.SAP.Application;
-using SAPLink.Domain.Models.System;
+using SAPLink.Domain.System;
 using PrismInvoice = SAPLink.Domain.Models.Prism.Sales.Invoice;
 
 namespace SAPLink.Application.Prism.Handlers.OutboundData.PointOfSale;

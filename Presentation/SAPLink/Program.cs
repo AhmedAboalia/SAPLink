@@ -8,9 +8,9 @@ using SAPLink.Application.Prism.Handlers.InboundData.Merchandise.Inventory;
 using SAPLink.Application.Prism.Handlers.InboundData.Merchandise.Vendors;
 using SAPLink.Application.SAP.Handlers;
 using SAPLink.Domain.Connection;
-using SAPLink.Domain.Models.System;
 using SAPLink.Infrastructure;
 using SAPLink.Infrastructure.Data;
+using SAPLink.Domain.System;
 
 namespace SAPLink;
 

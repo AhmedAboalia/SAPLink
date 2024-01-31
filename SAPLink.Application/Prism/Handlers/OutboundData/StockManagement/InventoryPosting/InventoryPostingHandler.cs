@@ -1,7 +1,7 @@
 ﻿using SAPbobsCOM;
 using SAPLink.Application.SAP.Application;
 using SAPLink.Domain;
-using SAPLink.Domain.Models;
+using SAPLink.Domain.Common;
 using SAPLink.Handler.Prism.Handlers;
 using Serilog;
 using InventoryCounting = SAPLink.Domain.Models.Prism.StockManagement.InventoryPosting;

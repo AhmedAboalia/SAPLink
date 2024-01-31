@@ -1,7 +1,7 @@
 ﻿using SAPLink.Domain.Models.Prism.StockManagement;
-using SAPLink.Domain.Models.SAP.Documents;
-using SAPLink.Domain.Models.SAP.MasterData.Items;
 using SAPLink.Domain.Models.SAP.Sales;
+using SAPLink.Domain.SAP.Documents;
+using SAPLink.Domain.SAP.MasterData.Items;
 using InventoryPosting = SAPLink.Domain.Models.Prism.StockManagement.InventoryPosting;
 
 namespace SAPLink.Utilities.Forms
