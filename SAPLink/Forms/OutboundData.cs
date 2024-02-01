@@ -208,7 +208,7 @@ public partial class OutboundData : Form
                                 await HandleCreditMemoWithPayment(invoiceResult.EntityList, UpdateType.SyncCreditMemo);
 
                             else if (IsReturnAndDownPayment(isHasReturnItem, returnInvoice))
-                                await HandleCreditMemoWithoutPayment(invoiceResult.EntityList, UpdateType.SyncInvoice);
+                                await HandleCreditMemoLinkedToDownPayment(invoiceResult.EntityList, UpdateType.SyncInvoice);
                         }
                     }
                     else
@@ -696,7 +696,7 @@ public partial class OutboundData : Form
             //syncResult.UpdateResponse;
         }
     }
-    private async Task HandleCreditMemoWithoutPayment(List<PrismInvoice> invoicesList, UpdateType UpdateType)
+    private async Task HandleCreditMemoLinkedToDownPayment(List<PrismInvoice> invoicesList, UpdateType UpdateType)
     {
         PlaySound.Click();
         //var BpList = new List<BusinessPartner>();

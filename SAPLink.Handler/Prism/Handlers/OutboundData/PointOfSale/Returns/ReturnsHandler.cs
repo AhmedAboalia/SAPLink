@@ -48,15 +48,15 @@ public partial class ReturnsHandler
 
                 if (result.EntityList.Any())
                 {
-                    var resultIncoming = new RequestResult<Payment>();
+                    var outgoing = new RequestResult<Payment>();
                     if (invoice.Tenders != null && SAPInvoice != null)
                     {
 
                         if (updateType != Enums.UpdateType.SyncWholesale)
                         {
-                            resultIncoming = OutgoingPayment.AddMultiplePaymentsInvoice(invoice, SAPInvoice.DocEntry, customerCode);
-                            result.Message += $"\r\n {resultIncoming.Message}";
-                            result.Status = resultIncoming.Status;
+                            outgoing = OutgoingPayment.AddMultiplePaymentsInvoice(invoice, SAPInvoice.DocEntry, customerCode, BoRcptInvTypes.it_Invoice);
+                            result.Message += $"\r\n {outgoing.Message}";
+                            result.Status = outgoing.Status;
                         }
                         
                         if (result.Status == Enums.StatusType.Success)
