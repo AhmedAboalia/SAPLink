@@ -34,7 +34,7 @@ public partial class CreditMemoHandler
             {
                 var downPaymentDocEntry = GetDownPaymentDocEntry(invoice.RefSaleDocSid, out var message);
                 var downPaymentDocNum = ActionHandler.GetStringValueByQuery($"SELECT T0.[DocNum] FROM ODPI T0 WHERE T0.[DocEntry] = {downPaymentDocEntry}");
-                var creditMemoDocNum = ActionHandler.GetStringValueByQuery($"SELECT TOP 1 T0.[DocNum] FROM ORIN T0 WHERE T0.[Comments] Like '%%Based on A/R Down Payment {downPaymentDocNum}.%%'");
+                //var creditMemoDocNum = ActionHandler.GetStringValueByQuery($"SELECT TOP 1 T0.[DocEntry] FROM ORIN T0 WHERE T0.[U_PrismSid] = '{invoice.Sid}'");
                 var arDownPayment = (Documents)ClientHandler.Company.GetBusinessObject(BoObjectTypes.oDownPayments);
 
                 if (arDownPayment.GetByKey(int.Parse(downPaymentDocEntry)))
@@ -79,9 +79,9 @@ public partial class CreditMemoHandler
 
                         if (oCreditMemo.Add() == 0)
                         {
-                           var resulOutgoing = OutgoingPayment.AddMultiplePaymentsInvoice(invoice, downPaymentDocEntry, customerCode, BoRcptInvTypes.it_DownPayment);
-                            result.Message += $"\r\n {resulOutgoing.Message}";
-                            result.Status = resulOutgoing.Status;
+                            //var resulOutgoing = OutgoingPayment.AddMultiplePaymentsInvoice(invoice, "", customerCode, BoRcptInvTypes.it_DownPayment);
+                            //result.Message += $"\r\n {resulOutgoing.Message}";
+                            //result.Status = resulOutgoing.Status;
                             
                             if (downPaymentDocNum != "0")
                                 result.Message +=

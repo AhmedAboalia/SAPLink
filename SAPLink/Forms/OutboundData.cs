@@ -140,12 +140,12 @@ public partial class OutboundData : Form
                             else if (IsDownPayment(sInvoice, isInvoiceHasReturnItem))
                                 await HandleDownPayment(invoiceResult.EntityList, UpdateType.SyncInvoice);
 
+                            else if (IsInvoiceAndCashWholesale(sInvoice, isInvoiceHasReturnItem, isWholesale, wholesaleCustomerCode))
+                                await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncWholesaleRetail);
+
                             else if (IsInvoiceAndCreditWholesale(sInvoice, isWholesale))
                                 await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncWholesale, wholesaleCustomerCode);
 
-                            else if (IsInvoiceAndCashWholesale(sInvoice, isInvoiceHasReturnItem, isWholesale, wholesaleCustomerCode))
-                                await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncWholesaleRetail);
-                           
                         }
 
                     }
@@ -877,6 +877,7 @@ public partial class OutboundData : Form
             or UpdateType.SyncOutGoodsReceipt
             or UpdateType.SyncOutGoodsIssue
             or UpdateType.SyncWholesale
+            or UpdateType.SyncWholesaleRetail
             )
         {
             //textBoxLogsSync.Clear();
@@ -1016,8 +1017,15 @@ public partial class OutboundData : Form
     {
         if (!string.IsNullOrEmpty(textBoxLogs.SelectedText))
         {
-            Clipboard.SetText(textBoxLogs.SelectedText);
-            labelStatus.Log("Status: Selected Text Copied", Logger.MessageTypes.Warning, Logger.MessageTime.Short);
+            try
+            {
+                Clipboard.SetText(textBoxLogs.SelectedText);
+                labelStatus.Log("Status: Selected Text Copied", Logger.MessageTypes.Warning, Logger.MessageTime.Short);
+            }
+            catch (Exception)
+            {
+                labelStatus.Log("Status: Can`t Copy Selected Text", Logger.MessageTypes.Error, Logger.MessageTime.Short);
+            }
         }
     }
 

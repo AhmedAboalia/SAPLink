@@ -43,11 +43,11 @@ public static class OutgoingPayment
         }
 
 
-        oPayment.Invoices.DocEntry = int.Parse(docEntry);
-        oPayment.Invoices.InvoiceType = BoRcptInvTypes.it_CredItnote;
-        oPayment.Invoices.SumApplied = amount;
-        oPayment.CashAccount = account;
-        oPayment.CashSum = amount;
+        //oPayment.Invoices.DocEntry = int.Parse(docEntry);
+        //oPayment.Invoices.InvoiceType = BoRcptInvTypes.it_CredItnote;
+        //oPayment.Invoices.SumApplied = amount;
+        //oPayment.CashAccount = account;
+        //oPayment.CashSum = amount;
 
         oPayment.TaxDate = invoice.CreatedDatetime;
         oPayment.DocDate = invoice.CreatedDatetime;
