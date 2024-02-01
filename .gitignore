@@ -32,6 +32,8 @@ bld/
 #[Bb]in/
 runtimes/
 nb/
+SAPLink.exe.WebView2/
+Logs/
 [Oo]bj/
 [Oo]ut/
 msbuild.log
