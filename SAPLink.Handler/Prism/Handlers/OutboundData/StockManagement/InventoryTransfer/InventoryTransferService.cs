@@ -1,4 +1,5 @@
-﻿using SAPLink.Core;
+﻿using Azure;
+using SAPLink.Core;
 using SAPLink.Core.Models;
 using SAPLink.Core.Models.Prism.Receiving;
 using SAPLink.Core.Models.Prism.StockManagement;
@@ -34,7 +35,7 @@ public partial class InventoryTransferService
         StoresService = new StoresService(client);
     }
 
-    public async Task<RequestResult<VerifiedVoucher>> GetVerifiedVoucher(DateTime dateFrom, DateTime dateTo, int storeNumber, string vouchersNo = "")
+    public async Task<RequestResult<VerifiedVoucher>> GetVerifiedVoucher(DateTime dateFrom, DateTime dateTo, int storeNumber, string vouchersNo = "", int pageNo = 1, int pageSize = 30)
     {
         RequestResult<VerifiedVoucher> result = new();
         try
@@ -67,7 +68,12 @@ public partial class InventoryTransferService
                              $"{query}{resource}\r\n" +
                              $"Auth Session: {_credentials.AuthSession}";
             _loger.Information(result.Message);
-            result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET);
+
+            result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET,"", pageNo, pageSize);
+
+            result.TotalItems = result.GetTotalItems(result.Response);
+            result.TotalPages = result.GetTotalPages(result.TotalItems);
+
 
             //var contentrange = "";
 
@@ -98,44 +104,6 @@ public partial class InventoryTransferService
         }
 
         return result;
-    }
-    public static bool GetContentRange(string query, int pageNo, out string Contentrange)
-    {
-        Contentrange = "";
-        //if (setupConfigData == null || date == "" || date == null) { return false; }
-
-        try
-        {
-            Uri ourUri = new Uri(query + $"&page_no={pageNo}&page_size=30");
-            HttpWebRequest myHttpWebRequest = (HttpWebRequest)WebRequest.Create(ourUri);
-            //myHttpWebRequest.Headers.Add("Authorization", "Basic " + credentials);
-            myHttpWebRequest.Headers.Add("Content-Type", "application/json");
-            myHttpWebRequest.Headers.Add("Accept", "application/json, version=2");
-            myHttpWebRequest.Headers.Add("Accept-Language", "n-US,en-SA;q=0.9");
-            myHttpWebRequest.ContentType = "application/json";
-            myHttpWebRequest.Headers.Add("Auth-Session", _credentials.AuthSession);
-            myHttpWebRequest.Method = "GET";
-
-            HttpWebResponse myHttpWebResponse = (HttpWebResponse)myHttpWebRequest.GetResponse();
-            string contents = "";
-
-            if (myHttpWebResponse.StatusCode == System.Net.HttpStatusCode.OK)
-            {
-                if (myHttpWebResponse.GetResponseHeader("Contentrange") != null)
-                {
-                    Contentrange = myHttpWebResponse.GetResponseHeader("Contentrange").ToString();//Convert.ToDouble(myHttpWebResponse.GetResponseHeader("Auth-Nonce").ToString());
-                }
-            }
-
-
-            return true;
-        }
-        catch (Exception e)
-        {
-            //ExtensionMethod.logData("The following Exception was raised 'get invoices from prism' : " + e.Message);
-            return false;
-        }
-
     }
 
     public static bool GetVerifiedVouchers(string query, int pageNo, out string contentRange, out List<VerifiedVoucher> invoices)
@@ -197,7 +165,7 @@ public partial class InventoryTransferService
 
     private static void ProcessResponseHeaders(HttpWebResponse response, out string contentRange)
     {
-        contentRange = response.GetResponseHeader("Contentrange") ?? "";
+        contentRange = response.GetResponseHeader("Content-Range") ?? "";
     }
     private RequestResult<VerifiedVoucher> LoadMockData(string fileName)
     {

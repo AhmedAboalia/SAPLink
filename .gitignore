@@ -32,6 +32,7 @@ bld/
 #[Bb]in/
 runtimes/
 nb/
+/Database/
 SAPLink.exe.WebView2/
 Logs/
 [Oo]bj/

@@ -8,6 +8,7 @@ using SAPLink.Handler.SAP.Application;
 using SAPLink.Handler.Prism.Connection.Auth;
 using SAPLink.Core.Connection;
 using SAPLink.EF.Data;
+using System.Drawing.Printing;
 
 namespace SAPLink.Forms;
 
@@ -264,42 +265,52 @@ public partial class OutboundData : Form
                 {
                     var verifiedVouchers = new RequestResult<VerifiedVoucher>();
 
-
-                    if (docCode.IsHasValue())
-                        verifiedVouchers = await _inventoryTransferService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value, storeNum, docCode);
-                    else
-                        verifiedVouchers = await _inventoryTransferService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value, storeNum);
+                    int pageNo = 1; // Set the initial page number
+                    int pageSize = 30; // Set the page size
 
 
-                    if (verifiedVouchers.EntityList.Any())
+                    do
                     {
+                        if (docCode.IsHasValue())
+                            verifiedVouchers = await _inventoryTransferService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value, storeNum, docCode, pageNo, pageSize);
+                        else
+                            verifiedVouchers = await _inventoryTransferService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value, storeNum,"", pageNo, pageSize);
 
-                        foreach (var verifiedVoucher in verifiedVouchers.EntityList)
+                        if (verifiedVouchers.EntityList.Any())
                         {
-                            Log(UpdateType.SyncInventoryTransfer, $"\r\nStock Transfer/s." + $"\r\nRequest Message: {verifiedVouchers.Message}", "");
 
-                            if (verifiedVoucher == null) continue;
-
-                            if (!CheckStockTransferExist(verifiedVoucher.Sid))// To-Do Add Check Exist in SAP by Sid in field U_PrismSid and U_SyncToPrism
-                                await HandleVerifiedVoucher(verifiedVoucher, UpdateType.SyncInvoice);
-                            else
+                            foreach (var verifiedVoucher in verifiedVouchers.EntityList)
                             {
-                                var docNum = GetStockTransferDocNum(verifiedVoucher.Sid);
+                                Log(UpdateType.SyncInventoryTransfer, $"\r\nStock Transfer/s." + $"\r\nRequest Message: {verifiedVouchers.Message}", "");
 
-                                Log(UpdateType.SyncInventoryTransfer, $"Prism Voucher No. ({verifiedVoucher.Vouno}) Slip No ({verifiedVoucher.Slipno}) is Already Exist with SAP Stock Transfer No. ({docNum}).", "");
+                                if (verifiedVoucher == null) continue;
+
+                                if (!CheckStockTransferExist(verifiedVoucher.Sid))// To-Do Add Check Exist in SAP by Sid in field U_PrismSid and U_SyncToPrism
+                                    await HandleVerifiedVoucher(verifiedVoucher, UpdateType.SyncInvoice);
+                                else
+                                {
+                                    var docNum = GetStockTransferDocNum(verifiedVoucher.Sid);
+
+                                    Log(UpdateType.SyncInventoryTransfer, $"Prism Voucher No. ({verifiedVoucher.Vouno}) Slip No ({verifiedVoucher.Slipno}) is Already Exist with SAP Stock Transfer No. ({docNum}).", "");
+                                }
                             }
+
+                        }
+                        else
+                        {
+                            dataGridView.DataSource = null;
+                            LogMessages($"No Available Verified Voucher/s." +
+                                        $"\r\nResponse:\r\n{verifiedVouchers.Response.Content.PrettyJson()} " +
+                                        $"\r\n\r\nResult Message: {verifiedVouchers.Message}" +
+                                        $"\r\nStatus: {verifiedVouchers.Status}",
+                                $"No Available Verified Voucher/s.");
                         }
 
-                    }
-                    else
-                    {
-                        dataGridView.DataSource = null;
-                        LogMessages($"No Available Verified Voucher/s." +
-                                    $"\r\nResponse:\r\n{verifiedVouchers.Response.Content.PrettyJson()} " +
-                                    $"\r\n\r\nResult Message: {verifiedVouchers.Message}" +
-                                    $"\r\nStatus: {verifiedVouchers.Status}",
-                            $"No Available Verified Voucher/s.");
-                    }
+                        // Increment the page number for the next iteration
+                        pageNo++;
+
+                    } while (verifiedVouchers.EntityList.Count == verifiedVouchers.TotalPages); // Continue until there are no more results
+
                 }
                 break;
 
