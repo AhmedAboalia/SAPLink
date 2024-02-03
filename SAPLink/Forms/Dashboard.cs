@@ -30,6 +30,29 @@ namespace SAPLink.Forms
         private async void Dashboard_Load(object sender, EventArgs e)
         {
             // ResizeForm();
+
+            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+
+            if (screenWidth < 1920 && screenHeight > 1080)
+            {
+                buttonDepartments.TextDescription = "";
+                buttonItems.TextDescription = "";
+                buttonVendors.TextDescription = "";
+                button_InGoodsReceiptPo.TextDescription = "";
+                buttonGoodsReturn.TextDescription = "";
+                button_InGoodsReceipt.TextDescription = "";
+                button_InGoodsIssue.TextDescription = "";
+                buttonInvoice.TextDescription = "";
+                buttonCreditMemo.TextDescription = "";
+                buttonStockTransfer.TextDescription = "";
+                buttonStockTaking.TextDescription = "";
+                buttonOutGoodsReceipt.TextDescription = "";
+                buttonOutGoodsIssue.TextDescription = "";
+                buttonSyncedItems.TextDescription = "";
+                buttonNotSyncedItems.TextDescription = "";
+                buttonPrismActiveItems.TextDescription = "";
+            }
             WindowState = FormWindowState.Maximized;
             var user = _client.Credentials.FirstOrDefault().PrismUserName;
             if (user.IsHasValue())

@@ -214,7 +214,7 @@ namespace SAPLink.Forms
             labelStatus.BackColor = Color.Wheat;
             labelStatus.Font = new Font("Cairo", 10F, FontStyle.Bold, GraphicsUnit.Point);
             labelStatus.ForeColor = Color.DarkSlateGray;
-            labelStatus.Location = new Point(68, 731);
+            labelStatus.Location = new Point(72, 750);
             labelStatus.Name = "labelStatus";
             labelStatus.Size = new Size(55, 26);
             labelStatus.TabIndex = 64;

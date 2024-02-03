@@ -657,7 +657,7 @@ public partial class OutboundData : Form
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
 
-                Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
+            Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
         }
@@ -915,7 +915,7 @@ public partial class OutboundData : Form
             )
         {
             //textBoxLogsSync.Clear();
-            textBoxLogsSync.Text += message;
+            textBoxLogsSync.Text += message + "\r\n";
             // UpdateTextBox(textBoxLogsInitialize, message);
         }
 
