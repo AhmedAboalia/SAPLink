@@ -35,7 +35,7 @@ public partial class InventoryTransferService
         StoresService = new StoresService(client);
     }
 
-    public async Task<RequestResult<VerifiedVoucher>> GetVerifiedVoucher(DateTime dateFrom, DateTime dateTo, int storeNumber, string vouchersNo = "", int pageNo = 1, int pageSize = 30)
+    public async Task<RequestResult<VerifiedVoucher>> GetVerifiedVoucher(DateTime dateFrom, DateTime dateTo, int storeNumber, string vouchersNo = "", int pageNo = 1, int pageSize = 30, bool IsListOfObjects = false)
     {
         RequestResult<VerifiedVoucher> result = new();
         try
@@ -67,9 +67,10 @@ public partial class InventoryTransferService
             result.Message = $"Resource: \r\n" +
                              $"{query}{resource}\r\n" +
                              $"Auth Session: {_credentials.AuthSession}";
+            
             _loger.Information(result.Message);
 
-            result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET,"", pageNo, pageSize);
+            result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET,"", pageNo, pageSize, IsListOfObjects);
 
             result.TotalItems = result.GetTotalItems(result.Response);
             result.TotalPages = result.GetTotalPages(result.TotalItems);

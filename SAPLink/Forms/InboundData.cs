@@ -296,7 +296,6 @@ public partial class InboundData : Form
                 dt.DataSource = null;
             }
 
-            if (_credentials.ActiveLog)
                 Log(filter.IsNullOrEmpty()
                     ? UpdateType.InitialDepartment
                     : UpdateType.SyncDepartment, syncResult.Message, syncResult.StatusBarMessage);
@@ -324,7 +323,6 @@ public partial class InboundData : Form
                 dt.DataSource = null;
             }
 
-            if (_credentials.ActiveLog)
                 Log(filter.IsNullOrEmpty()
                 ? UpdateType.InitialVendors
                 : UpdateType.SyncVendors, syncResult.Message, syncResult.StatusBarMessage);
@@ -350,14 +348,13 @@ public partial class InboundData : Form
             else
                 dt.DataSource = null;
 
-            if (_credentials.ActiveLog)
-            {
+     
                 LogMessage += syncResult.Message;
 
                 Log(filter.IsNullOrEmpty()
                     ? UpdateType.InitialItems
                     : UpdateType.SyncItems, LogMessage, syncResult.StatusBarMessage);
-            }
+            
         }
         //if (_credentials.ActiveLog)
         //    Log(filter.IsNullOrEmpty()
@@ -390,7 +387,7 @@ public partial class InboundData : Form
 
             }
 
-            if (_credentials.ActiveLog)
+
                 Log(filter.IsNullOrEmpty()
                 ? UpdateType.InitialGoodsReceiptPO
                 : UpdateType.SyncGoodsReceiptPO, syncResult.Message, syncResult.StatusBarMessage);
@@ -419,7 +416,7 @@ public partial class InboundData : Form
 
             }
 
-            if (_credentials.ActiveLog)
+
                 Log(filter.IsNullOrEmpty()
                 ? UpdateType.InitialInGoodsReceipt
                 : UpdateType.SyncInGoodsReceipt, syncResult.Message, syncResult.StatusBarMessage);
@@ -446,14 +443,13 @@ public partial class InboundData : Form
                 dt.DataSource = null;
 
             }
-            if (_credentials.ActiveLog)
-            {
+
                 LogMessage += syncResult.Message;
 
                 Log(filter.IsNullOrEmpty()
                     ? UpdateType.InitialInGoodsIssue
                     : UpdateType.SyncInGoodsIssue, syncResult.Message, syncResult.StatusBarMessage);
-            }
+            
         }
         //Log(filter.IsNullOrEmpty()
         //    ? UpdateType.InitialInGoodsIssue
@@ -480,14 +476,13 @@ public partial class InboundData : Form
                 dt.DataSource = null;
 
             }
-            if (_credentials.ActiveLog)
-            {
+   
                 LogMessage += syncResult.Message;
 
                 Log(filter.IsNullOrEmpty()
                     ? UpdateType.InitialInGoodsReturn
                     : UpdateType.SyncInGoodsReturn, syncResult.Message, syncResult.StatusBarMessage);
-            }
+            
         }
         //if (_credentials.ActiveLog)
         //    Log(filter.IsNullOrEmpty()
@@ -684,7 +679,7 @@ public partial class InboundData : Form
     private async void InboundData_LoadAsync(object sender, EventArgs e)
     {
         comboBoxDocTypeSync.SelectedIndex = (int)Documents.Departments;
-        dateTimePickerFrom.Value = DateTime.Now.AddDays(-1);
+        dateTimePickerFrom.Value = DateTime.Now;
 
         dateTimePickerTo.Value = DateTime.Now;
 

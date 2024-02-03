@@ -91,74 +91,87 @@ public partial class OutboundData : Form
                 {
                     var salesInvoices = new RequestResult<PrismInvoice>();
 
-                    if (docCode.IsHasValue())
-                        salesInvoices = await _invoiceService.GetInvoicesAsync(OutboundDocuments.SalesInvoice, filterByDateRang, storeNum, docCode);
-                    else
-                        salesInvoices = await _invoiceService.GetInvoicesAsync(OutboundDocuments.SalesInvoice, filterByDateRang, storeNum);
+                    int pageNo = 1; // Set the initial page number
+                    int pageSize = 30; // Set the page size
+                    int totalInvoices = 0;
 
-                    if (salesInvoices.EntityList.Any())
+                    do
                     {
-                        foreach (var sInvoice in salesInvoices.EntityList)
+                        if (docCode.IsHasValue())
+                            salesInvoices = await _invoiceService.GetInvoicesAsync(OutboundDocuments.SalesInvoice, filterByDateRang, storeNum, docCode, pageNo, pageSize,true);
+                        else
+                            salesInvoices = await _invoiceService.GetInvoicesAsync(OutboundDocuments.SalesInvoice, filterByDateRang, storeNum,"nn", pageNo, pageSize, true);
+
+                        if (salesInvoices.EntityList.Any())
                         {
-                            var invoiceResult = await _invoiceService.GetInvoiceDetailsBySidAsync(sInvoice.Sid);
-                            var invoice = invoiceResult.EntityList.FirstOrDefault();
-
-                            Log(UpdateType.SyncInvoice, $"Invoice/s." +
-                                        $"\r\nFirst Request Message {salesInvoices.Message}" +
-                                        $"\r\n\r\nSecond Request Message: {invoiceResult.Message}",
-                                "");
-
-                            if (invoice == null) continue;
-
-                            bool isInvoiceHasReturnItem = invoice.Items.Any(p => p.Alu == "SP0012");
-
-
-                            if (isInvoiceHasReturnItem && CheckInvoiceExist(sInvoice.Sid, "ODPI"))
+                            totalInvoices += salesInvoices.EntityList.Count;
+                            foreach (var sInvoice in salesInvoices.EntityList)
                             {
-                                var docNum = GetInvoiceDocNum(sInvoice.Sid, "ODPI");
+                                var invoiceResult = await _invoiceService.GetInvoiceDetailsBySidAsync(sInvoice.Sid);
+                                var invoice = invoiceResult.EntityList.FirstOrDefault();
 
-                                Log(UpdateType.SyncInvoice,
-                                    $"\r\nPrism Invoice No. ({sInvoice.DocumentNumber}) is Already Exist with SAP A/r Down Payment No. ({docNum}).",
-                                     "");
+                                if (_credentials.ActiveLog)
+                                    Log(UpdateType.SyncInvoice, $"Invoice/s." +
+                                            $"\r\nFirst Request Message {salesInvoices.Message}" +
+                                            $"\r\n\r\nSecond Request Message: {invoiceResult.Message}",
+                                    "");
+
+                                if (invoice == null) continue;
+
+                                bool isInvoiceHasReturnItem = invoice.Items.Any(p => p.Alu == "SP0012");
+
+
+                                if (isInvoiceHasReturnItem && CheckInvoiceExist(sInvoice.Sid, "ODPI"))
+                                {
+                                    var docNum = GetInvoiceDocNum(sInvoice.Sid, "ODPI");
+
+                                    Log(UpdateType.SyncInvoice,
+                                        $"\r\nPrism Invoice No. ({sInvoice.DocumentNumber}) is Already Exist with SAP A/r Down Payment No. ({docNum}).",
+                                         "");
+                                }
+
+                                else if (!isInvoiceHasReturnItem && CheckInvoiceExist(sInvoice.Sid, "OINV"))
+                                {
+                                    var docNum = GetInvoiceDocNum(sInvoice.Sid, "OINV");
+
+                                    Log(UpdateType.SyncInvoice,
+                                        $"\r\nPrism Invoice No. ({sInvoice.DocumentNumber}) is Already Exist with SAP Invoice No. ({docNum}).",
+                                         "");
+                                }
+
+                                var isWholesale = invoice.IsWholesale == "B2P";
+                                var wholesaleCustomerCode = invoice.WholesaleCustomerCode;
+
+                                if (IsInvoiceNormalSales(sInvoice, isInvoiceHasReturnItem, isWholesale, wholesaleCustomerCode))
+                                    await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncInvoice);
+
+
+                                else if (IsDownPayment(sInvoice, isInvoiceHasReturnItem))
+                                    await HandleDownPayment(invoiceResult.EntityList, UpdateType.SyncInvoice);
+
+                                else if (IsInvoiceAndCashWholesale(sInvoice, isInvoiceHasReturnItem, isWholesale, wholesaleCustomerCode))
+                                    await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncWholesaleRetail);
+
+                                else if (IsInvoiceAndCreditWholesale(sInvoice, isWholesale))
+                                    await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncWholesale, wholesaleCustomerCode);
+
                             }
-
-                            else if (!isInvoiceHasReturnItem && CheckInvoiceExist(sInvoice.Sid, "OINV"))
-                            {
-                                var docNum = GetInvoiceDocNum(sInvoice.Sid, "OINV");
-
-                                Log(UpdateType.SyncInvoice,
-                                    $"\r\nPrism Invoice No. ({sInvoice.DocumentNumber}) is Already Exist with SAP Invoice No. ({docNum}).",
-                                     "");
-                            }
-
-                            var isWholesale = invoice.IsWholesale == "B2P";
-                            var wholesaleCustomerCode = invoice.WholesaleCustomerCode;
-
-                            if (IsInvoiceNormalSales(sInvoice, isInvoiceHasReturnItem, isWholesale, wholesaleCustomerCode))
-                                await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncInvoice);
-
-
-                            else if (IsDownPayment(sInvoice, isInvoiceHasReturnItem))
-                                await HandleDownPayment(invoiceResult.EntityList, UpdateType.SyncInvoice);
-
-                            else if (IsInvoiceAndCashWholesale(sInvoice, isInvoiceHasReturnItem, isWholesale, wholesaleCustomerCode))
-                                await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncWholesaleRetail);
-
-                            else if (IsInvoiceAndCreditWholesale(sInvoice, isWholesale))
-                                await HandleInvoices(invoiceResult.EntityList, UpdateType.SyncWholesale, wholesaleCustomerCode);
 
                         }
+                        else
+                        {
+                            dataGridView.DataSource = null;
+                            LogMessages($"No Available invoice/s." +
+                                        $"\r\nResponse: {salesInvoices.Response.Content} " +
+                                        $"\r\nResult Message: {salesInvoices.Message}" +
+                                        $"\r\nStatus: {salesInvoices.Status}",
+                                $"No Available invoice/s.");
+                        }
+                        // Increment the page number for the next iteration
+                        pageNo++;
 
-                    }
-                    else
-                    {
-                        dataGridView.DataSource = null;
-                        LogMessages($"No Available invoice/s." +
-                                    $"\r\nResponse: {salesInvoices.Response.Content} " +
-                                    $"\r\nResult Message: {salesInvoices.Message}" +
-                                    $"\r\nStatus: {salesInvoices.Status}",
-                            $"No Available invoice/s.");
-                    }
+                    } while (pageNo <= salesInvoices.TotalPages); // Continue until there are no more results
+
 
                     break;
                 }
@@ -167,61 +180,74 @@ public partial class OutboundData : Form
                     var returnInvoices = new RequestResult<PrismInvoice>();
 
 
-                    if (docCode.IsHasValue())
-                        returnInvoices = await _invoiceService.GetInvoicesAsync(OutboundDocuments.ReturnInvoice, filterByDateRang, storeNum, docCode);
-                    else
-                        returnInvoices = await _invoiceService.GetInvoicesAsync(OutboundDocuments.ReturnInvoice, filterByDateRang, storeNum);
+                    int pageNo = 1; // Set the initial page number
+                    int pageSize = 30; // Set the page size
 
-                    if (returnInvoices.EntityList.Any())
+                    do
                     {
-                        foreach (var rInvoice in returnInvoices.EntityList)
+                        if (docCode.IsHasValue())
+                            returnInvoices = await _invoiceService.GetInvoicesAsync(OutboundDocuments.ReturnInvoice, filterByDateRang, storeNum, docCode, pageNo, pageSize, true);
+                        else
+                            returnInvoices = await _invoiceService.GetInvoicesAsync(OutboundDocuments.ReturnInvoice, filterByDateRang, storeNum,"nn", pageNo, pageSize, true);
+
+                        if (returnInvoices.EntityList.Any())
                         {
-                            var invoiceResult = await _invoiceService.GetInvoiceDetailsBySidAsync(rInvoice.Sid);
-                            var returnInvoice = invoiceResult.EntityList.FirstOrDefault();
-                            Log(UpdateType.SyncCreditMemo, $"Return invoice/s." +
-                                        $"\r\nFirst Request Message: {returnInvoices.Message}" +
-                                        $"\r\n\r\nSecond Request Message: {invoiceResult.Message}",
-                                "");
-
-                            if (returnInvoice == null) continue;
-
-                            if (CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
+                            foreach (var rInvoice in returnInvoices.EntityList)
                             {
-                                var docNum = GetReturnInvoiceDocNum(returnInvoice.Sid);
+                                var invoiceResult = await _invoiceService.GetInvoiceDetailsBySidAsync(rInvoice.Sid);
+                                var returnInvoice = invoiceResult.EntityList.FirstOrDefault();
 
-                                Log(UpdateType.SyncCreditMemo, $"\r\nPrism Invoice No. ({returnInvoice.DocumentNumber}) is Already Exist with SAP A/R Credit Memo No. ({docNum}).",
-                                     "");
+                                if (_credentials.ActiveLog)
+                                    Log(UpdateType.SyncCreditMemo, $"Return invoice/s." +
+                                            $"\r\nFirst Request Message: {returnInvoices.Message}" +
+                                            $"\r\n\r\nSecond Request Message: {invoiceResult.Message}",
+                                    "");
+
+                                if (returnInvoice == null) continue;
+
+                                if (CheckInvoiceExist(returnInvoice.Sid, "ORIN"))
+                                {
+                                    var docNum = GetReturnInvoiceDocNum(returnInvoice.Sid);
+
+                                    Log(UpdateType.SyncCreditMemo, $"\r\nPrism Invoice No. ({returnInvoice.DocumentNumber}) is Already Exist with SAP A/R Credit Memo No. ({docNum}).",
+                                         "");
+                                }
+
+                                var isWholesale = returnInvoice.IsWholesale == "B2P";
+                                var wholesaleCustomerCode = returnInvoice.WholesaleCustomerCode;
+
+                                var isHasReturnItem = returnInvoice.Items.Any(p => p.Alu == "SP0012");
+
+
+                                if (IsReturnAndCreditWholsale(isHasReturnItem, isWholesale, wholesaleCustomerCode, returnInvoice))
+                                    await HandleCreditMemoWithPayment(invoiceResult.EntityList, UpdateType.SyncWholesale, wholesaleCustomerCode);
+
+                                else if (IsReturnAndCashWholsale(isHasReturnItem, isWholesale, wholesaleCustomerCode, returnInvoice))
+                                    await HandleCreditMemoWithPayment(invoiceResult.EntityList, UpdateType.SyncWholesaleRetail);
+
+                                else if (IsNormalReturn(isHasReturnItem, returnInvoice))
+                                    await HandleCreditMemoWithPayment(invoiceResult.EntityList, UpdateType.SyncCreditMemo);
+
+                                else if (IsReturnAndDownPayment(isHasReturnItem, returnInvoice))
+                                    await HandleCreditMemoLinkedToDownPayment(invoiceResult.EntityList, UpdateType.SyncInvoice);
                             }
-
-                            var isWholesale = returnInvoice.IsWholesale == "B2P";
-                            var wholesaleCustomerCode = returnInvoice.WholesaleCustomerCode;
-
-                            var isHasReturnItem = returnInvoice.Items.Any(p => p.Alu == "SP0012");
-
-
-                            if (IsReturnAndCreditWholsale(isHasReturnItem, isWholesale, wholesaleCustomerCode, returnInvoice))
-                                await HandleCreditMemoWithPayment(invoiceResult.EntityList, UpdateType.SyncWholesale, wholesaleCustomerCode);
-
-                            else if (IsReturnAndCashWholsale(isHasReturnItem, isWholesale, wholesaleCustomerCode, returnInvoice))
-                                await HandleCreditMemoWithPayment(invoiceResult.EntityList, UpdateType.SyncWholesaleRetail);
-
-                            else if (IsNormalReturn(isHasReturnItem, returnInvoice))
-                                await HandleCreditMemoWithPayment(invoiceResult.EntityList, UpdateType.SyncCreditMemo);
-
-                            else if (IsReturnAndDownPayment(isHasReturnItem, returnInvoice))
-                                await HandleCreditMemoLinkedToDownPayment(invoiceResult.EntityList, UpdateType.SyncInvoice);
                         }
-                    }
-                    else
-                    {
-                        dataGridView.DataSource = null;
-                        LogMessages($"No Available Return invoice/s." +
-                                    $"\r\nResponse: {returnInvoices.Response.Content} " +
-                                    $"\r\nResult Message: {returnInvoices.Message}" +
-                                    $"\r\nStatus: {returnInvoices.Status}",
-                            $"No Available Return invoice/s.");
-                    }
+                        else
+                        {
+                            dataGridView.DataSource = null;
+                            LogMessages($"No Available Return invoice/s." +
+                                        $"\r\nResponse: {returnInvoices.Response.Content} " +
+                                        $"\r\nResult Message: {returnInvoices.Message}" +
+                                        $"\r\nStatus: {returnInvoices.Status}",
+                                $"No Available Return invoice/s.");
+                        }
+                        // Increment the page number for the next iteration
+                        pageNo++;
+
+                    } while (pageNo <= returnInvoices.TotalPages); // Continue until there are no more results
+
                 }
+
                 break;
             case OutboundDocuments.CustomerOrder:
                 {
@@ -240,7 +266,8 @@ public partial class OutboundData : Form
                         {
                             var order = await _invoiceService.GetInvoiceDetailsBySidAsync(sInvoice.Sid);
 
-                            LogMessages($"Order/s." +
+                            if (_credentials.ActiveLog)
+                                LogMessages($"Order/s." +
                                         $"\r\nFirst Request Message: {customerOrders.Message}" +
                                         $"\r\n\r\nSecond Request Message: {order.Message}",
                                 "");
@@ -267,20 +294,22 @@ public partial class OutboundData : Form
 
                     int pageNo = 1; // Set the initial page number
                     int pageSize = 30; // Set the page size
-
+                    int totalVouchers = 0;
 
                     do
                     {
                         if (docCode.IsHasValue())
-                            verifiedVouchers = await _inventoryTransferService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value, storeNum, docCode, pageNo, pageSize);
+                            verifiedVouchers = await _inventoryTransferService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value, storeNum, docCode, pageNo, pageSize, true);
                         else
-                            verifiedVouchers = await _inventoryTransferService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value, storeNum,"", pageNo, pageSize);
+                            verifiedVouchers = await _inventoryTransferService.GetVerifiedVoucher(dateTimePickerFrom.Value, dateTimePickerTo.Value, storeNum, "", pageNo, pageSize, true);
 
                         if (verifiedVouchers.EntityList.Any())
                         {
 
+                            totalVouchers += verifiedVouchers.EntityList.Count;
                             foreach (var verifiedVoucher in verifiedVouchers.EntityList)
                             {
+
                                 Log(UpdateType.SyncInventoryTransfer, $"\r\nStock Transfer/s." + $"\r\nRequest Message: {verifiedVouchers.Message}", "");
 
                                 if (verifiedVoucher == null) continue;
@@ -309,7 +338,7 @@ public partial class OutboundData : Form
                         // Increment the page number for the next iteration
                         pageNo++;
 
-                    } while (verifiedVouchers.EntityList.Count == verifiedVouchers.TotalPages); // Continue until there are no more results
+                    } while (pageNo <= verifiedVouchers.TotalPages); // Continue until there are no more results
 
                 }
                 break;
@@ -395,7 +424,6 @@ public partial class OutboundData : Form
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
 
-            if (_credentials.ActiveLog)
                 Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
@@ -498,7 +526,6 @@ public partial class OutboundData : Form
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
 
-            if (_credentials.ActiveLog)
                 Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
@@ -530,7 +557,6 @@ public partial class OutboundData : Form
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
 
-            if (_credentials.ActiveLog)
                 Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
@@ -556,7 +582,7 @@ public partial class OutboundData : Form
                 if (textBoxLogsSync.Text.Contains(syncResult.Message))
                     return;
 
-                if (_credentials.ActiveLog)
+
                     Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
             }
             else
@@ -568,7 +594,7 @@ public partial class OutboundData : Form
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
 
-            if (_credentials.ActiveLog)
+
                 Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
@@ -631,7 +657,6 @@ public partial class OutboundData : Form
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
 
-            if (_credentials.ActiveLog)
                 Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
@@ -643,7 +668,7 @@ public partial class OutboundData : Form
 
         if (result.EntityList.Any())
         {
-            if (_credentials.ActiveLog)
+  
                 LogMessages($"Inventory Posting/s.\r\n\r\nRequest Message: {result.Message}", "");
 
             foreach (var inventoryPosting in result.EntityList)
@@ -659,7 +684,6 @@ public partial class OutboundData : Form
                     var docNum = GetInventoryPostingDocNum(inventoryPosting.Sid);
                     var message = $"Prism Adjustment No. ({inventoryPosting.Adjno}) is Already Exist with SAP Inventory Posting No. ({docNum}).";
 
-                    if (_credentials.ActiveLog)
                         LogMessages(message, message);
                 }
             }
@@ -701,7 +725,6 @@ public partial class OutboundData : Form
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
 
-            if (_credentials.ActiveLog)
                 Log(updateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
@@ -738,7 +761,7 @@ public partial class OutboundData : Form
             if (textBoxLogsSync.Text.Contains(syncResult.Message))
                 return;
 
-            if (_credentials.ActiveLog)
+     
                 Log(UpdateType, syncResult.Message, syncResult.StatusBarMessage);
 
             //syncResult.UpdateResponse;
@@ -774,7 +797,7 @@ public partial class OutboundData : Form
     {
         comboBoxDocTypeSync.SelectedIndex = (int)OutboundDocuments.SalesInvoice;
         comboBoxBranch.SelectedIndex = 0;
-        dateTimePickerFrom.Value = DateTime.Now.AddMonths(-1);
+        dateTimePickerFrom.Value = DateTime.Now;
 
         dateTimePickerTo.Value = DateTime.Now;
 

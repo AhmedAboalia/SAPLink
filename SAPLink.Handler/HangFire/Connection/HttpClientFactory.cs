@@ -6,14 +6,16 @@ namespace SAPLink.Handler.Connection;
 
 public static partial class HttpClientFactory
 {
-    public static async Task<IRestResponse> InitializeAsync(string Uri, string resource, Method method, string body = "", int pageNo = 1,int pageSize = 30)
+    public static async Task<IRestResponse> InitializeAsync(string Uri, string resource, Method method, string body = "", int pageNo = 1,int pageSize = 30, bool IsListOfObjects = false)
     {
         try
         {
             ApiClient = new RestClient(Uri);
             RefreshAuthSession();
 
-            resource += $"&count=true&page_no={pageNo}&page_size={pageSize}";
+            if (IsListOfObjects)
+                resource += $"&count=true&page_no={pageNo}&page_size={pageSize}";
+            
             Request = new RestRequest
             {
                 Resource = resource,

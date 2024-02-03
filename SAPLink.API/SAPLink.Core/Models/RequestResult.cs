@@ -33,10 +33,17 @@ public class RequestResult<T>
 
     public int GetTotalItems(IRestResponse response)
     {
-        if (response.Headers != null && response.Headers.Any(h => h.Name.Equals("Content-Range", StringComparison.OrdinalIgnoreCase)))
+        if (response.Headers != null && 
+            response.Headers.Any(h => 
+            h.Name.Equals("Content-Range", StringComparison.OrdinalIgnoreCase) ||
+             h.Name.Equals("Contentrange", StringComparison.OrdinalIgnoreCase) ||
+            h.Name.Equals("ContentRange", StringComparison.OrdinalIgnoreCase)))
         {
             // Find the "Content-Range" header and retrieve its value
-            var contentRangeHeader = response.Headers.First(h => h.Name.Equals("Content-Range", StringComparison.OrdinalIgnoreCase));
+            var contentRangeHeader = response.Headers.First(h => 
+            h.Name.Equals("Content-Range", StringComparison.OrdinalIgnoreCase) ||
+            h.Name.Equals("Contentrange", StringComparison.OrdinalIgnoreCase) ||
+            h.Name.Equals("ContentRange", StringComparison.OrdinalIgnoreCase));
 
             var contentRange = contentRangeHeader.Value.ToString();
 
