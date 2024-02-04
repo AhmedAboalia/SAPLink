@@ -2,6 +2,7 @@
 using SAPbobsCOM;
 using SAPLink.Core;
 using SAPLink.Core.Models;
+using SAPLink.Core.Models.Prism.StockManagement;
 using SAPLink.Core.Models.SAP.Sales;
 using SAPLink.Handler.SAP.Application;
 using PrismInvoice = SAPLink.Core.Models.Prism.Sales.Invoice;
@@ -25,6 +26,11 @@ public static class IncomingPayment
             oPayment.Invoices.SumApplied = amount;
             oPayment.CashAccount = account;
             oPayment.CashSum = amount;
+
+            var DocNum = ActionHandler.GetStringValueByQuery($"SELECT T0.[DocNum] FROM OINV T0 WHERE T0.[DocEntry] = '{docEntry}'");
+            oPayment.Address = $"A/R Invoice No. : {DocNum}\r\nPrism Invoice No: {invoice.DocumentNumber}\r\nPrism Invoice Sid: {invoice.Sid}";
+            oPayment.CounterReference = $"A/R Invoice No. : {DocNum}\r\nPrism Invoice No: {invoice.DocumentNumber}\r\nPrism Invoice Sid: {invoice.Sid}";
+
         }
         else
         {

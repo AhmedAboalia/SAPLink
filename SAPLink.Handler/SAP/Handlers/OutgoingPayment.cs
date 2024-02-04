@@ -29,6 +29,9 @@ public static class OutgoingPayment
             oPayment.Invoices.SumApplied = amount;
             oPayment.CashAccount = account;
             oPayment.CashSum = amount;
+
+            var DocNum = ActionHandler.GetStringValueByQuery($"SELECT T0.[DocNum] FROM ORIN T0 WHERE T0.[DocEntry] = '{docEntry}'");
+            oPayment.Remarks = $"Credit Memo No. : {DocNum}\r\nPrism Invoice No: {invoice.DocumentNumber}\r\nPrism Invoice Sid: {invoice.Sid}";
         }
         else
         {
@@ -52,6 +55,7 @@ public static class OutgoingPayment
         oPayment.TaxDate = invoice.CreatedDatetime;
         oPayment.DocDate = invoice.CreatedDatetime;
         oPayment.DocDate = invoice.CreatedDatetime;
+
         oPayment.Invoices.Add();
 
         var response = oPayment.Add();

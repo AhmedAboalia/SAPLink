@@ -79,10 +79,10 @@ public partial class CreditMemoHandler
 
                         if (oCreditMemo.Add() == 0)
                         {
-                            //var resulOutgoing = OutgoingPayment.AddMultiplePaymentsInvoice(invoice, "", customerCode, BoRcptInvTypes.it_DownPayment);
-                            //result.Message += $"\r\n {resulOutgoing.Message}";
-                            //result.Status = resulOutgoing.Status;
-                            
+                            var resulOutgoing = OutgoingPayment.AddMultiplePaymentsInvoice(invoice, "", customerCode, BoRcptInvTypes.it_DownPayment);
+                            result.Message += $"\r\n {resulOutgoing.Message}";
+                            result.Status = resulOutgoing.Status;
+
                             if (downPaymentDocNum != "0")
                                 result.Message +=
                                        $"\r\nSuccessfully created A/R Credit Memo, Prism Return No. {invoice.DocumentNumber} - Sid. {invoice.Sid} based on A/R Down Payment {downPaymentDocNum}.\r\n";
