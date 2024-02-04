@@ -34,8 +34,8 @@ namespace SAPLink.Forms
             int screenWidth = Screen.PrimaryScreen.Bounds.Width;
             int screenHeight = Screen.PrimaryScreen.Bounds.Height;
 
-            if (screenWidth < 1920 && screenHeight > 1080)
-            {
+            //if (screenWidth < 1920 && screenHeight > 1080)
+            //{
                 buttonDepartments.TextDescription = "";
                 buttonItems.TextDescription = "";
                 buttonVendors.TextDescription = "";
@@ -52,7 +52,7 @@ namespace SAPLink.Forms
                 buttonSyncedItems.TextDescription = "";
                 buttonNotSyncedItems.TextDescription = "";
                 buttonPrismActiveItems.TextDescription = "";
-            }
+            //}
             WindowState = FormWindowState.Maximized;
             var user = _client.Credentials.FirstOrDefault().PrismUserName;
             if (user.IsHasValue())
