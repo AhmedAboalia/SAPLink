@@ -78,6 +78,30 @@ namespace SAPLink.Forms
             //}
             //string Urld = _client.Credentials.FirstOrDefault().IntegrationUrl;
             //hangFireDashBoard.Source = new Uri($"{Urld}/hangfire");
+
+
+            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+
+            //if (screenWidth < 1920 && screenHeight > 1080)
+            //{
+            buttonDepartments.TextDescription = "";
+            buttonItems.TextDescription = "";
+            buttonVendors.TextDescription = "";
+            button_InGoodsReceiptPo.TextDescription = "";
+            buttonGoodsReturn.TextDescription = "";
+            button_InGoodsReceipt.TextDescription = "";
+            button_InGoodsIssue.TextDescription = "";
+            buttonInvoice.TextDescription = "";
+            buttonCreditMemo.TextDescription = "";
+            buttonStockTransfer.TextDescription = "";
+            buttonStockTaking.TextDescription = "";
+            buttonOutGoodsReceipt.TextDescription = "";
+            buttonOutGoodsIssue.TextDescription = "";
+            buttonSyncedItems.TextDescription = "";
+            buttonNotSyncedItems.TextDescription = "";
+            buttonPrismActiveItems.TextDescription = "";
+            //}
         }
         private void UpdateWelcomingMessage()
         {

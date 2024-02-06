@@ -915,7 +915,7 @@ public partial class OutboundData : Form
             )
         {
             //textBoxLogsSync.Clear();
-            textBoxLogsSync.Text += message;
+            textBoxLogsSync.Text += $"\r\n{message}";
             // UpdateTextBox(textBoxLogsInitialize, message);
         }
 
