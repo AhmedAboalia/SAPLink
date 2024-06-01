@@ -39,6 +39,7 @@ public class DepartmentService : IEntityService<RequestResult<Department>, ItemG
             var entity = JsonConvert.DeserializeObject<Response<Department>>(result.Response.Content).Data.ToList()
                 .FirstOrDefault(x => x.DcsCode == code);
 
+            result.Status = Enums.StatusType.Success;
             result.EntityList.Add(entity);
         }
         return result;

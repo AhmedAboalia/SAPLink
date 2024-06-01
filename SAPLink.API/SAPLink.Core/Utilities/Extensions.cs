@@ -60,14 +60,15 @@ public static class Extensions
     /// <returns>The beautified JSON string.</returns>
     public static string PrettyJson(this string unPrettyJson)
     {
-        var options = new JsonSerializerOptions()
+        if (unPrettyJson.IsHasValue())
         {
-            WriteIndented = true
-        };
+            var options = new JsonSerializerOptions() { WriteIndented = true };
+            var jsonElement = JsonSerializer.Deserialize<JsonElement>(unPrettyJson);
 
-        var jsonElement = JsonSerializer.Deserialize<JsonElement>(unPrettyJson);
+            return JsonSerializer.Serialize(jsonElement, options);
+        }
 
-        return JsonSerializer.Serialize(jsonElement, options);
+        return unPrettyJson;
     }
 
     /// <summary>
@@ -105,6 +106,27 @@ public static class Extensions
         if (!Directory.Exists(directoryName))
         {
             Directory.CreateDirectory(directoryName);
+        }
+    }
+
+    /// <summary>
+    /// Convert a string to a title-friendly format (e.g., "Title Case String").
+    /// </summary>
+    /// <param name="input">String to convert</param>
+    /// <returns>Title-friendly string</returns>
+    public static string ToTitleFormat(this string input)
+    {
+        return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(input.ToLower());
+    }
+
+    public class ComboBoxItem
+    {
+        public string Text { get; set; }
+        public int Value { get; set; }
+
+        public override string ToString()
+        {
+            return Value + " - " + Text;
         }
     }
 }

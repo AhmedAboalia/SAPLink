@@ -22,13 +22,13 @@ namespace SAPLink.Core.Models.SAP.Sales
         public string? DocNum { get; set; }
 
         [JsonProperty("DocDueDate", NullValueHandling = NullValueHandling.Ignore)]
-        public DateTimeOffset? DocDueDate { get; set; }
+        public string? DocDueDate { get; set; }
 
         [JsonProperty("TaxDate", NullValueHandling = NullValueHandling.Ignore)]
-        public DateTimeOffset? TaxDate { get; set; }
+        public string? TaxDate { get; set; }
 
         [JsonProperty("DocDate", NullValueHandling = NullValueHandling.Ignore)]
-        public DateTimeOffset? DocDate { get; set; }
+        public string? DocDate { get; set; }
 
         [JsonProperty("CardCode")]
         public string? CardCode { get; set; } = "001";

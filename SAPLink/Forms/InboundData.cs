@@ -4,11 +4,11 @@ using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Vendors;
 using SAPLink.Handler.Prism.Handlers.InboundData.Receiving.GoodsReceiptPo;
 using SAPLink.Utilities.Forms;
 using SAPLink.Handler.Prism.Handlers.InboundData.Receiving.GoodsIssue;
-using SAPLink.Handler.Prism.Handlers.InboundData.Receiving.GoodsReceiptPo;
 using SAPLink.Handler.Prism.Handlers.InboundData.Receiving.GoodsReceipt;
-using static SAPLink.Core.Enums;
 using SAPLink.Handler.SAP.Application;
 using System.ComponentModel.DataAnnotations;
+using SAPLink.EF.Data;
+using SAPLink.Core.Connection;
 
 namespace SAPLink.Forms;
 
@@ -296,9 +296,9 @@ public partial class InboundData : Form
                 dt.DataSource = null;
             }
 
-            Log(filter.IsNullOrEmpty()
-                ? UpdateType.InitialDepartment
-                : UpdateType.SyncDepartment, syncResult.Message, syncResult.StatusBarMessage);
+                Log(filter.IsNullOrEmpty()
+                    ? UpdateType.InitialDepartment
+                    : UpdateType.SyncDepartment, syncResult.Message, syncResult.StatusBarMessage);
         }
     }
     private async Task HandleVendors(Guna2DataGridView dt, string filter)
@@ -323,7 +323,7 @@ public partial class InboundData : Form
                 dt.DataSource = null;
             }
 
-            Log(filter.IsNullOrEmpty()
+                Log(filter.IsNullOrEmpty()
                 ? UpdateType.InitialVendors
                 : UpdateType.SyncVendors, syncResult.Message, syncResult.StatusBarMessage);
         }
@@ -348,16 +348,18 @@ public partial class InboundData : Form
             else
                 dt.DataSource = null;
 
-            LogMessage += syncResult.Message;
+     
+                LogMessage += syncResult.Message;
 
-            Log(filter.IsNullOrEmpty()
-                ? UpdateType.InitialItems
-                : UpdateType.SyncItems, LogMessage, syncResult.StatusBarMessage);
-
+                Log(filter.IsNullOrEmpty()
+                    ? UpdateType.InitialItems
+                    : UpdateType.SyncItems, LogMessage, syncResult.StatusBarMessage);
+            
         }
-        Log(filter.IsNullOrEmpty()
-            ? UpdateType.InitialItems
-            : UpdateType.SyncItems, LogMessage, "");
+        //if (_credentials.ActiveLog)
+        //    Log(filter.IsNullOrEmpty()
+        //    ? UpdateType.InitialItems
+        //    : UpdateType.SyncItems, LogMessage, "");
     }
 
 
@@ -385,7 +387,8 @@ public partial class InboundData : Form
 
             }
 
-            Log(filter.IsNullOrEmpty()
+
+                Log(filter.IsNullOrEmpty()
                 ? UpdateType.InitialGoodsReceiptPO
                 : UpdateType.SyncGoodsReceiptPO, syncResult.Message, syncResult.StatusBarMessage);
 
@@ -413,7 +416,8 @@ public partial class InboundData : Form
 
             }
 
-            Log(filter.IsNullOrEmpty()
+
+                Log(filter.IsNullOrEmpty()
                 ? UpdateType.InitialInGoodsReceipt
                 : UpdateType.SyncInGoodsReceipt, syncResult.Message, syncResult.StatusBarMessage);
         }
@@ -440,11 +444,12 @@ public partial class InboundData : Form
 
             }
 
-            LogMessage += syncResult.Message;
+                LogMessage += syncResult.Message;
 
-            Log(filter.IsNullOrEmpty()
-                ? UpdateType.InitialInGoodsIssue
-                : UpdateType.SyncInGoodsIssue, syncResult.Message, syncResult.StatusBarMessage);
+                Log(filter.IsNullOrEmpty()
+                    ? UpdateType.InitialInGoodsIssue
+                    : UpdateType.SyncInGoodsIssue, syncResult.Message, syncResult.StatusBarMessage);
+            
         }
         //Log(filter.IsNullOrEmpty()
         //    ? UpdateType.InitialInGoodsIssue
@@ -471,16 +476,18 @@ public partial class InboundData : Form
                 dt.DataSource = null;
 
             }
+   
+                LogMessage += syncResult.Message;
 
-            LogMessage += syncResult.Message;
-
-            Log(filter.IsNullOrEmpty()
-                ? UpdateType.InitialInGoodsReturn
-                : UpdateType.SyncInGoodsReturn, syncResult.Message, syncResult.StatusBarMessage);
+                Log(filter.IsNullOrEmpty()
+                    ? UpdateType.InitialInGoodsReturn
+                    : UpdateType.SyncInGoodsReturn, syncResult.Message, syncResult.StatusBarMessage);
+            
         }
-        Log(filter.IsNullOrEmpty()
-            ? UpdateType.InitialInGoodsReturn
-            : UpdateType.SyncInGoodsReturn, LogMessage, "");
+        //if (_credentials.ActiveLog)
+        //    Log(filter.IsNullOrEmpty()
+        //    ? UpdateType.InitialInGoodsReturn
+        //    : UpdateType.SyncInGoodsReturn, LogMessage, "");
     }
     private string GetSyncQueryByRangOfDate()
     {
@@ -672,7 +679,7 @@ public partial class InboundData : Form
     private async void InboundData_LoadAsync(object sender, EventArgs e)
     {
         comboBoxDocTypeSync.SelectedIndex = (int)Documents.Departments;
-        dateTimePickerFrom.Value = DateTime.Now.AddDays(-1);
+        dateTimePickerFrom.Value = DateTime.Now;
 
         dateTimePickerTo.Value = DateTime.Now;
 
@@ -744,17 +751,17 @@ public partial class InboundData : Form
             if (toggleItems.Checked)
                 toggleItems.InvokeUnCheck();
 
-            if (toggleGoodsReceiptPO.Checked)
-                toggleGoodsReceiptPO.InvokeUnCheck();
+            //if (toggleGoodsReceiptPO.Checked)
+            //    toggleGoodsReceiptPO.InvokeUnCheck();
 
-            if (toggleGoodsReceipt.Checked)
-                toggleGoodsReceipt.InvokeUnCheck();
+            //if (toggleGoodsReceipt.Checked)
+            //    toggleGoodsReceipt.InvokeUnCheck();
 
-            if (toggleGoodsIssue.Checked)
-                toggleGoodsIssue.InvokeUnCheck();
+            //if (toggleGoodsIssue.Checked)
+            //    toggleGoodsIssue.InvokeUnCheck();
 
-            if (toggleGoodsReturn.Checked)
-                toggleGoodsReturn.InvokeUnCheck();
+            //if (toggleGoodsReturn.Checked)
+            //    toggleGoodsReturn.InvokeUnCheck();
         }
     }
 
@@ -772,17 +779,17 @@ public partial class InboundData : Form
             if (toggleItems.Checked)
                 toggleItems.InvokeUnCheck();
 
-            if (toggleGoodsReceiptPO.Checked)
-                toggleGoodsReceiptPO.InvokeUnCheck();
+            //if (toggleGoodsReceiptPO.Checked)
+            //    toggleGoodsReceiptPO.InvokeUnCheck();
 
-            if (toggleGoodsReceipt.Checked)
-                toggleGoodsReceipt.InvokeUnCheck();
+            //if (toggleGoodsReceipt.Checked)
+            //    toggleGoodsReceipt.InvokeUnCheck();
 
-            if (toggleGoodsIssue.Checked)
-                toggleGoodsIssue.InvokeUnCheck();
+            //if (toggleGoodsIssue.Checked)
+            //    toggleGoodsIssue.InvokeUnCheck();
 
-            if (toggleGoodsReturn.Checked)
-                toggleGoodsReturn.InvokeUnCheck();
+            //if (toggleGoodsReturn.Checked)
+            //    toggleGoodsReturn.InvokeUnCheck();
         }
     }
     private void ToggleItems_CheckedChanged(object sender, EventArgs e)
@@ -795,134 +802,9 @@ public partial class InboundData : Form
 
             if (toggleVendors.Checked)
                 toggleVendors.InvokeUnCheck();
-
-            //if (toggleItems.Checked)
-            //    toggleItems.InvokeUnCheck();
-
-            if (toggleGoodsReceiptPO.Checked)
-                toggleGoodsReceiptPO.InvokeUnCheck();
-
-            if (toggleGoodsReceipt.Checked)
-                toggleGoodsReceipt.InvokeUnCheck();
-
-            if (toggleGoodsIssue.Checked)
-                toggleGoodsIssue.InvokeUnCheck();
-
-            if (toggleGoodsReturn.Checked)
-                toggleGoodsReturn.InvokeUnCheck();
         }
     }
 
-    private void toggleGoodsReceiptPO_CheckedChanged(object sender, EventArgs e)
-    {
-        if (toggleGoodsReceiptPO.Checked)
-        {
-            PlaySound.Click();
-            if (toggleDepartments.Checked)
-                toggleDepartments.InvokeUnCheck();
-
-            if (toggleVendors.Checked)
-                toggleVendors.InvokeUnCheck();
-
-            if (toggleItems.Checked)
-                toggleItems.InvokeUnCheck();
-
-            //if (toggleGoodsReceiptPO.Checked)
-            //    toggleGoodsReceiptPO.InvokeUnCheck();
-
-            if (toggleGoodsReceipt.Checked)
-                toggleGoodsReceipt.InvokeUnCheck();
-
-            if (toggleGoodsIssue.Checked)
-                toggleGoodsIssue.InvokeUnCheck();
-
-            if (toggleGoodsReturn.Checked)
-                toggleGoodsReturn.InvokeUnCheck();
-        }
-    }
-
-    private void toggleGoodsReceipt_CheckedChanged(object sender, EventArgs e)
-    {
-        if (toggleGoodsReceipt.Checked)
-        {
-            PlaySound.Click();
-            if (toggleDepartments.Checked)
-                toggleDepartments.InvokeUnCheck();
-
-            if (toggleVendors.Checked)
-                toggleVendors.InvokeUnCheck();
-
-            if (toggleItems.Checked)
-                toggleItems.InvokeUnCheck();
-
-            if (toggleGoodsReceiptPO.Checked)
-                toggleGoodsReceiptPO.InvokeUnCheck();
-
-            //if (toggleGoodsReceipt.Checked)
-            //    toggleGoodsReceipt.InvokeUnCheck();
-
-            if (toggleGoodsIssue.Checked)
-                toggleGoodsIssue.InvokeUnCheck();
-
-            if (toggleGoodsReturn.Checked)
-                toggleGoodsReturn.InvokeUnCheck();
-        }
-    }
-
-    private void toggleGoodsIssue_CheckedChanged(object sender, EventArgs e)
-    {
-        if (toggleGoodsIssue.Checked)
-        {
-            PlaySound.Click();
-            if (toggleDepartments.Checked)
-                toggleDepartments.InvokeUnCheck();
-
-            if (toggleVendors.Checked)
-                toggleVendors.InvokeUnCheck();
-
-            if (toggleItems.Checked)
-                toggleItems.InvokeUnCheck();
-
-            if (toggleGoodsReceiptPO.Checked)
-                toggleGoodsReceiptPO.InvokeUnCheck();
-
-            if (toggleGoodsReceipt.Checked)
-                toggleGoodsReceipt.InvokeUnCheck();
-
-            //if (toggleGoodsIssue.Checked)
-            //    toggleGoodsIssue.InvokeUnCheck();
-
-            if (toggleGoodsReturn.Checked)
-                toggleGoodsReturn.InvokeUnCheck();
-        }
-    }
-    private void toggleGoodsReturn_CheckedChanged(object sender, EventArgs e)
-    {
-        if (toggleGoodsReturn.Checked)
-        {
-            PlaySound.Click();
-            if (toggleDepartments.Checked)
-                toggleDepartments.InvokeUnCheck();
-
-            if (toggleVendors.Checked)
-                toggleVendors.InvokeUnCheck();
-
-            if (toggleItems.Checked)
-                toggleItems.InvokeUnCheck();
-
-            if (toggleGoodsReceiptPO.Checked)
-                toggleGoodsReceiptPO.InvokeUnCheck();
-
-            if (toggleGoodsReceipt.Checked)
-                toggleGoodsReceipt.InvokeUnCheck();
-
-            if (toggleGoodsIssue.Checked)
-                toggleGoodsIssue.InvokeUnCheck();
-
-            //if (toggleGoodsReturn.Checked)
-            //    toggleGoodsReturn.InvokeUnCheck();
-        }
-    }
     private void PlayClickSound(object sender, EventArgs e)
         => PlaySound.KeyPress();
 
@@ -983,9 +865,25 @@ public partial class InboundData : Form
     {
         var newAuth = await LoginManager.GetAuthSessionAsync(_credentials.BaseUri, _credentials.PrismUserName, _credentials.PrismPassword);
         if (newAuth.IsHasValue())
-            labelStatus.Log("Status: Auth Session refreshed.", Logger.MessageTypes.Warning, Logger.MessageTime.Long);
-        else
-            labelStatus.Log("Status: Cant refresh Auth-Session, Wait a few seconds before you try again.", Logger.MessageTypes.Error, Logger.MessageTime.Long);
+            if (newAuth.IsHasValue())
+            {
+                _credentials.AuthSession = newAuth;
+
+                _unitOfWork.Credentials.Update(_credentials);
+                _unitOfWork.SaveChanges();
+
+                Program.Context = new ApplicationDbContext();
+                Program.UnitOfWork = new(Program.Context);
+
+                var activeConnection = ConnectionStringFactory.GetActiveConnection();
+
+                string[] includes = { "Credentials", "Credentials.Subsidiaries" };
+                Program.Client = Program.UnitOfWork.Clients.FindAsync(c => c.Id == activeConnection.Id, includes).Result;
+
+                labelStatus.Log("Status: Auth Session was updated and refreshed successfully.", Logger.MessageTypes.Warning, Logger.MessageTime.Long);
+            }
+            else
+                labelStatus.Log("Status: cant refresh 'Auth Session', Wait a few seconds before you try again.", Logger.MessageTypes.Error, Logger.MessageTime.Long);
     }
 
     private void textBoxDocCode_Enter(object sender, EventArgs e)
@@ -1025,6 +923,7 @@ public partial class InboundData : Form
         else if (report == (int)Enums.Reports.NotSynced)
             toggleNotSyncedItems.Checked = true;
 
+        RunReport();
     }
 
     private void togglePrismActiveItems_CheckedChanged(object sender, EventArgs e)
@@ -1038,14 +937,7 @@ public partial class InboundData : Form
             if (toggleNotSyncedItems.Checked)
                 toggleNotSyncedItems.InvokeUnCheck();
 
-            if (toggleGoodsReceiptPO.Checked)
-                toggleGoodsReceiptPO.InvokeUnCheck();
-
-            if (toggleGoodsReceipt.Checked)
-                toggleGoodsReceipt.InvokeUnCheck();
-
-            if (toggleGoodsIssue.Checked)
-                toggleGoodsIssue.InvokeUnCheck();
+            RunReport();
         }
     }
 
@@ -1063,14 +955,7 @@ public partial class InboundData : Form
             if (toggleNotSyncedItems.Checked)
                 toggleNotSyncedItems.InvokeUnCheck();
 
-            if (toggleGoodsReceiptPO.Checked)
-                toggleGoodsReceiptPO.InvokeUnCheck();
-
-            if (toggleGoodsReceipt.Checked)
-                toggleGoodsReceipt.InvokeUnCheck();
-
-            if (toggleGoodsIssue.Checked)
-                toggleGoodsIssue.InvokeUnCheck();
+            RunReport();
         }
     }
 
@@ -1085,21 +970,11 @@ public partial class InboundData : Form
             if (toggleSyncedItems.Checked)
                 toggleSyncedItems.InvokeUnCheck();
 
-            //if (toggleItems.Checked)
-            //    toggleItems.InvokeUnCheck();
-
-            if (toggleGoodsReceiptPO.Checked)
-                toggleGoodsReceiptPO.InvokeUnCheck();
-
-            if (toggleGoodsReceipt.Checked)
-                toggleGoodsReceipt.InvokeUnCheck();
-
-            if (toggleGoodsIssue.Checked)
-                toggleGoodsIssue.InvokeUnCheck();
+            RunReport();
         }
     }
 
-    private void buttonRunReport_Click(object sender, EventArgs e)
+    private void RunReport()
     {
         if (togglePrismActiveItems.Checked)
         {
@@ -1188,4 +1063,24 @@ public partial class InboundData : Form
             }
         }
     }
+
+    private void restartToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        RestartApp();
+    }
+
+    private void RestartApp()
+    {
+        var result = MessageBox.Show("Do you want to restart Application?", "Restart Application!!",
+            MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+        if (result == DialogResult.OK)
+            Application.Restart();
+    }
+
+    private void restartToolStripMenuItem1_Click(object sender, EventArgs e)
+    {
+        RestartApp();
+    }
+
 }

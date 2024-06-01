@@ -1,9 +1,6 @@
-﻿using Guna.UI2.WinForms;
-using Humanizer;
+﻿using Humanizer;
 using SAPLink.Handler.Prism.Connection.Auth;
 using SAPLink.Handler.SAP.Application;
-using System.Security.AccessControl;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using Documents = SAPLink.Core.InboundEnums.Documents;
 
 namespace SAPLink.Forms
@@ -38,19 +35,19 @@ namespace SAPLink.Forms
             if (user.IsHasValue())
             {
                 if (user == "sysadmin")
-                    label2.Text = "Hi, System Admin.";//Hi, Prism Sync User
+                    label3.Text = "System Admin";//Hi, Prism Sync User
                 else
-                    label2.Text = "Hi, SAP Link.";//Hi, Prism Sync User
+                    label3.Text = "SAP Link";//Hi, Prism Sync User
 
-                string databaseType = _credentials.CompanyDb switch
+                string environment = _credentials.EnvironmentCode switch
                 {
-                    "TESTDB" => "Test Environment",
-                    "SBODemoGB" => "Local Environment",
-                    "KaffaryDB" => "Production Environment",
+                    (int)Environments.Test => "Test Environment",
+                    (int)Environments.Local => "Local Environment",
+                    (int)Environments.Production => "Production Environment",
                     _ => "Unknown Environment"
                 };
 
-                label4.Text = $"{databaseType} ({_credentials.CompanyDb})";
+                label4.Text = $"{environment} - ({_credentials.CompanyDb})";
             }
 
             timer1.Enabled = true;
@@ -81,13 +78,37 @@ namespace SAPLink.Forms
             //}
             //string Urld = _client.Credentials.FirstOrDefault().IntegrationUrl;
             //hangFireDashBoard.Source = new Uri($"{Urld}/hangfire");
+
+
+            int screenWidth = Screen.PrimaryScreen.Bounds.Width;
+            int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+
+            //if (screenWidth < 1920 && screenHeight > 1080)
+            //{
+            buttonDepartments.TextDescription = "";
+            buttonItems.TextDescription = "";
+            buttonVendors.TextDescription = "";
+            button_InGoodsReceiptPo.TextDescription = "";
+            buttonGoodsReturn.TextDescription = "";
+            button_InGoodsReceipt.TextDescription = "";
+            button_InGoodsIssue.TextDescription = "";
+            buttonInvoice.TextDescription = "";
+            buttonCreditMemo.TextDescription = "";
+            buttonStockTransfer.TextDescription = "";
+            buttonStockTaking.TextDescription = "";
+            buttonOutGoodsReceipt.TextDescription = "";
+            buttonOutGoodsIssue.TextDescription = "";
+            buttonSyncedItems.TextDescription = "";
+            buttonNotSyncedItems.TextDescription = "";
+            buttonPrismActiveItems.TextDescription = "";
+            //}
         }
         private void UpdateWelcomingMessage()
         {
             if (_credentials.PrismUserName == "sysadmin")
-                label2.Text = "Welcome Back, System Admin.";
+                label3.Text = "Welcome Back, System Admin.";
             else if (_credentials.PrismUserName.ToLower() == "saplink")
-                label2.Text = "Welcome Back, SAP Link.";
+                label3.Text = "Welcome Back, SAP Link.";
             else
             {
                 var user = _credentials.PrismUserName.Transform(To.TitleCase);
@@ -260,14 +281,26 @@ namespace SAPLink.Forms
 
         private async void RefreshAuthSession()
         {
+            labelStatus.Visible = true;
+            labelStatus.Log("Status: Try to refresh Auth Session....", Logger.MessageTypes.Info, Logger.MessageTime.Short, false);
+
             var newAuth = await LoginManager.GetAuthSessionAsync(_credentials.BaseUri, _credentials.PrismUserName, _credentials.PrismPassword);
             if (newAuth.IsHasValue())
             {
                 CheckConnectivity(true);
                 Program.IsPrismConnected = true;
+
+                labelStatus.Visible = true;
+                labelStatus.Log("Status: Auth Session was updated and refreshed successfully", Logger.MessageTypes.Info, Logger.MessageTime.Long, false);
             }
             else
+            {
+                labelStatus.Log("Status: cant refresh 'Auth Session', trying again, please waite.", Logger.MessageTypes.Info, Logger.MessageTime.Long, false);
                 RefreshAuthSession();
+            }
+
+            await Task.Delay(3000);
+            labelStatus.Visible = false;
         }
 
         private async void timer1_Tick(object sender, EventArgs e)
@@ -311,8 +344,8 @@ namespace SAPLink.Forms
             => OpenReportsWithSettings(Enums.Reports.PrismActiveItems);
 
         private void buttonSyncedItems_Click(object sender, EventArgs e)
-        => OpenReportsWithSettings(Enums.Reports.SyncedItems);    
-        
+        => OpenReportsWithSettings(Enums.Reports.SyncedItems);
+
         private void buttonNotSyncedItems_Click(object sender, EventArgs e)
         => OpenReportsWithSettings(Enums.Reports.NotSynced);
 
@@ -326,5 +359,6 @@ namespace SAPLink.Forms
 
         private void buttonGoodsReturn_Click(object sender, EventArgs e)
             => OpenInboundData(Documents.GoodsReturn);
+
     }
 }

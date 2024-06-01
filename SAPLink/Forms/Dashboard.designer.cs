@@ -71,14 +71,14 @@ namespace SAPLink.Forms
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges34 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges35 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges36 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges45 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges46 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges43 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges44 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges39 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges40 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges41 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges42 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges43 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges44 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges45 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges46 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges47 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges48 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges49 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -94,39 +94,41 @@ namespace SAPLink.Forms
             toolStripMenuItem6 = new ToolStripMenuItem();
             restartToolStripMenuItem = new ToolStripMenuItem();
             exitToolStripMenuItem = new ToolStripMenuItem();
+            labelStatus = new Label();
             guna2GroupBox3 = new Guna2GroupBox();
-            buttonPrismActiveItems = new CustomGunaButton();
-            buttonNotSyncedItems = new CustomGunaButton();
-            buttonSyncedItems = new CustomGunaButton();
+            buttonPrismActiveItems = new CustomButton();
+            buttonNotSyncedItems = new CustomButton();
+            buttonSyncedItems = new CustomButton();
             guna2GroupBox1 = new Guna2GroupBox();
-            buttonOutGoodsReceipt = new CustomGunaButton();
-            buttonCreditMemo = new CustomGunaButton();
-            buttonStockTransfer = new CustomGunaButton();
-            buttonStockTaking = new CustomGunaButton();
-            buttonOutGoodsIssue = new CustomGunaButton();
-            buttonInvoice = new CustomGunaButton();
+            buttonOutGoodsReceipt = new CustomButton();
+            buttonCreditMemo = new CustomButton();
+            buttonStockTransfer = new CustomButton();
+            buttonStockTaking = new CustomButton();
+            buttonOutGoodsIssue = new CustomButton();
+            buttonInvoice = new CustomButton();
             guna2GroupBox2 = new Guna2GroupBox();
-            button_InGoodsReceipt = new CustomGunaButton();
-            button_InGoodsIssue = new CustomGunaButton();
-            buttonDepartments = new CustomGunaButton();
-            buttonGoodsReturn = new CustomGunaButton();
-            button_InGoodsReceiptPo = new CustomGunaButton();
-            buttonVendors = new CustomGunaButton();
-            buttonItems = new CustomGunaButton();
+            button_InGoodsReceipt = new CustomButton();
+            button_InGoodsIssue = new CustomButton();
+            buttonDepartments = new CustomButton();
+            buttonGoodsReturn = new CustomButton();
+            button_InGoodsReceiptPo = new CustomButton();
+            buttonVendors = new CustomButton();
+            buttonItems = new CustomButton();
             guna2GradientPanel1 = new Guna2GradientPanel();
             label8 = new Label();
             label4 = new Label();
+            label3 = new Label();
             label2 = new Label();
             label5 = new Label();
             guna2PictureBox2 = new Guna2PictureBox();
-            guna2PictureBox1 = new Guna2PictureBox();
             guna2GradientPanel2 = new Guna2GradientPanel();
             label7 = new Label();
             label6 = new Label();
-            label1 = new Label();
             guna2Button4 = new Guna2Button();
+            guna2PictureBox1 = new Guna2PictureBox();
             guna2ControlBox3 = new Guna2ControlBox();
             guna2ControlBox2 = new Guna2ControlBox();
+            label1 = new Label();
             guna2ControlBox1 = new Guna2ControlBox();
             MainPanel = new Guna2PictureBox();
             guna2ShadowForm1 = new Guna2ShadowForm(components);
@@ -141,8 +143,8 @@ namespace SAPLink.Forms
             guna2GroupBox2.SuspendLayout();
             guna2GradientPanel1.SuspendLayout();
             ((ISupportInitialize)guna2PictureBox2).BeginInit();
-            ((ISupportInitialize)guna2PictureBox1).BeginInit();
             guna2GradientPanel2.SuspendLayout();
+            ((ISupportInitialize)guna2PictureBox1).BeginInit();
             ((ISupportInitialize)MainPanel).BeginInit();
             SuspendLayout();
             // 
@@ -151,13 +153,16 @@ namespace SAPLink.Forms
             guna2Panel1.BorderColor = Color.White;
             guna2Panel1.BorderRadius = 30;
             guna2Panel1.ContextMenuStrip = contextMenu;
+            guna2Panel1.Controls.Add(labelStatus);
             guna2Panel1.Controls.Add(guna2GroupBox3);
             guna2Panel1.Controls.Add(guna2GroupBox1);
             guna2Panel1.Controls.Add(guna2GroupBox2);
             guna2Panel1.Controls.Add(guna2GradientPanel1);
             guna2Panel1.Controls.Add(guna2Button4);
+            guna2Panel1.Controls.Add(guna2PictureBox1);
             guna2Panel1.Controls.Add(guna2ControlBox3);
             guna2Panel1.Controls.Add(guna2ControlBox2);
+            guna2Panel1.Controls.Add(label1);
             guna2Panel1.Controls.Add(guna2ControlBox1);
             guna2Panel1.Controls.Add(MainPanel);
             guna2Panel1.CustomBorderColor = Color.Transparent;
@@ -202,6 +207,20 @@ namespace SAPLink.Forms
             exitToolStripMenuItem.Text = "Exit";
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
+            // labelStatus
+            // 
+            labelStatus.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            labelStatus.AutoSize = true;
+            labelStatus.BackColor = Color.Wheat;
+            labelStatus.Font = new Font("Cairo", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            labelStatus.ForeColor = Color.DarkSlateGray;
+            labelStatus.Location = new Point(68, 731);
+            labelStatus.Name = "labelStatus";
+            labelStatus.Size = new Size(55, 26);
+            labelStatus.TabIndex = 64;
+            labelStatus.Text = "Status:";
+            labelStatus.Visible = false;
+            // 
             // guna2GroupBox3
             // 
             guna2GroupBox3.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
@@ -215,19 +234,19 @@ namespace SAPLink.Forms
             guna2GroupBox3.CustomBorderThickness = new Padding(0, 32, 0, 0);
             guna2GroupBox3.CustomizableEdges = customizableEdges7;
             guna2GroupBox3.FillColor = Color.FromArgb(245, 246, 247);
-            guna2GroupBox3.Font = new Font("Cairo", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            guna2GroupBox3.ForeColor = Color.Black;
+            guna2GroupBox3.Font = new Font("Cairo", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            guna2GroupBox3.ForeColor = Color.DimGray;
             guna2GroupBox3.Location = new Point(59, 588);
             guna2GroupBox3.Name = "guna2GroupBox3";
             guna2GroupBox3.ShadowDecoration.CustomizableEdges = customizableEdges8;
             guna2GroupBox3.Size = new Size(1121, 171);
             guna2GroupBox3.TabIndex = 53;
             guna2GroupBox3.Text = "    Reports";
-            guna2GroupBox3.TextOffset = new Point(-30, 0);
+            guna2GroupBox3.TextOffset = new Point(-15, 1);
             // 
             // buttonPrismActiveItems
             // 
-            buttonPrismActiveItems.BackColor = Color.FromArgb(245, 246, 247);
+            buttonPrismActiveItems.BackColor = Color.Transparent;
             buttonPrismActiveItems.BorderColor = Color.FromArgb(245, 246, 247);
             buttonPrismActiveItems.BorderRadius = 15;
             buttonPrismActiveItems.BorderThickness = 1;
@@ -249,7 +268,12 @@ namespace SAPLink.Forms
             buttonPrismActiveItems.Location = new Point(11, 40);
             buttonPrismActiveItems.Name = "buttonPrismActiveItems";
             buttonPrismActiveItems.PressedColor = Color.SeaGreen;
+            buttonPrismActiveItems.ShadowDecoration.BorderRadius = 30;
+            buttonPrismActiveItems.ShadowDecoration.Color = Color.Silver;
             buttonPrismActiveItems.ShadowDecoration.CustomizableEdges = customizableEdges2;
+            buttonPrismActiveItems.ShadowDecoration.Depth = 5;
+            buttonPrismActiveItems.ShadowDecoration.Enabled = true;
+            buttonPrismActiveItems.ShadowDecoration.Shadow = new Padding(8);
             buttonPrismActiveItems.Size = new Size(138, 112);
             buttonPrismActiveItems.TabIndex = 46;
             buttonPrismActiveItems.Tag = "";
@@ -258,7 +282,7 @@ namespace SAPLink.Forms
             buttonPrismActiveItems.TextDescription = "(To-be Synced)";
             buttonPrismActiveItems.TextDescriptionFont = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             buttonPrismActiveItems.TextDescriptionOffsetX = 65;
-            buttonPrismActiveItems.TextDescriptionOffsetY = -10;
+            buttonPrismActiveItems.TextDescriptionOffsetY = -7;
             buttonPrismActiveItems.TextOffset = new Point(0, -52);
             buttonPrismActiveItems.Tile = true;
             buttonPrismActiveItems.Click += buttonPrismActiveItems_Click;
@@ -266,7 +290,7 @@ namespace SAPLink.Forms
             // 
             // buttonNotSyncedItems
             // 
-            buttonNotSyncedItems.BackColor = Color.FromArgb(245, 246, 247);
+            buttonNotSyncedItems.BackColor = Color.Transparent;
             buttonNotSyncedItems.BorderColor = Color.FromArgb(245, 246, 247);
             buttonNotSyncedItems.BorderRadius = 15;
             buttonNotSyncedItems.BorderThickness = 1;
@@ -288,7 +312,12 @@ namespace SAPLink.Forms
             buttonNotSyncedItems.Location = new Point(299, 40);
             buttonNotSyncedItems.Name = "buttonNotSyncedItems";
             buttonNotSyncedItems.PressedColor = Color.SeaGreen;
+            buttonNotSyncedItems.ShadowDecoration.BorderRadius = 30;
+            buttonNotSyncedItems.ShadowDecoration.Color = Color.Silver;
             buttonNotSyncedItems.ShadowDecoration.CustomizableEdges = customizableEdges4;
+            buttonNotSyncedItems.ShadowDecoration.Depth = 5;
+            buttonNotSyncedItems.ShadowDecoration.Enabled = true;
+            buttonNotSyncedItems.ShadowDecoration.Shadow = new Padding(8);
             buttonNotSyncedItems.Size = new Size(138, 112);
             buttonNotSyncedItems.TabIndex = 46;
             buttonNotSyncedItems.Tag = "";
@@ -297,7 +326,7 @@ namespace SAPLink.Forms
             buttonNotSyncedItems.TextDescription = "(Items Not In Prism)";
             buttonNotSyncedItems.TextDescriptionFont = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             buttonNotSyncedItems.TextDescriptionOffsetX = 65;
-            buttonNotSyncedItems.TextDescriptionOffsetY = -10;
+            buttonNotSyncedItems.TextDescriptionOffsetY = -7;
             buttonNotSyncedItems.TextOffset = new Point(0, -52);
             buttonNotSyncedItems.Tile = true;
             buttonNotSyncedItems.Click += buttonNotSyncedItems_Click;
@@ -305,7 +334,7 @@ namespace SAPLink.Forms
             // 
             // buttonSyncedItems
             // 
-            buttonSyncedItems.BackColor = Color.FromArgb(245, 246, 247);
+            buttonSyncedItems.BackColor = Color.Transparent;
             buttonSyncedItems.BorderColor = Color.FromArgb(245, 246, 247);
             buttonSyncedItems.BorderRadius = 15;
             buttonSyncedItems.BorderThickness = 1;
@@ -327,7 +356,12 @@ namespace SAPLink.Forms
             buttonSyncedItems.Location = new Point(155, 40);
             buttonSyncedItems.Name = "buttonSyncedItems";
             buttonSyncedItems.PressedColor = Color.SeaGreen;
+            buttonSyncedItems.ShadowDecoration.BorderRadius = 30;
+            buttonSyncedItems.ShadowDecoration.Color = Color.Silver;
             buttonSyncedItems.ShadowDecoration.CustomizableEdges = customizableEdges6;
+            buttonSyncedItems.ShadowDecoration.Depth = 5;
+            buttonSyncedItems.ShadowDecoration.Enabled = true;
+            buttonSyncedItems.ShadowDecoration.Shadow = new Padding(8);
             buttonSyncedItems.Size = new Size(138, 112);
             buttonSyncedItems.TabIndex = 46;
             buttonSyncedItems.Tag = "";
@@ -336,7 +370,7 @@ namespace SAPLink.Forms
             buttonSyncedItems.TextDescription = "(Items In Prism)";
             buttonSyncedItems.TextDescriptionFont = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             buttonSyncedItems.TextDescriptionOffsetX = 65;
-            buttonSyncedItems.TextDescriptionOffsetY = -10;
+            buttonSyncedItems.TextDescriptionOffsetY = -7;
             buttonSyncedItems.TextOffset = new Point(0, -52);
             buttonSyncedItems.Tile = true;
             buttonSyncedItems.Click += buttonSyncedItems_Click;
@@ -358,19 +392,19 @@ namespace SAPLink.Forms
             guna2GroupBox1.CustomBorderThickness = new Padding(0, 32, 0, 0);
             guna2GroupBox1.CustomizableEdges = customizableEdges21;
             guna2GroupBox1.FillColor = Color.FromArgb(245, 246, 247);
-            guna2GroupBox1.Font = new Font("Cairo", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            guna2GroupBox1.ForeColor = Color.Black;
+            guna2GroupBox1.Font = new Font("Cairo", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            guna2GroupBox1.ForeColor = Color.DimGray;
             guna2GroupBox1.Location = new Point(59, 424);
             guna2GroupBox1.Name = "guna2GroupBox1";
             guna2GroupBox1.ShadowDecoration.CustomizableEdges = customizableEdges22;
             guna2GroupBox1.Size = new Size(1121, 164);
             guna2GroupBox1.TabIndex = 47;
             guna2GroupBox1.Text = "   Outbound Data";
-            guna2GroupBox1.TextOffset = new Point(-30, 0);
+            guna2GroupBox1.TextOffset = new Point(-15, 1);
             // 
             // buttonOutGoodsReceipt
             // 
-            buttonOutGoodsReceipt.BackColor = Color.FromArgb(245, 246, 247);
+            buttonOutGoodsReceipt.BackColor = Color.Transparent;
             buttonOutGoodsReceipt.BorderColor = Color.FromArgb(245, 246, 247);
             buttonOutGoodsReceipt.BorderRadius = 15;
             buttonOutGoodsReceipt.BorderThickness = 1;
@@ -392,7 +426,12 @@ namespace SAPLink.Forms
             buttonOutGoodsReceipt.Location = new Point(587, 36);
             buttonOutGoodsReceipt.Name = "buttonOutGoodsReceipt";
             buttonOutGoodsReceipt.PressedColor = Color.SeaGreen;
+            buttonOutGoodsReceipt.ShadowDecoration.BorderRadius = 30;
+            buttonOutGoodsReceipt.ShadowDecoration.Color = Color.Silver;
             buttonOutGoodsReceipt.ShadowDecoration.CustomizableEdges = customizableEdges10;
+            buttonOutGoodsReceipt.ShadowDecoration.Depth = 5;
+            buttonOutGoodsReceipt.ShadowDecoration.Enabled = true;
+            buttonOutGoodsReceipt.ShadowDecoration.Shadow = new Padding(8);
             buttonOutGoodsReceipt.Size = new Size(138, 112);
             buttonOutGoodsReceipt.TabIndex = 48;
             buttonOutGoodsReceipt.Tag = "";
@@ -401,7 +440,7 @@ namespace SAPLink.Forms
             buttonOutGoodsReceipt.TextDescription = "";
             buttonOutGoodsReceipt.TextDescriptionFont = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             buttonOutGoodsReceipt.TextDescriptionOffsetX = 65;
-            buttonOutGoodsReceipt.TextDescriptionOffsetY = -10;
+            buttonOutGoodsReceipt.TextDescriptionOffsetY = -7;
             buttonOutGoodsReceipt.TextOffset = new Point(0, -52);
             buttonOutGoodsReceipt.Tile = true;
             buttonOutGoodsReceipt.Click += buttonOutGoodsReceipt_Click;
@@ -409,7 +448,7 @@ namespace SAPLink.Forms
             // 
             // buttonCreditMemo
             // 
-            buttonCreditMemo.BackColor = Color.FromArgb(245, 246, 247);
+            buttonCreditMemo.BackColor = Color.Transparent;
             buttonCreditMemo.BorderColor = Color.FromArgb(245, 246, 247);
             buttonCreditMemo.BorderRadius = 15;
             buttonCreditMemo.BorderThickness = 1;
@@ -431,7 +470,12 @@ namespace SAPLink.Forms
             buttonCreditMemo.Location = new Point(155, 36);
             buttonCreditMemo.Name = "buttonCreditMemo";
             buttonCreditMemo.PressedColor = Color.SeaGreen;
+            buttonCreditMemo.ShadowDecoration.BorderRadius = 30;
+            buttonCreditMemo.ShadowDecoration.Color = Color.Silver;
             buttonCreditMemo.ShadowDecoration.CustomizableEdges = customizableEdges12;
+            buttonCreditMemo.ShadowDecoration.Depth = 5;
+            buttonCreditMemo.ShadowDecoration.Enabled = true;
+            buttonCreditMemo.ShadowDecoration.Shadow = new Padding(8);
             buttonCreditMemo.Size = new Size(138, 112);
             buttonCreditMemo.TabIndex = 52;
             buttonCreditMemo.Tag = "";
@@ -440,7 +484,7 @@ namespace SAPLink.Forms
             buttonCreditMemo.TextDescription = "(Credit Memo)";
             buttonCreditMemo.TextDescriptionFont = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             buttonCreditMemo.TextDescriptionOffsetX = 65;
-            buttonCreditMemo.TextDescriptionOffsetY = -10;
+            buttonCreditMemo.TextDescriptionOffsetY = -7;
             buttonCreditMemo.TextOffset = new Point(0, -52);
             buttonCreditMemo.Tile = true;
             buttonCreditMemo.Click += buttonReturnInvoice_Click;
@@ -448,7 +492,7 @@ namespace SAPLink.Forms
             // 
             // buttonStockTransfer
             // 
-            buttonStockTransfer.BackColor = Color.FromArgb(245, 246, 247);
+            buttonStockTransfer.BackColor = Color.Transparent;
             buttonStockTransfer.BorderColor = Color.FromArgb(245, 246, 247);
             buttonStockTransfer.BorderRadius = 15;
             buttonStockTransfer.BorderThickness = 1;
@@ -470,7 +514,12 @@ namespace SAPLink.Forms
             buttonStockTransfer.Location = new Point(299, 36);
             buttonStockTransfer.Name = "buttonStockTransfer";
             buttonStockTransfer.PressedColor = Color.SeaGreen;
+            buttonStockTransfer.ShadowDecoration.BorderRadius = 30;
+            buttonStockTransfer.ShadowDecoration.Color = Color.Silver;
             buttonStockTransfer.ShadowDecoration.CustomizableEdges = customizableEdges14;
+            buttonStockTransfer.ShadowDecoration.Depth = 5;
+            buttonStockTransfer.ShadowDecoration.Enabled = true;
+            buttonStockTransfer.ShadowDecoration.Shadow = new Padding(8);
             buttonStockTransfer.Size = new Size(138, 112);
             buttonStockTransfer.TabIndex = 51;
             buttonStockTransfer.Tag = "";
@@ -479,7 +528,7 @@ namespace SAPLink.Forms
             buttonStockTransfer.TextDescription = "(Stock Transfer)";
             buttonStockTransfer.TextDescriptionFont = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             buttonStockTransfer.TextDescriptionOffsetX = 65;
-            buttonStockTransfer.TextDescriptionOffsetY = -10;
+            buttonStockTransfer.TextDescriptionOffsetY = -7;
             buttonStockTransfer.TextOffset = new Point(0, -52);
             buttonStockTransfer.Tile = true;
             buttonStockTransfer.Click += buttonStockTransfer_Click;
@@ -487,7 +536,7 @@ namespace SAPLink.Forms
             // 
             // buttonStockTaking
             // 
-            buttonStockTaking.BackColor = Color.FromArgb(245, 246, 247);
+            buttonStockTaking.BackColor = Color.Transparent;
             buttonStockTaking.BorderColor = Color.FromArgb(245, 246, 247);
             buttonStockTaking.BorderRadius = 15;
             buttonStockTaking.BorderThickness = 1;
@@ -509,7 +558,12 @@ namespace SAPLink.Forms
             buttonStockTaking.Location = new Point(443, 36);
             buttonStockTaking.Name = "buttonStockTaking";
             buttonStockTaking.PressedColor = Color.SeaGreen;
+            buttonStockTaking.ShadowDecoration.BorderRadius = 30;
+            buttonStockTaking.ShadowDecoration.Color = Color.Silver;
             buttonStockTaking.ShadowDecoration.CustomizableEdges = customizableEdges16;
+            buttonStockTaking.ShadowDecoration.Depth = 5;
+            buttonStockTaking.ShadowDecoration.Enabled = true;
+            buttonStockTaking.ShadowDecoration.Shadow = new Padding(8);
             buttonStockTaking.Size = new Size(138, 112);
             buttonStockTaking.TabIndex = 51;
             buttonStockTaking.Tag = "";
@@ -518,7 +572,7 @@ namespace SAPLink.Forms
             buttonStockTaking.TextDescription = "(Inventory Posting)";
             buttonStockTaking.TextDescriptionFont = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             buttonStockTaking.TextDescriptionOffsetX = 65;
-            buttonStockTaking.TextDescriptionOffsetY = -10;
+            buttonStockTaking.TextDescriptionOffsetY = -7;
             buttonStockTaking.TextOffset = new Point(0, -52);
             buttonStockTaking.Tile = true;
             buttonStockTaking.Click += buttonStockTaking_Click;
@@ -526,7 +580,7 @@ namespace SAPLink.Forms
             // 
             // buttonOutGoodsIssue
             // 
-            buttonOutGoodsIssue.BackColor = Color.FromArgb(245, 246, 247);
+            buttonOutGoodsIssue.BackColor = Color.Transparent;
             buttonOutGoodsIssue.BorderColor = Color.FromArgb(245, 246, 247);
             buttonOutGoodsIssue.BorderRadius = 15;
             buttonOutGoodsIssue.BorderThickness = 1;
@@ -548,7 +602,12 @@ namespace SAPLink.Forms
             buttonOutGoodsIssue.Location = new Point(731, 36);
             buttonOutGoodsIssue.Name = "buttonOutGoodsIssue";
             buttonOutGoodsIssue.PressedColor = Color.SeaGreen;
+            buttonOutGoodsIssue.ShadowDecoration.BorderRadius = 30;
+            buttonOutGoodsIssue.ShadowDecoration.Color = Color.Silver;
             buttonOutGoodsIssue.ShadowDecoration.CustomizableEdges = customizableEdges18;
+            buttonOutGoodsIssue.ShadowDecoration.Depth = 5;
+            buttonOutGoodsIssue.ShadowDecoration.Enabled = true;
+            buttonOutGoodsIssue.ShadowDecoration.Shadow = new Padding(8);
             buttonOutGoodsIssue.Size = new Size(138, 112);
             buttonOutGoodsIssue.TabIndex = 47;
             buttonOutGoodsIssue.Tag = "";
@@ -557,7 +616,7 @@ namespace SAPLink.Forms
             buttonOutGoodsIssue.TextDescription = "";
             buttonOutGoodsIssue.TextDescriptionFont = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             buttonOutGoodsIssue.TextDescriptionOffsetX = 65;
-            buttonOutGoodsIssue.TextDescriptionOffsetY = -10;
+            buttonOutGoodsIssue.TextDescriptionOffsetY = -7;
             buttonOutGoodsIssue.TextOffset = new Point(0, -52);
             buttonOutGoodsIssue.Tile = true;
             buttonOutGoodsIssue.Click += buttonOutGoodsIssue_Click;
@@ -565,7 +624,7 @@ namespace SAPLink.Forms
             // 
             // buttonInvoice
             // 
-            buttonInvoice.BackColor = Color.FromArgb(245, 246, 247);
+            buttonInvoice.BackColor = Color.Transparent;
             buttonInvoice.BorderColor = Color.FromArgb(245, 246, 247);
             buttonInvoice.BorderRadius = 15;
             buttonInvoice.BorderThickness = 1;
@@ -587,7 +646,12 @@ namespace SAPLink.Forms
             buttonInvoice.Location = new Point(11, 36);
             buttonInvoice.Name = "buttonInvoice";
             buttonInvoice.PressedColor = Color.SeaGreen;
+            buttonInvoice.ShadowDecoration.BorderRadius = 30;
+            buttonInvoice.ShadowDecoration.Color = Color.Silver;
             buttonInvoice.ShadowDecoration.CustomizableEdges = customizableEdges20;
+            buttonInvoice.ShadowDecoration.Depth = 5;
+            buttonInvoice.ShadowDecoration.Enabled = true;
+            buttonInvoice.ShadowDecoration.Shadow = new Padding(8);
             buttonInvoice.Size = new Size(138, 112);
             buttonInvoice.TabIndex = 50;
             buttonInvoice.Tag = "";
@@ -596,7 +660,7 @@ namespace SAPLink.Forms
             buttonInvoice.TextDescription = "(A/R Invoice)";
             buttonInvoice.TextDescriptionFont = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             buttonInvoice.TextDescriptionOffsetX = 65;
-            buttonInvoice.TextDescriptionOffsetY = -10;
+            buttonInvoice.TextDescriptionOffsetY = -7;
             buttonInvoice.TextOffset = new Point(0, -52);
             buttonInvoice.Tile = true;
             buttonInvoice.Click += buttonInvoice_Click;
@@ -619,19 +683,19 @@ namespace SAPLink.Forms
             guna2GroupBox2.CustomBorderThickness = new Padding(0, 32, 0, 0);
             guna2GroupBox2.CustomizableEdges = customizableEdges37;
             guna2GroupBox2.FillColor = Color.FromArgb(245, 246, 247);
-            guna2GroupBox2.Font = new Font("Cairo", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            guna2GroupBox2.ForeColor = Color.Black;
+            guna2GroupBox2.Font = new Font("Cairo", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            guna2GroupBox2.ForeColor = Color.DimGray;
             guna2GroupBox2.Location = new Point(59, 254);
             guna2GroupBox2.Name = "guna2GroupBox2";
             guna2GroupBox2.ShadowDecoration.CustomizableEdges = customizableEdges38;
             guna2GroupBox2.Size = new Size(1121, 170);
             guna2GroupBox2.TabIndex = 53;
             guna2GroupBox2.Text = "    Inbound Data";
-            guna2GroupBox2.TextOffset = new Point(-30, 0);
+            guna2GroupBox2.TextOffset = new Point(-15, 1);
             // 
             // button_InGoodsReceipt
             // 
-            button_InGoodsReceipt.BackColor = Color.FromArgb(245, 246, 247);
+            button_InGoodsReceipt.BackColor = Color.Transparent;
             button_InGoodsReceipt.BorderColor = Color.FromArgb(245, 246, 247);
             button_InGoodsReceipt.BorderRadius = 15;
             button_InGoodsReceipt.BorderThickness = 1;
@@ -653,7 +717,12 @@ namespace SAPLink.Forms
             button_InGoodsReceipt.Location = new Point(731, 41);
             button_InGoodsReceipt.Name = "button_InGoodsReceipt";
             button_InGoodsReceipt.PressedColor = Color.SeaGreen;
+            button_InGoodsReceipt.ShadowDecoration.BorderRadius = 30;
+            button_InGoodsReceipt.ShadowDecoration.Color = Color.Silver;
             button_InGoodsReceipt.ShadowDecoration.CustomizableEdges = customizableEdges24;
+            button_InGoodsReceipt.ShadowDecoration.Depth = 5;
+            button_InGoodsReceipt.ShadowDecoration.Enabled = true;
+            button_InGoodsReceipt.ShadowDecoration.Shadow = new Padding(8);
             button_InGoodsReceipt.Size = new Size(138, 112);
             button_InGoodsReceipt.TabIndex = 49;
             button_InGoodsReceipt.Tag = "";
@@ -662,7 +731,7 @@ namespace SAPLink.Forms
             button_InGoodsReceipt.TextDescription = "";
             button_InGoodsReceipt.TextDescriptionFont = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             button_InGoodsReceipt.TextDescriptionOffsetX = 65;
-            button_InGoodsReceipt.TextDescriptionOffsetY = -10;
+            button_InGoodsReceipt.TextDescriptionOffsetY = -7;
             button_InGoodsReceipt.TextOffset = new Point(0, -52);
             button_InGoodsReceipt.Tile = true;
             button_InGoodsReceipt.Click += buttonGoodsReceipt_Click;
@@ -670,7 +739,7 @@ namespace SAPLink.Forms
             // 
             // button_InGoodsIssue
             // 
-            button_InGoodsIssue.BackColor = Color.FromArgb(245, 246, 247);
+            button_InGoodsIssue.BackColor = Color.Transparent;
             button_InGoodsIssue.BorderColor = Color.FromArgb(245, 246, 247);
             button_InGoodsIssue.BorderRadius = 15;
             button_InGoodsIssue.BorderThickness = 1;
@@ -692,7 +761,12 @@ namespace SAPLink.Forms
             button_InGoodsIssue.Location = new Point(875, 41);
             button_InGoodsIssue.Name = "button_InGoodsIssue";
             button_InGoodsIssue.PressedColor = Color.SeaGreen;
+            button_InGoodsIssue.ShadowDecoration.BorderRadius = 30;
+            button_InGoodsIssue.ShadowDecoration.Color = Color.Silver;
             button_InGoodsIssue.ShadowDecoration.CustomizableEdges = customizableEdges26;
+            button_InGoodsIssue.ShadowDecoration.Depth = 5;
+            button_InGoodsIssue.ShadowDecoration.Enabled = true;
+            button_InGoodsIssue.ShadowDecoration.Shadow = new Padding(8);
             button_InGoodsIssue.Size = new Size(138, 112);
             button_InGoodsIssue.TabIndex = 47;
             button_InGoodsIssue.Tag = "";
@@ -701,7 +775,7 @@ namespace SAPLink.Forms
             button_InGoodsIssue.TextDescription = "";
             button_InGoodsIssue.TextDescriptionFont = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             button_InGoodsIssue.TextDescriptionOffsetX = 65;
-            button_InGoodsIssue.TextDescriptionOffsetY = -10;
+            button_InGoodsIssue.TextDescriptionOffsetY = -7;
             button_InGoodsIssue.TextOffset = new Point(0, -52);
             button_InGoodsIssue.Tile = true;
             button_InGoodsIssue.Click += buttonGoodsIssue_Click;
@@ -709,7 +783,7 @@ namespace SAPLink.Forms
             // 
             // buttonDepartments
             // 
-            buttonDepartments.BackColor = Color.FromArgb(245, 246, 247);
+            buttonDepartments.BackColor = Color.Transparent;
             buttonDepartments.BorderColor = Color.FromArgb(245, 246, 247);
             buttonDepartments.BorderRadius = 15;
             buttonDepartments.BorderThickness = 1;
@@ -731,7 +805,12 @@ namespace SAPLink.Forms
             buttonDepartments.Location = new Point(11, 41);
             buttonDepartments.Name = "buttonDepartments";
             buttonDepartments.PressedColor = Color.SeaGreen;
+            buttonDepartments.ShadowDecoration.BorderRadius = 30;
+            buttonDepartments.ShadowDecoration.Color = Color.Silver;
             buttonDepartments.ShadowDecoration.CustomizableEdges = customizableEdges28;
+            buttonDepartments.ShadowDecoration.Depth = 5;
+            buttonDepartments.ShadowDecoration.Enabled = true;
+            buttonDepartments.ShadowDecoration.Shadow = new Padding(8);
             buttonDepartments.Size = new Size(138, 112);
             buttonDepartments.TabIndex = 46;
             buttonDepartments.Tag = "";
@@ -740,7 +819,7 @@ namespace SAPLink.Forms
             buttonDepartments.TextDescription = "(Item Groups)";
             buttonDepartments.TextDescriptionFont = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             buttonDepartments.TextDescriptionOffsetX = 65;
-            buttonDepartments.TextDescriptionOffsetY = -10;
+            buttonDepartments.TextDescriptionOffsetY = -7;
             buttonDepartments.TextOffset = new Point(0, -52);
             buttonDepartments.Tile = true;
             buttonDepartments.Click += buttonDepartments_Click;
@@ -748,7 +827,7 @@ namespace SAPLink.Forms
             // 
             // buttonGoodsReturn
             // 
-            buttonGoodsReturn.BackColor = Color.FromArgb(245, 246, 247);
+            buttonGoodsReturn.BackColor = Color.Transparent;
             buttonGoodsReturn.BorderColor = Color.FromArgb(245, 246, 247);
             buttonGoodsReturn.BorderRadius = 15;
             buttonGoodsReturn.BorderThickness = 1;
@@ -770,7 +849,12 @@ namespace SAPLink.Forms
             buttonGoodsReturn.Location = new Point(587, 41);
             buttonGoodsReturn.Name = "buttonGoodsReturn";
             buttonGoodsReturn.PressedColor = Color.SeaGreen;
+            buttonGoodsReturn.ShadowDecoration.BorderRadius = 30;
+            buttonGoodsReturn.ShadowDecoration.Color = Color.Silver;
             buttonGoodsReturn.ShadowDecoration.CustomizableEdges = customizableEdges30;
+            buttonGoodsReturn.ShadowDecoration.Depth = 5;
+            buttonGoodsReturn.ShadowDecoration.Enabled = true;
+            buttonGoodsReturn.ShadowDecoration.Shadow = new Padding(8);
             buttonGoodsReturn.Size = new Size(138, 112);
             buttonGoodsReturn.TabIndex = 48;
             buttonGoodsReturn.Tag = "";
@@ -779,7 +863,7 @@ namespace SAPLink.Forms
             buttonGoodsReturn.TextDescription = "";
             buttonGoodsReturn.TextDescriptionFont = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             buttonGoodsReturn.TextDescriptionOffsetX = 65;
-            buttonGoodsReturn.TextDescriptionOffsetY = -10;
+            buttonGoodsReturn.TextDescriptionOffsetY = -7;
             buttonGoodsReturn.TextOffset = new Point(0, -52);
             buttonGoodsReturn.Tile = true;
             buttonGoodsReturn.Click += buttonGoodsReturn_Click;
@@ -787,7 +871,7 @@ namespace SAPLink.Forms
             // 
             // button_InGoodsReceiptPo
             // 
-            button_InGoodsReceiptPo.BackColor = Color.FromArgb(245, 246, 247);
+            button_InGoodsReceiptPo.BackColor = Color.Transparent;
             button_InGoodsReceiptPo.BorderColor = Color.FromArgb(245, 246, 247);
             button_InGoodsReceiptPo.BorderRadius = 15;
             button_InGoodsReceiptPo.BorderThickness = 1;
@@ -809,7 +893,12 @@ namespace SAPLink.Forms
             button_InGoodsReceiptPo.Location = new Point(443, 41);
             button_InGoodsReceiptPo.Name = "button_InGoodsReceiptPo";
             button_InGoodsReceiptPo.PressedColor = Color.SeaGreen;
+            button_InGoodsReceiptPo.ShadowDecoration.BorderRadius = 30;
+            button_InGoodsReceiptPo.ShadowDecoration.Color = Color.Silver;
             button_InGoodsReceiptPo.ShadowDecoration.CustomizableEdges = customizableEdges32;
+            button_InGoodsReceiptPo.ShadowDecoration.Depth = 5;
+            button_InGoodsReceiptPo.ShadowDecoration.Enabled = true;
+            button_InGoodsReceiptPo.ShadowDecoration.Shadow = new Padding(8);
             button_InGoodsReceiptPo.Size = new Size(138, 112);
             button_InGoodsReceiptPo.TabIndex = 48;
             button_InGoodsReceiptPo.Tag = "";
@@ -818,7 +907,7 @@ namespace SAPLink.Forms
             button_InGoodsReceiptPo.TextDescription = "";
             button_InGoodsReceiptPo.TextDescriptionFont = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             button_InGoodsReceiptPo.TextDescriptionOffsetX = 65;
-            button_InGoodsReceiptPo.TextDescriptionOffsetY = -10;
+            button_InGoodsReceiptPo.TextDescriptionOffsetY = -7;
             button_InGoodsReceiptPo.TextOffset = new Point(0, -52);
             button_InGoodsReceiptPo.Tile = true;
             button_InGoodsReceiptPo.Click += buttonGoodsReceiptPo_Click;
@@ -826,7 +915,7 @@ namespace SAPLink.Forms
             // 
             // buttonVendors
             // 
-            buttonVendors.BackColor = Color.FromArgb(245, 246, 247);
+            buttonVendors.BackColor = Color.Transparent;
             buttonVendors.BorderColor = Color.FromArgb(245, 246, 247);
             buttonVendors.BorderRadius = 15;
             buttonVendors.BorderThickness = 1;
@@ -848,7 +937,12 @@ namespace SAPLink.Forms
             buttonVendors.Location = new Point(299, 41);
             buttonVendors.Name = "buttonVendors";
             buttonVendors.PressedColor = Color.SeaGreen;
+            buttonVendors.ShadowDecoration.BorderRadius = 30;
+            buttonVendors.ShadowDecoration.Color = Color.Silver;
             buttonVendors.ShadowDecoration.CustomizableEdges = customizableEdges34;
+            buttonVendors.ShadowDecoration.Depth = 5;
+            buttonVendors.ShadowDecoration.Enabled = true;
+            buttonVendors.ShadowDecoration.Shadow = new Padding(8);
             buttonVendors.Size = new Size(138, 112);
             buttonVendors.TabIndex = 46;
             buttonVendors.Tag = "";
@@ -857,7 +951,7 @@ namespace SAPLink.Forms
             buttonVendors.TextDescription = "(Business Partner)";
             buttonVendors.TextDescriptionFont = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             buttonVendors.TextDescriptionOffsetX = 65;
-            buttonVendors.TextDescriptionOffsetY = -10;
+            buttonVendors.TextDescriptionOffsetY = -7;
             buttonVendors.TextOffset = new Point(0, -52);
             buttonVendors.Tile = true;
             buttonVendors.Click += buttonVendors_Click;
@@ -865,7 +959,7 @@ namespace SAPLink.Forms
             // 
             // buttonItems
             // 
-            buttonItems.BackColor = Color.FromArgb(245, 246, 247);
+            buttonItems.BackColor = Color.Transparent;
             buttonItems.BorderColor = Color.FromArgb(245, 246, 247);
             buttonItems.BorderRadius = 15;
             buttonItems.BorderThickness = 1;
@@ -887,7 +981,12 @@ namespace SAPLink.Forms
             buttonItems.Location = new Point(155, 41);
             buttonItems.Name = "buttonItems";
             buttonItems.PressedColor = Color.SeaGreen;
+            buttonItems.ShadowDecoration.BorderRadius = 30;
+            buttonItems.ShadowDecoration.Color = Color.Silver;
             buttonItems.ShadowDecoration.CustomizableEdges = customizableEdges36;
+            buttonItems.ShadowDecoration.Depth = 5;
+            buttonItems.ShadowDecoration.Enabled = true;
+            buttonItems.ShadowDecoration.Shadow = new Padding(8);
             buttonItems.Size = new Size(138, 112);
             buttonItems.TabIndex = 46;
             buttonItems.Tag = "";
@@ -896,7 +995,7 @@ namespace SAPLink.Forms
             buttonItems.TextDescription = "(Items)";
             buttonItems.TextDescriptionFont = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point);
             buttonItems.TextDescriptionOffsetX = 65;
-            buttonItems.TextDescriptionOffsetY = -10;
+            buttonItems.TextDescriptionOffsetY = -7;
             buttonItems.TextOffset = new Point(0, -52);
             buttonItems.Tile = true;
             buttonItems.Click += buttonItems_Click;
@@ -905,105 +1004,106 @@ namespace SAPLink.Forms
             // guna2GradientPanel1
             // 
             guna2GradientPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-            guna2GradientPanel1.BackColor = Color.FromArgb(245, 246, 247);
+            guna2GradientPanel1.BackColor = Color.Transparent;
             guna2GradientPanel1.BorderRadius = 15;
             guna2GradientPanel1.ContextMenuStrip = contextMenu;
             guna2GradientPanel1.Controls.Add(label8);
             guna2GradientPanel1.Controls.Add(label4);
+            guna2GradientPanel1.Controls.Add(label3);
             guna2GradientPanel1.Controls.Add(label2);
             guna2GradientPanel1.Controls.Add(label5);
             guna2GradientPanel1.Controls.Add(guna2PictureBox2);
-            guna2GradientPanel1.Controls.Add(guna2PictureBox1);
             guna2GradientPanel1.Controls.Add(guna2GradientPanel2);
-            guna2GradientPanel1.Controls.Add(label1);
-            guna2GradientPanel1.CustomizableEdges = customizableEdges45;
+            guna2GradientPanel1.CustomizableEdges = customizableEdges43;
             guna2GradientPanel1.FillColor = Color.OrangeRed;
             guna2GradientPanel1.FillColor2 = Color.Gold;
-            guna2GradientPanel1.ForeColor = Color.FromArgb(245, 246, 247);
-            guna2GradientPanel1.Location = new Point(59, 69);
+            guna2GradientPanel1.ForeColor = Color.Lime;
+            guna2GradientPanel1.Location = new Point(70, 85);
             guna2GradientPanel1.Name = "guna2GradientPanel1";
-            guna2GradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges46;
-            guna2GradientPanel1.Size = new Size(1110, 171);
+            guna2GradientPanel1.ShadowDecoration.BorderRadius = 111;
+            guna2GradientPanel1.ShadowDecoration.Color = Color.Lime;
+            guna2GradientPanel1.ShadowDecoration.CustomizableEdges = customizableEdges44;
+            guna2GradientPanel1.ShadowDecoration.Depth = 5;
+            guna2GradientPanel1.ShadowDecoration.Enabled = true;
+            guna2GradientPanel1.ShadowDecoration.Shadow = new Padding(1);
+            guna2GradientPanel1.Size = new Size(1099, 160);
             guna2GradientPanel1.TabIndex = 58;
             // 
             // label8
             // 
             label8.AutoSize = true;
             label8.BackColor = Color.Transparent;
-            label8.Font = new Font("Cairo", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label8.Font = new Font("Cairo", 11F, FontStyle.Bold, GraphicsUnit.Point);
             label8.ForeColor = Color.White;
-            label8.Location = new Point(61, 91);
+            label8.Location = new Point(61, 75);
             label8.Name = "label8";
-            label8.Size = new Size(203, 24);
+            label8.Size = new Size(232, 29);
             label8.TabIndex = 63;
             label8.Text = "Here your quick actions overview.";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.BackColor = SystemColors.ControlDarkDark;
-            label4.Font = new Font("Cairo", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.BackColor = Color.Black;
+            label4.Font = new Font("Cairo", 11F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = Color.White;
-            label4.Location = new Point(165, 67);
+            label4.Location = new Point(177, 44);
             label4.Name = "label4";
-            label4.Size = new Size(99, 24);
+            label4.Size = new Size(113, 29);
             label4.TabIndex = 61;
             label4.Text = "(Test Database)";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.Black;
+            label3.Font = new Font("Cairo", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label3.ForeColor = Color.White;
+            label3.Location = new Point(161, 11);
+            label3.Name = "label3";
+            label3.Size = new Size(115, 30);
+            label3.TabIndex = 44;
+            label3.Text = "System Admin";
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Cairo", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Font = new Font("Cairo", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(47, 43);
+            label2.Location = new Point(47, 11);
             label2.Name = "label2";
-            label2.Size = new Size(185, 24);
+            label2.Size = new Size(117, 30);
             label2.TabIndex = 44;
-            label2.Text = "Welcome Back, System Admin.";
+            label2.Text = "Welcome Back,";
             // 
             // label5
             // 
             label5.AutoSize = true;
             label5.BackColor = Color.Transparent;
-            label5.Font = new Font("Cairo", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.Font = new Font("Cairo", 11F, FontStyle.Bold, GraphicsUnit.Point);
             label5.ForeColor = Color.White;
-            label5.Location = new Point(61, 67);
+            label5.Location = new Point(61, 44);
             label5.Name = "label5";
-            label5.Size = new Size(105, 24);
+            label5.Size = new Size(120, 29);
             label5.TabIndex = 61;
             label5.Text = "You are Log-in to";
             // 
             // guna2PictureBox2
             // 
-            guna2PictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             guna2PictureBox2.BackColor = Color.Transparent;
             guna2PictureBox2.CustomizableEdges = customizableEdges39;
+            guna2PictureBox2.Dock = DockStyle.Right;
             guna2PictureBox2.Image = (Image)resources.GetObject("guna2PictureBox2.Image");
             guna2PictureBox2.ImageRotate = 0F;
-            guna2PictureBox2.Location = new Point(921, -1);
+            guna2PictureBox2.Location = new Point(917, 0);
             guna2PictureBox2.Name = "guna2PictureBox2";
             guna2PictureBox2.ShadowDecoration.CustomizableEdges = customizableEdges40;
-            guna2PictureBox2.Size = new Size(186, 186);
+            guna2PictureBox2.Size = new Size(182, 160);
             guna2PictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             guna2PictureBox2.TabIndex = 46;
             guna2PictureBox2.TabStop = false;
             guna2PictureBox2.UseTransparentBackground = true;
-            // 
-            // guna2PictureBox1
-            // 
-            guna2PictureBox1.BackColor = Color.Transparent;
-            guna2PictureBox1.CustomizableEdges = customizableEdges41;
-            guna2PictureBox1.Image = (Image)resources.GetObject("guna2PictureBox1.Image");
-            guna2PictureBox1.ImageRotate = 0F;
-            guna2PictureBox1.InitialImage = null;
-            guna2PictureBox1.Location = new Point(19, 9);
-            guna2PictureBox1.Name = "guna2PictureBox1";
-            guna2PictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges42;
-            guna2PictureBox1.Size = new Size(33, 32);
-            guna2PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            guna2PictureBox1.TabIndex = 53;
-            guna2PictureBox1.TabStop = false;
             // 
             // guna2GradientPanel2
             // 
@@ -1012,13 +1112,13 @@ namespace SAPLink.Forms
             guna2GradientPanel2.BorderRadius = 15;
             guna2GradientPanel2.Controls.Add(label7);
             guna2GradientPanel2.Controls.Add(label6);
-            guna2GradientPanel2.CustomizableEdges = customizableEdges43;
+            guna2GradientPanel2.CustomizableEdges = customizableEdges41;
             guna2GradientPanel2.FillColor = Color.DarkRed;
             guna2GradientPanel2.FillColor2 = Color.Gold;
-            guna2GradientPanel2.Location = new Point(20, 123);
+            guna2GradientPanel2.Location = new Point(20, 111);
             guna2GradientPanel2.Name = "guna2GradientPanel2";
-            guna2GradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges44;
-            guna2GradientPanel2.Size = new Size(1009, 29);
+            guna2GradientPanel2.ShadowDecoration.CustomizableEdges = customizableEdges42;
+            guna2GradientPanel2.Size = new Size(998, 32);
             guna2GradientPanel2.TabIndex = 60;
             // 
             // label7
@@ -1026,13 +1126,13 @@ namespace SAPLink.Forms
             label7.AutoSize = true;
             label7.BackColor = Color.Transparent;
             label7.Dock = DockStyle.Left;
-            label7.Font = new Font("Cairo", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.Font = new Font("Cairo", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label7.ForeColor = Color.AliceBlue;
             label7.Location = new Point(34, 0);
             label7.Margin = new Padding(8, 5, 3, 0);
             label7.Name = "label7";
             label7.Padding = new Padding(0, 2, 0, 0);
-            label7.Size = new Size(116, 26);
+            label7.Size = new Size(125, 28);
             label7.TabIndex = 45;
             label7.Text = "Not ready for Sync";
             // 
@@ -1041,7 +1141,7 @@ namespace SAPLink.Forms
             label6.AutoSize = true;
             label6.BackColor = Color.Transparent;
             label6.Dock = DockStyle.Left;
-            label6.Font = new Font("Cairo", 15F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.Font = new Font("Cairo ExtraBold", 15F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = Color.Gold;
             label6.Location = new Point(0, 0);
             label6.Name = "label6";
@@ -1050,24 +1150,12 @@ namespace SAPLink.Forms
             label6.TabIndex = 45;
             label6.Text = "*";
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.BackColor = Color.Transparent;
-            label1.Font = new Font("Agency FB", 20F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(53, 11);
-            label1.Name = "label1";
-            label1.Size = new Size(186, 34);
-            label1.TabIndex = 44;
-            label1.Text = "SAP Link Integration";
-            // 
             // guna2Button4
             // 
             guna2Button4.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            guna2Button4.BackColor = Color.FromArgb(245, 246, 247);
+            guna2Button4.BackColor = Color.Transparent;
             guna2Button4.BorderRadius = 10;
-            guna2Button4.CustomizableEdges = customizableEdges47;
+            guna2Button4.CustomizableEdges = customizableEdges45;
             guna2Button4.DisabledState.BorderColor = Color.DarkGray;
             guna2Button4.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button4.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -1080,10 +1168,30 @@ namespace SAPLink.Forms
             guna2Button4.ImageSize = new Size(30, 30);
             guna2Button4.Location = new Point(14, 720);
             guna2Button4.Name = "guna2Button4";
-            guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges48;
+            guna2Button4.ShadowDecoration.BorderRadius = 30;
+            guna2Button4.ShadowDecoration.Color = Color.Silver;
+            guna2Button4.ShadowDecoration.CustomizableEdges = customizableEdges46;
+            guna2Button4.ShadowDecoration.Depth = 3;
+            guna2Button4.ShadowDecoration.Enabled = true;
+            guna2Button4.ShadowDecoration.Shadow = new Padding(3);
             guna2Button4.Size = new Size(40, 40);
             guna2Button4.TabIndex = 18;
             guna2Button4.Click += buttonSettings_Click;
+            // 
+            // guna2PictureBox1
+            // 
+            guna2PictureBox1.BackColor = Color.FromArgb(245, 246, 247);
+            guna2PictureBox1.CustomizableEdges = customizableEdges47;
+            guna2PictureBox1.Image = (Image)resources.GetObject("guna2PictureBox1.Image");
+            guna2PictureBox1.ImageRotate = 0F;
+            guna2PictureBox1.InitialImage = null;
+            guna2PictureBox1.Location = new Point(23, 18);
+            guna2PictureBox1.Name = "guna2PictureBox1";
+            guna2PictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges48;
+            guna2PictureBox1.Size = new Size(45, 45);
+            guna2PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            guna2PictureBox1.TabIndex = 53;
+            guna2PictureBox1.TabStop = false;
             // 
             // guna2ControlBox3
             // 
@@ -1118,6 +1226,18 @@ namespace SAPLink.Forms
             guna2ControlBox2.Size = new Size(32, 28);
             guna2ControlBox2.TabIndex = 0;
             guna2ControlBox2.Click += controlBoxMinimized_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.BackColor = Color.FromArgb(245, 246, 247);
+            label1.Font = new Font("Agency FB", 24F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            label1.ForeColor = SystemColors.InactiveCaptionText;
+            label1.Location = new Point(68, 22);
+            label1.Name = "label1";
+            label1.Size = new Size(224, 39);
+            label1.TabIndex = 44;
+            label1.Text = "SAP Link Integration";
             // 
             // guna2ControlBox1
             // 
@@ -1193,6 +1313,7 @@ namespace SAPLink.Forms
             Text = "Dashboard";
             Load += Dashboard_Load;
             guna2Panel1.ResumeLayout(false);
+            guna2Panel1.PerformLayout();
             contextMenu.ResumeLayout(false);
             guna2GroupBox3.ResumeLayout(false);
             guna2GroupBox1.ResumeLayout(false);
@@ -1200,9 +1321,9 @@ namespace SAPLink.Forms
             guna2GradientPanel1.ResumeLayout(false);
             guna2GradientPanel1.PerformLayout();
             ((ISupportInitialize)guna2PictureBox2).EndInit();
-            ((ISupportInitialize)guna2PictureBox1).EndInit();
             guna2GradientPanel2.ResumeLayout(false);
             guna2GradientPanel2.PerformLayout();
+            ((ISupportInitialize)guna2PictureBox1).EndInit();
             ((ISupportInitialize)MainPanel).EndInit();
             ResumeLayout(false);
         }
@@ -1218,23 +1339,23 @@ namespace SAPLink.Forms
         private Guna2ControlBox guna2ControlBox3;
         private Guna2Button guna2Button4;
         private Label label2;
-        private CustomGunaButton button_InGoodsReceiptPo;
-        private CustomGunaButton button_InGoodsReceipt;
-        private CustomGunaButton button_InGoodsIssue;
-        private CustomGunaButton buttonDepartments;
-        private CustomGunaButton buttonCreditMemo;
-        private CustomGunaButton buttonStockTransfer;
-        private CustomGunaButton buttonInvoice;
+        private CustomButton button_InGoodsReceiptPo;
+        private CustomButton button_InGoodsReceipt;
+        private CustomButton button_InGoodsIssue;
+        private CustomButton buttonDepartments;
+        private CustomButton buttonCreditMemo;
+        private CustomButton buttonStockTransfer;
+        private CustomButton buttonInvoice;
         private Guna2DragControl guna2DragControl3;
         private Guna2DragControl guna2DragControl1;
         private Guna2PictureBox guna2PictureBox1;
         private Label label6;
         private Label label7;
-        private CustomGunaButton buttonOutGoodsReceipt;
-        private CustomGunaButton buttonOutGoodsIssue;
-        private CustomGunaButton buttonStockTaking;
-        private CustomGunaButton buttonItems;
-        private CustomGunaButton buttonVendors;
+        private CustomButton buttonOutGoodsReceipt;
+        private CustomButton buttonOutGoodsIssue;
+        private CustomButton buttonStockTaking;
+        private CustomButton buttonItems;
+        private CustomButton buttonVendors;
         private ContextMenuStrip contextMenu;
         private ToolStripMenuItem toolStripMenuItem6;
         private Guna2GradientPanel guna2GradientPanel1;
@@ -1249,10 +1370,12 @@ namespace SAPLink.Forms
         private Label label1;
         private Label label5;
         private Guna2GroupBox guna2GroupBox3;
-        private CustomGunaButton buttonPrismActiveItems;
-        private CustomGunaButton buttonNotSyncedItems;
-        private CustomGunaButton buttonSyncedItems;
+        private CustomButton buttonPrismActiveItems;
+        private CustomButton buttonNotSyncedItems;
+        private CustomButton buttonSyncedItems;
         private Label label8;
-        private CustomGunaButton buttonGoodsReturn;
+        private CustomButton buttonGoodsReturn;
+        private Label label3;
+        private Label labelStatus;
     }
 }

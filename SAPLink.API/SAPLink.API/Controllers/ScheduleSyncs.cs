@@ -3,6 +3,8 @@ using SAPLink.Handler.Integration;
 using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Departments;
 using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Inventory;
 using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Vendors;
+using SAPLink.Handler.SAP.Handlers;
+using ServiceLayerHelper.RefranceModels;
 
 namespace SAPLink.API.Controllers;
 
@@ -10,21 +12,40 @@ namespace SAPLink.API.Controllers;
 [ApiController]
 public class ScheduleSyncs : ControllerBase
 {
-    private static readonly ApplicationDbContext Context = new();
-    private static readonly UnitOfWork UnitOfWork = new(Context);
+    private readonly ApplicationDbContext _context;
+    private readonly UnitOfWork _unitOfWork;
+    private readonly Clients _client;
+    private readonly DepartmentService _departmentService;
+    private readonly DepartmentsHandler _departmentsHandler;
+    private readonly VendorsService _vendorsService;
+    private readonly VendorsHandler _vendorsHandler;
+    private readonly ServiceLayerHandler _serviceLayer;
+    private readonly ItemsService _itemsService;
+    private readonly ItemsHandler _itemsHandler;
 
-    static string[] includes = { "Credentials", "Credentials.Subsidiaries" };
-    private static readonly List<Clients> Clients  = UnitOfWork.Clients.GetAll(includes).ToList();
-     private static readonly Clients Client = Clients.Find(x=>x.Id == (int)Enums.Environments.Local);
-
-    private static readonly DepartmentService DepartmentService = new(Client);
-    private static readonly DepartmentsHandler DepartmentsHandler = new(UnitOfWork, DepartmentService, Client);
-
-    private static readonly VendorsService VendorsService = new(Client);
-    private static readonly VendorsHandler VendorsHandler = new(UnitOfWork, Client);
-
-    private static readonly ItemsService ItemsService = new(Client, DepartmentService, VendorsService);
-    private static readonly ItemsHandler ItemsHandler = new(UnitOfWork, ItemsService, Client);
+    public ScheduleSyncs(
+        ApplicationDbContext context,
+        UnitOfWork unitOfWork,
+        Clients client,
+        DepartmentService departmentService,
+        DepartmentsHandler departmentsHandler,
+        VendorsService vendorsService,
+        VendorsHandler vendorsHandler,
+        ServiceLayerHandler serviceLayer,
+        ItemsService itemsService,
+        ItemsHandler itemsHandler)
+    {
+        _context = context;
+        _unitOfWork = unitOfWork;
+        _client = client;
+        _departmentService = departmentService;
+        _departmentsHandler = departmentsHandler;
+        _vendorsService = vendorsService;
+        _vendorsHandler = vendorsHandler;
+        _serviceLayer = serviceLayer;
+        _itemsService = itemsService;
+        _itemsHandler = itemsHandler;
+    }
 
     /// <summary>
     /// Returns Recurrence that will fires every hour at the specified minute.
@@ -149,8 +170,8 @@ public class ScheduleSyncs : ControllerBase
     [ApiExplorerSettings(IgnoreApi = true)]
     public async Task SyncDepartments()
     {
-        var syncDate = SyncEntityService.CompareSyncDateWithDateNow(UnitOfWork, Enums.UpdateType.SyncDepartment, out var needToSyncBasedOnSyncDate);
-        var initialDate = SyncEntityService.CompareSyncDateWithDateNow(UnitOfWork, Enums.UpdateType.SyncDepartment, out var needToSyncBasedOnInitialDate);
+        var syncDate = SyncEntityService.CompareSyncDateWithDateNow(_unitOfWork, Enums.UpdateType.SyncDepartment, out var needToSyncBasedOnSyncDate);
+        var initialDate = SyncEntityService.CompareSyncDateWithDateNow(_unitOfWork, Enums.UpdateType.SyncDepartment, out var needToSyncBasedOnInitialDate);
 
         var lastInitialDate = initialDate.ToSAPDateFormat();
         var lastSyncDate = syncDate.ToSAPDateFormat();
@@ -159,9 +180,9 @@ public class ScheduleSyncs : ControllerBase
 
         if (needToSyncBasedOnSyncDate || needToSyncBasedOnInitialDate)
         {
-            await foreach (var requestResult in DepartmentsHandler.SyncAsync(filter))
+            await foreach (var requestResult in _departmentsHandler.SyncAsync(filter))
             {
-                var result = requestResult;
+                var result = requestResult.Message;
             }
         }
     }
@@ -170,7 +191,7 @@ public class ScheduleSyncs : ControllerBase
     {
         var itemsList = new List<ItemMasterData>();
 
-        var resultSync = ItemsHandler.SyncAsync("");
+        var resultSync = _itemsHandler.SyncAsync("");
         await foreach (var syncResult in resultSync)
         {
 
@@ -189,8 +210,8 @@ public class ScheduleSyncs : ControllerBase
     [ApiExplorerSettings(IgnoreApi = true)]
     public async Task SyncVendors()
     {
-        var initialDate = SyncEntityService.CompareSyncDateWithDateNow(UnitOfWork, Enums.UpdateType.InitialVendors, out var needToSyncBasedOnInitialDate);
-        var syncDate = SyncEntityService.CompareSyncDateWithDateNow(UnitOfWork, Enums.UpdateType.SyncVendors, out var needToSyncBasedOnSyncDate);
+        var initialDate = SyncEntityService.CompareSyncDateWithDateNow(_unitOfWork, Enums.UpdateType.InitialVendors, out var needToSyncBasedOnInitialDate);
+        var syncDate = SyncEntityService.CompareSyncDateWithDateNow(_unitOfWork, Enums.UpdateType.SyncVendors, out var needToSyncBasedOnSyncDate);
 
         var lastInitialDate = initialDate.ToSAPDateFormat();
         var lastSyncDate = syncDate.ToSAPDateFormat();
@@ -201,7 +222,7 @@ public class ScheduleSyncs : ControllerBase
         {
             var BpList = new List<BusinessPartner>();
 
-            var resultSync = VendorsHandler.SyncAsync(filter);
+            var resultSync = _vendorsHandler.SyncAsync(filter);
             await foreach (var syncResult in resultSync)
             {
 
@@ -223,7 +244,7 @@ public class ScheduleSyncs : ControllerBase
         var filter = GetSyncQueryByRangOfDate();
 
         var LogMessage = "";
-        await foreach (var syncResult in ItemsHandler.SyncAsync(filter))
+        await foreach (var syncResult in _itemsHandler.SyncAsync(filter))
         {
             if (syncResult.EntityList != null && syncResult.EntityList.Count > 0)
             {

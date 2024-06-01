@@ -1,16 +1,21 @@
 ﻿using SAPLink.Core.Utilities;
+using SAPLink.EF;
+using SAPLink.Handler.Prism.Connection.Auth;
 
 namespace SAPLink.Handler.Connection;
 
 public static partial class HttpClientFactory
 {
-    public static async Task<IRestResponse> InitializeAsync(string Uri, string resource, Method method,
-         string body = "")
+    public static async Task<IRestResponse> InitializeAsync(string Uri, string resource, Method method, string body = "", int pageNo = 1,int pageSize = 30, bool IsListOfObjects = false)
     {
         try
         {
             ApiClient = new RestClient(Uri);
+            RefreshAuthSession();
 
+            if (IsListOfObjects)
+                resource += $"&count=true&page_no={pageNo}&page_size={pageSize}";
+            
             Request = new RestRequest
             {
                 Resource = resource,
@@ -35,18 +40,47 @@ public static partial class HttpClientFactory
             ServicePointManager.ServerCertificateValidationCallback +=
                 (sender, certificate, chain, sslPolicyErrors) => true;
 
-            var response = await ApiClient.ExecuteAsync(Request);
-            return response;
+            if (Request != null)
+            {
+                var response = await ApiClient.ExecuteAsync(Request);
+
+                if (response.StatusCode == HttpStatusCode.Forbidden)
+                {
+                    
+                    response = await ApiClient.ExecuteAsync(Request);
+                }
+                return response;
+            }
+            
         }
         catch (Exception e)
         {
             // Handle the exception appropriately
         }
 
-        Request = null;
-        return null;
-    }
+        //Request = new RestRequest();
 
+        return new RestResponse();
+    }
+    private static async void RefreshAuthSession()
+    {
+        var newAuth = await LoginManager.GetAuthSessionAsync(Credential.BaseUri, Credential.PrismUserName, Credential.PrismPassword);
+        if (newAuth.IsHasValue())
+        {
+            Credential.AuthSession = newAuth;
+
+            //UnitOfWork.Credentials.Update(Credential);
+            //UnitOfWork.SaveChanges();
+
+            //using (var context = new UnitOfWork(Context))
+            //{
+            //    context.Credentials.Update(Credential);
+            //    context.SaveChanges();
+            //}
+        }
+        else
+            RefreshAuthSession();
+    }
     public static IRestResponse Initialize(string uri, string resource, Method method,
         IDictionary<string, string> headers, string body = "")
     {
@@ -123,7 +157,7 @@ public static partial class HttpClientFactory
             //MessageBox.Show(e.Message);
         }
 
-        Request = null;
-        return null;
+        //Request = null;
+        return new RestResponse();
     }
 }

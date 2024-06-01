@@ -1,6 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Text.Json;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace SAPLink.Utilities
 {
@@ -15,7 +13,7 @@ namespace SAPLink.Utilities
                 {
                     var cts = new CancellationTokenSource();
                     var timeoutTask = Task.Delay(httpClient.Timeout, cts.Token);
-                    var requestTask = httpClient.GetAsync("https://saplink.alkaffary.com/hangfire/", cts.Token);
+                    var requestTask = httpClient.GetAsync("https://localhost:5005/hangfire/", cts.Token);//saplink.alkaffary.com
 
                     var completedTask = await Task.WhenAny(timeoutTask, requestTask);
                     if (completedTask == timeoutTask)

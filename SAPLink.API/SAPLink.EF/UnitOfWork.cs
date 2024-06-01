@@ -10,6 +10,7 @@ namespace SAPLink.EF
         public IBaseRepository<Recurrence> Recurrences { get; }
         public IBaseRepository<Subsidiary> Subsidiary { get; }
         public IBaseRepository<Schedules> Schedule { get; }
+        public IBaseRepository<AccountManagement> Accounts { get; }
         public IBaseRepository<Logger<ItemMasterData>> ItemsLog { get; }
         //public IBaseRepository<Logger<ItemGroups>> ItemGroupsLog { get; }
         //public IBaseRepository<Logger<Vendor>> VendorsLog { get; }
@@ -29,6 +30,8 @@ namespace SAPLink.EF
 
             Recurrences = new BaseRepository<Recurrence>(context);
             Sync = new BaseRepository<Sync>(context);
+
+            Accounts = new BaseRepository<AccountManagement>(context);
 
             //ItemsLog = new BaseRepository<Logger<ItemMasterData>>(context);
             //ItemGroupsLog = new BaseRepository<Logger<ItemGroups>>(context);

@@ -1,4 +1,5 @@
-﻿using SAPLink.Core;
+﻿using Azure;
+using SAPLink.Core;
 using SAPLink.Core.Models;
 using SAPLink.Core.Models.Prism.Receiving;
 using SAPLink.Core.Models.Prism.StockManagement;
@@ -12,7 +13,7 @@ namespace SAPLink.Handler.Prism.Handlers.OutboundData.StockManagement.InventoryT
 
 public partial class InventoryTransferService
 {
-    private readonly Credentials? _credentials;
+    private static Credentials? _credentials;
     private readonly Subsidiaries? _subsidiary;
     public readonly TaxCodesService? TaxCodesService;
     public List<TaxCodes>? TaxCodes;
@@ -34,7 +35,7 @@ public partial class InventoryTransferService
         StoresService = new StoresService(client);
     }
 
-    public async Task<RequestResult<VerifiedVoucher>> GetVerifiedVoucher(DateTime dateFrom, DateTime dateTo, int storeNumber, string vouchersNo = "")
+    public async Task<RequestResult<VerifiedVoucher>> GetVerifiedVoucher(DateTime dateFrom, DateTime dateTo, int storeNumber, string vouchersNo = "", int pageNo = 1, int pageSize = 30, bool IsListOfObjects = false)
     {
         RequestResult<VerifiedVoucher> result = new();
         try
@@ -60,15 +61,25 @@ public partial class InventoryTransferService
                 vouchersFilter = $"AND(vouno,eq,{vouchersNo})";
 
             var resource = $"/receiving" +
-                           $"?filter=(sbssid,eq,{_subsidiary.SID}){storeFilter}{dateRange}AND(status,eq,4)AND(vouclass,ne,2)AND(slipflag,eq,1)AND(verified,eq,true){vouchersFilter}" + ///AND(Trackingno,ne,)
+                           $"?filter={storeFilter}{dateRange}AND(status,eq,4)AND(vouclass,ne,2)AND(slipflag,eq,1)AND(verified,eq,true){vouchersFilter}" + ///AND(Trackingno,ne,)
                            $"&cols=slipsbsno,createddatetime,vouno,storesid,origstoresid,slipstorecode,rowversion,storeno,storename,storecode,origstorecode,origstoreno,origstorename,recvitem.qty,recvitem.itemsid,recvitem.udfvalue5,recvitem.itemsid,recvitem.size,recvitem.description1,recvitem.description2,recvitem.alu,recvitem.price,recvitem.upc,pkgno,slipno";
 
             result.Message = $"Resource: \r\n" +
                              $"{query}{resource}\r\n" +
                              $"Auth Session: {_credentials.AuthSession}";
+            
             _loger.Information(result.Message);
-            result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET);
 
+            result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET,"", pageNo, pageSize, IsListOfObjects);
+
+            result.TotalItems = result.GetTotalItems(result.Response);
+            result.TotalPages = result.GetTotalPages(result.TotalItems);
+
+
+            //var contentrange = "";
+
+            //List<VerifiedVoucher> VerifiedVouchers;
+            //var xx = GetVerifiedVouchers(query + resource, 1, out contentrange, out VerifiedVouchers);
 
             if (result.Response.StatusCode == HttpStatusCode.OK)
             {
@@ -96,6 +107,67 @@ public partial class InventoryTransferService
         return result;
     }
 
+    public static bool GetVerifiedVouchers(string query, int pageNo, out string contentRange, out List<VerifiedVoucher> invoices)
+    {
+        invoices = null;
+        contentRange = "";
+
+        try
+        {
+            Uri uri = new Uri($"{query}&page_no={pageNo}&page_size=30&count=true");
+            HttpWebRequest request = CreateRequest(uri);
+
+            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+            {
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    ProcessResponseHeaders(response, out contentRange);
+
+                    using (var responseStream = response.GetResponseStream())
+                    using (var responseStreamReader = new StreamReader(responseStream))
+                    {
+                        string contents = responseStreamReader.ReadToEnd();
+
+                        if (string.IsNullOrWhiteSpace(contents) || contents == "[]")
+                            return true;
+
+                        invoices = VerifiedVoucher.FromJson(contents).Data;
+                        return true;
+                    }
+                }
+            }
+
+            return false; // Indicate failure if not HttpStatusCode.OK
+        }
+        catch (Exception e)
+        {
+            // Log or handle the exception as needed
+            return false;
+        }
+    }
+
+    private static HttpWebRequest CreateRequest(Uri uri)
+    {
+        HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+        SetupRequestHeaders(request);
+        request.Method = "GET";
+        return request;
+    }
+
+    private static void SetupRequestHeaders(HttpWebRequest request)
+    {
+        // Set common headers
+        request.Headers.Add("Content-Type", "application/json");
+        request.Headers.Add("Accept", "application/json, version=2");
+        request.Headers.Add("Accept-Language", "en-US,en-SA;q=0.9");
+        request.ContentType = "application/json";
+        request.Headers.Add("Auth-Session", _credentials.AuthSession);
+    }
+
+    private static void ProcessResponseHeaders(HttpWebResponse response, out string contentRange)
+    {
+        contentRange = response.GetResponseHeader("Content-Range") ?? "";
+    }
     private RequestResult<VerifiedVoucher> LoadMockData(string fileName)
     {
         var file = File.ReadAllText($"Resources\\{fileName}");

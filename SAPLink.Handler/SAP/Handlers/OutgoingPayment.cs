@@ -13,25 +13,45 @@ namespace SAPLink.Handler.SAP.Handlers;
 
 public static class OutgoingPayment
 {
-    private static RequestResult<Payment> SyncSinglePayment(PrismInvoice invoice, string account, double amount, string entry, string customerCode)
+    private static RequestResult<Payment> SyncSinglePayment(PrismInvoice invoice, string account, double amount, string docEntry, string customerCode, BoRcptInvTypes invoiceType)
     {
         var result = new RequestResult<Payment>();
 
         var oPayment = (Payments)ClientHandler.Company.GetBusinessObject(BoObjectTypes.oVendorPayments);
         oPayment.DocObjectCode = SAPbobsCOM.BoPaymentsObjectType.bopot_OutgoingPayments;
-        oPayment.DocType = SAPbobsCOM.BoRcptTypes.rCustomer;
-        oPayment.TaxDate = invoice.CreatedDatetime;
-        oPayment.DocDate = invoice.CreatedDatetime;
-        oPayment.DocDate = invoice.CreatedDatetime;
-       
 
         oPayment.CardCode = customerCode;
 
-        oPayment.Invoices.DocEntry = int.Parse(entry);
-        oPayment.Invoices.InvoiceType = BoRcptInvTypes.it_CredItnote;
-        oPayment.Invoices.SumApplied = amount;
-        oPayment.CashAccount = account;
-        oPayment.CashSum = amount;
+        if (invoiceType == BoRcptInvTypes.it_CredItnote)
+        {
+            oPayment.Invoices.DocEntry = int.Parse(docEntry);
+            oPayment.Invoices.InvoiceType = invoiceType;
+            oPayment.Invoices.SumApplied = amount;
+            oPayment.CashAccount = account;
+            oPayment.CashSum = amount;
+        }
+        else
+        {
+
+            oPayment.DocTypte = SAPbobsCOM.BoRcptTypes.rCustomer;
+            oPayment.CashAccount = account;
+            oPayment.CashSum = amount;
+
+            //oPayment.AccountPayments.SumPaid = amount;
+            //oPayment.CashSum = amount;
+            //oPayment.AccountPayments.AccountCode = ClientHandler.GetFieldValueByQuery($"SELECT DPmClear FROM OCRD WHERE CardCode = '{customerCode}'");
+        }
+
+
+        //oPayment.Invoices.DocEntry = int.Parse(docEntry);
+        //oPayment.Invoices.InvoiceType = BoRcptInvTypes.it_CredItnote;
+        //oPayment.Invoices.SumApplied = amount;
+        //oPayment.CashAccount = account;
+        //oPayment.CashSum = amount;
+
+        oPayment.TaxDate = invoice.CreatedDatetime;
+        oPayment.DocDate = invoice.CreatedDatetime;
+        oPayment.DocDate = invoice.CreatedDatetime;
         oPayment.Invoices.Add();
 
         var response = oPayment.Add();
@@ -51,7 +71,7 @@ public static class OutgoingPayment
 
         return result;
     }
-    public static RequestResult<Payment> AddMultiplePaymentsInvoice(PrismInvoice invoice, string docEntry, string customerCode)
+    public static RequestResult<Payment> AddMultiplePaymentsInvoice(PrismInvoice invoice, string docEntry, string customerCode, BoRcptInvTypes invoiceType)
     {
         var results = new List<RequestResult<Payment>>();
         var combinedResult = new RequestResult<Payment>();
@@ -82,7 +102,7 @@ public static class OutgoingPayment
             string account = entry.Key;
             double amount = entry.Value;
 
-            results.Add(SyncSinglePayment(invoice, account, amount, docEntry, customerCode));
+            results.Add(SyncSinglePayment(invoice, account, amount, docEntry, customerCode, invoiceType));
         }
 
         // Combine results

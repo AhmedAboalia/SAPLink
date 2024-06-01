@@ -3,29 +3,51 @@ using SAPbobsCOM;
 using SAPLink.Core;
 using SAPLink.Core.Models;
 using SAPLink.Core.Models.SAP.Sales;
+using SAPLink.EF.Data;
+using SAPLink.EF;
 using SAPLink.Handler.SAP.Application;
 using PrismInvoice = SAPLink.Core.Models.Prism.Sales.Invoice;
+using System;
 
 namespace SAPLink.Handler.SAP.Handlers;
 
 public static class IncomingPayment 
 {
+
     private static RequestResult<Payment> SyncSinglePayment(PrismInvoice invoice, string account, double amount, string docEntry, string customerCode, BoRcptInvTypes invoiceType)
     {
         var result = new RequestResult<Payment>();
 
-        var oPayment = (Payments)ClientHandler.Company.GetBusinessObject(BoObjectTypes.oIncomingPayments); 
+        var oPayment = (Payments)ClientHandler.Company.GetBusinessObject(BoObjectTypes.oIncomingPayments);
+
+        var dateTime = DateTime.Parse(invoice.InvoicePostedDate);
+
+        oPayment.DocDate = dateTime;
+        oPayment.DueDate = dateTime;
+        oPayment.TaxDate = dateTime;
 
         oPayment.CardCode = customerCode;
 
-        oPayment.Invoices.DocEntry = int.Parse(docEntry);
-        oPayment.Invoices.InvoiceType = invoiceType;
-        oPayment.Invoices.SumApplied = amount;
-        oPayment.CashAccount = account;
-        oPayment.CashSum = amount;
-        oPayment.TaxDate = invoice.CreatedDatetime;
-        oPayment.DocDate = invoice.CreatedDatetime;
-        oPayment.DocDate = invoice.CreatedDatetime;
+        if (invoiceType == BoRcptInvTypes.it_Invoice)
+        {
+            oPayment.Invoices.DocEntry = int.Parse(docEntry);
+            oPayment.Invoices.InvoiceType = invoiceType;
+            oPayment.Invoices.SumApplied = amount;
+            oPayment.CashAccount = account;
+            oPayment.CashSum = amount;
+        }
+        else
+        {
+
+            oPayment.DocTypte = SAPbobsCOM.BoRcptTypes.rCustomer;
+            oPayment.CashAccount = account;
+            oPayment.CashSum = amount;
+
+            //oPayment.AccountPayments.SumPaid = amount;
+            //oPayment.CashSum = amount;
+            //oPayment.AccountPayments.AccountCode = ClientHandler.GetFieldValueByQuery($"SELECT DPmClear FROM OCRD WHERE CardCode = '{customerCode}'");
+        }
+        
         oPayment.Invoices.Add();
 
         var response = oPayment.Add();
@@ -45,12 +67,13 @@ public static class IncomingPayment
 
         return result;
     }
-    public static RequestResult<Payment>AddMultiplePaymentsInvoice(PrismInvoice invoice, string docEntry, string CustomerID, BoRcptInvTypes invoiceType)
+    public static RequestResult<Payment>AddMultiplePaymentsInvoice(PrismInvoice invoice, string docEntry, string CustomerID, BoRcptInvTypes invoiceType, UnitOfWork unitOfWork)
     {
         var results = new List<RequestResult<Payment>>();
         var combinedResult = new RequestResult<Payment>();
 
         var paymentList = new Dictionary<string, double>();
+        var accounts = unitOfWork.Accounts.GetAll().OrderBy(x => x.Id);
 
         var tenderData = "";
         foreach (var tender in invoice.Tenders)
@@ -60,6 +83,7 @@ public static class IncomingPayment
                 tender.TenderName.ToLower() == Enums.PaymentTypes.Mada.ToLower() ||
                 tender.TenderName.ToLower() == Enums.PaymentTypes.MasterCard.ToLower() ||
                 tender.TenderName.ToLower() == Enums.PaymentTypes.Return.ToLower() ||
+                tender.TenderName.ToLower() == Enums.PaymentTypes.AmericanExpress.ToLower() ||
 
                 //tender.TenderType == (int)Enums.PaymentTypesEnum.Visa ||
                 //tender.TenderType == (int)Enums.PaymentTypesEnum.Mada ||
@@ -72,27 +96,52 @@ public static class IncomingPayment
             )
             {
                 //var accountCode = "160000"; //Local
-                var accountCode = ClientHandler.GetAccountCode($"1101{invoice.StoreCode}0100");
+                var accountCode = ClientHandler.GetAccountCode($"1101{invoice.StoreCode}0100");//1101-017-0100
 
                 if (paymentList.ContainsKey(accountCode))
                     paymentList[accountCode] += tender.Amount;
                 else
                     paymentList.Add(accountCode, tender.Amount);
             }
-
-            else if (tender.TenderName.ToLower() == Enums.PaymentTypes.Tamara.ToLower() ||
-                     tender.TenderName.ToLower() == Enums.PaymentTypes.Emkan.ToLower())
+            else
             {
-                //var accountCode = "160000"; //Local
-                var accountCode = ClientHandler.GetAccountCode("11180050100");
+                var account = accounts.FirstOrDefault(x => x.PaymentTypeCode.ToLower() == tender.TenderName.ToLower());
+                if (account != null)
+                {
+                    var accountCode = ClientHandler.GetAccountCode(account.Account);
 
-                if (paymentList.ContainsKey(accountCode))
-                    paymentList[accountCode] += tender.Amount;
-                else
-                    paymentList.Add(accountCode, tender.Amount);
+                    if (paymentList.ContainsKey(accountCode))
+                        paymentList[accountCode] += tender.Amount;
+                    else
+                        paymentList.Add(accountCode, tender.Amount);
+                }
             }
 
-            //tenderData += $"Tender Name: {tender.TenderName} - Amount: ({tender.Amount})";
+
+
+
+            //else if (tender.TenderName.ToLower() == Enums.PaymentTypes.Tamara.ToLower() ||
+            //         tender.TenderName.ToLower() == Enums.PaymentTypes.Emkan.ToLower())
+            //{
+            //    //var accountCode = "160000"; //Local
+            //    var accountCode = ClientHandler.GetAccountCode("11180050100");
+
+            //    if (paymentList.ContainsKey(accountCode))
+            //        paymentList[accountCode] += tender.Amount;
+            //    else
+            //        paymentList.Add(accountCode, tender.Amount);
+            //}
+            //else if (tender.TenderName.ToLower() == Enums.PaymentTypes.Tabby.ToLower())
+            //{
+            //    //var accountCode = "160000"; //Local
+            //    var accountCode = ClientHandler.GetAccountCode("11180070100");
+
+            //    if (paymentList.ContainsKey(accountCode))
+            //        paymentList[accountCode] += tender.Amount;
+            //    else
+            //        paymentList.Add(accountCode, tender.Amount);
+            //}
+            ////tenderData += $"Tender Name: {tender.TenderName} - Amount: ({tender.Amount})";
         }
 
         foreach (KeyValuePair<string, double> entry in paymentList)
@@ -131,7 +180,7 @@ public static class IncomingPayment
         return combinedResult;
     }
 
-    public static RequestResult<Payment> AddPayment(PrismInvoice invoice)
+    public static RequestResult<Payment> AddPayment(PrismInvoice invoice, UnitOfWork unitOfWork)
     {
         var results = new List<RequestResult<Payment>>();
         var combinedResult = new RequestResult<Payment>();
@@ -181,6 +230,11 @@ public static class IncomingPayment
         var result = new RequestResult<Payment>();
 
         var oPayment = (Payments)ClientHandler.Company.GetBusinessObject(BoObjectTypes.oIncomingPayments);
+        var dateTime = DateTime.Parse(invoice.InvoicePostedDate);
+
+        oPayment.DocDate = dateTime;
+        oPayment.DueDate = dateTime;
+        oPayment.TaxDate = dateTime;
 
         oPayment.CardCode = invoice.CustomerID;
         oPayment.CashAccount = account;

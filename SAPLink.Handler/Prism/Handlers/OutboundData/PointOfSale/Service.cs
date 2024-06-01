@@ -40,7 +40,7 @@ public partial class InvoiceService
         StoresService = new StoresService(client);
     }
 
-    public async Task<RequestResult<PrismInvoice>> GetInvoicesAsync(OutboundEnums.Documents document, string dateRange, int storeNumber, string code = "nn")
+    public async Task<RequestResult<PrismInvoice>> GetInvoicesAsync(OutboundEnums.Documents document, string dateRange, int storeNumber, string code = "nn", int pageNo = 1, int pageSize = 30, bool IsListOfObjects = false)
     {
         RequestResult<PrismInvoice> result = new();
         try
@@ -83,8 +83,11 @@ public partial class InvoiceService
 
             _loger.Information(result.Message);
 
-            result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET);
+            result.Response = await HttpClientFactory.InitializeAsync(query, resource, Method.GET,"", pageNo, pageSize, IsListOfObjects);
             //_loger.Information(result.Response.Content);
+
+            result.TotalItems = result.GetTotalItems(result.Response);
+            result.TotalPages = result.GetTotalPages(result.TotalItems);
 
             if (result.Response.StatusCode == HttpStatusCode.OK)
             {

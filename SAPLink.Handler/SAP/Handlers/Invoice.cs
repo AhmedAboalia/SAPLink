@@ -7,6 +7,7 @@ using SAPLink.Core.Utilities;
 using SAPLink.Handler.SAP.Application;
 using SAPLink.Handler.SAP.Connection;
 using ServiceLayerHelper.RefranceModels;
+using System.Globalization;
 using static SAPLink.Core.Enums;
 using DocumentLine = SAPLink.Core.Models.SAP.Sales.DocumentLine;
 using HttpClientFactory = SAPLink.Handler.Connection.HttpClientFactory;
@@ -32,7 +33,7 @@ partial class ServiceLayerHandler
                 var body = CreateBody(PrismInvoice, taxCodes, customerCode, series, updateType);
 
 
-                result.Response = HttpClientFactory.Initialize("Invoices", Method.POST, LoginModel.LoginTypes.Basic, null, body);
+                result.Response = HttpClientFactory.Initialize("Invoices", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
 
                 if (result.Response.StatusCode == HttpStatusCode.OK || result.Response.StatusCode == HttpStatusCode.Created)
                 {
@@ -84,7 +85,7 @@ partial class ServiceLayerHandler
 
         return result;
     }
-    public RequestResult<SAPInvoice> AddReturnInvoice(PrismInvoice PrismInvoice, string code, string series)
+    public RequestResult<SAPInvoice> AddReturnInvoice(PrismInvoice PrismInvoice, string code, string series, Enums.UpdateType updateType)
     {
         RequestResult<SAPInvoice> result = new RequestResult<SAPInvoice>();
 
@@ -95,10 +96,10 @@ partial class ServiceLayerHandler
                 var taxCodes = GetTaxCodes();
 
 
-                var body = CreateReturnBody(PrismInvoice, taxCodes, code, series);
+                var body = CreateReturnBody(PrismInvoice, taxCodes, code, series, updateType);
 
 
-                result.Response = HttpClientFactory.Initialize("CreditNotes", Method.POST, LoginModel.LoginTypes.Basic, null, body);
+                result.Response = HttpClientFactory.Initialize("CreditNotes", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
 
                 if (result.Response.StatusCode == HttpStatusCode.OK || result.Response.StatusCode == HttpStatusCode.Created)
                 {
@@ -159,7 +160,7 @@ partial class ServiceLayerHandler
                 var body = CreateDownPaymentBody(PrismInvoice, taxCodes, customerCode, series);
 
 
-                result.Response = HttpClientFactory.Initialize("DownPayments", Method.POST, LoginModel.LoginTypes.Basic, null, body);
+                result.Response = HttpClientFactory.Initialize("DownPayments", Method.POST, _client, LoginModel.LoginTypes.Basic, null, body);
 
                 if (result.Response.StatusCode == HttpStatusCode.OK || result.Response.StatusCode == HttpStatusCode.Created)
                 {
@@ -231,6 +232,15 @@ partial class ServiceLayerHandler
 
                 branch = "101003";
             }
+            else if (updateType == UpdateType.SyncWholesaleRetail)
+            {
+                var WholesaleRetailCustomerCode = ActionHandler.GetStringValueByQuery($"SELECT T0.[AddID] FROM OCRD T0 WHERE T0.[CardCode] = '{customerCode}'");//invoice.WholesaleCustomerCode;
+
+
+                region = WholesaleRetailCustomerCode.Substring(0, 1);
+                city = WholesaleRetailCustomerCode.Substring(0, 3);
+                branch = WholesaleRetailCustomerCode;
+            }
             else
             {
                  region = customerCode.Substring(0, 1);
@@ -268,12 +278,15 @@ partial class ServiceLayerHandler
         try { FeeTaxCode = taxCodes.FirstOrDefault(x => x.Rate == -invoice.FeeTaxPrecentage).Code; }
         catch (Exception e) { }
 
+
+        var dateTime = invoice.InvoicePostedDate;
+
         var arInvoice = new Invoice
         {
             CardCode = customerCode,
-            DocDueDate = invoice.CreatedDatetime,
-            DocDate = invoice.CreatedDatetime,
-            TaxDate = invoice.CreatedDatetime,
+            DocDueDate = dateTime,
+            DocDate = dateTime,
+            TaxDate = dateTime,
             //SalesEmployee = invoice.SalesEmpolyee,
             SalesEmployeeUDF = invoice.SalesEmpolyee,
             SyncdToSAP = "Y",
@@ -304,7 +317,7 @@ partial class ServiceLayerHandler
         return arInvoice.ToJson();
     }
 
-    public static string CreateReturnBody(Core.Models.Prism.Sales.Invoice invoice, List<TaxCodes> taxCodes, string customerCode, string series)
+    public static string CreateReturnBody(Core.Models.Prism.Sales.Invoice invoice, List<TaxCodes> taxCodes, string customerCode, string series, UpdateType updateType)
     {
 
         var lines = new List<DocumentLine>();
@@ -320,16 +333,44 @@ partial class ServiceLayerHandler
             {
                 //
             }
+
+            string region, city, branch;
+
+            if (updateType == UpdateType.SyncWholesale ||
+                updateType == UpdateType.SyncWholesaleRetail
+                )
+            {
+                var WholesaleCustomerCode = ActionHandler.GetStringValueByQuery($"SELECT T0.[AddID] FROM OCRD T0 WHERE T0.[CardCode] = '{customerCode}'");//invoice.WholesaleCustomerCode;
+
+                region = WholesaleCustomerCode.Substring(0, 1);
+                city = WholesaleCustomerCode.Substring(0, 3);
+                branch = WholesaleCustomerCode;
+            }
+            else
+            {
+                region = customerCode.Substring(0, 1);
+                city = customerCode.Substring(0, 3);
+                branch = customerCode;
+            }
+
             var line = new DocumentLine
             {
                 ItemCode = item.Alu,
                 Quantity = item.Quantity,
                 VatGroup = vatGroup,
                 UnitPrice = item.Price,
+
                 CostCenter = GetCostCenter(item.Alu),
-                Region = customerCode.Substring(0, 1),
-                City = customerCode.Substring(0, 3),
-                Branch = customerCode,
+
+                Region = region,
+                City = city,
+                Branch = branch,
+
+                //CostCenter = GetCostCenter(item.Alu),
+                //Region = customerCode.Substring(0, 1),
+                //City = customerCode.Substring(0, 3),
+                //Branch = customerCode,
+
                 //line.DiscountPercent = ((item.OriginalPrice - item.Price) / item.OriginalPrice) * 100;
                 //line.DiscountPercent = item.TotalDiscountPercent;
                 WarehouseCode = invoice.StoreCode
@@ -356,13 +397,14 @@ partial class ServiceLayerHandler
         {
             //
         }
+        var dateTime = invoice.InvoicePostedDate;
 
         var arInvoice = new SAPInvoice
         {
             CardCode = customerCode,
-            DocDueDate = invoice.CreatedDatetime,
-            DocDate = invoice.CreatedDatetime,
-            TaxDate = invoice.CreatedDatetime,
+            DocDueDate = dateTime,
+            DocDate = dateTime,
+            TaxDate = dateTime,
             Series = series,
             //SalesEmployee = invoice.SalesEmpolyee,
             SalesEmployeeUDF = invoice.SalesEmpolyee,
@@ -446,12 +488,14 @@ partial class ServiceLayerHandler
             //
         }
 
+        var dateTime = invoice.InvoicePostedDate;
+
         var downPayment = new DownPayment
         {
             CardCode = customerCode,
-            DocDueDate = invoice.InvoicePostedDate,
-            DocDate = invoice.InvoicePostedDate,
-            TaxDate = invoice.InvoicePostedDate,
+            DocDueDate = dateTime,
+            DocDate = dateTime,
+            TaxDate = dateTime,
             SalesEmployeeUDF = invoice.SalesEmpolyee,
             SyncToPrism = "Y",
             PrismSid = invoice.Sid,
@@ -494,7 +538,7 @@ partial class ServiceLayerHandler
                 var body = SAPInvoice.CreateOrderBody(PrismInvoice, taxCodes, customerCode);
 
 
-                result.Response = HttpClientFactory.Initialize("Orders", Method.POST, LoginModel.LoginTypes.Basic, null, body);
+                result.Response = HttpClientFactory.Initialize("Orders", Method.POST,_client, LoginModel.LoginTypes.Basic, null, body);
 
                 if (result.Response.StatusCode == HttpStatusCode.OK || result.Response.StatusCode == HttpStatusCode.Created)
                 {

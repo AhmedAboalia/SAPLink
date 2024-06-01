@@ -4,6 +4,7 @@ using SAPLink.Core.Models;
 using SAPLink.Core.Models.Prism.Sales;
 using SAPLink.Core.Models.SAP.Sales;
 using SAPLink.Core.Models.System;
+using SAPLink.EF;
 using SAPLink.Handler.SAP.Application;
 using SAPLink.Handler.SAP.Handlers;
 using Serilog;
@@ -17,11 +18,12 @@ public partial class DownPaymentHandler
     private static Clients _client;
     private readonly ServiceLayerHandler _serviceLayer;
     private static ILogger _loger;
-
-    public DownPaymentHandler(Clients client, ServiceLayerHandler serviceLayer)
+    private UnitOfWork _unitOfWork;
+    public DownPaymentHandler(Clients client, ServiceLayerHandler serviceLayer, UnitOfWork unitOfWork)
     {
         _client = client;
         _serviceLayer = serviceLayer;
+        _unitOfWork = unitOfWork;
         _loger = Helper.CreateLoggerConfiguration("AR Down Payments", "Handler", LogsTypes.OutboundData);
 
     }
@@ -46,7 +48,7 @@ public partial class DownPaymentHandler
                 {
                     result.Message += $"\r\nSuccessfully Update Sync Flag for the Prism invoice No.: {invoice.DocumentNumber} - SAP A/R Down Payments No: {SAPInvoice.DocNum}.\r\n " ;
 
-                    var resultIncoming = IncomingPayment.AddMultiplePaymentsInvoice(invoice, SAPInvoice.DocEntry, customerCode,BoRcptInvTypes.it_DownPayment);
+                    var resultIncoming = IncomingPayment.AddMultiplePaymentsInvoice(invoice, SAPInvoice.DocEntry, customerCode,BoRcptInvTypes.it_DownPayment,_unitOfWork);
                     result.Message += $"\r\nIncoming Payment\r\n\r\n{resultIncoming.Message}";
                     result.Status = resultIncoming.Status;
                 }

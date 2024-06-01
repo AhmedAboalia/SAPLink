@@ -24,7 +24,7 @@ public partial class ReturnsHandler
         _loger = Helper.CreateLoggerConfiguration("Return - (AR Credit Memo)", "Handler", LogsTypes.OutboundData);
     }
 
-    public async IAsyncEnumerable<RequestResult<SAPInvoice>> AddReturnInvoiceAsync(List<PrismInvoice> invoicesList)
+    public async IAsyncEnumerable<RequestResult<SAPInvoice>> AddReturnInvoiceAsync(List<PrismInvoice> invoicesList, Enums.UpdateType updateType, string wholesaleCustomerCode)
     {
         var result = new RequestResult<SAPInvoice>();
         if (!_serviceLayer.Connected())
@@ -34,29 +34,37 @@ public partial class ReturnsHandler
         {
             foreach (var invoice in invoicesList)
             {
-                var customerCode = Handler.GetCustomerCodeByStoreCode(invoice.StoreCode, out string message);
+
+                var customerCode = updateType == Enums.UpdateType.SyncWholesale
+                   ? wholesaleCustomerCode
+                   : Handler.GetCustomerCodeByStoreCode(invoice.StoreCode, out string message);
+
                 var series = GetSeriesCode(invoice.StoreCode, out string message2);
 
-                result = _serviceLayer.AddReturnInvoice(invoice, customerCode, series);
+                result = _serviceLayer.AddReturnInvoice(invoice, customerCode, series, updateType);
 
                 var SAPInvoice = result.EntityList.FirstOrDefault();
 
 
                 if (result.EntityList.Any())
                 {
-                    var resultIncoming = new RequestResult<Payment>();
+                    var outgoing = new RequestResult<Payment>();
                     if (invoice.Tenders != null && SAPInvoice != null)
                     {
-                        resultIncoming = OutgoingPayment.AddMultiplePaymentsInvoice(invoice, SAPInvoice.DocNum, customerCode);
-                        result.Message += $"\r\n {resultIncoming.Message}";
-                        result.Status = resultIncoming.Status;
 
+                        if (updateType != Enums.UpdateType.SyncWholesale)
+                        {
+                            outgoing = OutgoingPayment.AddMultiplePaymentsInvoice(invoice, SAPInvoice.DocEntry, customerCode, BoRcptInvTypes.it_Invoice);
+                            result.Message += $"\r\n {outgoing.Message}";
+                            result.Status = outgoing.Status;
+                        }
+                        
                         if (result.Status == Enums.StatusType.Success)
                         {
 
                             if (result.Status == Enums.StatusType.Success)
                             {
-                                SetReturnInvoiceAsSynced(invoice.Sid, SAPInvoice.DocNum);
+                                SetReturnInvoiceAsSynced(invoice.Sid, SAPInvoice.DocEntry);
                                 result.Message += $"\r\nSuccessfully Update Sync Flag for the Prism invoice No. {invoice.DocumentNumber} - SAP invoice No. {SAPInvoice.DocNum}.\r\n";
                             }
 
@@ -124,7 +132,7 @@ public partial class ReturnsHandler
 
         return cardCode;
     }
- 
+
     private static void CheckCompanyConnection(ref string message)
     {
         if (!ClientHandler.Company.Connected)

@@ -77,6 +77,8 @@ public static class Enums
         public static string Mada = "UDF2";
         public static string Emkan = "UDF3";
         public static string Return = "UDF4";
+        public static string Tabby = "UDF6";
+        public static string AmericanExpress = "AmEx";
     }
 
     public enum Repeats
@@ -216,6 +218,9 @@ public static class Enums
 
         InitialWholesale,
         SyncWholesale,
+
+        InitialWholesaleRetail,
+        SyncWholesaleRetail,
 
         InitialInGoodsReturn,
         SyncInGoodsReturn,

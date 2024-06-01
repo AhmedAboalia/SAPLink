@@ -1,9 +1,15 @@
 
 using SAPLink.API.Services;
 using SAPLink.Core.Models.System;
+using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Departments;
+using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Inventory;
+using SAPLink.Handler.Prism.Handlers.InboundData.Merchandise.Vendors;
 using SAPLink.Handler.SAP.Application;
+using SAPLink.Handler.SAP.Handlers;
 using ServiceLayerHelper.RefranceModels;
 using System.Drawing;
+using SAPLink.API.Controllers;
+using SAPLink.Core.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,8 +46,8 @@ var connectionString = ConnectionStringFactory.SqlLite();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(connectionString, sqliteOptions =>
     {
-        sqliteOptions.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
-        //sqliteOptions.MigrationsAssembly("SAPLink.API");
+        //sqliteOptions.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
+        sqliteOptions.MigrationsAssembly("SAPLink.EF");
 
         //sqliteOptions.UseSqlCipher("<encryption_key>");
     }));
@@ -63,12 +69,43 @@ builder.Services.AddHangfireServer();
 
 #endregion
 
-
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<UnitOfWork>();
 builder.Services.AddScoped<RecurrenceService>();
 
+// Register your DbContext and UnitOfWork
+builder.Services.AddScoped<ApplicationDbContext>();
+builder.Services.AddScoped<UnitOfWork>();
+
+// Register other services
+builder.Services.AddScoped<Clients>();
+builder.Services.AddScoped<DepartmentService>();
+builder.Services.AddScoped<DepartmentsHandler>();
+builder.Services.AddScoped<VendorsService>();
+builder.Services.AddScoped<VendorsHandler>();
+builder.Services.AddScoped<ServiceLayerHandler>();
+builder.Services.AddScoped<ItemsService>();
+builder.Services.AddScoped<ItemsHandler>();
+
+// Register your controller
+builder.Services.AddScoped<ScheduleSyncs>();
+
 //builder.Services.AddTransient(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+
+
+builder.Services.AddScoped(provider =>
+{
+    // Get required dependencies
+    var unitOfWork = provider.GetRequiredService<UnitOfWork>();
+    var includes = new string[] { "Credentials", "Credentials.Subsidiaries" };
+
+    // Fetch data and create the client
+    var clients = unitOfWork.Clients.GetAll(includes).ToList();
+    var localClient = clients.Find(x => x.Id == (int)Enums.Environments.Local);
+
+    // Return the configured client
+    return localClient;
+});
 
 builder.Services.AddControllers().AddJsonOptions(opt => { opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()); });
 
@@ -120,6 +157,11 @@ app.UseSwaggerUI(options =>
 //    SchedulePollingInterval = new System.TimeSpan(0, 1, 0)
 //});
 
+app.UseHangfireServer(new BackgroundJobServerOptions
+{
+    WorkerCount = 1
+});
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
@@ -132,7 +174,5 @@ app.UseEndpoints(endpoints =>
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}");
 });
-
-app.Run();
 
 app.Run();

@@ -10,6 +10,7 @@ namespace SAPLink.EF.Data
         public DbSet<Clients> Clients { get; set; }
         public DbSet<Recurrence> Recurrences { get; set; }
         public DbSet<Credentials> Credentials { get; set; }
+        public DbSet<AccountManagement> Accounts { get; set; }
 
         //public DbSet<Logger<ItemMasterData>> ItemsLog { get; set; }
         //public DbSet<Logger<ItemGroups>> ItemGroupsLog { get; set; }
@@ -29,6 +30,8 @@ namespace SAPLink.EF.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.EnableSensitiveDataLogging();
+
+            var connectionString = ConnectionStringFactory.SqlLite();
 
             if (!optionsBuilder.IsConfigured)
             {
@@ -50,7 +53,6 @@ namespace SAPLink.EF.Data
 
                 #region SQL Lite
 
-                var connectionString = ConnectionStringFactory.SqlLite();
                 optionsBuilder.UseSqlite(connectionString, sqliteOptions =>
                 {
                     sqliteOptions.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
@@ -80,6 +82,7 @@ namespace SAPLink.EF.Data
 
             modelBuilder.ApplyConfiguration(new RecurrencesConfiguration());
             modelBuilder.ApplyConfiguration(new SyncConfiguration());
+            modelBuilder.ApplyConfiguration(new AccountManagementConfiguration());
 
             //modelBuilder.ApplyConfiguration(new ItemsLogConfiguration());
 

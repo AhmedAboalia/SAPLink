@@ -2,6 +2,7 @@
 using SAPLink.Core.Models;
 using SAPLink.Core.Models.SAP.Sales;
 using SAPLink.Core.Models.System;
+using SAPLink.EF;
 using SAPLink.Handler.SAP.Handlers;
 using Serilog;
 using PrismInvoice = SAPLink.Core.Models.Prism.Sales.Invoice;
@@ -13,10 +14,11 @@ public partial class OrdersHandler
 {
     private readonly ServiceLayerHandler _serviceLayer;
     private static ILogger _loger;
-
-    public OrdersHandler(ServiceLayerHandler serviceLayer)
+    private UnitOfWork UnitOfWork;
+    public OrdersHandler(ServiceLayerHandler serviceLayer, UnitOfWork unitOfWork)
     {
         _serviceLayer = serviceLayer;
+        UnitOfWork = unitOfWork;
         _loger = Helper.CreateLoggerConfiguration("Customer Order - (Incoming Payment)", "Handler", LogsTypes.OutboundData);
     }
     public async IAsyncEnumerable<RequestResult<SAPInvoice>> AddOrdersAsync(List<PrismInvoice> invoicesList)
@@ -33,7 +35,7 @@ public partial class OrdersHandler
                 if (invoice.Tenders != null)
                 {
 
-                    resultIncoming = IncomingPayment.AddPayment(invoice);
+                    resultIncoming = IncomingPayment.AddPayment(invoice, UnitOfWork);
                     result.Message += $"\r\n {resultIncoming.Message}";
                     result.Status = resultIncoming.Status;
 

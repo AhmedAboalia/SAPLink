@@ -5,6 +5,8 @@ using SAPLink.Core.Models.Prism.Sales;
 using SAPLink.Core.Models.SAP.Documents;
 using SAPLink.Core.Models.SAP.Sales;
 using SAPLink.Core.Models.System;
+using SAPLink.EF;
+using SAPLink.EF.Interfaces;
 using SAPLink.Handler.SAP.Application;
 using SAPLink.Handler.SAP.Handlers;
 using Serilog;
@@ -17,10 +19,11 @@ public partial class InvoiceHandler
 {
     private readonly ServiceLayerHandler _serviceLayer;
     private static ILogger _loger;
-
-    public InvoiceHandler(ServiceLayerHandler serviceLayer)
+    private UnitOfWork UnitOfWork;
+    public InvoiceHandler(ServiceLayerHandler serviceLayer, UnitOfWork unitOfWork)
     {
         _serviceLayer = serviceLayer;
+        UnitOfWork = unitOfWork;
         _loger = Helper.CreateLoggerConfiguration("Sale - (AR Invoice)", "Handler", LogsTypes.OutboundData);
 
     }
@@ -52,7 +55,7 @@ public partial class InvoiceHandler
 
                         if (updateType != Enums.UpdateType.SyncWholesale)
                         {
-                            resultIncoming = IncomingPayment.AddMultiplePaymentsInvoice(invoice, SAPInvoice.DocEntry, customerCode,BoRcptInvTypes.it_Invoice);
+                            resultIncoming = IncomingPayment.AddMultiplePaymentsInvoice(invoice, SAPInvoice.DocEntry, customerCode,BoRcptInvTypes.it_Invoice, UnitOfWork);
                             result.Message += $"\r\n{resultIncoming.Message}";
                             result.Status = resultIncoming.Status;
                         }

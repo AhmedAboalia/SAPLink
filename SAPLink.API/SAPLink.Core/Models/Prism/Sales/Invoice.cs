@@ -45,7 +45,7 @@ public partial class Invoice
     public long DocumentNumber { get; set; }
 
     [JsonProperty("invoice_posted_date", NullValueHandling = NullValueHandling.Ignore)]
-    public DateTimeOffset InvoicePostedDate { get; set; }
+    public string InvoicePostedDate { get; set; } 
 
     [JsonProperty("subsidiary_number", NullValueHandling = NullValueHandling.Ignore)]
     public long SubsidiaryNumber { get; set; }
@@ -193,7 +193,7 @@ public partial class Item
     public string Link { get; set; }
 
     [JsonProperty("quantity", NullValueHandling = NullValueHandling.Ignore)]
-    public long Quantity { get; set; }
+    public double Quantity { get; set; }
 
     [JsonProperty("original_price", NullValueHandling = NullValueHandling.Ignore)]
     public long OriginalPrice { get; set; }

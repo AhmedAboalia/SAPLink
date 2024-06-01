@@ -17,6 +17,7 @@ internal class CredentialsConfiguration : IEntityTypeConfiguration<Credentials>
             .WithOne(s => s.Credential)
             .HasForeignKey(s => s.CredentialId)
             .IsRequired();
+        const string ProductionBaseUrl = "http://kaffaryretail.alkaffary.com:8080";
 
         builder.HasData(CredentialsList.GetCredentials());
     }
@@ -27,7 +28,7 @@ internal static class CredentialsList
 
     const string TestBaseUrl = "http://postest.alkaffary.com:8080";
     const string LocalBaseUrl = "http://194.163.155.105";
-    const string integrationUrl = "http://saplink.alkaffary.com";
+    const string integrationUrl = "https://localhost:44326";
 
     public static Credentials[] GetCredentials()
     {
@@ -39,7 +40,7 @@ internal static class CredentialsList
                 ClientId = (int)Environments.Production,
                 EnvironmentCode = (int)Environments.Production,
                 EnvironmentName = "Production Environment",
-                Active = false,
+                //Active = false,
 
                 PrismUserName = "SAPLINK",
                 PrismPassword = "RetailTec@123",
@@ -66,7 +67,6 @@ internal static class CredentialsList
                 Cookie = "",
 
                 IntegrationUrl = integrationUrl,
-                ActiveLog = false,
             },
             new()
             {
@@ -74,10 +74,10 @@ internal static class CredentialsList
                 ClientId = (int)Environments.Test, // Foreign key referencing the client
                 EnvironmentCode = (int)Environments.Test,
                 EnvironmentName = "Test Environment",
-                Active = false,
+                //Active = false,
 
-                PrismUserName = "SAPLINK",//;"sysadmin",
-                PrismPassword = "RetailTec@123",//"kaf@admin",
+                PrismUserName = "SAPLINK3",//sysadmin
+                PrismPassword = "RetailTec@123",//kaf@admin
                 BaseUri = TestBaseUrl,
 
                 BackOfficeUri = $"{TestBaseUrl}/api/backoffice",
@@ -102,8 +102,6 @@ internal static class CredentialsList
                 Cookie = "",
 
                 IntegrationUrl = integrationUrl,
-                ActiveLog = false,
-
             },
             //new()
             //{
@@ -111,7 +109,7 @@ internal static class CredentialsList
             //    ClientId = (int)Environments.Test, // Foreign key referencing the client
             //    EnvironmentCode = (int)Environments.Test,
             //    EnvironmentName = "Test Environment",
-            //    Active = false,
+            ////    Active = false,
 
             //    PrismUserName = "sysadmin",
             //    PrismPassword = "sysadmin",
@@ -146,7 +144,7 @@ internal static class CredentialsList
                 ClientId = (int)Environments.Local, // Foreign key referencing the client
                 EnvironmentCode = (int)Environments.Local,
                 EnvironmentName = "Local Environment",
-                Active = true,
+                //Active = true,
 
                 PrismUserName = "sysadmin",
                 PrismPassword = "sysadmin",
@@ -159,7 +157,7 @@ internal static class CredentialsList
                 AuthSession = "F1726B4EC6304D969ED816D844617C02",
 
                 ServiceLayerUri = "https://Localhost:50000/b1s/v1/",
-                Server = "ABOALIA",
+                Server = "Aboalia",
                 ServerTypes = BoDataServerTypes.dst_MSSQL2019,
                 CompanyDb = "SBODemoGB",
                 UserName = "manager",
@@ -172,7 +170,6 @@ internal static class CredentialsList
                 Cookie = "",
 
                 IntegrationUrl = integrationUrl,
-                ActiveLog = false,
             },
         };
     }
