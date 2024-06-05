@@ -548,6 +548,8 @@ namespace SAPLink.Forms
                 textBoxPaymentTypeCode.Text = "";
                 textBoxTenderName.Text = "";
                 textBoxAccountCode.Text = "";
+                textBoxAccount1.Text = textBoxAccount2.Text = "";
+                toggleSwitchUsePerStoreAccount.Checked = false;
             }
             else
             {
@@ -557,9 +559,22 @@ namespace SAPLink.Forms
 
                 textBoxPaymentTypeCode.Text = account.PaymentTypeCode;
                 textBoxTenderName.Text = account.PaymentTypeName;
-                textBoxAccountCode.Text = account.Account;
-            }
+                toggleSwitchUsePerStoreAccount.Checked = account.UsePerStoreAccount;
+                textBoxAccount1.Text = account.Account1;
+                textBoxAccount2.Text = account.Account2;
 
+                if (account.UsePerStoreAccount)
+                {
+                    textBoxAccountCode.Text = "";
+                    textBoxAccountCode.Enabled = false;
+                }
+                else
+                {
+                    textBoxAccountCode.Enabled = true;
+                    textBoxAccount1.Text = textBoxAccount2.Text = "";
+                    textBoxAccountCode.Text = account.Account;
+                }
+            }
         }
 
         private void guna2Button1_Click_1(object sender, EventArgs e)
@@ -576,6 +591,10 @@ namespace SAPLink.Forms
                     account.PaymentTypeName = textBoxTenderName.Text;
                     account.Account = textBoxAccountCode.Text;
 
+                    account.UsePerStoreAccount = toggleSwitchUsePerStoreAccount.Checked;
+                    account.Account1 = textBoxAccount1.Text;
+                    account.Account2 = textBoxAccount2.Text;
+
                     _unitOfWork.Accounts.AddAsync(account);
                 }
                 else
@@ -585,6 +604,10 @@ namespace SAPLink.Forms
                     account.PaymentTypeCode = textBoxPaymentTypeCode.Text;
                     account.PaymentTypeName = textBoxTenderName.Text;
                     account.Account = textBoxAccountCode.Text;
+
+                    account.UsePerStoreAccount = toggleSwitchUsePerStoreAccount.Checked;
+                    account.Account1 = textBoxAccount1.Text;
+                    account.Account2 = textBoxAccount2.Text;
 
                     _unitOfWork.Accounts.Update(account);
                 }
@@ -632,6 +655,24 @@ namespace SAPLink.Forms
             }
             catch (Exception exception)
             {
+            }
+        }
+
+        private void ToggleSwitchUsePerStoreAccountCheckedChanged(object sender, EventArgs e)
+        {
+            if (toggleSwitchUsePerStoreAccount.Checked)
+            {
+                textBoxAccount1.Text = textBoxAccount2.Text = "";
+                textBoxAccount1.Enabled = textBoxAccount2.Enabled = true;
+                textBoxAccountCode.Text = "";
+                textBoxAccountCode.Enabled = false;
+            }
+            else
+            {
+                textBoxAccount1.Text = textBoxAccount2.Text = "";
+                textBoxAccount1.Enabled = textBoxAccount2.Enabled = false;
+                textBoxAccountCode.Text = "";
+                textBoxAccountCode.Enabled = true;
             }
         }
     }

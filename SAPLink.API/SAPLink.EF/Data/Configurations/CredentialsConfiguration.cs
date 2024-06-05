@@ -50,20 +50,20 @@ internal static class CredentialsList
                 RestUri = $"{ProductionBaseUrl}/api/common",
                 Origin = ProductionBaseUrl,
                 Referer = $"{ProductionBaseUrl}/prism.shtml",
-                AuthSession = "",
+                AuthSession = "ED095C24AF524529A2A341BAF60BD99C",
 
                 ServiceLayerUri = "https://sap-test:50000/b1s/v1/",
                 Server = "SAP-TEST",
                 ServerTypes = BoDataServerTypes.dst_MSSQL2016,
-                CompanyDb = "",
+                CompanyDb = "kaffaryDB",
                 UserName = "manager",
-                Password = "",
+                Password = "Ag123456*",
                 DbUserName = "sa",
                 DbPassword = "sap123456*",
 
-                AuthUserName = @"{{""UserName"" : ""manager"",""CompanyDB"" : """"}}",
-                AuthPassword = "",
-                Authorization = "",
+                AuthUserName = @"{{""UserName"" : ""manager"",""CompanyDB"" : ""kaffaryDB""}}",
+                AuthPassword = "Ag123456*",
+                Authorization = "Basic eyJVc2VyTmFtZSI6ICJtYW5hZ2VyIiwgIkNvbXBhbnlEQiI6ICJLYWZmYXJ5REIifTpBZzEyMzQ1Nio=",
                 Cookie = "",
 
                 IntegrationUrl = integrationUrl,
@@ -90,54 +90,19 @@ internal static class CredentialsList
                 ServiceLayerUri = "https://sap-test:50000/b1s/v1/",
                 Server = "SAP-TEST",
                 ServerTypes = BoDataServerTypes.dst_MSSQL2016,
-                CompanyDb = "TESTDB",
+                CompanyDb = "KaffaryDB_TEST",
                 UserName = "manager",
                 Password = "Ag123456*",//Qw123654*
                 DbUserName = "sa",
                 DbPassword = "sap123456*",
 
-                AuthUserName = @"{{""UserName"" : ""manager"",""CompanyDB"" : ""TESTDB""}}",
+                AuthUserName = @"{{""UserName"" : ""manager"",""CompanyDB"" : ""KaffaryDB_TEST""}}",
                 AuthPassword = "Ag123456*",//Qw123654*
-                Authorization = "Basic eyJVc2VyTmFtZSI6ICJtYW5hZ2VyIiwgIkNvbXBhbnlEQiI6ICJURVNUREIifTpBZzEyMzQ1Nio=",
+                Authorization = "Basic eyJVc2VyTmFtZSI6ICJtYW5hZ2VyIiwgIkNvbXBhbnlEQiI6ICJLYWZmYXJ5REJfVEVTVCJ9OkFnMTIzNDU2Kg==",
                 Cookie = "",
 
                 IntegrationUrl = integrationUrl,
             },
-            //new()
-            //{
-            //    Id = (int)Environments.Test,
-            //    ClientId = (int)Environments.Test, // Foreign key referencing the client
-            //    EnvironmentCode = (int)Environments.Test,
-            //    EnvironmentName = "Test Environment",
-            ////    Active = false,
-
-            //    PrismUserName = "sysadmin",
-            //    PrismPassword = "sysadmin",
-            //    BaseUri = TestBaseUrl,
-
-            //    BackOfficeUri = $"{TestBaseUrl}/api/backoffice",
-            //    CommonUri = $"{TestBaseUrl}/v1/rest",
-            //    RestUri = $"{TestBaseUrl}/api/common",
-            //    Origin = TestBaseUrl,
-            //    Referer = $"{TestBaseUrl}/prism.shtml",
-            //    AuthSession = "369B7B1BF58F469896B06B804BFBE272",
-
-            //    ServiceLayerUri = "https://sap-test:50000/b1s/v1/",
-            //    Server = "SAP-TEST",
-            //    ServerTypes = BoDataServerTypes.dst_MSSQL2016,
-            //    CompanyDb = "TESTDB",
-            //    UserName = "manager",
-            //    Password = "Rs123456*",//Qw123654*
-            //    DbUserName = "sa",
-            //    DbPassword = "sap123456*",
-
-            //    AuthUserName = @"{{""UserName"" : ""manager"",""CompanyDB"" : ""TESTDB""}}",
-            //    AuthPassword = "Rs123456*",//Qw123654*
-            //    Authorization = "Basic eyJVc2VyTmFtZSI6ICJtYW5hZ2VyIiwgIkNvbXBhbnlEQiI6ICJURVNUREIifTpSczEyMzQ1Nio=",
-            //    Cookie = "",
-
-            //    IntegrationUrl = integrationUrl,
-            //},
             new()
             {
                 Id = (int)Environments.Local,

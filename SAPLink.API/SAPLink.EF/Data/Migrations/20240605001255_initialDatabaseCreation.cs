@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SAPLink.EF.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class initialDBCreation : Migration
+    public partial class initialDatabaseCreation : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,10 +19,14 @@ namespace SAPLink.EF.Data.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    TenderCode = table.Column<string>(type: "TEXT", nullable: false),
-                    TenderName = table.Column<string>(type: "TEXT", nullable: false),
-                    Account = table.Column<string>(type: "TEXT", nullable: false),
-                    UsePerBranchCode = table.Column<bool>(type: "INTEGER", nullable: false)
+                    PaymentTypeCode = table.Column<string>(type: "TEXT", nullable: false),
+                    PaymentType = table.Column<int>(type: "INTEGER", nullable: false),
+                    PaymentTypeName = table.Column<string>(type: "TEXT", nullable: false),
+                    UsePerStoreAccount = table.Column<bool>(type: "INTEGER", nullable: false),
+                    Account1 = table.Column<string>(type: "TEXT", nullable: true),
+                    StoreCode = table.Column<string>(type: "TEXT", nullable: true),
+                    Account2 = table.Column<string>(type: "TEXT", nullable: true),
+                    Account = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -182,12 +186,20 @@ namespace SAPLink.EF.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Accounts",
-                columns: new[] { "Id", "Account", "TenderCode", "TenderName", "UsePerBranchCode" },
+                columns: new[] { "Id", "Account", "Account1", "Account2", "PaymentType", "PaymentTypeCode", "PaymentTypeName", "StoreCode", "UsePerStoreAccount" },
                 values: new object[,]
                 {
-                    { 1, "11180050100", "UDF1", "Tamara", false },
-                    { 2, "11180050100", "UDF3", "Emkan", false },
-                    { 3, "11180070100", "UDF6", "Tabby", false }
+                    { 1, "11180050100", "", "", 2, "UDF1", "Tamara", "", false },
+                    { 2, "11180050100", "", "", 2, "UDF3", "Emkan", "", false },
+                    { 3, "11180070100", "", "", 2, "UDF6", "Tabby", "", false },
+                    { 4, "", "1101", "0100", 2, "MC", "Master Card", "", true },
+                    { 5, "", "1101", "0100", 2, "UDF2", "Mada", "", true },
+                    { 6, "", "1101", "0100", 2, "UDF4", "Return", "", true },
+                    { 7, "", "1101", "0100", 2, "Visa", "Visa", "", true },
+                    { 8, "", "1101", "0100", 2, "AmEx", "American Express", "", true },
+                    { 9, "", "1101", "0100", 0, "0", "Cash", "", true },
+                    { 10, "", "1101", "0100", 3, "7", "Deposit", "", true },
+                    { 11, "", "1101", "0100", 7, "3", "Bank Transfer", "", true }
                 });
 
             migrationBuilder.InsertData(
@@ -196,7 +208,8 @@ namespace SAPLink.EF.Data.Migrations
                 values: new object[,]
                 {
                     { 1, false, "Al-Kaffary Subsidiary - SAP Live DB (KaffaryDB)" },
-                    { 2, true, "Test Subsidiary - SAP Test DB (TESTDB)" },
+                    { 2, false, "Test Subsidiary - SAP Test DB (TESTDB)" },
+                    { 3, true, "Fakeeh Vision Subsidiary - SAP Local DB (SBODemoGB)" }
                 });
 
             migrationBuilder.InsertData(
@@ -242,8 +255,9 @@ namespace SAPLink.EF.Data.Migrations
                 columns: new[] { "Id", "Active", "ActiveLog", "AuthPassword", "AuthSession", "AuthUserName", "Authorization", "BackOfficeUri", "BaseUri", "ClientId", "CommonUri", "CompanyDb", "Cookie", "DbPassword", "DbUserName", "EnvironmentCode", "EnvironmentName", "IntegrationUrl", "Origin", "Password", "PrismPassword", "PrismUserName", "Referer", "RestUri", "Server", "ServerTypes", "ServiceLayerUri", "UserName" },
                 values: new object[,]
                 {
-                    { 1, false, false, "", "", "{{\"UserName\" : \"manager\",\"CompanyDB\" : \"\"}}", "", "http://kaffaryretail.alkaffary.com:8080/api/backoffice", "http://kaffaryretail.alkaffary.com:8080", 1, "http://kaffaryretail.alkaffary.com:8080/v1/rest", "", "", "sap123456*", "sa", 1, "Production Environment", "https://localhost:44326", "http://kaffaryretail.alkaffary.com:8080", "", "RetailTec@123", "SAPLINK", "http://kaffaryretail.alkaffary.com:8080/prism.shtml", "http://kaffaryretail.alkaffary.com:8080/api/common", "SAP-TEST", 10, "https://sap-test:50000/b1s/v1/", "manager" },
-                    { 2, true, true, "Ag123456*", "369B7B1BF58F469896B06B804BFBE272", "{{\"UserName\" : \"manager\",\"CompanyDB\" : \"TESTDB\"}}", "Basic eyJVc2VyTmFtZSI6ICJtYW5hZ2VyIiwgIkNvbXBhbnlEQiI6ICJURVNUREIifTpBZzEyMzQ1Nio=", "http://postest.alkaffary.com:8080/api/backoffice", "http://postest.alkaffary.com:8080", 2, "http://postest.alkaffary.com:8080/v1/rest", "TESTDB", "", "sap123456*", "sa", 2, "Test Environment", "https://localhost:44326", "http://postest.alkaffary.com:8080", "Ag123456*", "RetailTec@123", "SAPLINK3", "http://postest.alkaffary.com:8080/prism.shtml", "http://postest.alkaffary.com:8080/api/common", "SAP-TEST", 10, "https://sap-test:50000/b1s/v1/", "manager" },
+                    { 1, false, false, "Ag123456*", "ED095C24AF524529A2A341BAF60BD99C", "{{\"UserName\" : \"manager\",\"CompanyDB\" : \"kaffaryDB\"}}", "Basic eyJVc2VyTmFtZSI6ICJtYW5hZ2VyIiwgIkNvbXBhbnlEQiI6ICJLYWZmYXJ5REIifTpBZzEyMzQ1Nio=", "http://kaffaryretail.alkaffary.com:8080/api/backoffice", "http://kaffaryretail.alkaffary.com:8080", 1, "http://kaffaryretail.alkaffary.com:8080/v1/rest", "kaffaryDB", "", "sap123456*", "sa", 1, "Production Environment", "https://localhost:44326", "http://kaffaryretail.alkaffary.com:8080", "Ag123456*", "RetailTec@123", "SAPLINK", "http://kaffaryretail.alkaffary.com:8080/prism.shtml", "http://kaffaryretail.alkaffary.com:8080/api/common", "SAP-TEST", 10, "https://sap-test:50000/b1s/v1/", "manager" },
+                    { 2, false, false, "Ag123456*", "369B7B1BF58F469896B06B804BFBE272", "{{\"UserName\" : \"manager\",\"CompanyDB\" : \"KaffaryDB_TEST\"}}", "Basic eyJVc2VyTmFtZSI6ICJtYW5hZ2VyIiwgIkNvbXBhbnlEQiI6ICJLYWZmYXJ5REJfVEVTVCJ9OkFnMTIzNDU2Kg==", "http://postest.alkaffary.com:8080/api/backoffice", "http://postest.alkaffary.com:8080", 2, "http://postest.alkaffary.com:8080/v1/rest", "KaffaryDB_TEST", "", "sap123456*", "sa", 2, "Test Environment", "https://localhost:44326", "http://postest.alkaffary.com:8080", "Ag123456*", "RetailTec@123", "SAPLINK3", "http://postest.alkaffary.com:8080/prism.shtml", "http://postest.alkaffary.com:8080/api/common", "SAP-TEST", 10, "https://sap-test:50000/b1s/v1/", "manager" },
+                    { 3, false, false, "manager", "F1726B4EC6304D969ED816D844617C02", "{{\"UserName\" : \"manager\",\"CompanyDB\" : \"SBODemoGB\"}}", "Basic eyJVc2VyTmFtZSI6ICJtYW5hZ2VyIiwgIkNvbXBhbnlEQiI6ICJTQk9EZW1vR0IifTptYW5hZ2Vy", "http://194.163.155.105/api/backoffice", "http://194.163.155.105", 3, "http://194.163.155.105/v1/rest", "SBODemoGB", "", "P@ssw0rd", "sa", 3, "Local Environment", "https://localhost:44326", "http://194.163.155.105", "manager", "sysadmin", "sysadmin", "http://194.163.155.105/prism.shtml", "http://194.163.155.105/api/common", "Aboalia", 15, "https://Localhost:50000/b1s/v1/", "manager" }
                 });
 
             migrationBuilder.InsertData(

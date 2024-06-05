@@ -411,12 +411,12 @@
             label1.BackColor = Color.WhiteSmoke;
             label1.Font = new Font("Bahnschrift", 8F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = SystemColors.ControlDarkDark;
-            label1.Location = new Point(226, 401);
+            label1.Location = new Point(221, 401);
             label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(134, 13);
+            label1.Size = new Size(142, 13);
             label1.TabIndex = 15;
-            label1.Text = "Current Version 2024.5.17";
+            label1.Text = "Current Version 2024.06.07";
             // 
             // guna2ControlBox3
             // 

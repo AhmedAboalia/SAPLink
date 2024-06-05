@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             components = new Container();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges107 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges108 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges113 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges114 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges1 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges2 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges3 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -106,9 +106,9 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges73 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges74 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges75 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
-            ComponentResourceManager resources = new ComponentResourceManager(typeof(Settings));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges76 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges77 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            ComponentResourceManager resources = new ComponentResourceManager(typeof(Settings));
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges78 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges79 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges80 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
@@ -138,6 +138,12 @@
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges104 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges105 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges106 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges107 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges108 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges109 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges110 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges111 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
+            Guna.UI2.WinForms.Suite.CustomizableEdges customizableEdges112 = new Guna.UI2.WinForms.Suite.CustomizableEdges();
             guna2Panel1 = new Guna2Panel();
             guna2TabControl1 = new Guna2TabControl();
             tabPage3 = new TabPage();
@@ -230,18 +236,25 @@
             comboBoxClient = new Guna2ComboBox();
             comboBoxEnvironment = new Guna2ComboBox();
             tabPage4 = new TabPage();
+            toggleSwitchUsePerStoreAccount = new Guna2ToggleSwitch();
             guna2Button2 = new Guna2Button();
             comboBoxPaymentType = new Guna2ComboBox();
             label20 = new Label();
             guna2Shapes8 = new Guna2Shapes();
+            label49 = new Label();
+            label48 = new Label();
             label45 = new Label();
             label43 = new Label();
+            label50 = new Label();
             label42 = new Label();
             guna2Button1 = new Guna2Button();
             label47 = new Label();
             label34 = new Label();
+            textBoxAccount2 = new Guna2TextBox();
+            textBoxAccount1 = new Guna2TextBox();
             textBoxAccountCode = new Guna2TextBox();
             textBoxPaymentTypeCode = new Guna2TextBox();
+            label46 = new Label();
             textBoxTenderName = new Guna2TextBox();
             label41 = new Label();
             label4 = new Label();
@@ -292,12 +305,12 @@
             guna2Panel1.Controls.Add(guna2ControlBox1);
             guna2Panel1.Controls.Add(MainPanel);
             guna2Panel1.CustomBorderColor = Color.Transparent;
-            guna2Panel1.CustomizableEdges = customizableEdges107;
+            guna2Panel1.CustomizableEdges = customizableEdges113;
             guna2Panel1.Dock = DockStyle.Fill;
             guna2Panel1.Location = new Point(0, 0);
             guna2Panel1.Margin = new Padding(4);
             guna2Panel1.Name = "guna2Panel1";
-            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges108;
+            guna2Panel1.ShadowDecoration.CustomizableEdges = customizableEdges114;
             guna2Panel1.Size = new Size(1284, 893);
             guna2Panel1.TabIndex = 0;
             guna2Panel1.DoubleClick += guna2Panel1_DoubleClick;
@@ -1804,18 +1817,25 @@
             // tabPage4
             // 
             tabPage4.BackColor = Color.White;
+            tabPage4.Controls.Add(toggleSwitchUsePerStoreAccount);
             tabPage4.Controls.Add(guna2Button2);
             tabPage4.Controls.Add(comboBoxPaymentType);
             tabPage4.Controls.Add(label20);
             tabPage4.Controls.Add(guna2Shapes8);
+            tabPage4.Controls.Add(label49);
+            tabPage4.Controls.Add(label48);
             tabPage4.Controls.Add(label45);
             tabPage4.Controls.Add(label43);
+            tabPage4.Controls.Add(label50);
             tabPage4.Controls.Add(label42);
             tabPage4.Controls.Add(guna2Button1);
             tabPage4.Controls.Add(label47);
             tabPage4.Controls.Add(label34);
+            tabPage4.Controls.Add(textBoxAccount2);
+            tabPage4.Controls.Add(textBoxAccount1);
             tabPage4.Controls.Add(textBoxAccountCode);
             tabPage4.Controls.Add(textBoxPaymentTypeCode);
+            tabPage4.Controls.Add(label46);
             tabPage4.Controls.Add(textBoxTenderName);
             tabPage4.Controls.Add(label41);
             tabPage4.Controls.Add(label4);
@@ -1827,11 +1847,29 @@
             tabPage4.TabIndex = 1;
             tabPage4.Text = "Payment Accounts";
             // 
+            // toggleSwitchUsePerStoreAccount
+            // 
+            toggleSwitchUsePerStoreAccount.CheckedState.BorderColor = Color.FromArgb(94, 148, 255);
+            toggleSwitchUsePerStoreAccount.CheckedState.FillColor = Color.FromArgb(94, 148, 255);
+            toggleSwitchUsePerStoreAccount.CheckedState.InnerBorderColor = Color.White;
+            toggleSwitchUsePerStoreAccount.CheckedState.InnerColor = Color.White;
+            toggleSwitchUsePerStoreAccount.CustomizableEdges = customizableEdges75;
+            toggleSwitchUsePerStoreAccount.Location = new Point(520, 54);
+            toggleSwitchUsePerStoreAccount.Name = "toggleSwitchUsePerStoreAccount";
+            toggleSwitchUsePerStoreAccount.ShadowDecoration.CustomizableEdges = customizableEdges76;
+            toggleSwitchUsePerStoreAccount.Size = new Size(35, 20);
+            toggleSwitchUsePerStoreAccount.TabIndex = 183;
+            toggleSwitchUsePerStoreAccount.UncheckedState.BorderColor = Color.FromArgb(125, 137, 149);
+            toggleSwitchUsePerStoreAccount.UncheckedState.FillColor = Color.FromArgb(125, 137, 149);
+            toggleSwitchUsePerStoreAccount.UncheckedState.InnerBorderColor = Color.White;
+            toggleSwitchUsePerStoreAccount.UncheckedState.InnerColor = Color.White;
+            toggleSwitchUsePerStoreAccount.CheckedChanged += ToggleSwitchUsePerStoreAccountCheckedChanged;
+            // 
             // guna2Button2
             // 
             guna2Button2.BackColor = Color.Transparent;
             guna2Button2.BorderRadius = 10;
-            guna2Button2.CustomizableEdges = customizableEdges75;
+            guna2Button2.CustomizableEdges = customizableEdges77;
             guna2Button2.DisabledState.BorderColor = Color.DarkGray;
             guna2Button2.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button2.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -1843,11 +1881,11 @@
             guna2Button2.Image = (Image)resources.GetObject("guna2Button2.Image");
             guna2Button2.ImageAlign = HorizontalAlignment.Left;
             guna2Button2.ImageSize = new Size(30, 30);
-            guna2Button2.Location = new Point(335, 162);
+            guna2Button2.Location = new Point(377, 190);
             guna2Button2.Name = "guna2Button2";
             guna2Button2.ShadowDecoration.BorderRadius = 30;
             guna2Button2.ShadowDecoration.Color = Color.Silver;
-            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges76;
+            guna2Button2.ShadowDecoration.CustomizableEdges = customizableEdges78;
             guna2Button2.ShadowDecoration.Depth = 5;
             guna2Button2.ShadowDecoration.Enabled = true;
             guna2Button2.ShadowDecoration.Shadow = new Padding(8);
@@ -1860,7 +1898,7 @@
             // comboBoxPaymentType
             // 
             comboBoxPaymentType.BackColor = Color.Transparent;
-            comboBoxPaymentType.CustomizableEdges = customizableEdges77;
+            comboBoxPaymentType.CustomizableEdges = customizableEdges79;
             comboBoxPaymentType.DrawMode = DrawMode.OwnerDrawFixed;
             comboBoxPaymentType.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxPaymentType.FocusedColor = Color.FromArgb(94, 148, 255);
@@ -1869,10 +1907,10 @@
             comboBoxPaymentType.ForeColor = Color.FromArgb(68, 88, 112);
             comboBoxPaymentType.ItemHeight = 15;
             comboBoxPaymentType.Items.AddRange(new object[] { "--- Add New ---" });
-            comboBoxPaymentType.Location = new Point(205, 53);
+            comboBoxPaymentType.Location = new Point(244, 53);
             comboBoxPaymentType.Name = "comboBoxPaymentType";
-            comboBoxPaymentType.ShadowDecoration.CustomizableEdges = customizableEdges78;
-            comboBoxPaymentType.Size = new Size(252, 21);
+            comboBoxPaymentType.ShadowDecoration.CustomizableEdges = customizableEdges80;
+            comboBoxPaymentType.Size = new Size(270, 21);
             comboBoxPaymentType.TabIndex = 181;
             comboBoxPaymentType.SelectedIndexChanged += comboBoxPaymentType_SelectedIndexChanged;
             // 
@@ -1897,12 +1935,36 @@
             guna2Shapes8.Name = "guna2Shapes8";
             guna2Shapes8.PolygonSkip = 1;
             guna2Shapes8.Rotate = 0F;
-            guna2Shapes8.RoundedEdges = customizableEdges79;
+            guna2Shapes8.RoundedEdges = customizableEdges81;
             guna2Shapes8.Shape = Guna.UI2.WinForms.Enums.ShapeType.Line;
             guna2Shapes8.Size = new Size(206, 15);
             guna2Shapes8.TabIndex = 180;
             guna2Shapes8.Text = "guna2Shapes8";
             guna2Shapes8.Zoom = 80;
+            // 
+            // label49
+            // 
+            label49.AutoSize = true;
+            label49.BackColor = Color.White;
+            label49.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label49.ForeColor = Color.DimGray;
+            label49.Location = new Point(312, 136);
+            label49.Name = "label49";
+            label49.Size = new Size(135, 17);
+            label49.TabIndex = 178;
+            label49.Text = "Generic Store Code";
+            // 
+            // label48
+            // 
+            label48.AutoSize = true;
+            label48.BackColor = Color.White;
+            label48.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label48.ForeColor = Color.DimGray;
+            label48.Location = new Point(520, 135);
+            label48.Name = "label48";
+            label48.Size = new Size(120, 17);
+            label48.TabIndex = 178;
+            label48.Text = "e.g. 1101-017-0100";
             // 
             // label45
             // 
@@ -1910,7 +1972,7 @@
             label45.BackColor = Color.White;
             label45.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             label45.ForeColor = Color.DimGray;
-            label45.Location = new Point(463, 136);
+            label45.Location = new Point(520, 163);
             label45.Name = "label45";
             label45.Size = new Size(110, 17);
             label45.TabIndex = 178;
@@ -1922,11 +1984,23 @@
             label43.BackColor = Color.White;
             label43.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             label43.ForeColor = Color.DimGray;
-            label43.Location = new Point(463, 109);
+            label43.Location = new Point(520, 108);
             label43.Name = "label43";
             label43.Size = new Size(197, 17);
             label43.TabIndex = 178;
             label43.Text = "e.g. (Tamara - Emkan - Tabby)";
+            // 
+            // label50
+            // 
+            label50.AutoSize = true;
+            label50.BackColor = Color.White;
+            label50.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label50.ForeColor = Color.DimGray;
+            label50.Location = new Point(561, 55);
+            label50.Name = "label50";
+            label50.Size = new Size(219, 17);
+            label50.TabIndex = 178;
+            label50.Text = "Use Generic Store Code Account";
             // 
             // label42
             // 
@@ -1934,7 +2008,7 @@
             label42.BackColor = Color.White;
             label42.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             label42.ForeColor = Color.DimGray;
-            label42.Location = new Point(463, 82);
+            label42.Location = new Point(520, 81);
             label42.Name = "label42";
             label42.Size = new Size(81, 17);
             label42.TabIndex = 178;
@@ -1944,7 +2018,7 @@
             // 
             guna2Button1.BackColor = Color.Transparent;
             guna2Button1.BorderRadius = 10;
-            guna2Button1.CustomizableEdges = customizableEdges80;
+            guna2Button1.CustomizableEdges = customizableEdges82;
             guna2Button1.DisabledState.BorderColor = Color.DarkGray;
             guna2Button1.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button1.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -1956,11 +2030,11 @@
             guna2Button1.Image = (Image)resources.GetObject("guna2Button1.Image");
             guna2Button1.ImageAlign = HorizontalAlignment.Left;
             guna2Button1.ImageSize = new Size(30, 30);
-            guna2Button1.Location = new Point(208, 162);
+            guna2Button1.Location = new Point(250, 190);
             guna2Button1.Name = "guna2Button1";
             guna2Button1.ShadowDecoration.BorderRadius = 30;
             guna2Button1.ShadowDecoration.Color = Color.Silver;
-            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges81;
+            guna2Button1.ShadowDecoration.CustomizableEdges = customizableEdges83;
             guna2Button1.ShadowDecoration.Depth = 5;
             guna2Button1.ShadowDecoration.Enabled = true;
             guna2Button1.ShadowDecoration.Shadow = new Padding(8);
@@ -1994,9 +2068,53 @@
             label34.TabIndex = 178;
             label34.Text = "Tender Code (Prism) :";
             // 
+            // textBoxAccount2
+            // 
+            textBoxAccount2.CustomizableEdges = customizableEdges84;
+            textBoxAccount2.DefaultText = "";
+            textBoxAccount2.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            textBoxAccount2.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            textBoxAccount2.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            textBoxAccount2.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            textBoxAccount2.Enabled = false;
+            textBoxAccount2.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            textBoxAccount2.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxAccount2.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            textBoxAccount2.Location = new Point(450, 134);
+            textBoxAccount2.Margin = new Padding(3, 4, 3, 4);
+            textBoxAccount2.Name = "textBoxAccount2";
+            textBoxAccount2.PasswordChar = '\0';
+            textBoxAccount2.PlaceholderText = "";
+            textBoxAccount2.SelectedText = "";
+            textBoxAccount2.ShadowDecoration.CustomizableEdges = customizableEdges85;
+            textBoxAccount2.Size = new Size(64, 21);
+            textBoxAccount2.TabIndex = 174;
+            // 
+            // textBoxAccount1
+            // 
+            textBoxAccount1.CustomizableEdges = customizableEdges86;
+            textBoxAccount1.DefaultText = "";
+            textBoxAccount1.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
+            textBoxAccount1.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
+            textBoxAccount1.DisabledState.ForeColor = Color.FromArgb(138, 138, 138);
+            textBoxAccount1.DisabledState.PlaceholderForeColor = Color.FromArgb(138, 138, 138);
+            textBoxAccount1.Enabled = false;
+            textBoxAccount1.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
+            textBoxAccount1.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            textBoxAccount1.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
+            textBoxAccount1.Location = new Point(244, 134);
+            textBoxAccount1.Margin = new Padding(3, 4, 3, 4);
+            textBoxAccount1.Name = "textBoxAccount1";
+            textBoxAccount1.PasswordChar = '\0';
+            textBoxAccount1.PlaceholderText = "";
+            textBoxAccount1.SelectedText = "";
+            textBoxAccount1.ShadowDecoration.CustomizableEdges = customizableEdges87;
+            textBoxAccount1.Size = new Size(64, 21);
+            textBoxAccount1.TabIndex = 174;
+            // 
             // textBoxAccountCode
             // 
-            textBoxAccountCode.CustomizableEdges = customizableEdges82;
+            textBoxAccountCode.CustomizableEdges = customizableEdges88;
             textBoxAccountCode.DefaultText = "";
             textBoxAccountCode.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             textBoxAccountCode.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -2005,19 +2123,19 @@
             textBoxAccountCode.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             textBoxAccountCode.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxAccountCode.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            textBoxAccountCode.Location = new Point(205, 134);
+            textBoxAccountCode.Location = new Point(244, 162);
             textBoxAccountCode.Margin = new Padding(3, 4, 3, 4);
             textBoxAccountCode.Name = "textBoxAccountCode";
             textBoxAccountCode.PasswordChar = '\0';
             textBoxAccountCode.PlaceholderText = "";
             textBoxAccountCode.SelectedText = "";
-            textBoxAccountCode.ShadowDecoration.CustomizableEdges = customizableEdges83;
-            textBoxAccountCode.Size = new Size(252, 21);
+            textBoxAccountCode.ShadowDecoration.CustomizableEdges = customizableEdges89;
+            textBoxAccountCode.Size = new Size(270, 21);
             textBoxAccountCode.TabIndex = 174;
             // 
             // textBoxPaymentTypeCode
             // 
-            textBoxPaymentTypeCode.CustomizableEdges = customizableEdges84;
+            textBoxPaymentTypeCode.CustomizableEdges = customizableEdges90;
             textBoxPaymentTypeCode.DefaultText = "";
             textBoxPaymentTypeCode.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             textBoxPaymentTypeCode.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -2026,19 +2144,31 @@
             textBoxPaymentTypeCode.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             textBoxPaymentTypeCode.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxPaymentTypeCode.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            textBoxPaymentTypeCode.Location = new Point(205, 80);
+            textBoxPaymentTypeCode.Location = new Point(244, 80);
             textBoxPaymentTypeCode.Margin = new Padding(3, 4, 3, 4);
             textBoxPaymentTypeCode.Name = "textBoxPaymentTypeCode";
             textBoxPaymentTypeCode.PasswordChar = '\0';
             textBoxPaymentTypeCode.PlaceholderText = "";
             textBoxPaymentTypeCode.SelectedText = "";
-            textBoxPaymentTypeCode.ShadowDecoration.CustomizableEdges = customizableEdges85;
-            textBoxPaymentTypeCode.Size = new Size(252, 21);
+            textBoxPaymentTypeCode.ShadowDecoration.CustomizableEdges = customizableEdges91;
+            textBoxPaymentTypeCode.Size = new Size(270, 21);
             textBoxPaymentTypeCode.TabIndex = 174;
+            // 
+            // label46
+            // 
+            label46.AutoSize = true;
+            label46.BackColor = Color.White;
+            label46.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label46.ForeColor = Color.DimGray;
+            label46.Location = new Point(34, 136);
+            label46.Name = "label46";
+            label46.Size = new Size(145, 17);
+            label46.TabIndex = 172;
+            label46.Text = "Account Code (SAP) :";
             // 
             // textBoxTenderName
             // 
-            textBoxTenderName.CustomizableEdges = customizableEdges86;
+            textBoxTenderName.CustomizableEdges = customizableEdges92;
             textBoxTenderName.DefaultText = "";
             textBoxTenderName.DisabledState.BorderColor = Color.FromArgb(208, 208, 208);
             textBoxTenderName.DisabledState.FillColor = Color.FromArgb(226, 226, 226);
@@ -2047,14 +2177,14 @@
             textBoxTenderName.FocusedState.BorderColor = Color.FromArgb(94, 148, 255);
             textBoxTenderName.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             textBoxTenderName.HoverState.BorderColor = Color.FromArgb(94, 148, 255);
-            textBoxTenderName.Location = new Point(205, 107);
+            textBoxTenderName.Location = new Point(244, 107);
             textBoxTenderName.Margin = new Padding(3, 4, 3, 4);
             textBoxTenderName.Name = "textBoxTenderName";
             textBoxTenderName.PasswordChar = '\0';
             textBoxTenderName.PlaceholderText = "";
             textBoxTenderName.SelectedText = "";
-            textBoxTenderName.ShadowDecoration.CustomizableEdges = customizableEdges87;
-            textBoxTenderName.Size = new Size(252, 21);
+            textBoxTenderName.ShadowDecoration.CustomizableEdges = customizableEdges93;
+            textBoxTenderName.Size = new Size(270, 21);
             textBoxTenderName.TabIndex = 174;
             // 
             // label41
@@ -2063,11 +2193,11 @@
             label41.BackColor = Color.White;
             label41.Font = new Font("Bahnschrift", 10F, FontStyle.Regular, GraphicsUnit.Point);
             label41.ForeColor = Color.DimGray;
-            label41.Location = new Point(34, 136);
+            label41.Location = new Point(34, 164);
             label41.Name = "label41";
-            label41.Size = new Size(145, 17);
+            label41.Size = new Size(211, 17);
             label41.TabIndex = 172;
-            label41.Text = "Account Code (SAP) :";
+            label41.Text = "Formated Account Code (SAP) :";
             // 
             // label4
             // 
@@ -2102,7 +2232,7 @@
             guna2Shapes1.Name = "guna2Shapes1";
             guna2Shapes1.PolygonSkip = 1;
             guna2Shapes1.Rotate = 0F;
-            guna2Shapes1.RoundedEdges = customizableEdges88;
+            guna2Shapes1.RoundedEdges = customizableEdges94;
             guna2Shapes1.Shape = Guna.UI2.WinForms.Enums.ShapeType.Line;
             guna2Shapes1.Size = new Size(225, 15);
             guna2Shapes1.TabIndex = 62;
@@ -2112,13 +2242,13 @@
             // guna2PictureBox1
             // 
             guna2PictureBox1.BackColor = SystemColors.Control;
-            guna2PictureBox1.CustomizableEdges = customizableEdges89;
+            guna2PictureBox1.CustomizableEdges = customizableEdges95;
             guna2PictureBox1.Image = (Image)resources.GetObject("guna2PictureBox1.Image");
             guna2PictureBox1.ImageRotate = 0F;
             guna2PictureBox1.InitialImage = null;
             guna2PictureBox1.Location = new Point(23, 18);
             guna2PictureBox1.Name = "guna2PictureBox1";
-            guna2PictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges90;
+            guna2PictureBox1.ShadowDecoration.CustomizableEdges = customizableEdges96;
             guna2PictureBox1.Size = new Size(45, 45);
             guna2PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             guna2PictureBox1.TabIndex = 57;
@@ -2152,7 +2282,7 @@
             guna2Button6.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             guna2Button6.BackColor = Color.Transparent;
             guna2Button6.BorderRadius = 10;
-            guna2Button6.CustomizableEdges = customizableEdges91;
+            guna2Button6.CustomizableEdges = customizableEdges97;
             guna2Button6.DisabledState.BorderColor = Color.DarkGray;
             guna2Button6.DisabledState.CustomBorderColor = Color.DarkGray;
             guna2Button6.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -2168,7 +2298,7 @@
             guna2Button6.Name = "guna2Button6";
             guna2Button6.ShadowDecoration.BorderRadius = 30;
             guna2Button6.ShadowDecoration.Color = Color.Silver;
-            guna2Button6.ShadowDecoration.CustomizableEdges = customizableEdges92;
+            guna2Button6.ShadowDecoration.CustomizableEdges = customizableEdges98;
             guna2Button6.ShadowDecoration.Depth = 5;
             guna2Button6.ShadowDecoration.Enabled = true;
             guna2Button6.ShadowDecoration.Shadow = new Padding(8);
@@ -2182,7 +2312,7 @@
             // 
             ButtonOpenOutboundData.BackColor = Color.Transparent;
             ButtonOpenOutboundData.BorderRadius = 10;
-            ButtonOpenOutboundData.CustomizableEdges = customizableEdges93;
+            ButtonOpenOutboundData.CustomizableEdges = customizableEdges99;
             ButtonOpenOutboundData.DisabledState.BorderColor = Color.DarkGray;
             ButtonOpenOutboundData.DisabledState.CustomBorderColor = Color.DarkGray;
             ButtonOpenOutboundData.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -2198,7 +2328,7 @@
             ButtonOpenOutboundData.Name = "ButtonOpenOutboundData";
             ButtonOpenOutboundData.ShadowDecoration.BorderRadius = 30;
             ButtonOpenOutboundData.ShadowDecoration.Color = Color.Silver;
-            ButtonOpenOutboundData.ShadowDecoration.CustomizableEdges = customizableEdges94;
+            ButtonOpenOutboundData.ShadowDecoration.CustomizableEdges = customizableEdges100;
             ButtonOpenOutboundData.ShadowDecoration.Depth = 5;
             ButtonOpenOutboundData.ShadowDecoration.Enabled = true;
             ButtonOpenOutboundData.ShadowDecoration.Shadow = new Padding(8);
@@ -2212,7 +2342,7 @@
             // 
             ButtonOpenInboundData.BackColor = Color.Transparent;
             ButtonOpenInboundData.BorderRadius = 10;
-            ButtonOpenInboundData.CustomizableEdges = customizableEdges95;
+            ButtonOpenInboundData.CustomizableEdges = customizableEdges101;
             ButtonOpenInboundData.DisabledState.BorderColor = Color.DarkGray;
             ButtonOpenInboundData.DisabledState.CustomBorderColor = Color.DarkGray;
             ButtonOpenInboundData.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -2228,7 +2358,7 @@
             ButtonOpenInboundData.Name = "ButtonOpenInboundData";
             ButtonOpenInboundData.ShadowDecoration.BorderRadius = 30;
             ButtonOpenInboundData.ShadowDecoration.Color = Color.Silver;
-            ButtonOpenInboundData.ShadowDecoration.CustomizableEdges = customizableEdges96;
+            ButtonOpenInboundData.ShadowDecoration.CustomizableEdges = customizableEdges102;
             ButtonOpenInboundData.ShadowDecoration.Depth = 5;
             ButtonOpenInboundData.ShadowDecoration.Enabled = true;
             ButtonOpenInboundData.ShadowDecoration.Shadow = new Padding(8);
@@ -2242,7 +2372,7 @@
             // 
             ButtonOpenDashboard.BackColor = Color.Transparent;
             ButtonOpenDashboard.BorderRadius = 10;
-            ButtonOpenDashboard.CustomizableEdges = customizableEdges97;
+            ButtonOpenDashboard.CustomizableEdges = customizableEdges103;
             ButtonOpenDashboard.DisabledState.BorderColor = Color.DarkGray;
             ButtonOpenDashboard.DisabledState.CustomBorderColor = Color.DarkGray;
             ButtonOpenDashboard.DisabledState.FillColor = Color.FromArgb(169, 169, 169);
@@ -2258,7 +2388,7 @@
             ButtonOpenDashboard.Name = "ButtonOpenDashboard";
             ButtonOpenDashboard.ShadowDecoration.BorderRadius = 30;
             ButtonOpenDashboard.ShadowDecoration.Color = Color.Silver;
-            ButtonOpenDashboard.ShadowDecoration.CustomizableEdges = customizableEdges98;
+            ButtonOpenDashboard.ShadowDecoration.CustomizableEdges = customizableEdges104;
             ButtonOpenDashboard.ShadowDecoration.Depth = 5;
             ButtonOpenDashboard.ShadowDecoration.Enabled = true;
             ButtonOpenDashboard.ShadowDecoration.Shadow = new Padding(8);
@@ -2274,13 +2404,13 @@
             guna2ControlBox3.BackColor = SystemColors.Control;
             guna2ControlBox3.BorderRadius = 8;
             guna2ControlBox3.ControlBoxType = Guna.UI2.WinForms.Enums.ControlBoxType.MaximizeBox;
-            guna2ControlBox3.CustomizableEdges = customizableEdges99;
+            guna2ControlBox3.CustomizableEdges = customizableEdges105;
             guna2ControlBox3.FillColor = Color.Transparent;
             guna2ControlBox3.IconColor = Color.Black;
             guna2ControlBox3.Location = new Point(1197, 9);
             guna2ControlBox3.Margin = new Padding(4);
             guna2ControlBox3.Name = "guna2ControlBox3";
-            guna2ControlBox3.ShadowDecoration.CustomizableEdges = customizableEdges100;
+            guna2ControlBox3.ShadowDecoration.CustomizableEdges = customizableEdges106;
             guna2ControlBox3.Size = new Size(32, 28);
             guna2ControlBox3.TabIndex = 2;
             guna2ControlBox3.Click += guna2ControlBox3_Click;
@@ -2291,13 +2421,13 @@
             guna2ControlBox2.BackColor = SystemColors.Control;
             guna2ControlBox2.BorderRadius = 8;
             guna2ControlBox2.ControlBoxType = Guna.UI2.WinForms.Enums.ControlBoxType.MinimizeBox;
-            guna2ControlBox2.CustomizableEdges = customizableEdges101;
+            guna2ControlBox2.CustomizableEdges = customizableEdges107;
             guna2ControlBox2.FillColor = Color.Transparent;
             guna2ControlBox2.IconColor = Color.Black;
             guna2ControlBox2.Location = new Point(1157, 9);
             guna2ControlBox2.Margin = new Padding(4);
             guna2ControlBox2.Name = "guna2ControlBox2";
-            guna2ControlBox2.ShadowDecoration.CustomizableEdges = customizableEdges102;
+            guna2ControlBox2.ShadowDecoration.CustomizableEdges = customizableEdges108;
             guna2ControlBox2.Size = new Size(32, 28);
             guna2ControlBox2.TabIndex = 0;
             guna2ControlBox2.Click += guna2ControlBox2_Click;
@@ -2307,13 +2437,13 @@
             guna2ControlBox1.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             guna2ControlBox1.BackColor = SystemColors.Control;
             guna2ControlBox1.BorderRadius = 8;
-            guna2ControlBox1.CustomizableEdges = customizableEdges103;
+            guna2ControlBox1.CustomizableEdges = customizableEdges109;
             guna2ControlBox1.FillColor = Color.Transparent;
             guna2ControlBox1.IconColor = Color.Black;
             guna2ControlBox1.Location = new Point(1237, 9);
             guna2ControlBox1.Margin = new Padding(4);
             guna2ControlBox1.Name = "guna2ControlBox1";
-            guna2ControlBox1.ShadowDecoration.CustomizableEdges = customizableEdges104;
+            guna2ControlBox1.ShadowDecoration.CustomizableEdges = customizableEdges110;
             guna2ControlBox1.Size = new Size(32, 28);
             guna2ControlBox1.TabIndex = 1;
             guna2ControlBox1.Click += guna2ControlBox1_Click;
@@ -2324,14 +2454,14 @@
             MainPanel.BackColor = Color.Transparent;
             MainPanel.BorderRadius = 30;
             MainPanel.ContextMenuStrip = contextMenuStrip1;
-            MainPanel.CustomizableEdges = customizableEdges105;
+            MainPanel.CustomizableEdges = customizableEdges111;
             MainPanel.ImageRotate = 0F;
             MainPanel.Location = new Point(145, 77);
             MainPanel.Margin = new Padding(4);
             MainPanel.Name = "MainPanel";
             MainPanel.ShadowDecoration.BorderRadius = 30;
             MainPanel.ShadowDecoration.Color = Color.Silver;
-            MainPanel.ShadowDecoration.CustomizableEdges = customizableEdges106;
+            MainPanel.ShadowDecoration.CustomizableEdges = customizableEdges112;
             MainPanel.ShadowDecoration.Depth = 5;
             MainPanel.ShadowDecoration.Enabled = true;
             MainPanel.ShadowDecoration.Shadow = new Padding(8);
@@ -2509,5 +2639,13 @@
         private Guna2TextBox textBoxPaymentTypeCode;
         private Guna2Button guna2Button1;
         private Guna2Button guna2Button2;
+        private Label label48;
+        private Guna2TextBox guna2TextBox3;
+        private Guna2TextBox textBoxAccount2;
+        private Guna2TextBox textBoxAccount1;
+        private Label label46;
+        private Label label49;
+        private Guna2ToggleSwitch toggleSwitchUsePerStoreAccount;
+        private Label label50;
     }
 }

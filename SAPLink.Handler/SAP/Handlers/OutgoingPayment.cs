@@ -3,6 +3,7 @@ using SAPbobsCOM;
 using SAPLink.Core;
 using SAPLink.Core.Models;
 using SAPLink.Core.Models.SAP.Sales;
+using SAPLink.Core.Models.System;
 using SAPLink.Core.Utilities;
 using SAPLink.Handler.SAP.Application;
 using SAPLink.Handler.SAP.Connection;
@@ -80,10 +81,10 @@ public static class OutgoingPayment
         var tenderData = "";
         foreach (var tender in invoice.Tenders)
         {
-            if (tender.TenderType == (int)Enums.PaymentTypesEnum.Cash ||
-                tender.TenderName.ToLower() == Enums.PaymentTypes.Return.ToLower() ||
-                tender.TenderType == (int)Enums.PaymentTypesEnum.Deposit ||
-                tender.TenderType == (int)Enums.PaymentTypesEnum.BankTransfer
+            if (tender.TenderType == (int)PaymentTypesEnum.Cash ||
+                tender.TenderName.ToLower() == PaymentTypes.Return.ToLower() ||
+                tender.TenderType == (int)PaymentTypesEnum.Deposit ||
+                tender.TenderType == (int)PaymentTypesEnum.BankTransfer
             )
             {
                 //var accountCode = "160000"; //Local

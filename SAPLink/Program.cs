@@ -53,7 +53,7 @@ internal static class Program
         Application.ThreadException += Application_ThreadException;
         AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
-        AutoUpdater.Start("https://pastebin.com/raw/S53jgRFB");
+        //AutoUpdater.Start("https://pastebin.com/raw/S53jgRFB");
 
         Application.Run(new Login(UnitOfWork, _serviceLayer, _departmentService, _itemsService, Client));
 

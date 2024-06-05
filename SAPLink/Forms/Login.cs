@@ -55,14 +55,14 @@ namespace SAPLink.Forms
 
             ClientHandler.InitializeClientObjects(_client, out var code, out var message);
 
-            if (AutoUpdater.IsUpdateAvailable)
-            {
-                panel2.Show();
-                guna2CirclePictureBox2.Show();
-            }
+            //if (AutoUpdater.IsUpdateAvailable)
+            //{
+            //    panel2.Show();
+            //    guna2CirclePictureBox2.Show();
+            //}
 
-            Text = AutoUpdater.DialogTitle;
-            labelUpdate.Text = $"A New Version ({AutoUpdater.CurrentVersion}) is Available. {AutoUpdater.InstalledVersion} installed.";
+            //Text = AutoUpdater.DialogTitle;
+            //labelUpdate.Text = $"A New Version ({AutoUpdater.CurrentVersion}) is Available. {AutoUpdater.InstalledVersion} installed.";
 
 
             //label1.Text = $"Version {AutoUpdater.InstalledVersion}";

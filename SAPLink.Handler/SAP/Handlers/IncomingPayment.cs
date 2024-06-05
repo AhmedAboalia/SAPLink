@@ -8,6 +8,7 @@ using SAPLink.EF;
 using SAPLink.Handler.SAP.Application;
 using PrismInvoice = SAPLink.Core.Models.Prism.Sales.Invoice;
 using System;
+using SAPLink.Core.Models.System;
 
 namespace SAPLink.Handler.SAP.Handlers;
 
@@ -78,25 +79,20 @@ public static class IncomingPayment
         var tenderData = "";
         foreach (var tender in invoice.Tenders)
         {
-            if (tender.TenderName == null ||
-                tender.TenderName.ToLower() == Enums.PaymentTypes.Visa.ToLower() ||
-                tender.TenderName.ToLower() == Enums.PaymentTypes.Mada.ToLower() ||
-                tender.TenderName.ToLower() == Enums.PaymentTypes.MasterCard.ToLower() ||
-                tender.TenderName.ToLower() == Enums.PaymentTypes.Return.ToLower() ||
-                tender.TenderName.ToLower() == Enums.PaymentTypes.AmericanExpress.ToLower() ||
+            var account = accounts.FirstOrDefault(x => x.PaymentTypeCode.ToLower() == tender.TenderName.ToLower());
 
-                //tender.TenderType == (int)Enums.PaymentTypesEnum.Visa ||
-                //tender.TenderType == (int)Enums.PaymentTypesEnum.Mada ||
-                //tender.TenderType == (int)Enums.PaymentTypesEnum.MasterCard ||
-                //tender.TenderType == (int)Enums.PaymentTypesEnum.Return ||
 
-                tender.TenderType == (int)Enums.PaymentTypesEnum.Cash ||
-                tender.TenderType == (int)Enums.PaymentTypesEnum.Deposit ||
-                tender.TenderType == (int)Enums.PaymentTypesEnum.BankTransfer
-            )
+            if (
+                (account.UsePerStoreAccount && tender.TenderName.ToLower() == account.PaymentTypeCode)
+                || (account.UsePerStoreAccount && tender.TenderType == account.PaymentType && tender.TenderType != 2)
+                || tender.TenderName == null)
             {
-                //var accountCode = "160000"; //Local
-                var accountCode = ClientHandler.GetAccountCode($"1101{invoice.StoreCode}0100");//1101-017-0100
+
+                var formattedAccountCode = $"{account.Account1}{invoice.StoreCode}{account.Account1}";
+
+                //var accountCode = ClientHandler.GetAccountCode($"1101{invoice.StoreCode}0100");//1101-017-0100
+
+                var accountCode = ClientHandler.GetAccountCode(formattedAccountCode);//1101-017-0100
 
                 if (paymentList.ContainsKey(accountCode))
                     paymentList[accountCode] += tender.Amount;
@@ -105,7 +101,6 @@ public static class IncomingPayment
             }
             else
             {
-                var account = accounts.FirstOrDefault(x => x.PaymentTypeCode.ToLower() == tender.TenderName.ToLower());
                 if (account != null)
                 {
                     var accountCode = ClientHandler.GetAccountCode(account.Account);
@@ -116,32 +111,6 @@ public static class IncomingPayment
                         paymentList.Add(accountCode, tender.Amount);
                 }
             }
-
-
-
-
-            //else if (tender.TenderName.ToLower() == Enums.PaymentTypes.Tamara.ToLower() ||
-            //         tender.TenderName.ToLower() == Enums.PaymentTypes.Emkan.ToLower())
-            //{
-            //    //var accountCode = "160000"; //Local
-            //    var accountCode = ClientHandler.GetAccountCode("11180050100");
-
-            //    if (paymentList.ContainsKey(accountCode))
-            //        paymentList[accountCode] += tender.Amount;
-            //    else
-            //        paymentList.Add(accountCode, tender.Amount);
-            //}
-            //else if (tender.TenderName.ToLower() == Enums.PaymentTypes.Tabby.ToLower())
-            //{
-            //    //var accountCode = "160000"; //Local
-            //    var accountCode = ClientHandler.GetAccountCode("11180070100");
-
-            //    if (paymentList.ContainsKey(accountCode))
-            //        paymentList[accountCode] += tender.Amount;
-            //    else
-            //        paymentList.Add(accountCode, tender.Amount);
-            //}
-            ////tenderData += $"Tender Name: {tender.TenderName} - Amount: ({tender.Amount})";
         }
 
         foreach (KeyValuePair<string, double> entry in paymentList)

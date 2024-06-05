@@ -12,8 +12,8 @@ using SAPLink.EF.Data;
 namespace SAPLink.EF.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240520213051_initialDBCreation")]
-    partial class initialDBCreation
+    [Migration("20240605001255_initialDatabaseCreation")]
+    partial class initialDatabaseCreation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -82,18 +82,29 @@ namespace SAPLink.EF.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Account")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Account1")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Account2")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PaymentType")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PaymentTypeCode")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("TenderCode")
+                    b.Property<string>("PaymentTypeName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("TenderName")
-                        .IsRequired()
+                    b.Property<string>("StoreCode")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("UsePerBranchCode")
+                    b.Property<bool>("UsePerStoreAccount")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
@@ -105,33 +116,133 @@ namespace SAPLink.EF.Data.Migrations
                         {
                             Id = 1,
                             Account = "11180050100",
-                            TenderCode = "UDF1",
-                            TenderName = "Tamara",
-                            UsePerBranchCode = false
+                            Account1 = "",
+                            Account2 = "",
+                            PaymentType = 2,
+                            PaymentTypeCode = "UDF1",
+                            PaymentTypeName = "Tamara",
+                            StoreCode = "",
+                            UsePerStoreAccount = false
                         },
                         new
                         {
                             Id = 2,
                             Account = "11180050100",
-                            TenderCode = "UDF3",
-                            TenderName = "Emkan",
-                            UsePerBranchCode = false
+                            Account1 = "",
+                            Account2 = "",
+                            PaymentType = 2,
+                            PaymentTypeCode = "UDF3",
+                            PaymentTypeName = "Emkan",
+                            StoreCode = "",
+                            UsePerStoreAccount = false
                         },
                         new
                         {
                             Id = 3,
                             Account = "11180070100",
-                            TenderCode = "UDF6",
-                            TenderName = "Tabby",
-                            UsePerBranchCode = false
+                            Account1 = "",
+                            Account2 = "",
+                            PaymentType = 2,
+                            PaymentTypeCode = "UDF6",
+                            PaymentTypeName = "Tabby",
+                            StoreCode = "",
+                            UsePerStoreAccount = false
                         },
                         new
                         {
                             Id = 4,
                             Account = "",
-                            TenderCode = "AmEx",
-                            TenderName = "American Express",
-                            UsePerBranchCode = false
+                            Account1 = "1101",
+                            Account2 = "0100",
+                            PaymentType = 2,
+                            PaymentTypeCode = "MC",
+                            PaymentTypeName = "Master Card",
+                            StoreCode = "",
+                            UsePerStoreAccount = true
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Account = "",
+                            Account1 = "1101",
+                            Account2 = "0100",
+                            PaymentType = 2,
+                            PaymentTypeCode = "UDF2",
+                            PaymentTypeName = "Mada",
+                            StoreCode = "",
+                            UsePerStoreAccount = true
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Account = "",
+                            Account1 = "1101",
+                            Account2 = "0100",
+                            PaymentType = 2,
+                            PaymentTypeCode = "UDF4",
+                            PaymentTypeName = "Return",
+                            StoreCode = "",
+                            UsePerStoreAccount = true
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Account = "",
+                            Account1 = "1101",
+                            Account2 = "0100",
+                            PaymentType = 2,
+                            PaymentTypeCode = "Visa",
+                            PaymentTypeName = "Visa",
+                            StoreCode = "",
+                            UsePerStoreAccount = true
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Account = "",
+                            Account1 = "1101",
+                            Account2 = "0100",
+                            PaymentType = 2,
+                            PaymentTypeCode = "AmEx",
+                            PaymentTypeName = "American Express",
+                            StoreCode = "",
+                            UsePerStoreAccount = true
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Account = "",
+                            Account1 = "1101",
+                            Account2 = "0100",
+                            PaymentType = 0,
+                            PaymentTypeCode = "0",
+                            PaymentTypeName = "Cash",
+                            StoreCode = "",
+                            UsePerStoreAccount = true
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Account = "",
+                            Account1 = "1101",
+                            Account2 = "0100",
+                            PaymentType = 3,
+                            PaymentTypeCode = "7",
+                            PaymentTypeName = "Deposit",
+                            StoreCode = "",
+                            UsePerStoreAccount = true
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Account = "",
+                            Account1 = "1101",
+                            Account2 = "0100",
+                            PaymentType = 7,
+                            PaymentTypeCode = "3",
+                            PaymentTypeName = "Bank Transfer",
+                            StoreCode = "",
+                            UsePerStoreAccount = true
                         });
                 });
 
@@ -294,15 +405,15 @@ namespace SAPLink.EF.Data.Migrations
                             Id = 1,
                             Active = false,
                             ActiveLog = false,
-                            AuthPassword = "",
-                            AuthSession = "",
-                            AuthUserName = "{{\"UserName\" : \"manager\",\"CompanyDB\" : \"\"}}",
-                            Authorization = "",
+                            AuthPassword = "Ag123456*",
+                            AuthSession = "ED095C24AF524529A2A341BAF60BD99C",
+                            AuthUserName = "{{\"UserName\" : \"manager\",\"CompanyDB\" : \"kaffaryDB\"}}",
+                            Authorization = "Basic eyJVc2VyTmFtZSI6ICJtYW5hZ2VyIiwgIkNvbXBhbnlEQiI6ICJLYWZmYXJ5REIifTpBZzEyMzQ1Nio=",
                             BackOfficeUri = "http://kaffaryretail.alkaffary.com:8080/api/backoffice",
                             BaseUri = "http://kaffaryretail.alkaffary.com:8080",
                             ClientId = 1,
                             CommonUri = "http://kaffaryretail.alkaffary.com:8080/v1/rest",
-                            CompanyDb = "",
+                            CompanyDb = "kaffaryDB",
                             Cookie = "",
                             DbPassword = "sap123456*",
                             DbUserName = "sa",
@@ -310,7 +421,7 @@ namespace SAPLink.EF.Data.Migrations
                             EnvironmentName = "Production Environment",
                             IntegrationUrl = "https://localhost:44326",
                             Origin = "http://kaffaryretail.alkaffary.com:8080",
-                            Password = "",
+                            Password = "Ag123456*",
                             PrismPassword = "RetailTec@123",
                             PrismUserName = "SAPLINK",
                             Referer = "http://kaffaryretail.alkaffary.com:8080/prism.shtml",
@@ -327,13 +438,13 @@ namespace SAPLink.EF.Data.Migrations
                             ActiveLog = false,
                             AuthPassword = "Ag123456*",
                             AuthSession = "369B7B1BF58F469896B06B804BFBE272",
-                            AuthUserName = "{{\"UserName\" : \"manager\",\"CompanyDB\" : \"TESTDB\"}}",
-                            Authorization = "Basic eyJVc2VyTmFtZSI6ICJtYW5hZ2VyIiwgIkNvbXBhbnlEQiI6ICJURVNUREIifTpBZzEyMzQ1Nio=",
+                            AuthUserName = "{{\"UserName\" : \"manager\",\"CompanyDB\" : \"KaffaryDB_TEST\"}}",
+                            Authorization = "Basic eyJVc2VyTmFtZSI6ICJtYW5hZ2VyIiwgIkNvbXBhbnlEQiI6ICJLYWZmYXJ5REJfVEVTVCJ9OkFnMTIzNDU2Kg==",
                             BackOfficeUri = "http://postest.alkaffary.com:8080/api/backoffice",
                             BaseUri = "http://postest.alkaffary.com:8080",
                             ClientId = 2,
                             CommonUri = "http://postest.alkaffary.com:8080/v1/rest",
-                            CompanyDb = "TESTDB",
+                            CompanyDb = "KaffaryDB_TEST",
                             Cookie = "",
                             DbPassword = "sap123456*",
                             DbUserName = "sa",
