@@ -32,5 +32,4 @@ public static class ServerInfoHandler
             Directory.CreateDirectory(directoryName);
         }
     }
-
 }

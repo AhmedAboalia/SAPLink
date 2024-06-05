@@ -41,15 +41,7 @@ public class ServerInfo
                 Database = database,
                 Password = "P@ssw0rd",
                 Active = pcName == "ABOALIA",
-            },
-            //new()
-            //{
-            //    ConnectionName = "SAP Server Connection",
-            //    Server = "SAP-TEST",
-            //    Database = database,
-            //    Password = "sap123456*",
-            //    Active = pcName == "SAP-TEST",
-            //},
+            }
         };
 
         return serverlist;

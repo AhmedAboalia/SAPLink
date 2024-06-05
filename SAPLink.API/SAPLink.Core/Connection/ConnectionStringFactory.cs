@@ -4,9 +4,7 @@ public static class ConnectionStringFactory
 {
     private static ServerInfo? _serverInfo;
 
-    private static readonly string filePath = "Database\\LocalSettings.json";
-
-    //static string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings\\LocalSettings.txt");
+    static string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Settings\\Server.json");
 
     private static string ToSQLServer()
     {
@@ -41,7 +39,18 @@ public static class ConnectionStringFactory
 
     private static string ToSQLLite()
     {
-        return $"Data Source=Database\\{_serverInfo.Database}.db;";
+
+        string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        string dbDirectory = Path.Combine(baseDirectory, "Settings");
+
+        // Ensure the database directory exists
+        if (!Directory.Exists(dbDirectory))
+        {
+            Directory.CreateDirectory(dbDirectory);
+        }
+
+
+        return $"Data Source={dbDirectory}\\SAPLinkDB.db;";
     }
 
     public static string SqlLite()
@@ -86,56 +95,5 @@ public static class ConnectionStringFactory
         }
 
         return null;
-    }
-}
-
-public class LocalSettings
-{
-    private static LocalSettings Setting;
-
-    static string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Database\\LocalSettings.txt");
-
-
-    private static void SaveChanges(LocalSettings localSettings)
-    {
-        try
-        {
-            File.WriteAllText(path, JsonConvert.SerializeObject(localSettings));
-        }
-        catch (Exception ex)
-        {
-
-        }
-    }
-
-    public static void Init()
-    {
-        try
-        {
-            if (!File.Exists(path))
-            {
-                Setting = new LocalSettings();
-                using StreamWriter streamWriter = new StreamWriter(path, append: true);
-                streamWriter.Write(JsonConvert.SerializeObject(Setting));
-                return;
-            }
-            string value = File.ReadAllText(path);
-            if (string.IsNullOrWhiteSpace(value))
-            {
-                Setting = new LocalSettings();
-                SaveChanges(Setting);
-                return;
-            }
-            Setting = JsonConvert.DeserializeObject<LocalSettings>(value);
-            if (Setting == null)
-            {
-                //PV.ShowNotification("فشل قراءة الإعدادات المحلية");
-                Setting = new LocalSettings();
-            }
-        }
-        catch (Exception ex)
-        {
-            //PV.error.SaveError(ex);
-        }
     }
 }

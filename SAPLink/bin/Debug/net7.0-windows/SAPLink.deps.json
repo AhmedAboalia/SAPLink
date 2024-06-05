@@ -8,7 +8,6 @@
     ".NETCoreApp,Version=v7.0": {
       "SAPLink/1.0.0": {
         "dependencies": {
-          "AutoupdaterdotNet": "1.3.1",
           "Guna.UI2.WinForms": "2.0.4.4",
           "Humanizer.Core": "2.14.1",
           "Microsoft.EntityFrameworkCore.Design": "7.0.5",
@@ -21,37 +20,6 @@
         },
         "runtime": {
           "SAPLink.dll": {}
-        }
-      },
-      "AutoupdaterdotNet/1.3.1": {
-        "resources": {
-          "lib/net20/da/AutoUpdater.NET.resources.dll": {
-            "locale": "da"
-          },
-          "lib/net20/de/AutoUpdater.NET.resources.dll": {
-            "locale": "de"
-          },
-          "lib/net20/es/AutoUpdater.NET.resources.dll": {
-            "locale": "es"
-          },
-          "lib/net20/fr/AutoUpdater.NET.resources.dll": {
-            "locale": "fr"
-          },
-          "lib/net20/it-IT/AutoUpdater.NET.resources.dll": {
-            "locale": "it-IT"
-          },
-          "lib/net20/nl/AutoUpdater.NET.resources.dll": {
-            "locale": "nl"
-          },
-          "lib/net20/pl/AutoUpdater.NET.resources.dll": {
-            "locale": "pl"
-          },
-          "lib/net20/ru/AutoUpdater.NET.resources.dll": {
-            "locale": "ru"
-          },
-          "lib/net20/sv/AutoUpdater.NET.resources.dll": {
-            "locale": "sv"
-          }
         }
       },
       "Azure.Core/1.24.0": {
@@ -1538,13 +1506,6 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
-    },
-    "AutoupdaterdotNet/1.3.1": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-ywhTthGp2hAeCpRBpgrfWNajfarp7d1WzFh9H+P689kjnG/ohBamVmIreIB6N5MygxDkovpS0H8x0TsZuARg6Q==",
-      "path": "autoupdaterdotnet/1.3.1",
-      "hashPath": "autoupdaterdotnet.1.3.1.nupkg.sha512"
     },
     "Azure.Core/1.24.0": {
       "type": "package",
