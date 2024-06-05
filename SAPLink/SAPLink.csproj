@@ -45,6 +45,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SAPLink.Core\SAPLink.Core.csproj" />
+    <ProjectReference Include="..\SAPLink.EF\SAPLink.EF.csproj" />
     <ProjectReference Include="..\SAPLink.Handler\SAPLink.Handler.csproj" />
   </ItemGroup>
 

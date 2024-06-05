@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SAPLink.API\SAPLink.Core\SAPLink.Core.csproj" />
-    <ProjectReference Include="..\SAPLink.API\SAPLink.EF\SAPLink.EF.csproj" />
+    <ProjectReference Include="..\SAPLink.Core\SAPLink.Core.csproj" />
+    <ProjectReference Include="..\SAPLink.EF\SAPLink.EF.csproj" />
   </ItemGroup>
 
   <ItemGroup>
